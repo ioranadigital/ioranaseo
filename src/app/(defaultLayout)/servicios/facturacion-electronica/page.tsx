@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import React from "react";
 import BreadCumb from "@/app/Components/Common/BreadCumb";
-import HeroBannerPlanes from "@/app/Components/HeroBanner/HeroBannerPlanes";
+import HeroBannerServicios from "@/app/Components/HeroBanner/HeroBannerServicios";
 import FeaturesSection from "@/app/Components/FeaturesSection/FeaturesSection";
 import NuestroProcesoLocal from "@/app/Components/NuestroProcesoLocal/NuestroProcesoLocal";
 import ContactIno3 from "@/app/Components/ContactInfo/ContactIno3";
@@ -134,15 +134,14 @@ const FacturacionElectronicaPage = () => {
       ></BreadCumb>
 
       <div style={{ fontSize: "0.85em" }} className="ficha-hero">
-        <HeroBannerPlanes
+        <HeroBannerServicios
           subtitle="Servicios Digitales"
           title="Implementamos <span style='color: #4D32A5;'>Facturación Electrónica</span>"
           content="Sistema de facturación digital seguro y cumplidor. Genera, envía y archiva facturas electrónicas de forma automática."
           img="/assets/img/servicios/facturas.jpg"
-          showImage={false}
           benefits={facturacionElectronicaBenefits}
           whyImportant={facturacionElectronicaWhyImportant}
-        ></HeroBannerPlanes>
+        ></HeroBannerServicios>
       </div>
 
       <FeaturesSection

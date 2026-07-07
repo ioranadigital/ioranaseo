@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import React from "react";
 import BreadCumb from "@/app/Components/Common/BreadCumb";
-import HeroBannerPlanes from "@/app/Components/HeroBanner/HeroBannerPlanes";
+import HeroBannerServicios from "@/app/Components/HeroBanner/HeroBannerServicios";
 import FeaturesSection from "@/app/Components/FeaturesSection/FeaturesSection";
 import NuestroProcesoLocal from "@/app/Components/NuestroProcesoLocal/NuestroProcesoLocal";
 import ContactIno3 from "@/app/Components/ContactInfo/ContactIno3";
@@ -134,15 +134,14 @@ const CRMPage = () => {
       ></BreadCumb>
 
       <div style={{ fontSize: "0.85em" }} className="ficha-hero">
-        <HeroBannerPlanes
+        <HeroBannerServicios
           subtitle="Servicios Digitales"
           title="Implementamos <span style='color: #4D32A5;'>CRM</span>"
           content="Gestión integral de relaciones con clientes. Organiza, automatiza y mejora tus procesos de ventas y servicio al cliente."
           img="/assets/img/hero/hero3-main-img.png"
-          showImage={false}
           benefits={crmBenefits}
           whyImportant={crmWhyImportant}
-        ></HeroBannerPlanes>
+        ></HeroBannerServicios>
       </div>
 
       <FeaturesSection
