@@ -2,34 +2,42 @@ export const dynamic = "force-dynamic";
 import React from "react";
 import BreadCumb from "../../../Components/Common/BreadCumb";
 import HeroBannerPlanes from "../../../Components/HeroBanner/HeroBannerPlanes";
-import FeaturesSection from "../../../Components/FeaturesSection/FeaturesSection";
-import Pricing3 from "../../../Components/Pricing/Pricing3";
+import PlanDetailSection from "../../../Components/PlanDetail/PlanDetailSection";
 import WebGratisSection from "../../../Components/WebGratis/WebGratisSection";
 import ContactIno3 from "../../../Components/ContactInfo/ContactIno3";
 import { Zap, Layers, Rocket } from "lucide-react";
 
 const basicoFeatures = [
   {
-    icon: <Zap size={32} />,
+    icon: <Zap size={40} />,
     title: "Web Optimizada y Rápida",
     description:
       "Eliminamos problemas técnicos que ralentizan tu sitio. Velocidad de carga, móvil-friendly y estructura perfecta.",
   },
   {
-    icon: <Layers size={32} />,
+    icon: <Layers size={40} />,
     title: "Contenido que Convierte",
     description:
       "Textos, imágenes y CTA estratégicos diseñados para guiar a visitantes hacia la acción. De curiosos a clientes.",
   },
   {
-    icon: <Rocket size={32} />,
+    icon: <Rocket size={40} />,
     title: "Resultados en Semanas",
     description:
       "Empieza a ver mejoras en posicionamiento y conversiones en las primeras 4-6 semanas. Crecimiento real y medible.",
   },
 ];
 
-const Inicio2Page = () => {
+const basicPlanIncludes = [
+  "Todo del Plan Inicial",
+  "SEO Local completo (Google Maps)",
+  "Sincronización en directorios locales",
+  "Sistema de reseñas automático",
+  "Textos enfocados a conversión",
+  "Soporte técnico 1h/mes",
+];
+
+const BasicoPage = () => {
   return (
     <div style={{ backgroundColor: "#ffffff" }}>
       <BreadCumb
@@ -43,20 +51,25 @@ const Inicio2Page = () => {
       ></BreadCumb>
 
       <HeroBannerPlanes
-        subtitle="Planes y Precios"
-        title="Elige el Plan Perfecto para tu Negocio"
-        content="Nuestros planes están diseñados para adaptarse a las necesidades de tu empresa, desde startups hasta grandes corporaciones."
-        img="/assets/img/hero/hero3-main-img.png"
+        subtitle="Plan Básico"
+        title="Apúntate a Nuestro<br/><span style='color: #4D32A5;'>Plan Básico</span>"
+        content="Optimización completa de tu web y presencia online para atraer más clientes locales. Desde lo técnico hasta el contenido que convierte."
+        img="/assets/img/hero/pintores-profesionales.jpg"
+        showBreadcrumb={false}
+        showImage={true}
       ></HeroBannerPlanes>
 
-      <FeaturesSection
-        title="¿Qué Incluye el"
-        titleHighlight="Plan Básico?"
-        description="Optimización completa de tu web y presencia online. Desde lo técnico hasta el contenido que convierte."
+      <PlanDetailSection
+        sectionTitle="Qué incluye este plan"
+        sectionDescription="Optimización completa de tu web y presencia online. Desde lo técnico hasta el contenido que convierte."
         features={basicoFeatures}
-      ></FeaturesSection>
-
-      <Pricing3 highlightedPlan="basico"></Pricing3>
+        planName="Plan Básico"
+        planPrice="€699"
+        planDescription="Ideal para negocios locales que necesitan captar clientes en su ciudad."
+        planFeatures={basicPlanIncludes}
+        planButtonText="Contratar Ahora"
+        planButtonUrl="/contacto"
+      ></PlanDetailSection>
 
       <WebGratisSection></WebGratisSection>
 
@@ -65,4 +78,4 @@ const Inicio2Page = () => {
   );
 };
 
-export default Inicio2Page;
+export default BasicoPage;

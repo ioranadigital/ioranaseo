@@ -2,31 +2,38 @@ export const dynamic = "force-dynamic";
 import React from "react";
 import BreadCumb from "../../../Components/Common/BreadCumb";
 import HeroBannerPlanes from "../../../Components/HeroBanner/HeroBannerPlanes";
-import FeaturesSection from "../../../Components/FeaturesSection/FeaturesSection";
-import Pricing3 from "../../../Components/Pricing/Pricing3";
+import PlanDetailSection from "../../../Components/PlanDetail/PlanDetailSection";
 import WebGratisSection from "../../../Components/WebGratis/WebGratisSection";
 import ContactIno3 from "../../../Components/ContactInfo/ContactIno3";
 import { Zap, BarChart3, TrendingUp } from "lucide-react";
 
 const avanzadoFeatures = [
   {
-    icon: <Zap size={32} />,
+    icon: <Zap size={40} />,
     title: "Automatización Inteligente",
     description:
       "Sistemas automáticos que trabajan 24/7. Lead capture, seguimiento de clientes y nurturing sin intervención manual.",
   },
   {
-    icon: <BarChart3 size={32} />,
+    icon: <BarChart3 size={40} />,
     title: "Análisis en Tiempo Real",
     description:
       "Dashboard personalizado con métricas que importan. Ve exactamente qué tráfico generan llamadas, cuántos clientes vienen de cada fuente.",
   },
   {
-    icon: <TrendingUp size={32} />,
+    icon: <TrendingUp size={40} />,
     title: "Escalamiento Sostenido",
     description:
       "Estrategia probada que adapta constantemente. A medida que creces, el sistema se ajusta para mantener rentabilidad y crecimiento.",
   },
+];
+
+const avanzadoPlanIncludes = [
+  "Todo del Plan Básico",
+  "1 artículo SEO optimizado/mes",
+  "Vigilancia de 3 competidores",
+  "SEO para vídeos (YouTube/Redes)",
+  "Informe visual de conversiones",
 ];
 
 const AvanzadoPage = () => {
@@ -44,19 +51,24 @@ const AvanzadoPage = () => {
 
       <HeroBannerPlanes
         subtitle="Plan Avanzado"
-        title="Elige el Plan Perfecto para tu Negocio"
-        content="Nuestros planes están diseñados para adaptarse a las necesidades de tu empresa, desde startups hasta grandes corporaciones."
-        img="/assets/img/hero/hero3-main-img.png"
+        title="Apúntate a Nuestro<br/><span style='color: #4D32A5;'>Plan Avanzado</span>"
+        content="Crecimiento acelerado con automatización, análisis profundo y estrategia de escalamiento. Para empresas con ambiciones de expansión."
+        img="/assets/img/hero/dentista-perspectiva.jpg"
+        showBreadcrumb={false}
+        showImage={true}
       ></HeroBannerPlanes>
 
-      <FeaturesSection
-        title="¿Qué Incluye el"
-        titleHighlight="Plan Avanzado?"
-        description="Crecimiento acelerado con automatización, análisis profundo y estrategia de escalamiento. Para empresas con ambiciones de expansión."
+      <PlanDetailSection
+        sectionTitle="Qué incluye este plan"
+        sectionDescription="Crecimiento acelerado con automatización, análisis profundo y estrategia de escalamiento. Para empresas con ambiciones de expansión."
         features={avanzadoFeatures}
-      ></FeaturesSection>
-
-      <Pricing3 highlightedPlan="avanzado"></Pricing3>
+        planName="Plan Avanzado"
+        planPrice="€899"
+        planDescription="Para PYMEs en sectores competitivos que quieren superar a la competencia."
+        planFeatures={avanzadoPlanIncludes}
+        planButtonText="Contratar Ahora"
+        planButtonUrl="/contacto"
+      ></PlanDetailSection>
 
       <WebGratisSection></WebGratisSection>
 
