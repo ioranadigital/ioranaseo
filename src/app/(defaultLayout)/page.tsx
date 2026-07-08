@@ -30,7 +30,7 @@ const page = () => {
           "Liderazgo en tu región",
           "Un comercial activo las 24 horas",
         ]}
-        btnurl="/service"
+        btnurl="/servicios"
         btnname="Explora Nuestros Servicios"
       ></About3>
       <Pricing3></Pricing3>

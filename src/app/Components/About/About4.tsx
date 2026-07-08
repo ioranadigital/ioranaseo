@@ -67,7 +67,7 @@ const About4: FC<About4Props> = ({
               </div>
               <div className="space30"></div>
               <div className="">
-                <Link className="theme-btn2" href="/contact">
+                <Link className="theme-btn2" href="/servicios">
                   Explora Nuestros Servicios{" "}
                   <span>
                     <i className="bi bi-arrow-right"></i>

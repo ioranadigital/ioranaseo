@@ -57,6 +57,11 @@ const AvanzadoPage = () => {
         showBreadcrumb={false}
         showImage={false}
         rightImage="/assets/img/hero/dentista-perspectiva.jpg"
+        benefits={[
+          "Automatización 24/7",
+          "Vigilancia de tu Competencia",
+          "Análisis en Tiempo Real",
+        ]}
       ></HeroBannerPlanes>
 
       <PlanDetailSection

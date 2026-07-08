@@ -57,6 +57,11 @@ const PremiumPage = () => {
         showBreadcrumb={false}
         showImage={false}
         rightImage="/assets/img/hero/bar-hosteleria.jpg"
+        benefits={[
+          "Asesor Digital Dedicado",
+          "Stack Tecnológico Completo",
+          "Dominio Total del Mercado",
+        ]}
       ></HeroBannerPlanes>
 
       <PlanDetailSection

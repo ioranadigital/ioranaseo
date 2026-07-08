@@ -4,7 +4,6 @@ import About4 from "@/app/Components/About/About4";
 import BreadCumb from "@/app/Components/Common/BreadCumb";
 import ContactInfo4 from "@/app/Components/ContactInfo/ContactInfo4";
 import Skill from "@/app/Components/Skill/Skill";
-import Team2 from "@/app/Components/Team/Team2";
 import Testimonial1 from "@/app/Components/Testimonial/Testimonial1";
 import Work5 from "@/app/Components/Work/Work5";
 import React from "react";
@@ -29,7 +28,7 @@ const page = () => {
           "Dominio del Mercado Local",
           "Promoción 24/7",
         ]}
-        btnurl="/service"
+        btnurl="/servicios"
         btnname="Explora Nuestros Servicios"
       ></About1>
       <About4
@@ -44,7 +43,6 @@ const page = () => {
       ></About4>
       <Skill></Skill>
       <Work5></Work5>
-      <Team2></Team2>
       <Testimonial1></Testimonial1>
       <ContactInfo4></ContactInfo4>
     </div>

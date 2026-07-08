@@ -57,6 +57,11 @@ const PlanesInicio = () => {
         showBreadcrumb={false}
         showImage={false}
         rightImage="/assets/img/hero/pareja-tienda.jpg"
+        benefits={[
+          "Diagnóstico Completo de tu Web",
+          "Estudio de Palabras Clave",
+          "Alta Oficial en Google",
+        ]}
       ></HeroBannerPlanes>
 
       <PlanDetailSection

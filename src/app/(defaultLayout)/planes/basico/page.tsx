@@ -58,6 +58,11 @@ const BasicoPage = () => {
         showBreadcrumb={false}
         showImage={false}
         rightImage="/assets/img/hero/pintores-profesionales.jpg"
+        benefits={[
+          "SEO Local en Google Maps",
+          "Más Reseñas de Clientes",
+          "Contenido que Convierte",
+        ]}
       ></HeroBannerPlanes>
 
       <PlanDetailSection

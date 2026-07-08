@@ -176,7 +176,7 @@ const HeroBannerPlanes: FC<HeroBannerPlanesProps> = ({
                   </button>
                   {showPlansButton && (
                     <Link
-                      href="/planes"
+                      href="/planes/compara"
                       className="btn-barrido"
                       style={{
                         display: "inline-block",
@@ -195,7 +195,7 @@ const HeroBannerPlanes: FC<HeroBannerPlanesProps> = ({
                       }}
                     >
                       <span style={{ position: "relative", zIndex: 1 }}>
-                        Mira Nuestros Planes{" "}
+                        Compara Nuestros Planes{" "}
                         <span>
                           <i className="bi bi-arrow-right"></i>
                         </span>
