@@ -16,7 +16,7 @@ const Nav: FC<NavProps> = ({ setMobileToggle }) => {
       </li>
       <li className="menu-item-has-children">
         <Link href="/servicios" onClick={() => setMobileToggle(false)}>
-          Servicios
+          Servicios <i className="bi bi-chevron-down" style={{ marginLeft: "6px" }}></i>
         </Link>
         <DropDown>
           <ul>
@@ -179,7 +179,7 @@ const Nav: FC<NavProps> = ({ setMobileToggle }) => {
       </li>
       <li className="menu-item-has-children">
         <Link href="/planes" onClick={() => setMobileToggle(false)}>
-          Planes
+          Planes <i className="bi bi-chevron-down" style={{ marginLeft: "6px" }}></i>
         </Link>
         <DropDown>
           <ul>

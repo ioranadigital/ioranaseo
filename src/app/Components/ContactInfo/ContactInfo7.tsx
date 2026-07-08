@@ -48,42 +48,6 @@ const ContactInfo7: FC<ContactInfo7Props> = ({
                 <div className="space16"></div>
                 <p>{description}</p>
 
-                <div className="faq-contact-boxs">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="single-box">
-                        <div className="icon">
-                          <OptimizedImage
-                            src="/assets/img/icons/contact-icon1.svg"
-                            alt="img"
-                            width={33}
-                            height={32}
-                          />
-                        </div>
-                        <div className="heading">
-                          <h6>Nuestro Correo</h6>
-                          <a href={`mailto:${email}`}>{email}</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="single-box">
-                        <div className="icon">
-                          <OptimizedImage
-                            src="/assets/img/icons/contact-icon2.svg"
-                            alt="img"
-                            width={32}
-                            height={32}
-                          />
-                        </div>
-                        <div className="heading">
-                          <h6>Teléfono</h6>
-                          <a href={`tel:${phone}`}>{phone}</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="col-lg-6">
@@ -127,13 +91,64 @@ const ContactInfo7: FC<ContactInfo7Props> = ({
                       </div>
                       <div className="space30"></div>
                       <div className="button">
-                        <button className="theme-btn2">
-                          {buttonText}{" "}
-                          <span>
-                            <i className="bi bi-arrow-right"></i>
+                        <button
+                          className="btn-barrido-contact"
+                          style={{
+                            display: "inline-block",
+                            backgroundColor: "#FF8C00",
+                            color: "#ffffff",
+                            padding: "14px 32px",
+                            borderRadius: "24px",
+                            textDecoration: "none",
+                            fontWeight: "600",
+                            fontSize: "14px",
+                            cursor: "pointer",
+                            border: "none",
+                            position: "relative",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <span style={{ position: "relative", zIndex: 1 }}>
+                            Enviar Consulta{" "}
+                            <span>
+                              <i className="bi bi-arrow-right"></i>
+                            </span>
                           </span>
                         </button>
                       </div>
+                      <style>{`
+                        .btn-barrido-contact {
+                          position: relative;
+                          overflow: hidden;
+                          background: #FF8C00 !important;
+                        }
+
+                        .btn-barrido-contact::before {
+                          content: '';
+                          position: absolute;
+                          top: 0;
+                          left: -100%;
+                          width: 100%;
+                          height: 100%;
+                          background: #4D32A5;
+                          transition: left 0.4s ease;
+                          z-index: 0;
+                        }
+
+                        .btn-barrido-contact:hover::before {
+                          left: 0;
+                        }
+
+                        .btn-barrido-contact span {
+                          position: relative;
+                          z-index: 1;
+                          color: #ffffff !important;
+                        }
+
+                        .btn-barrido-contact:hover span {
+                          color: #ffffff !important;
+                        }
+                      `}</style>
                     </div>
                   </div>
                 </form>

@@ -63,14 +63,14 @@ const RGPDModal = () => {
             Utilizamos cookies para mejorar tu experiencia. Al continuar
             navegando, aceptas nuestro uso de cookies. Lee nuestra{" "}
             <a
-              href="/legal"
+              href="/legal/cookies"
               style={{
                 color: "#4D32A5",
                 textDecoration: "none",
                 fontWeight: "600",
               }}
             >
-              política de privacidad
+              política de cookies
             </a>
             .
           </p>

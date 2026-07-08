@@ -44,39 +44,16 @@ const Footer1: FC<Footer1Props> = ({ addclass, footerlogo }) => {
                   <Link href="/about">Sobre Nosotros</Link>
                 </li>
                 <li>
-                  <Link href="/contact">Contáctanos</Link>
+                  <Link href="/contacto">Contáctanos</Link>
                 </li>
                 <li>
-                  <Link href="/pricing">Plan de Precios</Link>
+                  <Link href="/planes">Plan de Precios</Link>
                 </li>
                 <li>
-                  <Link href="/blog">Nuestros Artículos</Link>
+                  <a href="#">Nuestros Artículos</a>
                 </li>
                 <li>
-                  <Link href="/case">Casos de Estudio</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-lg col-6">
-            <div className="menu-list">
-              <h3>Empresa</h3>
-              <ul>
-                <li>
-                  <a href="#">Nuestro Portafolio</a>
-                </li>
-                <li>
-                  <a href="#">Miembro del Equipo</a>
-                </li>
-                <li>
-                  <a href="#">Plan de Precios</a>
-                </li>
-                <li>
-                  <a href="#">Política de Privacidad</a>
-                </li>
-                <li>
-                  <a href="#">Asociación</a>
+                  <a href="#">Casos de Estudio</a>
                 </li>
               </ul>
             </div>
@@ -87,23 +64,22 @@ const Footer1: FC<Footer1Props> = ({ addclass, footerlogo }) => {
               <h3>Servicios</h3>
               <ul>
                 <li>
-                  <Link href="/service/service-details">Marketing SEO</Link>
+                  <a href="#">SEO & Visibilidad</a>
                 </li>
                 <li>
-                  <Link href="/service/service-details">
-                    Marketing de Contenidos
-                  </Link>
+                  <a href="#">Visibilidad Web</a>
                 </li>
                 <li>
-                  <Link href="/service/service-details">Marketing Digital</Link>
+                  <a href="#">Campañas Publicitarias</a>
                 </li>
                 <li>
-                  <Link href="/service/service-details">Email Marketing</Link>
+                  <a href="#">Marca y Contenidos</a>
                 </li>
                 <li>
-                  <Link href="/service/service-details">
-                    Estrategia de Marketing
-                  </Link>
+                  <a href="#">Automatizaciones</a>
+                </li>
+                <li>
+                  <a href="#">Soluciones Inteligentes</a>
                 </li>
               </ul>
             </div>
@@ -114,19 +90,19 @@ const Footer1: FC<Footer1Props> = ({ addclass, footerlogo }) => {
               <h3>Legal</h3>
               <ul>
                 <li>
-                  <Link href="/legal">Términos y Condiciones</Link>
+                  <Link href="/legal/aviso-legal">Términos y Condiciones</Link>
                 </li>
                 <li>
-                  <a href="#">Política de Privacidad</a>
+                  <Link href="/legal/privacidad">Política de Privacidad</Link>
                 </li>
                 <li>
-                  <a href="#">Política de Cookies</a>
+                  <Link href="/legal/cookies">Política de Cookies</Link>
                 </li>
                 <li>
-                  <a href="#">Aviso Legal</a>
+                  <Link href="/legal/aviso-legal">Aviso Legal</Link>
                 </li>
                 <li>
-                  <a href="#">Contacto Legal</a>
+                  <Link href="/contacto">Contacto Legal</Link>
                 </li>
               </ul>
             </div>

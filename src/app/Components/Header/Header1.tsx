@@ -113,6 +113,11 @@ const Header1: FC<Header1Props> = ({ variant }) => {
         .btn-barrido-header span {
           position: relative;
           z-index: 1;
+          color: #ffffff !important;
+        }
+
+        .btn-barrido-header:hover span {
+          color: #ffffff !important;
         }
       `}</style>
     </header>

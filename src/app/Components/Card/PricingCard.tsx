@@ -41,6 +41,8 @@ const PricingCard: FC<PricingCardProps> = ({
         boxShadow: isHovered
           ? "0 20px 40px rgba(77, 50, 165, 0.15)"
           : "0 5px 15px rgba(0, 0, 0, 0.08)",
+        backgroundColor: isHovered ? "#4D32A5" : "#ffffff",
+        color: isHovered ? "#ffffff" : "inherit",
         display: "flex",
         flexDirection: "column",
         minHeight: "700px",
@@ -66,8 +68,8 @@ const PricingCard: FC<PricingCardProps> = ({
         </div>
       )}
       <div style={{ flex: 1 }}>
-        <h6>{title}</h6>
-        <p>{content}</p>
+        <h6 style={{ color: isHovered ? "#ffffff" : "inherit" }}>{title}</h6>
+        <p style={{ color: isHovered ? "#ffffff" : "inherit" }}>{content}</p>
         <ul style={{ listStyle: "none", padding: "0", margin: "0" }}>
           {FeatureList?.map((item, index) => {
             const isTodoDel = item.startsWith("Todo del");
@@ -131,9 +133,9 @@ const PricingCard: FC<PricingCardProps> = ({
 
       <div style={{ marginTop: "auto" }}>
         <div className="head-text">
-          <h3>
+          <h3 style={{ color: isHovered ? "#FF8C00" : "inherit" }}>
             {price}
-            <span>/{pricename}</span>
+            <span style={{ color: isHovered ? "#FF8C00" : "inherit" }}>/{pricename}</span>
           </h3>
         </div>
         <div className="button" style={{ width: "100%" }}>

@@ -80,7 +80,7 @@ const HeroBanner3: FC<HeroBanner3Props> = ({
           </div>
         </div>
         <div
-          className="col-lg-6"
+          className="hero-bg-carpintero"
           style={{
             marginRight: "-10px",
             width: "calc(50% + 10px)",
@@ -95,18 +95,14 @@ const HeroBanner3: FC<HeroBanner3Props> = ({
             top: "0",
             bottom: "0",
           }}
-        >
-          <div
-            className="main-images"
-            data-aos="zoom-out"
-            data-aos-duration="700"
-            style={{ position: "relative" }}
-          >
-            <div className="main-img">
-              <OptimizedImage src={img3} alt="img" width={552} height={530} />
-            </div>
-          </div>
-        </div>
+        ></div>
+        <style>{`
+          @media (max-width: 768px) {
+            .hero-bg-carpintero {
+              display: none !important;
+            }
+          }
+        `}</style>
       </div>
     </div>
   );
