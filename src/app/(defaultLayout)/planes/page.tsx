@@ -22,8 +22,9 @@ const PlanesPage = () => {
         subtitle="Planes y Precios"
         title="Elige el Plan Perfecto para tu Negocio"
         content="Nuestros planes están diseñados para adaptarse a las necesidades de tu empresa, desde startups hasta grandes corporaciones."
-        img="/assets/img/hero/hero3-main-img.png"
+        img=""
         showImage={false}
+        rightImage="/assets/img/hero/tablet-planes-hero.png"
       ></HeroBannerPlanes>
 
       <Pricing3></Pricing3>

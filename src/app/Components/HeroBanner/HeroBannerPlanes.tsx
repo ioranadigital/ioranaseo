@@ -14,6 +14,7 @@ interface HeroBannerPlanesProps {
   showPlansButton?: boolean;
   benefits?: string[];
   whyImportant?: string[];
+  rightImage?: string;
 }
 
 const HeroBannerPlanes: FC<HeroBannerPlanesProps> = ({
@@ -34,6 +35,7 @@ const HeroBannerPlanes: FC<HeroBannerPlanesProps> = ({
     "El 76% de las personas que hacen una búsqueda local visitan el negocio en 24 horas",
     "Los negocios en el Local Pack de Google reciben el 44% de los clics totales de la página de resultados",
   ],
+  rightImage,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -203,26 +205,66 @@ const HeroBannerPlanes: FC<HeroBannerPlanesProps> = ({
                 </div>
               </div>
             </div>
-            <div className="col-lg-6" style={{ width: "50%", paddingRight: "20px", display: showImage ? "none" : "block" }}>
-              {!showImage && (
-                <div
-                  style={{
-                    padding: "40px 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    height: "600px",
-                    justifyContent: "center",
-                    backgroundImage: `url('${img}')`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    borderRadius: "20px",
-                    overflow: "hidden",
-                  }}
-                >
-                  {/* Imagen de fondo */}
+            {rightImage ? (
+              <div className="col-lg-6">
+                <div className="relative w-full h-[650px] overflow-hidden">
+                  <svg
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                    className="w-full h-full drop-shadow-2xl"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      {/* Panza inferior ensanchada hacia la izquierda (valores X reducidos en el tramo final) */}
+                      <clipPath id="true-organic-mask-expanded-blob" clipPathUnits="objectBoundingBox">
+                        <path d="M 1,0 L 0.4,0 C 0.25,0.15 0.1,0.35 0.35,0.55 C 0.55,0.7 0.0,0.80 0.1,1 L 1,1 Z" />
+                      </clipPath>
+                    </defs>
+
+                    {/* Imagen recortada */}
+                    <g clipPath="url(#true-organic-mask-expanded-blob)">
+                      <image
+                        href={rightImage}
+                        width="100"
+                        height="100"
+                        preserveAspectRatio="xMidYMid slice"
+                      />
+                    </g>
+
+                    {/* TRAZO GRUESO MORADO: Siguiendo el nuevo recorrido expandido */}
+                    <path
+                      d="M 40,0 C 25,15 10,35 35,55 C 55,70 0,80 10,100"
+                      vectorEffect="non-scaling-stroke"
+                      stroke="#4C1D95"
+                      strokeWidth="16"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                  </svg>
                 </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="col-lg-6" style={{ display: showImage ? "none" : "block" }}>
+                {!showImage && (
+                  <div
+                    style={{
+                      padding: "40px 20px",
+                      display: "flex",
+                      alignItems: "center",
+                      height: "600px",
+                      justifyContent: "center",
+                      backgroundImage: `url('${img}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {/* Imagen de fondo */}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

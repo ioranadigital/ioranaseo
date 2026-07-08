@@ -53,9 +53,10 @@ const PlanesInicio = () => {
         subtitle="Plan Inicial"
         title="Apúntate a Nuestro<br/><span style='color: #4D32A5;'>Plan Inicial</span>"
         content="Aparece más en búsquedas locales, gana visibilidad online y atrae más clientes desde una única plataforma con el respaldo de nuestros expertos"
-        img="/assets/img/hero/pareja-tienda.jpg"
+        img=""
         showBreadcrumb={false}
-        showImage={true}
+        showImage={false}
+        rightImage="/assets/img/hero/pareja-tienda.jpg"
       ></HeroBannerPlanes>
 
       <PlanDetailSection

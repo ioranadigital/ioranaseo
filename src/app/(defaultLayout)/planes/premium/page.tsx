@@ -53,9 +53,10 @@ const PremiumPage = () => {
         subtitle="Plan Premium"
         title="Apúntate a Nuestro<br/><span style='color: #4D32A5;'>Plan Premium</span>"
         content="El máximo en soporte, tecnología y estrategia. Para empresas que quieren ser líderes indiscutibles en su mercado."
-        img="/assets/img/hero/bar-hosteleria.jpg"
+        img=""
         showBreadcrumb={false}
-        showImage={true}
+        showImage={false}
+        rightImage="/assets/img/hero/bar-hosteleria.jpg"
       ></HeroBannerPlanes>
 
       <PlanDetailSection

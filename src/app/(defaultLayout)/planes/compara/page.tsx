@@ -23,9 +23,10 @@ const ComparaPlanesPage = () => {
         subtitle="Planes y Precios"
         title="Compara <span style='color: #4D32A5;'>Nuestros Planes</span>"
         content="Encuentra el plan que mejor se adapte a tu negocio y tus necesidades específicas."
-        img="/assets/img/hero/tablet-gafas-mesa.jpg"
+        img="/assets/img/hero/tablet-planes-hero.png"
         showImage={true}
         showPlansButton={false}
+        benefits={[]}
       ></HeroBannerPlanes>
 
       <PricingComparison></PricingComparison>

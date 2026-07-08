@@ -53,9 +53,10 @@ const AvanzadoPage = () => {
         subtitle="Plan Avanzado"
         title="Apúntate a Nuestro<br/><span style='color: #4D32A5;'>Plan Avanzado</span>"
         content="Crecimiento acelerado con automatización, análisis profundo y estrategia de escalamiento. Para empresas con ambiciones de expansión."
-        img="/assets/img/hero/dentista-perspectiva.jpg"
+        img=""
         showBreadcrumb={false}
-        showImage={true}
+        showImage={false}
+        rightImage="/assets/img/hero/dentista-perspectiva.jpg"
       ></HeroBannerPlanes>
 
       <PlanDetailSection

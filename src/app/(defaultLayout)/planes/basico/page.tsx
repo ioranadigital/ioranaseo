@@ -54,9 +54,10 @@ const BasicoPage = () => {
         subtitle="Plan Básico"
         title="Apúntate a Nuestro<br/><span style='color: #4D32A5;'>Plan Básico</span>"
         content="Optimización completa de tu web y presencia online para atraer más clientes locales. Desde lo técnico hasta el contenido que convierte."
-        img="/assets/img/hero/pintores-profesionales.jpg"
+        img=""
         showBreadcrumb={false}
-        showImage={true}
+        showImage={false}
+        rightImage="/assets/img/hero/pintores-profesionales.jpg"
       ></HeroBannerPlanes>
 
       <PlanDetailSection

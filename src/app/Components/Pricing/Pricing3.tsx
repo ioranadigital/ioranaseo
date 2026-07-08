@@ -24,7 +24,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Alta oficial en Google",
         "Informe mensual sencillo",
       ],
-      price: "$299",
+      price: "€349",
     },
     {
       id: "basico",
@@ -39,7 +39,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Textos enfocados a la venta",
         "Soporte técnico mensual",
       ],
-      price: "$599",
+      price: "€699",
       badge: "Más Vendido",
     },
     {
@@ -54,7 +54,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Especialistas en búsquedas de Vídeo",
         "Informe de resultados detallado",
       ],
-      price: "$799",
+      price: "€899",
     },
     {
       id: "premium",
@@ -68,7 +68,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Optimización para Asistentes de Voz e IA",
         "Mejora del diseño para vender más",
       ],
-      price: "$999",
+      price: "€1.299",
     },
   ];
 
@@ -76,6 +76,16 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
     if (!highlightedPlan) return 1;
     if (planId === highlightedPlan || hoveredPlan === planId) return 1;
     return 0.5;
+  };
+
+  const getPlanUrl = (planId: string) => {
+    const urlMap: { [key: string]: string } = {
+      inicial: "/planes/inicio",
+      basico: "/planes/basico",
+      avanzado: "/planes/avanzado",
+      premium: "/planes/premium",
+    };
+    return urlMap[planId] || "/planes";
   };
 
   return (
@@ -108,7 +118,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
                 FeatureList={plan.features}
                 price={plan.price}
                 pricename="Mes"
-                btnurl="/pricing"
+                btnurl={getPlanUrl(plan.id)}
                 btnname="Me Interesa →"
                 badge={plan.badge}
               ></PricingCard>
