@@ -38,7 +38,7 @@ const ServiciosPage = () => {
 
       <AuditoriaGratis></AuditoriaGratis>
 
-      <ContactIno3></ContactIno3>
+      <ContactIno3 showForm={false}></ContactIno3>
     </div>
   );
 };

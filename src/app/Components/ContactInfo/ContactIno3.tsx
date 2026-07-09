@@ -3,6 +3,7 @@ import { useEffect, FC, useState, useRef } from "react";
 import loadBackgroudImages from "../Common/loadBackgroudImages";
 import { OptimizedImage } from "@/components";
 import data from "../../Data/faq.json";
+import { submitLead } from "@/lib/submitLead";
 
 interface FAQ {
   title: string;
@@ -18,6 +19,41 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
   const accordionContentRef = useRef(null);
   const [openItemIndex, setOpenItemIndex] = useState(-1);
   const [firstItemOpen, setFirstItemOpen] = useState(true);
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    website: "",
+    mensaje: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const ok = await submitLead({
+      nombre: formData.nombre,
+      email: formData.email,
+      asunto: "form-listo-para-comenzar",
+    });
+
+    if (ok) {
+      setSubmitted(true);
+    } else {
+      setError("Error al enviar. Inténtalo de nuevo.");
+    }
+    setLoading(false);
+  };
 
   const handleItemClick = (index: number) => {
     if (index === openItemIndex) {
@@ -66,7 +102,10 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
           {/* Left Column - FAQ */}
           <div className={showForm ? "col-lg-6" : "col-lg-12"}>
             <div style={{ paddingRight: "20px" }}>
-              <div className="accordion accordion1" id="accordionContact">
+              <div
+                className={`accordion accordion1${!showForm ? " accordion-full-width" : ""}`}
+                id="accordionContact"
+              >
                 {(faqData || data).map((item, index) => (
                   <div
                     key={index}
@@ -135,10 +174,42 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
                   Nuestro equipo de expertos en SEO está aquí para ayudarte a
                   crecer tu negocio online.
                 </p>
-                <form className="contact-form-planes" action="#">
+                {submitted ? (
+                  <div
+                    style={{
+                      padding: "24px",
+                      backgroundColor: "rgba(34, 197, 94, 0.08)",
+                      border: "1px solid rgba(34, 197, 94, 0.3)",
+                      borderRadius: "16px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <p
+                      style={{
+                        margin: 0,
+                        color: "#16a34a",
+                        fontWeight: 700,
+                        fontSize: "16px",
+                      }}
+                    >
+                      ¡Mensaje enviado con éxito!
+                    </p>
+                    <p style={{ margin: "8px 0 0", color: "#333" }}>
+                      Nos pondremos en contacto contigo lo antes posible.
+                    </p>
+                  </div>
+                ) : (
+                <form
+                  id="form-listo-para-comenzar"
+                  className="contact-form-planes"
+                  onSubmit={handleFormSubmit}
+                >
                   <div className="form-group">
                     <input
                       type="text"
+                      name="nombre"
+                      value={formData.nombre}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="Tu nombre"
                       required
@@ -147,6 +218,9 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
                   <div className="form-group">
                     <input
                       type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="Tu correo electrónico"
                       required
@@ -155,6 +229,9 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
                   <div className="form-group">
                     <input
                       type="url"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleChange}
                       className="form-control"
                       placeholder="Tu sitio web"
                       required
@@ -162,13 +239,22 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
                   </div>
                   <div className="form-group">
                     <textarea
+                      name="mensaje"
+                      value={formData.mensaje}
+                      onChange={handleChange}
                       className="form-control"
                       rows={4}
                       placeholder="Cuéntanos sobre tu negocio"
                     ></textarea>
                   </div>
+                  {error && (
+                    <p style={{ color: "#ef4444", fontWeight: 600 }}>
+                      {error}
+                    </p>
+                  )}
                   <button
                     type="submit"
+                    disabled={loading}
                     className="btn-barrido-contact"
                     style={{
                       backgroundColor: "#FF8C00",
@@ -182,13 +268,15 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
                       width: "100%",
                       position: "relative",
                       overflow: "hidden",
+                      opacity: loading ? 0.6 : 1,
                     }}
                   >
                     <span style={{ position: "relative", zIndex: 1 }}>
-                      Enviar Mensaje →
+                      {loading ? "Enviando..." : "Enviar Mensaje →"}
                     </span>
                   </button>
                 </form>
+                )}
               </div>
             </div>
           )}
@@ -268,6 +356,15 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
 
         #accordionContact {
           min-height: 400px;
+        }
+
+        #accordionContact.accordion-full-width .accordion-item button {
+          font-size: 18px !important;
+        }
+
+        #accordionContact.accordion-full-width .accordion-item .accordion-body {
+          font-size: 16px !important;
+          padding-top: 20px !important;
         }
 
         .btn-barrido-contact {

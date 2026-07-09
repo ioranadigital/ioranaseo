@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { submitLead } from "@/lib/submitLead";
 
 interface FormData {
   nombre: string;
@@ -39,15 +40,19 @@ export default function AuditoriaGratis() {
     setLoading(true);
     setError(null);
 
-    try {
-      // Aquí iría la integración con tu backend
-      console.log("Datos del formulario:", formData);
+    const ok = await submitLead({
+      nombre: formData.nombre,
+      telefono: formData.telefono,
+      email: formData.email,
+      asunto: "form-auditoria-gratuita",
+    });
+
+    if (ok) {
       setSubmitted(true);
-    } catch (err) {
+    } else {
       setError("Error al enviar. Inténtalo de nuevo.");
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
@@ -227,6 +232,7 @@ export default function AuditoriaGratis() {
                 </h2>
 
                 <form
+                  id="form-auditoria-gratuita"
                   onSubmit={handleSubmit}
                   style={{
                     display: "flex",

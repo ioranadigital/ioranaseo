@@ -1,7 +1,8 @@
 "use client";
 import parse from "html-react-parser";
 import Link from "next/link";
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
+import { submitLead } from "@/lib/submitLead";
 
 interface HeroBannerServiciosProps {
   subtitle: string;
@@ -30,6 +31,10 @@ const HeroBannerServicios: FC<HeroBannerServiciosProps> = ({
   ],
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [callPhone, setCallPhone] = useState("");
+  const [callLoading, setCallLoading] = useState(false);
+  const [callSubmitted, setCallSubmitted] = useState(false);
+  const [callError, setCallError] = useState<string | null>(null);
 
   const openModal = () => {
     dialogRef.current?.showModal();
@@ -37,6 +42,26 @@ const HeroBannerServicios: FC<HeroBannerServiciosProps> = ({
 
   const closeModal = () => {
     dialogRef.current?.close();
+    setCallSubmitted(false);
+    setCallPhone("");
+  };
+
+  const handleCallSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setCallLoading(true);
+    setCallError(null);
+
+    const ok = await submitLead({
+      telefono: callPhone,
+      asunto: "modal-te-llamamos-gratis",
+    });
+
+    if (ok) {
+      setCallSubmitted(true);
+    } else {
+      setCallError("Error al enviar. Inténtalo de nuevo.");
+    }
+    setCallLoading(false);
   };
 
   return (
@@ -341,12 +366,35 @@ const HeroBannerServicios: FC<HeroBannerServiciosProps> = ({
               Te llamamos Gratis
             </h2>
 
+            {callSubmitted ? (
+              <div
+                style={{
+                  padding: "24px",
+                  backgroundColor: "rgba(34, 197, 94, 0.08)",
+                  border: "1px solid rgba(34, 197, 94, 0.3)",
+                  borderRadius: "16px",
+                  textAlign: "center",
+                }}
+              >
+                <p
+                  style={{
+                    margin: 0,
+                    color: "#16a34a",
+                    fontWeight: 700,
+                    fontSize: "16px",
+                  }}
+                >
+                  ¡Solicitud enviada con éxito!
+                </p>
+                <p style={{ margin: "8px 0 0", color: "#333" }}>
+                  Te llamaremos lo antes posible.
+                </p>
+              </div>
+            ) : (
             <form
+              id="modal-te-llamamos-gratis"
               className="modal-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                closeModal();
-              }}
+              onSubmit={handleCallSubmit}
               style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             >
               <div
@@ -363,6 +411,9 @@ const HeroBannerServicios: FC<HeroBannerServiciosProps> = ({
                 </label>
                 <input
                   type="tel"
+                  name="telefono"
+                  value={callPhone}
+                  onChange={(e) => setCallPhone(e.target.value)}
                   placeholder="Número de teléfono"
                   required
                   onFocus={(e) => {
@@ -423,8 +474,15 @@ const HeroBannerServicios: FC<HeroBannerServiciosProps> = ({
                 </label>
               </div>
 
+              {callError && (
+                <p style={{ color: "#ef4444", fontWeight: 600, margin: 0 }}>
+                  {callError}
+                </p>
+              )}
+
               <button
                 type="submit"
+                disabled={callLoading}
                 style={{
                   width: "100%",
                   padding: "14px 28px",
@@ -436,11 +494,13 @@ const HeroBannerServicios: FC<HeroBannerServiciosProps> = ({
                   fontWeight: 600,
                   cursor: "pointer",
                   transition: "all 0.3s ease",
+                  opacity: callLoading ? 0.6 : 1,
                 }}
               >
-                TE LLAMAMOS
+                {callLoading ? "Enviando..." : "TE LLAMAMOS"}
               </button>
             </form>
+            )}
           </div>
 
           {/* Tarjeta Derecha - Información */}
