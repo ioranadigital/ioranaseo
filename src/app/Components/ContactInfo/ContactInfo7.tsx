@@ -3,6 +3,7 @@ import parse from "html-react-parser";
 import { OptimizedImage } from "@/components";
 import { FC, useState } from "react";
 import { submitLead } from "@/lib/submitLead";
+import ConsentCheckbox from "@/app/Components/Common/ConsentCheckbox";
 
 interface ContactInfo7Props {
   title?: string;
@@ -394,6 +395,8 @@ const ContactInfo7: FC<ContactInfo7Props> = ({
                         onBlur={handleBlur}
                       ></textarea>
                     </div>
+
+                    <ConsentCheckbox id="consent-contacto" />
 
                     {error && (
                       <p

@@ -4,6 +4,7 @@ import loadBackgroudImages from "../Common/loadBackgroudImages";
 import { OptimizedImage } from "@/components";
 import data from "../../Data/faq.json";
 import { submitLead } from "@/lib/submitLead";
+import ConsentCheckbox from "../Common/ConsentCheckbox";
 
 interface FAQ {
   title: string;
@@ -246,6 +247,9 @@ const ContactIno3: FC<ContactIno3Props> = ({ faqData, showForm = true }) => {
                       rows={4}
                       placeholder="Cuéntanos sobre tu negocio"
                     ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <ConsentCheckbox id="consent-listo-comenzar" />
                   </div>
                   {error && (
                     <p style={{ color: "#ef4444", fontWeight: 600 }}>

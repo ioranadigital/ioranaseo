@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { submitLead } from "@/lib/submitLead";
+import ConsentCheckbox from "@/app/Components/Common/ConsentCheckbox";
 
 interface FormData {
   nombre: string;
@@ -511,6 +512,8 @@ export default function AuditoriaGratis() {
                       }}
                     />
                   </div>
+
+                  <ConsentCheckbox id="consent-auditoria" />
 
                   <button
                     type="submit"
