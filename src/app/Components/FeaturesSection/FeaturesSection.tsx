@@ -119,16 +119,11 @@ const FeaturesSection: FC<FeaturesSectionProps> = ({
               >
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "64px",
-                    height: "64px",
-                    minWidth: "64px",
-                    borderRadius: "12px",
-                    backgroundColor: "#EDE9FE",
-                    color: "#4D32A5",
                     flexShrink: 0,
+                    color: "#4D32A5",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    paddingTop: "4px",
                   }}
                 >
                   {feature.icon}

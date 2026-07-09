@@ -1,12 +1,11 @@
 export const dynamic = "force-dynamic";
 import React from "react";
 import BreadCumb from "@/app/Components/Common/BreadCumb";
-import HeroBannerPlanes from "@/app/Components/HeroBanner/HeroBannerPlanes";
-import PricingComparison from "@/app/Components/PricingComparison/PricingComparison";
+import ServiciosGrid from "@/app/Components/Services/ServiciosGrid";
 import AuditoriaGratis from "@/app/Components/AuditoriaGratis/AuditoriaGratis";
 import ContactIno3 from "@/app/Components/ContactInfo/ContactIno3";
 
-const ServiciosComparaPage = () => {
+const ServiciosPage = () => {
   return (
     <div>
       <BreadCumb
@@ -14,14 +13,28 @@ const ServiciosComparaPage = () => {
         Title="Conoce Nuestros Servicios"
       ></BreadCumb>
 
-      <HeroBannerPlanes
-        subtitle="Servicios Digitales"
-        title="Conoce <span style='color: #4D32A5;'>Nuestros Servicios</span>"
-        content="Encuentra el servicio que mejor se adapte a tu negocio y tus necesidades específicas de marketing digital."
-        img="/assets/img/hero/hero3-main-img.png"
-      ></HeroBannerPlanes>
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "80px auto 0",
+          textAlign: "center",
+          padding: "0 20px",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "44px",
+            fontWeight: "700",
+            color: "#1a1a1a",
+            marginBottom: "16px",
+            lineHeight: "1.2",
+          }}
+        >
+          Encuentra el servicio que mejor se adapte a tu negocio
+        </h2>
+      </div>
 
-      <PricingComparison></PricingComparison>
+      <ServiciosGrid></ServiciosGrid>
 
       <AuditoriaGratis></AuditoriaGratis>
 
@@ -30,4 +43,4 @@ const ServiciosComparaPage = () => {
   );
 };
 
-export default ServiciosComparaPage;
+export default ServiciosPage;
