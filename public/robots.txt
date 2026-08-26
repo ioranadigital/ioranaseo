@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+Disallow: /diagnostico/
+
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: AnthropicAI
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+Disallow: /diagnostico/
+Disallow: /*?q=
+Disallow: /*?tag=
+Disallow: /tag/
+
+
+Sitemap: https://www.ioranaseo.com/sitemap.xml
