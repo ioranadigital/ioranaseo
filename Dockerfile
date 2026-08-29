@@ -7,7 +7,12 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Install dependencies (including devDependencies for build)
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+# pnpm >=10 skips postinstall scripts (sharp, unrs-resolver) unless approved;
+# run the install, then approve+build them, then re-verify.
+RUN npm install -g pnpm \
+    && (pnpm install --frozen-lockfile || true) \
+    && pnpm approve-builds --all \
+    && pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
@@ -24,7 +29,10 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Install only production dependencies
-RUN npm install -g pnpm && pnpm install --frozen-lockfile --production
+RUN npm install -g pnpm \
+    && (pnpm install --frozen-lockfile --production || true) \
+    && pnpm approve-builds --all \
+    && pnpm install --frozen-lockfile --production
 
 # Copy built app from builder
 COPY --from=builder /app/.next ./.next
