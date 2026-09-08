@@ -126,11 +126,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.ioranaseo.com/index.html</loc>
-    <lastmod>2026-08-26</lastmod>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://www.ioranaseo.com/about</loc>
     <lastmod>2026-08-26</lastmod>
     <priority>0.9</priority>
@@ -142,21 +137,6 @@
   </url>
   <url>
     <loc>https://www.ioranaseo.com/legal/privacidad</loc>
-    <lastmod>2026-08-26</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ioranaseo.com/servicios/index.html</loc>
-    <lastmod>2026-08-26</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ioranaseo.com/legal/index.html</loc>
-    <lastmod>2026-08-26</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ioranaseo.com/planes/index.html</loc>
     <lastmod>2026-08-26</lastmod>
     <priority>0.8</priority>
   </url>
