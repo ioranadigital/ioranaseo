@@ -25,6 +25,7 @@ const About3: FC<About3Props> = ({
     <div className="about1 sp" style={{ backgroundColor: "#f9f7ff" }}>
       <div className="container">
         <div
+          className="about3-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -34,6 +35,7 @@ const About3: FC<About3Props> = ({
         >
           {/* Left Column - Features Grid */}
           <div
+            className="about3-features-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -131,7 +133,7 @@ const About3: FC<About3Props> = ({
               </p>
             )}
             <h2
-              className="text-anime-style-3"
+              className="text-anime-style-3 about3-title"
               style={{
                 fontSize: "48px",
                 fontWeight: "700",
@@ -151,7 +153,10 @@ const About3: FC<About3Props> = ({
             >
               {content}
             </p>
-            <div style={{ marginTop: "0", textAlign: "right" }}>
+            <div
+              className="about3-cta-wrap"
+              style={{ marginTop: "0", textAlign: "right" }}
+            >
               <Link
                 className="btn-barrido-contact"
                 href={btnurl}
@@ -178,6 +183,24 @@ const About3: FC<About3Props> = ({
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .about3-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+          .about3-features-grid {
+            display: none !important;
+          }
+          .about3-title {
+            font-size: 32px !important;
+          }
+          .about3-cta-wrap {
+            text-align: left !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

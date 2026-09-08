@@ -15,11 +15,13 @@ const RGPDModal = () => {
   const handleAccept = () => {
     localStorage.setItem("rgpd-dismissed", "true");
     setIsOpen(false);
+    window.dispatchEvent(new Event("rgpd-dismissed"));
   };
 
   const handleReject = () => {
     localStorage.setItem("rgpd-dismissed", "true");
     setIsOpen(false);
+    window.dispatchEvent(new Event("rgpd-dismissed"));
   };
 
   if (!isOpen) return null;
