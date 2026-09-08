@@ -4,10 +4,10 @@ import { trackEvent } from "@/lib/trackEvent";
 import { LANDING_COLORS, LANDING_FONT } from "./landingTheme";
 
 const plans = [
-  { title: "Inicial", price: "€349", badge: undefined },
-  { title: "Básico", price: "€699", badge: "Más Vendido" },
-  { title: "Avanzado", price: "€899", badge: undefined },
-  { title: "Premium", price: "€1.299", badge: undefined },
+  { title: "Inicial", price: "€250", badge: undefined },
+  { title: "Básico", price: "€400", badge: "Más Vendido" },
+  { title: "Avanzado", price: "€700", badge: undefined },
+  { title: "Premium", price: "€1.000", badge: undefined },
 ];
 
 const LandingPricing: FC = () => {

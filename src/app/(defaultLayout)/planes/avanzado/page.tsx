@@ -69,7 +69,7 @@ const AvanzadoPage = () => {
         sectionDescription="Crecimiento acelerado con automatización, análisis profundo y estrategia de escalamiento. Para empresas con ambiciones de expansión."
         features={avanzadoFeatures}
         planName="Plan Avanzado"
-        planPrice="€899"
+        planPrice="€700"
         planDescription="Para PYMEs en sectores competitivos que quieren superar a la competencia."
         planFeatures={avanzadoPlanIncludes}
         planButtonText="Contratar Ahora"

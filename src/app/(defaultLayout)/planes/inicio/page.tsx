@@ -69,7 +69,7 @@ const PlanesInicio = () => {
         sectionDescription="Comienza con un diagnóstico sólido de tu presencia digital. Entiende dónde estás, hacia dónde vas y cómo llegamos juntos."
         features={inicialPlanFeatures}
         planName="Plan Inicial"
-        planPrice="€349"
+        planPrice="€250"
         planDescription="Perfectos para startups y negocios nuevos que necesitan aparecer en Google."
         planFeatures={initialPlanIncludes}
         planButtonText="Contratar Ahora"

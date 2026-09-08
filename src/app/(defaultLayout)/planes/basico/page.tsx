@@ -70,7 +70,7 @@ const BasicoPage = () => {
         sectionDescription="Optimización completa de tu web y presencia online. Desde lo técnico hasta el contenido que convierte."
         features={basicoFeatures}
         planName="Plan Básico"
-        planPrice="€699"
+        planPrice="€400"
         planDescription="Ideal para negocios locales que necesitan captar clientes en su ciudad."
         planFeatures={basicPlanIncludes}
         planButtonText="Contratar Ahora"

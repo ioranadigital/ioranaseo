@@ -24,7 +24,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Alta oficial en Google",
         "Informe mensual sencillo",
       ],
-      price: "€349",
+      price: "€250",
     },
     {
       id: "basico",
@@ -39,7 +39,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Textos enfocados a la venta",
         "Soporte técnico mensual",
       ],
-      price: "€699",
+      price: "€400",
       badge: "Más Vendido",
     },
     {
@@ -54,7 +54,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Especialistas en búsquedas de Vídeo",
         "Informe de resultados detallado",
       ],
-      price: "€899",
+      price: "€700",
     },
     {
       id: "premium",
@@ -68,7 +68,7 @@ const Pricing3: FC<Pricing3Props> = ({ highlightedPlan }) => {
         "Optimización para Asistentes de Voz e IA",
         "Mejora del diseño para vender más",
       ],
-      price: "€1.299",
+      price: "€1.000",
     },
   ];
 

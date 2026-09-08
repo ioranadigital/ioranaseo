@@ -21,25 +21,25 @@ interface PricingPlan {
 const PRICING_PLANS: PricingPlan[] = [
   {
     name: "Plan Inicial",
-    price: "€349",
+    price: "€250",
     description: "Ideal para nuevos negocios o que no aparecen en Google. Ponemos tu negocio en el mapa de internet corrigiendo los fallos y definiendo las palabras exactas por las que te buscarán tus clientes.",
     isPopular: false,
   },
   {
     name: "Plan Básico",
-    price: "€699",
+    price: "€400",
     description: "Ideal para empresas locales que necesitan que el teléfono suene todas las semanas. El motor para captar clientes en tu ciudad multiplicando tu presencia en mapas y directorios.",
     isPopular: true,
   },
   {
     name: "Plan Avanzado",
-    price: "€899",
+    price: "€700",
     description: "Ideal para PYMEs en sectores competitivos que quieren superar a los negocios de toda la vida. Adelanta a tu competencia creando contenidos nuevos todos los meses.",
     isPopular: false,
   },
   {
     name: "Plan Premium",
-    price: "€1.299",
+    price: "€1.000",
     description: "La solución definitiva para empresas que quieren delegar todo su internet en un profesional sénior. Tu propio departamento de marketing digital con un asesor estratégico.",
     isPopular: false,
   },

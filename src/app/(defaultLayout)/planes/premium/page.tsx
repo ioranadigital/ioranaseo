@@ -69,7 +69,7 @@ const PremiumPage = () => {
         sectionDescription="El máximo en soporte, tecnología y estrategia. Para empresas que quieren ser líderes indiscutibles en su mercado."
         features={premiumFeatures}
         planName="Plan Premium"
-        planPrice="€1.299"
+        planPrice="€1.000"
         planDescription="Para empresas escalando que quieren delegar su estrategia digital a un profesional sénior."
         planFeatures={premiumPlanIncludes}
         planButtonText="Contratar Ahora"
