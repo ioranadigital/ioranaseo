@@ -1,10 +1,33 @@
 "use client";
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 const MetodologiaSection: FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
+      data-visible={isVisible}
       style={{
         padding: "80px 20px",
         backgroundColor: "#f9fafb",
@@ -12,9 +35,48 @@ const MetodologiaSection: FC = () => {
         overflow: "hidden",
       }}
     >
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .metodologia-title {
+          opacity: 0;
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        section[data-visible="true"] .metodologia-title {
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .metodologia-subtitle {
+          opacity: 0;
+        }
+
+        section[data-visible="true"] .metodologia-subtitle {
+          animation: fadeInUp 0.6s ease-out 0.1s forwards;
+        }
+
+        .metodologia-card {
+          opacity: 0;
+        }
+
+        section[data-visible="true"] .metodologia-card {
+          animation: fadeInUp 0.6s ease-out 0.2s forwards;
+        }
+      `}</style>
+
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "60px" }}>
           <h2
+            className="metodologia-title"
             style={{
               fontSize: "48px",
               fontWeight: "700",
@@ -27,6 +89,7 @@ const MetodologiaSection: FC = () => {
             <span style={{ color: "#4D32A5" }}>SEO Estratégico y Digital</span>
           </h2>
           <p
+            className="metodologia-subtitle"
             style={{
               maxWidth: "700px",
               margin: "0 auto",
@@ -52,6 +115,7 @@ const MetodologiaSection: FC = () => {
         >
           {/* Card 1 */}
           <div
+            className="metodologia-card"
             style={{
               backgroundColor: "#ffffff",
               padding: "40px 30px",
@@ -110,6 +174,7 @@ const MetodologiaSection: FC = () => {
 
           {/* Card 2 */}
           <div
+            className="metodologia-card"
             style={{
               backgroundColor: "#ffffff",
               padding: "40px 30px",
@@ -168,6 +233,7 @@ const MetodologiaSection: FC = () => {
 
           {/* Card 3 */}
           <div
+            className="metodologia-card"
             style={{
               backgroundColor: "#ffffff",
               padding: "40px 30px",
