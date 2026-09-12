@@ -321,14 +321,19 @@ export default function Pricing() {
           }
           @media (max-width: 375px) {
             .pricing-section {
-              padding: 32px 16px;
+              padding: 32px 16px !important;
+            }
+            .pricing-grid {
+              gap: 12px !important;
             }
             .pricing-card {
               padding: 20px 14px !important;
+              order: 1 !important;
             }
             .pricing-card.recommended {
               padding: 28px 16px !important;
               border: 2px solid var(--io-action) !important;
+              order: 0 !important;
             }
           }
         `}
