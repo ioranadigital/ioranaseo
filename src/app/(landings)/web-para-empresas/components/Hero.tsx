@@ -27,6 +27,7 @@ export default function Hero() {
         <div>
           {/* Eyebrow */}
           <div
+            className="hero-eyebrow"
             style={{
               display: 'inline-block',
               backgroundColor: 'var(--io-bg-soft)',
@@ -64,6 +65,7 @@ export default function Hero() {
 
           {/* Description */}
           <p
+            className="hero-description"
             style={{
               fontSize: '18px',
               lineHeight: 1.65,
@@ -153,6 +155,7 @@ export default function Hero() {
 
         {/* Right: Mockup Visual */}
         <div
+          className="hero-mockup"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -163,6 +166,8 @@ export default function Hero() {
             border: '1px solid var(--io-border)',
             padding: '40px 20px',
             position: 'relative',
+            width: '100%',
+            overflow: 'hidden',
           }}
         >
           {/* Desktop mockup */}
@@ -436,21 +441,22 @@ export default function Hero() {
         {`
           @media (max-width: 1024px) {
             .hero-section {
-              paddingTop: 60px;
-              paddingBottom: 60px;
+              paddingTop: 60px !important;
+              paddingBottom: 60px !important;
             }
             .hero-grid {
-              grid-template-columns: 1fr;
-              gap: 60px;
+              grid-template-columns: 1fr !important;
+              gap: 60px !important;
             }
           }
           @media (max-width: 768px) {
             .hero-section {
-              paddingTop: 40px;
-              paddingBottom: 40px;
+              paddingTop: 40px !important;
+              paddingBottom: 40px !important;
             }
             .hero-grid {
-              gap: 40px;
+              grid-template-columns: 1fr !important;
+              gap: 40px !important;
             }
             .benefits-grid {
               grid-template-columns: repeat(2, 1fr) !important;
@@ -459,41 +465,79 @@ export default function Hero() {
           }
           @media (max-width: 430px) {
             .hero-section {
-              paddingTop: 32px;
-              paddingBottom: 32px;
+              paddingTop: 32px !important;
+              paddingBottom: 32px !important;
             }
             .hero-grid {
-              gap: 32px;
+              grid-template-columns: 1fr !important;
+              gap: 24px !important;
             }
             .benefits-grid {
               grid-template-columns: repeat(2, 1fr) !important;
               gap: 12px !important;
-              marginTop: 32px !important;
-            }
-            .hero-cta {
-              width: 100% !important;
-              padding: 16px 24px !important;
-            }
-            .hero-h1 {
-              fontSize: 38px !important;
-            }
-          }
-          @media (max-width: 375px) {
-            .hero-section {
-              paddingTop: 32px;
-              paddingBottom: 40px;
-            }
-            .hero-grid {
-              gap: 24px;
+              marginTop: 24px !important;
             }
             .hero-cta {
               width: 100% !important;
               padding: 16px 20px !important;
-              fontSize: 15px !important;
+              font-size: 15px !important;
             }
             .hero-h1 {
-              fontSize: 36px !important;
-              lineHeight: 1.25 !important;
+              font-size: 36px !important;
+              line-height: 1.25 !important;
+            }
+          }
+          @media (max-width: 375px) {
+            .hero-section {
+              padding-top: 32px !important;
+              padding-bottom: 32px !important;
+              padding-left: 16px !important;
+              padding-right: 16px !important;
+            }
+            .hero-grid {
+              grid-template-columns: 1fr !important;
+              gap: 24px !important;
+              align-items: stretch !important;
+            }
+            .hero-eyebrow {
+              font-size: 11px !important;
+              padding: 6px 12px !important;
+              margin-bottom: 16px !important;
+            }
+            .hero-h1 {
+              font-size: 32px !important;
+              line-height: 1.35 !important;
+              max-width: 100% !important;
+              margin-bottom: 14px !important;
+            }
+            .hero-description {
+              font-size: 14px !important;
+              max-width: 100% !important;
+              margin-bottom: 18px !important;
+              line-height: 1.6 !important;
+            }
+            .hero-cta {
+              width: 100% !important;
+              padding: 12px 16px !important;
+              font-size: 14px !important;
+              min-height: 44px !important;
+            }
+            .benefits-grid {
+              grid-template-columns: repeat(2, 1fr) !important;
+              gap: 8px !important;
+              margin-top: 16px !important;
+              padding-top: 16px !important;
+              border-top: 1px solid var(--io-border) !important;
+            }
+            .benefits-grid > div {
+              font-size: 11px !important;
+              line-height: 1.4 !important;
+              gap: 6px !important;
+            }
+            .hero-mockup {
+              min-height: 280px !important;
+              padding: 24px 16px !important;
+              margin-top: 8px !important;
             }
           }
         `}

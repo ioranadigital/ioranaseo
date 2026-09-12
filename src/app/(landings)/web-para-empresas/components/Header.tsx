@@ -9,7 +9,7 @@ export default function Header() {
     <header
       className="landing-header"
       style={{
-        padding: '16px 20px',
+        padding: '14px 20px',
         backgroundColor: 'white',
         borderBottom: '1px solid var(--io-border)',
         position: 'sticky',
@@ -165,6 +165,9 @@ export default function Header() {
       <style>
         {`
           @media (min-width: 1025px) {
+            .landing-header {
+              padding: 16px 20px !important;
+            }
             .desktop-nav {
               display: flex !important;
             }
@@ -173,6 +176,28 @@ export default function Header() {
             }
             .mobile-menu {
               display: none !important;
+            }
+          }
+          @media (max-width: 375px) {
+            .landing-header {
+              padding: 12px 16px !important;
+            }
+            .mobile-menu-btn {
+              padding: 6px !important;
+              margin-right: -6px !important;
+            }
+            .mobile-menu-btn > div {
+              width: 22px !important;
+            }
+            .mobile-menu {
+              gap: 12px !important;
+              margin-top: 12px !important;
+              padding-top: 12px !important;
+            }
+            .mobile-menu a,
+            .mobile-menu button {
+              font-size: 14px !important;
+              padding: 10px 12px !important;
             }
           }
         `}
