@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './styles.css';
+import HomeLayoutClient from './HomeLayoutClient';
 
 export const metadata: Metadata = {
   title: 'Home | IORANA SEO',
@@ -19,5 +20,5 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <HomeLayoutClient>{children}</HomeLayoutClient>;
 }
