@@ -81,6 +81,7 @@ export default function VisibilityToResults() {
 
           {/* Arrow */}
           <div
+            className="visibility-arrow"
             style={{
               fontSize: '28px',
               color: 'var(--io-action)',
@@ -90,7 +91,6 @@ export default function VisibilityToResults() {
               marginTop: '20px',
               opacity: 0.6,
             }}
-            className="hidden md:flex"
           >
             →
           </div>
@@ -128,6 +128,7 @@ export default function VisibilityToResults() {
 
           {/* Arrow */}
           <div
+            className="visibility-arrow"
             style={{
               fontSize: '28px',
               color: 'var(--io-action)',
@@ -137,7 +138,6 @@ export default function VisibilityToResults() {
               marginTop: '20px',
               opacity: 0.6,
             }}
-            className="hidden md:flex"
           >
             →
           </div>

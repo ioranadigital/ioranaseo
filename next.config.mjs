@@ -148,7 +148,6 @@ const nextConfig = {
 
   experimental: {
     optimizePackageImports: ["lucide-react", "bootstrap-icons"],
-    cpus: 1,
   },
 };
 

@@ -419,6 +419,7 @@ export default function Hero() {
 
           {/* Accent note with small accent bar */}
           <div
+            className="hero-accent-note"
             style={{
               position: 'absolute',
               bottom: '24px',

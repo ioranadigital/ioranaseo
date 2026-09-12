@@ -1,5 +1,6 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "./assets/main.css";
+@import "./styles/iorana-design-tokens.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

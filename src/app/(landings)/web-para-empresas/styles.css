@@ -99,6 +99,14 @@
     max-width: 100% !important;
     min-height: 280px !important;
   }
+
+  .hero-accent-note {
+    position: absolute !important;
+    bottom: 14px !important;
+    right: 14px !important;
+    font-size: 10px !important;
+    opacity: 0.9 !important;
+  }
 }
 
 /* Visibility to Results section */
@@ -110,7 +118,13 @@
 
   .visibility-section h2 {
     font-size: 32px !important;
-    line-height: 1.15 !important;
+    line-height: 1.2 !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .visibility-section p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
   }
 
   .visibility-section > div > div:first-child {
@@ -128,8 +142,18 @@
 
 /* Arrow removal in mobile */
 @media (max-width: 767px) {
-  .hidden.md\\:flex {
+  .visibility-arrow {
     display: none !important;
+  }
+
+  .visibility-section > div > div:first-child {
+    margin-bottom: 32px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .visibility-section > div > div:first-child {
+    margin-bottom: 24px !important;
   }
 }
 
@@ -207,6 +231,14 @@
     margin-top: 8px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+
+  .hero-accent-note {
+    position: absolute !important;
+    bottom: 12px !important;
+    right: 12px !important;
+    font-size: 9px !important;
+    opacity: 0.9 !important;
   }
 }
 

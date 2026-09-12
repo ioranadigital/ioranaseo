@@ -1,0 +1,25 @@
+/* IORANA SEO 2.0 Design Tokens */
+
+:root {
+  /* Colors - MASTER.md palette */
+  --io-brand: #60A5FA;
+  --io-action: #3B82F6;
+  --io-action-hover: #2563EB;
+  --io-accent: #F4A27C;
+
+  --io-bg: #F8FAFC;
+  --io-bg-soft: #EFF6FF;
+
+  --io-text: #0F172A;
+  --io-text-muted: #475569;
+  --io-border: #DBEAFE;
+
+  /* Spacing */
+  --io-radius-sm: 8px;
+  --io-radius-md: 12px;
+  --io-radius-lg: 18px;
+
+  /* Typography */
+  --io-font: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+}

@@ -1,0 +1,67 @@
+
+> seomax@0.1.0 build E:\git\interno\ioranaseo
+> next build
+
+ ⚠ You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env
+   ▲ Next.js 15.1.8
+   - Experiments (use with caution):
+     · cpus
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|E:\git\interno\ioranaseo\node_modules\.pnpm\next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[13].oneOf[10].use[2]!E:\git\interno\ioranaseo\node_modules\.pnpm\next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[13].oneOf[10].use[3]!E:\git\interno\ioranaseo\src\app\assets\main.css': No serializer registered for Warning
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> Array { 3 items } -> webpack/lib/ModuleWarning -> Warning
+ ⚠ Compiled with warnings
+
+./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/assets/main.css
+Warning
+
+(12218:3) autoprefixer: start value has mixed support, consider using flex-start instead
+
+Import trace for requested module:
+./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/assets/main.css
+./src/app/globals.css.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/globals.css
+./src/app/globals.css
+
+./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/assets/main.css
+Warning
+
+(12535:3) autoprefixer: start value has mixed support, consider using flex-start instead
+
+Import trace for requested module:
+./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/assets/main.css
+./src/app/globals.css.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/globals.css
+./src/app/globals.css
+
+./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/assets/main.css
+Warning
+
+(12847:3) autoprefixer: start value has mixed support, consider using flex-start instead
+
+Import trace for requested module:
+./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/assets/main.css
+./src/app/globals.css.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./src/app/globals.css
+./src/app/globals.css
+
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/3) ...
+Error: <Html> should not be imported outside of pages/_document.
+Read more: https://nextjs.org/docs/messages/no-document-import-in-page
+    at y (E:\git\interno\ioranaseo\.next\server\chunks\557.js:6:1263)
+Error occurred prerendering page "/500". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: <Html> should not be imported outside of pages/_document.
+Read more: https://nextjs.org/docs/messages/no-document-import-in-page
+    at Y (E:\git\interno\ioranaseo\node_modules\.pnpm\next@15.1.8_react-dom@19.0.0_react@19.0.0__react@19.0.0\node_modules\next\dist\compiled\next-server\pages.runtime.prod.js:16:5469)
+    at y (E:\git\interno\ioranaseo\.next\server\chunks\557.js:6:1263)
+    at react-stack-bottom-frame (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:8798:18)
+    at renderWithHooks (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:4722:19)
+    at renderElement (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:5157:23)
+    at retryNode (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:5805:22)
+    at renderNodeDestructive (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:5631:11)
+    at renderElement (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:5143:11)
+    at retryNode (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:5805:22)
+    at renderNodeDestructive (E:\git\interno\ioranaseo\node_modules\.pnpm\react-dom@19.0.0_react@19.0.0\node_modules\react-dom\cjs\react-dom-server.edge.development.js:5631:11)
+Export encountered an error on /_error: /500, exiting the build.
+ ⨯ Next.js build worker exited with code: 1 and signal: null
+ ELIFECYCLE  Command failed with exit code 1.
