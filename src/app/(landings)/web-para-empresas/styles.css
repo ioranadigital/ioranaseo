@@ -209,12 +209,12 @@
   }
 
   .hero-h1 {
-    font-size: 38px !important;
-    line-height: 1.08 !important;
+    font-size: 40px !important;
+    line-height: 1.05 !important;
     max-width: 100% !important;
     margin-bottom: 16px !important;
     width: 100% !important;
-    letter-spacing: -0.015em !important;
+    letter-spacing: -0.02em !important;
   }
 
   .hero-description {

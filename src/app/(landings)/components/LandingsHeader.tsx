@@ -55,7 +55,6 @@ export default function LandingsHeader() {
         {/* Desktop Nav - Solo visible en desktop */}
         <nav
           style={{
-            display: 'flex',
             gap: '32px',
             marginLeft: 'auto',
             marginRight: 'auto',
@@ -115,7 +114,6 @@ export default function LandingsHeader() {
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           style={{
-            display: 'none',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
