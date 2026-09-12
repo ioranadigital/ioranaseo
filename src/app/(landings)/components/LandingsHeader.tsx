@@ -1,16 +1,29 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function LandingsHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isHome, setIsHome] = useState(false);
 
-  const navItems = [
-    { label: 'Qué incluye', href: '#que-incluye' },
-    { label: 'Cómo trabajamos', href: '#como-trabajamos' },
-    { label: 'Precios', href: '#precios' },
-  ];
+  useEffect(() => {
+    setIsHome(window.location.pathname.startsWith('/home'));
+  }, []);
+
+  // Navegación dinámica basada en la ruta
+  const navItems = isHome
+    ? [
+        { label: 'Soluciones', href: '#soluciones' },
+        { label: 'Cómo trabajamos', href: '#como-trabajamos' },
+        { label: 'Recursos', href: '#recursos' },
+        { label: 'Casos', href: '#casos' },
+      ]
+    : [
+        { label: 'Qué incluye', href: '#que-incluye' },
+        { label: 'Cómo trabajamos', href: '#como-trabajamos' },
+        { label: 'Precios', href: '#precios' },
+      ];
 
   return (
     <header

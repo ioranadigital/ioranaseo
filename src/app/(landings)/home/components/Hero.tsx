@@ -208,168 +208,184 @@ export default function Hero() {
             backgroundColor: 'white',
             borderRadius: 'var(--io-radius-lg)',
             border: '1px solid var(--io-border)',
-            padding: '40px',
+            padding: '40px 30px',
             position: 'relative',
             width: '100%',
             overflow: 'hidden',
           }}
         >
-          {/* Web Desktop - Center Left */}
+          {/* CENTRAL: Web Desktop - Pieza principal prominente */}
           <div
             style={{
               position: 'absolute',
-              left: '15%',
+              left: '50%',
               top: '50%',
-              transform: 'translateY(-50%)',
-              width: '90px',
-              height: '110px',
+              transform: 'translate(-50%, -50%)',
+              width: '130px',
+              height: '155px',
               backgroundColor: 'white',
-              border: '2.5px solid var(--io-text)',
-              borderRadius: '6px',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '6px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-              zIndex: 5,
-            }}
-          >
-            <div style={{ height: '6px', backgroundColor: 'var(--io-action)', marginBottom: '4px', borderRadius: '2px' }} />
-            <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '2px' }} />
-            <div style={{ height: '4px', backgroundColor: 'var(--io-border)', marginTop: '4px', borderRadius: '2px' }} />
-          </div>
-
-          {/* Mobile - Center Right */}
-          <div
-            style={{
-              position: 'absolute',
-              right: '18%',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '60px',
-              height: '100px',
-              backgroundColor: 'white',
-              border: '2.5px solid var(--io-text)',
+              border: '3px solid var(--io-text)',
               borderRadius: '8px',
               display: 'flex',
               flexDirection: 'column',
-              padding: '4px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-              zIndex: 5,
+              padding: '8px',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              zIndex: 10,
             }}
           >
-            <div style={{ height: '4px', backgroundColor: 'var(--io-action)', marginBottom: '3px', borderRadius: '2px' }} />
-            <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '2px' }} />
+            {/* Header simulado */}
+            <div
+              style={{
+                height: '8px',
+                backgroundColor: 'var(--io-action)',
+                marginBottom: '8px',
+                borderRadius: '2px',
+              }}
+            />
+            {/* Content area */}
+            <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '2px', marginBottom: '6px' }} />
+            {/* Footer */}
+            <div style={{ height: '6px', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
           </div>
 
-          {/* Google/Maps - Top Left */}
+          {/* Mobile secundario - Solapado ligeramente */}
           <div
             style={{
               position: 'absolute',
-              top: '12%',
-              left: '8%',
-              width: '65px',
-              height: '48px',
+              right: '22%',
+              bottom: '25%',
+              width: '72px',
+              height: '110px',
+              backgroundColor: 'white',
+              border: '3px solid var(--io-text)',
+              borderRadius: '10px',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '5px',
+              boxShadow: '0 6px 16px rgba(0,0,0,0.1)',
+              zIndex: 7,
+            }}
+          >
+            <div
+              style={{
+                height: '5px',
+                backgroundColor: 'var(--io-action)',
+                marginBottom: '4px',
+                borderRadius: '1px',
+              }}
+            />
+            <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '1px' }} />
+          </div>
+
+          {/* Badge: Google/Maps - arriba izquierda */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '20%',
+              left: '10%',
+              width: '72px',
+              height: '52px',
               backgroundColor: 'white',
               border: '1.5px solid var(--io-border)',
               borderRadius: '6px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '11px',
+              fontSize: '10px',
               fontWeight: 600,
-              color: 'var(--io-text-muted)',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-              zIndex: 2,
+              color: 'var(--io-text)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+              zIndex: 3,
             }}
           >
             📍 Maps
           </div>
 
-          {/* Campañas - Top Right */}
+          {/* Badge: Campañas - arriba derecha */}
           <div
             style={{
               position: 'absolute',
-              top: '16%',
-              right: '8%',
-              width: '70px',
-              height: '45px',
+              top: '18%',
+              right: '12%',
+              width: '75px',
+              height: '50px',
               backgroundColor: 'var(--io-action)',
               borderRadius: '6px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '11px',
+              fontSize: '10px',
               fontWeight: 600,
               color: 'white',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              zIndex: 2,
+              zIndex: 3,
             }}
           >
             📢 Campañas
           </div>
 
-          {/* Analytics - Bottom Right */}
+          {/* Badge: Analytics - abajo derecha */}
           <div
             style={{
               position: 'absolute',
-              bottom: '14%',
-              right: '10%',
-              width: '65px',
-              height: '50px',
+              bottom: '18%',
+              right: '14%',
+              width: '72px',
+              height: '54px',
               backgroundColor: 'white',
               border: '1.5px solid var(--io-border)',
               borderRadius: '6px',
               display: 'flex',
               flexDirection: 'column',
               gap: '3px',
-              padding: '5px',
+              padding: '6px',
               alignItems: 'flex-end',
               justifyContent: 'flex-end',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-              zIndex: 2,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+              zIndex: 3,
             }}
           >
             <div style={{ width: '70%', height: '3px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
-            <div style={{ width: '45%', height: '3px', backgroundColor: 'var(--io-accent)', borderRadius: '1px' }} />
-            <div style={{ width: '60%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
+            <div style={{ width: '50%', height: '3px', backgroundColor: 'var(--io-accent)', borderRadius: '1px' }} />
+            <div style={{ width: '65%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
           </div>
 
-          {/* Leads/Oportunidades - Bottom Left */}
+          {/* Badge: Leads/Oportunidades - abajo izquierda */}
           <div
             style={{
               position: 'absolute',
-              bottom: '12%',
-              left: '10%',
-              width: '68px',
-              height: '50px',
+              bottom: '20%',
+              left: '12%',
+              width: '75px',
+              height: '52px',
               backgroundColor: 'var(--io-bg-soft)',
               border: '1.5px solid var(--io-accent)',
               borderRadius: '6px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '11px',
+              fontSize: '10px',
               fontWeight: 600,
               color: 'var(--io-text)',
-              boxShadow: '0 2px 8px rgba(244,162,124,0.1)',
-              zIndex: 2,
+              boxShadow: '0 2px 8px rgba(244,162,124,0.08)',
+              zIndex: 3,
             }}
           >
             👥 Leads
           </div>
 
-          {/* Accent annotation - Refined */}
+          {/* Accent annotation - Discreta */}
           <div
             style={{
               position: 'absolute',
-              bottom: '20px',
-              right: '20px',
-              fontSize: '12px',
+              bottom: '16px',
+              right: '18px',
+              fontSize: '11px',
               color: 'var(--io-accent)',
               fontWeight: 700,
               lineHeight: 1.3,
               textAlign: 'right',
-              zIndex: 10,
+              zIndex: 15,
             }}
           >
             ✦ Más visibilidad.
