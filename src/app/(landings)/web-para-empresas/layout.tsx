@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './styles.css';
+import WebLayoutClient from './WebLayoutClient';
 
 export const metadata: Metadata = {
   title: 'Web para Empresas | IORANA SEO',
@@ -19,5 +20,5 @@ export default function WebParaEmpresasLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <WebLayoutClient>{children}</WebLayoutClient>;
 }
