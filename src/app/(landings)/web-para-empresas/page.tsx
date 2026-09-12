@@ -1,6 +1,5 @@
 'use client';
 
-import Header from './components/Header';
 import Hero from './components/Hero';
 import VisibilityToResults from './components/VisibilityToResults';
 import OurMethod from './components/OurMethod';
@@ -11,7 +10,6 @@ import FAQForm from './components/FAQForm';
 export default function WebParaEmpresasPage() {
   return (
     <>
-      <Header />
       <Hero />
       <VisibilityToResults />
       <OurMethod />

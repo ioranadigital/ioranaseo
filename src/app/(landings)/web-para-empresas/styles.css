@@ -1,12 +1,24 @@
 /* Web para Empresas Landing — Responsive Styles */
 
-/* Desktop — Header desktop nav visible */
-.desktop-nav {
-  display: flex !important;
+/* Global — Ensure LandingsHeader responsive works */
+@media (max-width: 768px) {
+  .hidden.md\\:flex {
+    display: none !important;
+  }
+
+  .md\\:hidden {
+    display: block !important;
+  }
 }
 
-.mobile-menu-btn {
-  display: none !important;
+@media (min-width: 769px) {
+  .hidden.md\\:flex {
+    display: flex !important;
+  }
+
+  .md\\:hidden {
+    display: none !important;
+  }
 }
 
 /* Desktop — No changes */
@@ -197,12 +209,12 @@
   }
 
   .hero-h1 {
-    font-size: 44px !important;
-    line-height: 1.05 !important;
+    font-size: 38px !important;
+    line-height: 1.08 !important;
     max-width: 100% !important;
     margin-bottom: 16px !important;
     width: 100% !important;
-    letter-spacing: -0.02em !important;
+    letter-spacing: -0.015em !important;
   }
 
   .hero-description {
