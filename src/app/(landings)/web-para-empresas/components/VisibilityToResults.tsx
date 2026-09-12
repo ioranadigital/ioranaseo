@@ -196,6 +196,11 @@ export default function VisibilityToResults() {
               padding: 32px 20px;
             }
           }
+          @media (max-width: 375px) {
+            .visibility-section {
+              padding: 32px 16px;
+            }
+          }
         `}
       </style>
     </section>

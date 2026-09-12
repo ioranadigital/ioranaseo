@@ -178,8 +178,9 @@ export default function OurMethod() {
                 opacity: 0.95,
               }}
             >
-              {/* Number - Circle on top */}
+              {/* Number - Circle on top or inline */}
               <div
+                className="method-number"
                 style={{
                   position: 'absolute',
                   top: '-42px',
@@ -249,6 +250,16 @@ export default function OurMethod() {
               grid-template-columns: 1fr !important;
               gap: 20px !important;
             }
+            .method-number {
+              top: 16px !important;
+              position: static !important;
+              transform: none !important;
+              width: 40px !important;
+              height: 40px !important;
+              margin-bottom: 12px !important;
+              border: 2px solid var(--io-action) !important;
+              font-size: 16px !important;
+            }
           }
           @media (max-width: 430px) {
             .method-section {
@@ -256,6 +267,11 @@ export default function OurMethod() {
             }
             .method-grid {
               gap: 16px !important;
+            }
+          }
+          @media (max-width: 375px) {
+            .method-section {
+              padding: 32px 16px;
             }
           }
         `}

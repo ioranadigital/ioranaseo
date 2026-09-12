@@ -343,6 +343,14 @@ export default function WhatIncludes() {
               gap: 32px !important;
             }
           }
+          @media (max-width: 375px) {
+            .includes-section {
+              padding: 32px 16px;
+            }
+            .includes-grid {
+              gap: 28px !important;
+            }
+          }
         `}
       </style>
     </section>

@@ -5,8 +5,8 @@ export default function Hero() {
     <section
       className="hero-section"
       style={{
-        paddingTop: '80px',
-        paddingBottom: '80px',
+        paddingTop: '60px',
+        paddingBottom: '60px',
         paddingLeft: '20px',
         paddingRight: '20px',
         backgroundColor: 'var(--io-bg)',
@@ -43,16 +43,17 @@ export default function Hero() {
             Web para pequeños negocios y pymes
           </div>
 
-          {/* H1 - 2 lines in desktop */}
+          {/* H1 - 2 lines in desktop, 2-3 in mobile */}
           <h1
+            className="hero-h1"
             style={{
-              fontSize: 'clamp(42px, 5.2vw, 56px)',
+              fontSize: 'clamp(32px, 5.2vw, 56px)',
               fontWeight: 800,
               color: 'var(--io-text)',
-              lineHeight: 1.15,
+              lineHeight: 1.2,
               marginBottom: '24px',
               margin: '0 0 24px 0',
-              maxWidth: '600px',
+              maxWidth: '100%',
               letterSpacing: '-0.01em',
             }}
           >
@@ -78,6 +79,7 @@ export default function Hero() {
 
           {/* CTA */}
           <button
+            className="hero-cta"
             style={{
               padding: '14px 32px',
               backgroundColor: 'var(--io-action)',
@@ -88,6 +90,10 @@ export default function Hero() {
               borderRadius: 'var(--io-radius-md)',
               cursor: 'pointer',
               transition: 'background-color 0.2s',
+              minHeight: '48px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
@@ -460,9 +466,34 @@ export default function Hero() {
               gap: 32px;
             }
             .benefits-grid {
-              grid-template-columns: 1fr !important;
+              grid-template-columns: repeat(2, 1fr) !important;
               gap: 12px !important;
               marginTop: 32px !important;
+            }
+            .hero-cta {
+              width: 100% !important;
+              padding: 16px 24px !important;
+            }
+            .hero-h1 {
+              fontSize: 38px !important;
+            }
+          }
+          @media (max-width: 375px) {
+            .hero-section {
+              paddingTop: 32px;
+              paddingBottom: 40px;
+            }
+            .hero-grid {
+              gap: 24px;
+            }
+            .hero-cta {
+              width: 100% !important;
+              padding: 16px 20px !important;
+              fontSize: 15px !important;
+            }
+            .hero-h1 {
+              fontSize: 36px !important;
+              lineHeight: 1.25 !important;
             }
           }
         `}

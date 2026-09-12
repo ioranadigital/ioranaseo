@@ -411,6 +411,18 @@ export default function FAQForm() {
               border: 1px solid var(--io-action) !important;
             }
           }
+          @media (max-width: 375px) {
+            .faq-section {
+              padding: 32px 16px;
+            }
+            .faq-grid {
+              gap: 28px !important;
+            }
+            .form-box {
+              padding: 20px 14px !important;
+              border: 1px solid var(--io-action) !important;
+            }
+          }
         `}
       </style>
     </section>

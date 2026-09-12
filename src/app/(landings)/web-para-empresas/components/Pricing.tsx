@@ -96,9 +96,10 @@ export default function Pricing() {
             marginBottom: '60px',
           }}
         >
-          {plans.map((plan) => (
+          {plans.map((plan, index) => (
             <div
               key={plan.name}
+              className={`pricing-card ${plan.recommended ? 'recommended' : ''}`}
               style={{
                 position: 'relative',
                 padding: plan.recommended ? '48px 32px 40px' : '40px 32px',
@@ -112,6 +113,7 @@ export default function Pricing() {
                   ? '0 20px 50px rgba(59, 130, 246, 0.15)'
                   : '0 2px 8px rgba(0, 0, 0, 0.04)',
                 transition: 'all 0.2s',
+                order: plan.recommended ? -1 : index,
               }}
             >
               {/* Badge */}
@@ -297,7 +299,7 @@ export default function Pricing() {
               grid-template-columns: 1fr !important;
               gap: 24px !important;
             }
-            .pricing-grid > div {
+            .pricing-card {
               transform: translateY(0) !important;
               padding: 32px 24px !important;
             }
@@ -309,8 +311,24 @@ export default function Pricing() {
             .pricing-grid {
               gap: 16px !important;
             }
-            .pricing-grid > div {
+            .pricing-card {
               padding: 24px 16px !important;
+            }
+            .pricing-card.recommended {
+              border: 2px solid var(--io-action) !important;
+              padding: 32px 20px !important;
+            }
+          }
+          @media (max-width: 375px) {
+            .pricing-section {
+              padding: 32px 16px;
+            }
+            .pricing-card {
+              padding: 20px 14px !important;
+            }
+            .pricing-card.recommended {
+              padding: 28px 16px !important;
+              border: 2px solid var(--io-action) !important;
             }
           }
         `}
