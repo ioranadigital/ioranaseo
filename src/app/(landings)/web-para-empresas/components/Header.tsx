@@ -42,7 +42,6 @@ export default function Header() {
         <nav
           className="desktop-nav"
           style={{
-            display: 'flex',
             alignItems: 'center',
             gap: '40px',
           }}
