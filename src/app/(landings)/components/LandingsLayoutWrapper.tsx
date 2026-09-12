@@ -11,6 +11,19 @@ interface LandingsLayoutWrapperProps {
 export default function LandingsLayoutWrapper({
   children,
 }: LandingsLayoutWrapperProps) {
+  const [isHome, setIsHome] = useState(false);
+
+  React.useEffect(() => {
+    setIsHome(window.location.pathname.startsWith('/home'));
+  }, []);
+
+  // /home tiene su propio layout (HomeLayoutClient) con header/footer
+  // LandingsLayoutWrapper solo renderiza children para que HomeLayoutClient controle
+  if (isHome) {
+    return children;
+  }
+
+  // /web-para-empresas: renderiza header + children + footer
   return (
     <div
       style={{
