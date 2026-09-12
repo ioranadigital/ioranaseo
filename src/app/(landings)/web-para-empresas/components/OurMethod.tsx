@@ -242,13 +242,13 @@ export default function OurMethod() {
               grid-template-columns: repeat(2, 1fr) !important;
             }
           }
-          @media (max-width: 768px) {
+          @media (max-width: 430px) {
             .method-section {
-              padding: 40px 20px;
+              padding: 32px 20px;
             }
             .method-grid {
               grid-template-columns: 1fr !important;
-              gap: 20px !important;
+              gap: 16px !important;
             }
             .method-number {
               top: 16px !important;
@@ -259,14 +259,6 @@ export default function OurMethod() {
               margin-bottom: 12px !important;
               border: 2px solid var(--io-action) !important;
               font-size: 16px !important;
-            }
-          }
-          @media (max-width: 430px) {
-            .method-section {
-              padding: 32px 20px;
-            }
-            .method-grid {
-              gap: 16px !important;
             }
           }
           @media (max-width: 375px) {
