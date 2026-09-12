@@ -134,8 +134,8 @@ export default function Hero() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '20px',
-              marginTop: '60px',
+              gap: '24px',
+              marginTop: '64px',
               paddingTop: '48px',
               borderTop: '1px solid var(--io-border)',
             }}
@@ -147,46 +147,52 @@ export default function Hero() {
                   key={item.label}
                   style={{
                     textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                   }}
                 >
-                  {/* Icon circle */}
+                  {/* Icon circle - More prominent */}
                   <div
                     style={{
-                      width: '56px',
-                      height: '56px',
+                      width: '64px',
+                      height: '64px',
                       borderRadius: '50%',
                       backgroundColor: 'var(--io-bg-soft)',
-                      border: '2px solid var(--io-border)',
+                      border: '2.5px solid var(--io-action)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      margin: '0 auto 12px',
+                      marginBottom: '16px',
                       color: 'var(--io-action)',
+                      flexShrink: 0,
                     }}
                   >
-                    <Icon size={24} strokeWidth={1.5} />
+                    <Icon size={28} strokeWidth={1.5} />
                   </div>
 
-                  {/* Label */}
+                  {/* Label - Stronger hierarchy */}
                   <div
                     style={{
-                      fontSize: '14px',
-                      fontWeight: 700,
+                      fontSize: '15px',
+                      fontWeight: 800,
                       color: 'var(--io-text)',
-                      marginBottom: '6px',
+                      marginBottom: '8px',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.03em',
+                      letterSpacing: '0.04em',
+                      lineHeight: 1.2,
                     }}
                   >
                     {item.label}
                   </div>
 
-                  {/* Description */}
+                  {/* Description - Improved legibility */}
                   <div
                     style={{
-                      fontSize: '12px',
+                      fontSize: '13px',
                       color: 'var(--io-text-muted)',
-                      lineHeight: 1.5,
+                      lineHeight: 1.6,
+                      fontWeight: 500,
                     }}
                   >
                     {item.desc}

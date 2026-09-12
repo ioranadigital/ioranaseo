@@ -65,43 +65,47 @@ export default function PresenciaDigital() {
             justifyContent: 'center',
             alignItems: 'flex-start',
             flexWrap: 'wrap',
-            gap: '20px',
+            gap: '28px',
           }}
         >
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <div key={step.title}>
+              <div key={step.title} style={{ display: 'flex', alignItems: 'flex-start', gap: '28px' }}>
                 <div
                   style={{
                     flex: '1 1 280px',
-                    maxWidth: '320px',
+                    maxWidth: '300px',
                     textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                   }}
                 >
-                  {/* Icon circle */}
+                  {/* Icon circle - Enhanced visibility */}
                   <div
                     style={{
-                      width: '60px',
-                      height: '60px',
+                      width: '68px',
+                      height: '68px',
                       borderRadius: '50%',
                       backgroundColor: 'var(--io-bg-soft)',
-                      border: '2px solid var(--io-action)',
+                      border: '2.5px solid var(--io-action)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      margin: '0 auto 16px',
+                      marginBottom: '18px',
                       color: 'var(--io-action)',
+                      flexShrink: 0,
                     }}
                   >
-                    <Icon size={28} strokeWidth={1.5} />
+                    <Icon size={32} strokeWidth={1.5} />
                   </div>
 
-                  {/* Title */}
+                  {/* Title - Enhanced hierarchy */}
                   <h3
                     style={{
-                      fontSize: '18px',
-                      fontWeight: 700,
+                      fontSize: '19px',
+                      fontWeight: 800,
                       color: 'var(--io-text)',
                       margin: '0 0 12px 0',
                       lineHeight: 1.2,
@@ -110,32 +114,33 @@ export default function PresenciaDigital() {
                     {step.title}
                   </h3>
 
-                  {/* Description */}
+                  {/* Description - Better spacing */}
                   <p
                     style={{
-                      fontSize: '15px',
-                      lineHeight: 1.6,
+                      fontSize: '14px',
+                      lineHeight: 1.7,
                       color: 'var(--io-text-muted)',
                       margin: '0',
+                      fontWeight: 500,
                     }}
                   >
                     {step.description}
                   </p>
                 </div>
 
-                {/* Arrow - only between steps */}
+                {/* Arrow - Only between steps, more prominent */}
                 {index < steps.length - 1 && (
                   <div
                     className="presencia-arrow"
                     style={{
-                      fontSize: '28px',
+                      fontSize: '32px',
                       color: 'var(--io-accent)',
                       flex: '0 0 auto',
                       display: 'flex',
                       alignItems: 'center',
-                      marginTop: '20px',
-                      opacity: 0.7,
-                      fontWeight: 700,
+                      marginTop: '24px',
+                      opacity: 0.8,
+                      fontWeight: 800,
                     }}
                   >
                     →
