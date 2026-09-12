@@ -350,6 +350,17 @@
   }
 }
 
+/* Desktop Pricing — Reset order to maintain correct sequence */
+@media (min-width: 1024px) {
+  .pricing-card {
+    order: auto !important;
+  }
+
+  .pricing-card.recommended {
+    order: auto !important;
+  }
+}
+
 /* Global — Prevent overflow */
 @media (max-width: 375px) {
   body {
