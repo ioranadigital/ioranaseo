@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import LandingsHeader from './LandingsHeader';
 import LandingsFooter from './LandingsFooter';
-import HomeFooter from '../home/components/Footer';
+import HomeFooter from '../../home/components/Footer';
 
 interface LandingsLayoutWrapperProps {
   children: React.ReactNode;
