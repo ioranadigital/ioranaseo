@@ -160,25 +160,36 @@ export default function PresenciaDigital() {
               padding: 60px 20px;
             }
           }
-          @media (max-width: 768px) {
+
+          /* Tablet 768px - 3 columnas horizontales con arrows */
+          @media (min-width: 768px) and (max-width: 1023px) {
+            .presencia-section {
+              padding: 40px 20px;
+            }
+            .presencia-flow {
+              gap: 16px !important;
+              flex-wrap: nowrap !important;
+            }
+            .presencia-flow > div {
+              display: flex;
+              align-items: flex-start;
+              gap: 16px;
+            }
+            .presencia-arrow {
+              display: flex !important;
+              margin-top: 24px !important;
+              font-size: 28px !important;
+            }
+          }
+
+          @media (max-width: 767px) {
             .presencia-section {
               padding: 40px 20px;
             }
             .presencia-flow {
               gap: 12px !important;
+              flex-wrap: wrap !important;
             }
-          }
-          @media (max-width: 430px) {
-            .presencia-section {
-              padding: 32px 20px;
-            }
-          }
-          @media (max-width: 375px) {
-            .presencia-section {
-              padding: 32px 16px;
-            }
-          }
-          @media (max-width: 767px) {
             .presencia-arrow {
               display: none !important;
             }
@@ -186,9 +197,19 @@ export default function PresenciaDigital() {
               margin-bottom: 32px !important;
             }
           }
+
           @media (max-width: 430px) {
+            .presencia-section {
+              padding: 32px 20px;
+            }
             .presencia-section > div > div:first-child {
               margin-bottom: 24px !important;
+            }
+          }
+
+          @media (max-width: 375px) {
+            .presencia-section {
+              padding: 32px 16px;
             }
           }
         `}
