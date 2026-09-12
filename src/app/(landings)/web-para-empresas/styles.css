@@ -340,3 +340,52 @@
     overflow-x: clip !important;
   }
 }
+
+/* TABLET 768px OPTIMIZATIONS */
+@media (min-width: 431px) and (max-width: 1023px) {
+  /* Nuestro Método - Grid 2×2 */
+  .method-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px !important;
+  }
+
+  .method-card {
+    margin-bottom: 0 !important;
+  }
+
+  /* Pricing - Special layout: recommended full width, then 2 cols */
+  .pricing-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+
+  .pricing-card {
+    order: 1 !important;
+  }
+
+  .pricing-card.recommended {
+    order: 0 !important;
+    grid-column: 1 / -1 !important;
+  }
+
+  /* De la visibilidad - refine spacing */
+  .steps-flow {
+    gap: 24px !important;
+  }
+
+  .steps-flow > div {
+    margin-bottom: 0 !important;
+  }
+
+  /* Typography refinement */
+  .steps-flow h3 {
+    font-size: 18px !important;
+  }
+
+  .steps-flow p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+  }
+}
