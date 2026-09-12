@@ -11,6 +11,13 @@
   }
 }
 
+/* Hide CTA from header in <=430px */
+@media (max-width: 430px) {
+  header > div > a[href="#contacto"] {
+    display: none !important;
+  }
+}
+
 @media (min-width: 769px) {
   header nav {
     display: flex !important;
