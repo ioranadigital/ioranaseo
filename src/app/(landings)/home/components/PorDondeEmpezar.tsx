@@ -13,7 +13,8 @@ export default function PorDondeEmpezar() {
       cta: 'Ver Web de Captación →',
       href: '/web-para-empresas',
       icon: Monitor,
-      order: 2,
+      featured: false,
+      gridArea: 'web',
     },
     {
       id: 'clientes',
@@ -25,7 +26,7 @@ export default function PorDondeEmpezar() {
       icon: Users,
       badge: 'RECOMENDADA',
       featured: true,
-      order: 1,
+      gridArea: 'clientes',
     },
     {
       id: 'crecer',
@@ -35,7 +36,8 @@ export default function PorDondeEmpezar() {
       cta: 'Ver soluciones de crecimiento →',
       href: '#soluciones',
       icon: ChartNoAxesColumnIncreasing,
-      order: 3,
+      featured: false,
+      gridArea: 'crecer',
     },
   ];
 
@@ -81,212 +83,216 @@ export default function PorDondeEmpezar() {
           className="por-donde-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateAreas: '"web clientes crecer"',
             gap: '24px',
           }}
         >
-          {cards
-            .sort((a, b) => a.order - b.order)
-            .map((card) => {
-              const Icon = card.icon;
-              return (
-                <Link
-                  key={card.id}
-                  href={card.href}
+          {cards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <Link
+                key={card.id}
+                href={card.href}
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  gridArea: card.gridArea,
+                }}
+                className="card-link"
+              >
+                <div
+                  className="por-donde-card"
                   style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
+                    position: 'relative',
+                    padding: '32px 24px',
+                    backgroundColor: 'white',
+                    borderRadius: 'var(--io-radius-md)',
+                    border: card.featured ? '2px solid var(--io-action)' : '1.5px solid var(--io-border)',
+                    transition: 'all 0.3s ease',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px',
+                    minHeight: '380px',
+                    boxShadow: card.featured
+                      ? '0 8px 24px rgba(0, 0, 0, 0.1)'
+                      : '0 2px 8px rgba(0, 0, 0, 0.06)',
                   }}
-                  className="card-link"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--io-action)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = card.featured
+                      ? 'var(--io-action)'
+                      : 'var(--io-border)';
+                    e.currentTarget.style.boxShadow = card.featured
+                      ? '0 8px 24px rgba(0, 0, 0, 0.1)'
+                      : '0 2px 8px rgba(0, 0, 0, 0.06)';
+                  }}
                 >
+                  {/* Badge */}
+                  {card.badge && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '-12px',
+                        right: '24px',
+                        backgroundColor: 'var(--io-accent)',
+                        color: 'white',
+                        fontSize: '10px',
+                        fontWeight: 700,
+                        letterSpacing: '0.1em',
+                        padding: '4px 12px',
+                        borderRadius: '4px',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      {card.badge}
+                    </div>
+                  )}
+
+                  {/* Icon */}
                   <div
-                    className="por-donde-card"
                     style={{
-                      position: 'relative',
-                      padding: '32px 24px',
-                      backgroundColor: 'white',
-                      borderRadius: 'var(--io-radius-md)',
-                      border: card.featured ? '2px solid var(--io-action)' : '1.5px solid var(--io-border)',
-                      transition: 'all 0.3s ease',
-                      cursor: 'pointer',
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '8px',
+                      backgroundColor: 'var(--io-bg-soft)',
                       display: 'flex',
-                      flexDirection: 'column',
-                      gap: '12px',
-                      minHeight: '380px',
-                      boxShadow: card.featured
-                        ? '0 8px 24px rgba(0, 0, 0, 0.1)'
-                        : '0 2px 8px rgba(0, 0, 0, 0.06)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--io-action)';
-                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = card.featured
-                        ? 'var(--io-action)'
-                        : 'var(--io-border)';
-                      e.currentTarget.style.boxShadow = card.featured
-                        ? '0 8px 24px rgba(0, 0, 0, 0.1)'
-                        : '0 2px 8px rgba(0, 0, 0, 0.06)';
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--io-action)',
+                      flexShrink: 0,
                     }}
                   >
-                    {/* Badge */}
-                    {card.badge && (
-                      <div
+                    <Icon size={24} strokeWidth={1.5} />
+                  </div>
+
+                  {/* Title */}
+                  <h3
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 700,
+                      color: 'var(--io-text)',
+                      margin: '0',
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {card.titulo}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    style={{
+                      fontSize: '14px',
+                      color: 'var(--io-text-muted)',
+                      margin: '0',
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {card.texto}
+                  </p>
+
+                  {/* Bullets */}
+                  <ul
+                    style={{
+                      listStyle: 'none',
+                      margin: '12px 0 0 0',
+                      padding: '0',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                      flex: 1,
+                    }}
+                  >
+                    {card.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
                         style={{
-                          position: 'absolute',
-                          top: '-12px',
-                          right: '24px',
-                          backgroundColor: 'var(--io-accent)',
-                          color: 'white',
-                          fontSize: '10px',
-                          fontWeight: 700,
-                          letterSpacing: '0.1em',
-                          padding: '4px 12px',
-                          borderRadius: '4px',
-                          textTransform: 'uppercase',
+                          fontSize: '13px',
+                          color: 'var(--io-text-muted)',
+                          paddingLeft: '20px',
+                          position: 'relative',
                         }}
                       >
-                        {card.badge}
-                      </div>
-                    )}
-
-                    {/* Icon */}
-                    <div
-                      style={{
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: '8px',
-                        backgroundColor: 'var(--io-bg-soft)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--io-action)',
-                        flexShrink: 0,
-                      }}
-                    >
-                      <Icon size={24} strokeWidth={1.5} />
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      style={{
-                        fontSize: '18px',
-                        fontWeight: 700,
-                        color: 'var(--io-text)',
-                        margin: '0',
-                        lineHeight: 1.2,
-                      }}
-                    >
-                      {card.titulo}
-                    </h3>
-
-                    {/* Description */}
-                    <p
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--io-text-muted)',
-                        margin: '0',
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {card.texto}
-                    </p>
-
-                    {/* Bullets */}
-                    <ul
-                      style={{
-                        listStyle: 'none',
-                        margin: '12px 0 0 0',
-                        padding: '0',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '8px',
-                        flex: 1,
-                      }}
-                    >
-                      {card.bullets.map((bullet) => (
-                        <li
-                          key={bullet}
+                        <span
                           style={{
-                            fontSize: '13px',
-                            color: 'var(--io-text-muted)',
-                            paddingLeft: '20px',
-                            position: 'relative',
+                            position: 'absolute',
+                            left: '0',
+                            color: 'var(--io-action)',
+                            fontWeight: 600,
                           }}
                         >
-                          <span
-                            style={{
-                              position: 'absolute',
-                              left: '0',
-                              color: 'var(--io-action)',
-                              fontWeight: 600,
-                            }}
-                          >
-                            •
-                          </span>
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
+                          •
+                        </span>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
 
-                    {/* CTA */}
-                    <div
-                      style={{
-                        fontSize: '14px',
-                        fontWeight: 600,
-                        color: card.featured ? 'white' : 'var(--io-action)',
-                        backgroundColor: card.featured ? 'var(--io-action)' : 'transparent',
-                        padding: card.featured ? '12px 16px' : '0',
-                        borderRadius: card.featured ? 'var(--io-radius-md)' : '0',
-                        marginTop: 'auto',
-                        textAlign: card.featured ? 'center' : 'left',
-                        transition: 'all 0.2s',
-                      }}
-                      className="cta-text"
-                    >
-                      {card.cta}
-                    </div>
+                  {/* CTA */}
+                  <div
+                    style={{
+                      fontSize: '14px',
+                      fontWeight: 600,
+                      color: card.featured ? 'white' : 'var(--io-action)',
+                      backgroundColor: card.featured ? 'var(--io-action)' : 'transparent',
+                      padding: card.featured ? '12px 16px' : '0',
+                      borderRadius: card.featured ? 'var(--io-radius-md)' : '0',
+                      marginTop: 'auto',
+                      textAlign: card.featured ? 'center' : 'left',
+                      transition: 'all 0.2s',
+                    }}
+                    className="cta-text"
+                  >
+                    {card.cta}
                   </div>
-                </Link>
-              );
-            })}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
 
       {/* Responsive styles */}
       <style>
         {`
-          /* Desktop: 3 columns */
+          /* Desktop 1024px+: Web | Clientes (center) | Crecer */
           @media (min-width: 1024px) {
             .por-donde-grid {
-              grid-template-columns: repeat(3, 1fr) !important;
+              grid-template-columns: 1fr 1fr 1fr !important;
+              grid-template-areas: "web clientes crecer" !important;
               gap: 24px !important;
             }
           }
 
-          /* Tablet: featured full width, others 2 cols */
+          /* Tablet 768-1023px: Clientes full-width, Web | Crecer below */
           @media (min-width: 768px) and (max-width: 1023px) {
             .por-donde-section {
               padding: 60px 20px;
             }
             .por-donde-grid {
-              grid-template-columns: repeat(2, 1fr) !important;
+              grid-template-columns: 1fr 1fr !important;
+              grid-template-areas:
+                "clientes clientes"
+                "web crecer" !important;
               gap: 24px !important;
-            }
-            .por-donde-card[style*="border: 2px"] {
-              grid-column: 1 / -1 !important;
-              max-width: 100% !important;
             }
           }
 
-          /* Mobile: recomendada first, others after */
+          /* Mobile <=767px: Clientes first, Web, Crecer (stacked) */
           @media (max-width: 767px) {
             .por-donde-section {
               padding: 40px 20px;
             }
             .por-donde-grid {
               grid-template-columns: 1fr !important;
+              grid-template-areas:
+                "clientes"
+                "web"
+                "crecer" !important;
               gap: 16px !important;
             }
           }
