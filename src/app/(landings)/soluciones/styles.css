@@ -1,0 +1,183 @@
+/* Soluciones Landing — Responsive Styles */
+
+/* Global — Header responsive (mismo patrón que Home) */
+@media (max-width: 768px) {
+  header nav {
+    display: none !important;
+  }
+
+  header button {
+    display: block !important;
+  }
+}
+
+/* Hide CTA from header in <=430px */
+@media (max-width: 430px) {
+  header > div > a[href="#contacto"] {
+    display: none !important;
+  }
+}
+
+/* Header alignment tablet */
+@media (min-width: 431px) and (max-width: 1023px) {
+  header > div {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  header > div > a[href="#contacto"] {
+    order: 2 !important;
+    margin-left: auto !important;
+  }
+
+  header > div > button {
+    order: 3 !important;
+    margin-left: 8px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  header nav {
+    display: flex !important;
+  }
+
+  header button {
+    display: none !important;
+  }
+}
+
+/* ===== HERO ===== */
+
+@media (max-width: 1024px) {
+  .soluciones-hero-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .soluciones-hero-h1 {
+    font-size: clamp(28px, 6vw, 40px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .soluciones-hero-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .soluciones-piezas-row {
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .soluciones-hero-section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .soluciones-hero-h1 {
+    font-size: clamp(26px, 7vw, 34px) !important;
+    line-height: 1.15 !important;
+  }
+
+  .soluciones-piezas-row {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .soluciones-pieza-arrow {
+    transform: rotate(90deg);
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .soluciones-hero-section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .soluciones-hero-h1 {
+    font-size: 26px !important;
+  }
+}
+
+/* ===== PUNTO DE PARTIDA ===== */
+
+@media (max-width: 1024px) {
+  .punto-partida-section {
+    padding: 48px 20px !important;
+  }
+
+  .punto-partida-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .punto-partida-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .punto-partida-section {
+    padding: 32px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .punto-partida-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== LAS CUATRO SOLUCIONES ===== */
+
+@media (max-width: 1023px) {
+  .cuatro-soluciones-section {
+    padding: 48px 20px !important;
+  }
+
+  .cuatro-soluciones-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .cuatro-soluciones-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .cuatro-soluciones-section {
+    padding: 32px 16px !important;
+  }
+
+  .solucion-card {
+    padding: 24px 20px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .cuatro-soluciones-section {
+    padding: 32px 16px !important;
+  }
+}
+
+.solucion-cta:hover {
+  opacity: 0.85;
+}

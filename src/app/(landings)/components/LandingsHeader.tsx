@@ -5,16 +5,21 @@ import { useState, useEffect } from 'react';
 
 export default function LandingsHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isHome, setIsHome] = useState(false);
+  const [isHomeVariant, setIsHomeVariant] = useState(false);
+  const [isSolucionesPage, setIsSolucionesPage] = useState(false);
 
   useEffect(() => {
-    setIsHome(window.location.pathname.startsWith('/home'));
+    const pathname = window.location.pathname;
+    setIsHomeVariant(
+      pathname.startsWith('/home') || pathname.startsWith('/soluciones')
+    );
+    setIsSolucionesPage(pathname.startsWith('/soluciones'));
   }, []);
 
-  // Navegación dinámica basada en la ruta
-  const navItems = isHome
+  // Navegación dinámica basada en la ruta (Home y Soluciones comparten variante)
+  const navItems = isHomeVariant
     ? [
-        { label: 'Soluciones', href: '#soluciones' },
+        { label: 'Soluciones', href: isSolucionesPage ? '/soluciones' : '#soluciones' },
         { label: 'Cómo trabajamos', href: '#como-trabajamos' },
         { label: 'Recursos', href: '#recursos' },
         { label: 'Casos', href: '#casos' },
@@ -74,27 +79,32 @@ export default function LandingsHeader() {
           }}
           className="hidden md:flex"
         >
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              style={{
-                fontSize: '14px',
-                fontWeight: 500,
-                color: 'var(--io-text-muted)',
-                textDecoration: 'none',
-                transition: 'color 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--io-action)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--io-text-muted)';
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive = isSolucionesPage && item.label === 'Soluciones';
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                style={{
+                  fontSize: '14px',
+                  fontWeight: isActive ? 700 : 500,
+                  color: isActive ? 'var(--io-action)' : 'var(--io-text-muted)',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--io-action)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = isActive
+                    ? 'var(--io-action)'
+                    : 'var(--io-text-muted)';
+                }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* CTA Button - Desktop */}
@@ -161,7 +171,11 @@ export default function LandingsHeader() {
               href={item.href}
               style={{
                 fontSize: '14px',
-                color: 'var(--io-text-muted)',
+                fontWeight: isSolucionesPage && item.label === 'Soluciones' ? 700 : 400,
+                color:
+                  isSolucionesPage && item.label === 'Soluciones'
+                    ? 'var(--io-action)'
+                    : 'var(--io-text-muted)',
                 textDecoration: 'none',
                 padding: '8px 0',
               }}
