@@ -1,5 +1,6 @@
 'use client';
 
+import SolucionesLayoutClient from './SolucionesLayoutClient';
 import Hero from './components/Hero';
 import PuntoDePartida from './components/PuntoDePartida';
 import LasCuatroSoluciones from './components/LasCuatroSoluciones';
@@ -10,7 +11,7 @@ import FAQAnalisis from './components/FAQAnalisis';
 
 export default function SolucionesPage() {
   return (
-    <>
+    <SolucionesLayoutClient>
       <Hero />
       <PuntoDePartida />
       <LasCuatroSoluciones />
@@ -18,6 +19,6 @@ export default function SolucionesPage() {
       <Diagnostico />
       <Metodo />
       <FAQAnalisis />
-    </>
+    </SolucionesLayoutClient>
   );
 }

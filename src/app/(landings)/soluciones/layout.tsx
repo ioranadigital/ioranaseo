@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './styles.css';
-import SolucionesLayoutClient from './SolucionesLayoutClient';
 
 export const metadata: Metadata = {
   title: 'Soluciones | IORANA SEO',
@@ -20,5 +19,8 @@ export default function SolucionesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <SolucionesLayoutClient>{children}</SolucionesLayoutClient>;
+  // Header/footer se renderizan solo en page.tsx (vía SolucionesLayoutClient),
+  // NO aquí — este layout.tsx también envuelve rutas hijas como
+  // /soluciones/visibilidad/, que tienen su propio header+footer.
+  return children;
 }
