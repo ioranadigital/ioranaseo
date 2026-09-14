@@ -93,7 +93,7 @@ export default function QueIncluye() {
           </ul>
 
           <Link
-            href="#contacto"
+            href="#por-donde-empezar"
             style={{
               fontSize: '15px',
               fontWeight: 600,
