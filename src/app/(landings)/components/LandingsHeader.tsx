@@ -25,13 +25,13 @@ export default function LandingsHeader() {
   const navItemsFull = isHomeVariant
     ? [
         { label: 'Soluciones', href: isSolucionesPage ? '/soluciones' : '#soluciones' },
-        { label: 'Cómo trabajamos', href: '#como-trabajamos' },
+        { label: 'Cómo trabajamos', href: '/como-trabajamos' },
         { label: 'Recursos', href: '#recursos' },
         { label: 'Casos', href: '#casos' },
       ]
     : [
         { label: 'Qué incluye', href: '#que-incluye' },
-        { label: 'Cómo trabajamos', href: '#como-trabajamos' },
+        { label: 'Cómo trabajamos', href: '/como-trabajamos' },
         { label: 'Precios', href: '#precios' },
       ];
 

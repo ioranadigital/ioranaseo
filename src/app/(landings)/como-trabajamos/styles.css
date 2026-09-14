@@ -1,0 +1,262 @@
+/* Cómo trabajamos — Responsive Styles */
+
+/* Global — Header responsive (mismo patrón que el resto del sitio) */
+@media (max-width: 768px) {
+  header nav {
+    display: none !important;
+  }
+
+  header button {
+    display: block !important;
+  }
+}
+
+@media (max-width: 430px) {
+  header > div > a[href="#contacto"] {
+    display: none !important;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 1023px) {
+  header > div {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  header > div > a[href="#contacto"] {
+    order: 2 !important;
+    margin-left: auto !important;
+  }
+
+  header > div > button {
+    order: 3 !important;
+    margin-left: 8px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  header nav {
+    display: flex !important;
+  }
+
+  header button {
+    display: none !important;
+  }
+}
+
+/* ===== HERO ===== */
+
+@media (max-width: 1024px) {
+  .ct-hero-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .ct-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 48px !important;
+  }
+
+  .ct-hero-h1 {
+    font-size: clamp(28px, 6vw, 40px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ct-hero-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .ct-hero-visual {
+    min-height: 280px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-hero-section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .ct-hero-h1 {
+    font-size: clamp(26px, 7vw, 34px) !important;
+    line-height: 1.18 !important;
+  }
+
+  .ct-hero-copy {
+    font-size: 16px !important;
+  }
+
+  .ct-hero-visual {
+    min-height: 240px !important;
+    padding: 24px 16px !important;
+  }
+
+  .ct-hero-board-grid {
+    gap: 6px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-hero-section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .ct-hero-h1 {
+    font-size: 26px !important;
+  }
+
+  .ct-hero-visual-inner {
+    transform: scale(0.92);
+    transform-origin: center;
+  }
+}
+
+/* ===== CUATRO ATRIBUTOS ===== */
+
+@media (max-width: 1023px) {
+  .ct-atributos-section {
+    padding: 48px 20px !important;
+  }
+
+  .ct-atributos-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 28px 20px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-atributos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-atributos-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== PRINCIPIO DE TRABAJO ===== */
+
+@media (max-width: 1023px) {
+  .ct-principio-section {
+    padding: 48px 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ct-principio-texto {
+    font-size: 19px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-principio-section {
+    padding: 32px 16px !important;
+  }
+
+  .ct-principio-texto {
+    font-size: 17px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-principio-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== CÓMO TRABAJAMOS CONTIGO (timeline vertical — mismo DOM en todos los breakpoints) ===== */
+
+@media (max-width: 1023px) {
+  .ct-timeline-section {
+    padding: 56px 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ct-timeline-numero {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .ct-timeline-line {
+    left: 23px !important;
+  }
+
+  .ct-timeline-item {
+    gap: 18px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-timeline-section {
+    padding: 32px 16px !important;
+  }
+
+  .ct-timeline-numero {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .ct-timeline-line {
+    left: 21px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-timeline-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== UN ENFOQUE INTEGRAL ===== */
+
+@media (max-width: 1023px) {
+  .ct-enfoque-section {
+    padding: 56px 20px !important;
+  }
+
+  .ct-enfoque-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .ct-enfoque-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-enfoque-section {
+    padding: 32px 16px !important;
+  }
+
+  .ct-enfoque-card {
+    padding: 24px 20px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-enfoque-section {
+    padding: 32px 16px !important;
+  }
+}
+
+.ct-enfoque-card:hover {
+  border-color: var(--io-action) !important;
+}
