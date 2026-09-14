@@ -16,8 +16,13 @@ export default function LandingsHeader() {
     setIsSolucionesPage(pathname.startsWith('/soluciones'));
   }, []);
 
+  // MVP de lanzamiento: Recursos y Casos se retiran temporalmente de la
+  // navegación pública (no hay contenido editorial/casos reales todavía).
+  // No se elimina la lógica ni los items por si se reactivan más adelante.
+  const LAUNCH_MVP_SHOW_RECURSOS_Y_CASOS = false;
+
   // Navegación dinámica basada en la ruta (Home y Soluciones comparten variante)
-  const navItems = isHomeVariant
+  const navItemsFull = isHomeVariant
     ? [
         { label: 'Soluciones', href: isSolucionesPage ? '/soluciones' : '#soluciones' },
         { label: 'Cómo trabajamos', href: '#como-trabajamos' },
@@ -29,6 +34,12 @@ export default function LandingsHeader() {
         { label: 'Cómo trabajamos', href: '#como-trabajamos' },
         { label: 'Precios', href: '#precios' },
       ];
+
+  const navItems = LAUNCH_MVP_SHOW_RECURSOS_Y_CASOS
+    ? navItemsFull
+    : navItemsFull.filter(
+        (item) => item.label !== 'Recursos' && item.label !== 'Casos'
+      );
 
   return (
     <header
