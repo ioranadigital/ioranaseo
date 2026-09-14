@@ -223,7 +223,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .que-hacemos-checklist {
     grid-template-columns: 1fr !important;
   }
@@ -242,6 +242,70 @@
 
 @media (max-width: 375px) {
   .que-hacemos-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== CASOS DONDE SUELE FALLAR LA VISIBILIDAD ===== */
+
+@media (max-width: 1023px) {
+  .casos-falla-section {
+    padding: 56px 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .casos-falla-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .casos-falla-section {
+    padding: 32px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .casos-falla-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== ¿QUÉ NECESITAS MEJORAR? ===== */
+
+@media (max-width: 1023px) {
+  .que-necesitas-section {
+    padding: 56px 20px !important;
+  }
+
+  .que-necesitas-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Recomendada ya es la primera tarjeta en el DOM: 1 columna la mantiene primera */
+  .que-necesitas-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .que-necesitas-section {
+    padding: 32px 16px !important;
+  }
+
+  .que-necesitas-card {
+    padding: 24px 20px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .que-necesitas-section {
     padding: 32px 16px !important;
   }
 }

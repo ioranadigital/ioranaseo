@@ -93,7 +93,7 @@ export default function QueHacemos() {
           </ul>
 
           <Link
-            href="#contacto"
+            href="#que-necesitas-mejorar"
             style={{
               fontSize: '15px',
               fontWeight: 600,
