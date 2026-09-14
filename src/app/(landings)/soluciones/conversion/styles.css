@@ -269,3 +269,90 @@
     padding: 32px 16px !important;
   }
 }
+
+/* ===== ¿DÓNDE SUELE PERDERSE LA CONVERSIÓN? ===== */
+
+@media (max-width: 1023px) {
+  .donde-pierde-section {
+    padding: 56px 20px !important;
+  }
+
+  .donde-pierde-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .donde-pierde-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .donde-pierde-section {
+    padding: 32px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .donde-pierde-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== ¿POR DÓNDE QUIERES EMPEZAR? ===== */
+
+/* Desktop 1024px+: 3 columnas iguales */
+@media (min-width: 1024px) {
+  .por-donde-grid {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    grid-template-areas: "optimizar landing medicion" !important;
+    gap: 24px !important;
+  }
+}
+
+/* Tablet 768-1023px: Recomendada full-width, Landing | Medición debajo */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .por-donde-section {
+    padding: 60px 20px;
+  }
+  .por-donde-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-areas:
+      "optimizar optimizar"
+      "landing medicion" !important;
+    gap: 24px !important;
+  }
+}
+
+/* Mobile <=767px: stack, recomendada primera (ya lo es en el DOM) */
+@media (max-width: 767px) {
+  .por-donde-section {
+    padding: 40px 20px;
+  }
+  .por-donde-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "optimizar"
+      "landing"
+      "medicion" !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .por-donde-section {
+    padding: 32px 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .por-donde-section {
+    padding: 32px 16px;
+  }
+  .por-donde-card {
+    padding: 24px 20px !important;
+  }
+}
