@@ -260,3 +260,100 @@
 .ct-enfoque-card:hover {
   border-color: var(--io-action) !important;
 }
+
+/* ===== NOS IMPLICAMOS DE VERDAD EN TU NEGOCIO ===== */
+
+@media (max-width: 1023px) {
+  .ct-implicamos-section {
+    padding: 56px 20px !important;
+  }
+
+  .ct-implicamos-grid {
+    gap: 36px !important;
+  }
+}
+
+/* Mobile: visual (ya es el primer hijo en el DOM) encima, copy debajo */
+@media (max-width: 767px) {
+  .ct-implicamos-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 32px !important;
+  }
+
+  .ct-implicamos-visual {
+    min-height: 280px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-implicamos-section {
+    padding: 32px 16px !important;
+  }
+
+  .ct-implicamos-visual {
+    min-height: 240px !important;
+    padding: 24px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-implicamos-section {
+    padding: 32px 16px !important;
+  }
+
+  .ct-implicamos-visual-inner {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+}
+
+/* ===== CTA FINAL ===== */
+
+@media (max-width: 1023px) {
+  .ct-cta-final-section {
+    padding: 48px 20px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-cta-final-section {
+    padding: 32px 16px !important;
+  }
+
+  .ct-cta-final-section > div {
+    padding: 36px 24px !important;
+  }
+
+  .ct-cta-final-button {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-cta-final-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== FAQ ===== */
+
+@media (max-width: 1023px) {
+  .ct-faq-section {
+    padding: 56px 20px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .ct-faq-section {
+    padding: 32px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .ct-faq-section {
+    padding: 32px 16px !important;
+  }
+}
