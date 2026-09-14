@@ -196,3 +196,162 @@
 .solucion-cta:hover {
   opacity: 0.85;
 }
+
+/* ===== NO SON SERVICIOS AISLADOS ===== */
+
+@media (max-width: 1023px) {
+  .no-aislados-section {
+    padding: 56px 20px !important;
+  }
+
+  .no-aislados-ideas {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    margin-bottom: 48px !important;
+  }
+
+  .sistema-visual {
+    padding: 32px 20px 24px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .sistema-visual-row {
+    flex-wrap: wrap !important;
+    row-gap: 24px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .no-aislados-section {
+    padding: 32px 16px !important;
+  }
+
+  .sistema-visual-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .sistema-visual-item {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .sistema-visual-arrow {
+    transform: rotate(90deg);
+    margin: 4px 0 !important;
+    align-self: center !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .no-aislados-section {
+    padding: 32px 16px !important;
+  }
+
+  .sistema-visual {
+    padding: 24px 16px 20px !important;
+  }
+}
+
+/* ===== DIAGNÓSTICO — ¿Por dónde debería empezar? ===== */
+
+@media (max-width: 1023px) {
+  .diagnostico-section {
+    padding: 56px 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .diagnostico-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .diagnostico-featured {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: center;
+  }
+
+  .diagnostico-featured > div:first-child {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .diagnostico-section {
+    padding: 32px 16px !important;
+  }
+
+  .diagnostico-item {
+    padding: 16px !important;
+  }
+
+  .diagnostico-featured {
+    padding: 24px 20px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .diagnostico-section {
+    padding: 32px 16px !important;
+  }
+}
+
+.diagnostico-item:hover {
+  border-color: var(--io-action) !important;
+}
+
+/* ===== MÉTODO ===== */
+
+@media (min-width: 1025px) {
+  .metodo-grid {
+    position: relative;
+  }
+
+  .metodo-connector {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background-color: var(--io-border);
+    z-index: 0;
+  }
+
+  .metodo-numero {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .metodo-section {
+    padding: 56px 20px !important;
+  }
+
+  .metodo-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .metodo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .metodo-section {
+    padding: 32px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .metodo-section {
+    padding: 32px 16px !important;
+  }
+}
