@@ -5,21 +5,25 @@ import { Monitor, Search, Megaphone, Target } from 'lucide-react';
 export default function PuntoDePartida() {
   const situaciones = [
     {
+      numero: '01',
       texto: 'Necesitas una base mejor',
       solucion: 'Web',
       icon: Monitor,
     },
     {
+      numero: '02',
       texto: 'Necesitas que te encuentren',
       solucion: 'Visibilidad',
       icon: Search,
     },
     {
+      numero: '03',
       texto: 'Necesitas atraer demanda',
       solucion: 'Campañas',
       icon: Megaphone,
     },
     {
+      numero: '04',
       texto: 'Necesitas convertir mejor',
       solucion: 'Conversión',
       icon: Target,
@@ -77,25 +81,40 @@ export default function PuntoDePartida() {
             return (
               <div
                 key={s.solucion}
+                className="punto-partida-item"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   textAlign: 'center',
-                  gap: '12px',
+                  gap: '10px',
                   padding: '24px 16px',
+                  position: 'relative',
                 }}
               >
+                <span
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    color: 'var(--io-text-muted)',
+                  }}
+                >
+                  {s.numero}
+                </span>
                 <div
+                  className="punto-partida-icon"
                   style={{
                     width: '48px',
                     height: '48px',
-                    borderRadius: 'var(--io-radius-md)',
+                    borderRadius: '50%',
                     backgroundColor: 'var(--io-bg-soft)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: 'var(--io-action)',
+                    position: 'relative',
+                    zIndex: 2,
                   }}
                 >
                   <Icon size={22} strokeWidth={1.5} />

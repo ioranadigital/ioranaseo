@@ -1,16 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Monitor, Search, Megaphone, Target, ArrowRight } from 'lucide-react';
+import { Search, Megaphone, TrendingUp } from 'lucide-react';
 
 export default function Hero() {
-  const piezas = [
-    { icon: Monitor, label: 'Web' },
-    { icon: Search, label: 'Visibilidad' },
-    { icon: Megaphone, label: 'Campañas' },
-    { icon: Target, label: 'Conversión' },
-  ];
-
   return (
     <section
       className="soluciones-hero-section"
@@ -25,7 +18,7 @@ export default function Hero() {
       <div
         className="soluciones-hero-inner"
         style={{
-          maxWidth: '900px',
+          maxWidth: '780px',
           margin: '0 auto',
           textAlign: 'center',
         }}
@@ -70,7 +63,7 @@ export default function Hero() {
             color: 'var(--io-text-muted)',
             lineHeight: 1.6,
             margin: '0 0 32px 0',
-            maxWidth: '620px',
+            maxWidth: '560px',
             marginLeft: 'auto',
             marginRight: 'auto',
           }}
@@ -92,7 +85,6 @@ export default function Hero() {
             borderRadius: 'var(--io-radius-md)',
             textDecoration: 'none',
             transition: 'background-color 0.2s',
-            marginBottom: '56px',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
@@ -103,76 +95,183 @@ export default function Hero() {
         >
           Analizar mi proyecto
         </Link>
+      </div>
 
-        {/* Visual: piezas conectadas */}
+      {/* Visual Ecosystem — lenguaje Product Growth de Home */}
+      <div
+        className="soluciones-hero-visual"
+        style={{
+          maxWidth: '760px',
+          margin: '56px auto 0',
+          minHeight: '340px',
+          backgroundColor: 'white',
+          borderRadius: 'var(--io-radius-lg)',
+          border: '1px solid var(--io-border)',
+          position: 'relative',
+          overflow: 'hidden',
+          padding: '40px 30px',
+        }}
+      >
         <div
-          className="soluciones-piezas-row"
+          className="soluciones-hero-visual-inner"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0',
-            flexWrap: 'wrap',
+            position: 'absolute',
+            inset: 0,
           }}
         >
-          {piezas.map((pieza, index) => {
-            const Icon = pieza.icon;
-            return (
-              <div
-                key={pieza.label}
-                style={{ display: 'flex', alignItems: 'center' }}
-              >
-                <div
-                  className="soluciones-pieza"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '10px',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '64px',
-                      height: '64px',
-                      borderRadius: '50%',
-                      backgroundColor: 'white',
-                      border: '1.5px solid var(--io-border)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--io-action)',
-                      boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)',
-                    }}
-                  >
-                    <Icon size={26} strokeWidth={1.5} />
-                  </div>
-                  <span
-                    style={{
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      color: 'var(--io-text)',
-                    }}
-                  >
-                    {pieza.label}
-                  </span>
-                </div>
+        {/* Líneas de conexión discretas (SVG, detrás de las piezas) */}
+        <svg
+          width="100%"
+          height="100%"
+          style={{ position: 'absolute', inset: 0, zIndex: 1 }}
+          preserveAspectRatio="none"
+        >
+          <line x1="50%" y1="50%" x2="16%" y2="24%" stroke="var(--io-border)" strokeWidth="1.5" strokeDasharray="3 4" />
+          <line x1="50%" y1="50%" x2="84%" y2="24%" stroke="var(--io-border)" strokeWidth="1.5" strokeDasharray="3 4" />
+          <line x1="50%" y1="50%" x2="50%" y2="86%" stroke="var(--io-border)" strokeWidth="1.5" strokeDasharray="3 4" />
+        </svg>
 
-                {index < piezas.length - 1 && (
-                  <ArrowRight
-                    className="soluciones-pieza-arrow"
-                    size={20}
-                    strokeWidth={2}
-                    style={{
-                      color: 'var(--io-accent)',
-                      margin: '0 16px',
-                      flexShrink: 0,
-                    }}
-                  />
-                )}
-              </div>
-            );
-          })}
+        {/* CENTRAL: ventana web — pieza base */}
+        <div
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '128px',
+            height: '148px',
+            backgroundColor: 'white',
+            border: '3px solid var(--io-text)',
+            borderRadius: '8px',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '8px',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+            zIndex: 10,
+          }}
+        >
+          <div
+            style={{
+              height: '8px',
+              backgroundColor: 'var(--io-action)',
+              marginBottom: '8px',
+              borderRadius: '2px',
+            }}
+          />
+          <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '2px', marginBottom: '6px' }} />
+          <div style={{ height: '6px', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
+          <span
+            style={{
+              position: 'absolute',
+              bottom: '-22px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              fontSize: '10px',
+              fontWeight: 700,
+              color: 'var(--io-text-muted)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Web
+          </span>
+        </div>
+
+        {/* Badge: Search/Google — Visibilidad (arriba izquierda) */}
+        <div
+          className="soluciones-hero-badge"
+          style={{
+            position: 'absolute',
+            top: '16%',
+            left: '6%',
+            width: '104px',
+            height: '40px',
+            backgroundColor: 'white',
+            border: '1.5px solid var(--io-border)',
+            borderRadius: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '0 12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            zIndex: 3,
+          }}
+        >
+          <Search size={13} strokeWidth={2} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
+          <div style={{ flex: 1, height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
+        </div>
+
+        {/* Badge: Ads — Campañas (arriba derecha) */}
+        <div
+          className="soluciones-hero-badge"
+          style={{
+            position: 'absolute',
+            top: '16%',
+            right: '6%',
+            width: '92px',
+            height: '48px',
+            backgroundColor: 'var(--io-action)',
+            borderRadius: '8px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            padding: '8px 10px',
+            gap: '4px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            zIndex: 3,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <Megaphone size={11} strokeWidth={2} style={{ color: 'white', flexShrink: 0 }} />
+            <span style={{ fontSize: '9px', fontWeight: 700, color: 'white' }}>Ad</span>
+          </div>
+          <div style={{ width: '70%', height: '3px', backgroundColor: 'rgba(255,255,255,0.5)', borderRadius: '1px' }} />
+        </div>
+
+        {/* Badge: Analytics/Lead — Conversión (abajo centro) */}
+        <div
+          className="soluciones-hero-badge"
+          style={{
+            position: 'absolute',
+            bottom: '10%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '108px',
+            height: '46px',
+            backgroundColor: 'white',
+            border: '1.5px solid var(--io-border)',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'flex-end',
+            gap: '4px',
+            padding: '8px 12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            zIndex: 3,
+          }}
+        >
+          <div style={{ width: '4px', height: '10px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
+          <div style={{ width: '4px', height: '16px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
+          <div style={{ width: '4px', height: '22px', backgroundColor: 'var(--io-accent)', borderRadius: '1px' }} />
+          <TrendingUp
+            size={16}
+            strokeWidth={2}
+            style={{ color: 'var(--io-action)', marginLeft: 'auto', flexShrink: 0 }}
+          />
+        </div>
+
+        {/* Microacento discreto */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '14px',
+            right: '18px',
+            fontSize: '11px',
+            color: 'var(--io-accent)',
+            fontWeight: 700,
+            zIndex: 15,
+          }}
+        >
+          ✦ Trabajan juntas
+        </div>
         </div>
       </div>
     </section>

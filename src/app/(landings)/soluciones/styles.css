@@ -69,9 +69,14 @@
     padding-right: 20px !important;
   }
 
-  .soluciones-piezas-row {
-    flex-wrap: wrap !important;
-    gap: 16px !important;
+  .soluciones-hero-visual {
+    min-height: 280px !important;
+    margin-top: 40px !important;
+  }
+
+  .soluciones-hero-visual-inner {
+    transform: scale(0.85);
+    transform-origin: center;
   }
 }
 
@@ -88,14 +93,15 @@
     line-height: 1.15 !important;
   }
 
-  .soluciones-piezas-row {
-    flex-direction: column !important;
-    gap: 20px !important;
+  .soluciones-hero-visual {
+    min-height: 240px !important;
+    margin-top: 32px !important;
+    padding: 24px 16px !important;
   }
 
-  .soluciones-pieza-arrow {
-    transform: rotate(90deg);
-    margin: 0 !important;
+  .soluciones-hero-visual-inner {
+    transform: scale(0.68);
+    transform-origin: center;
   }
 }
 
@@ -108,9 +114,41 @@
   .soluciones-hero-h1 {
     font-size: 26px !important;
   }
+
+  .soluciones-hero-visual {
+    min-height: 220px !important;
+  }
+
+  .soluciones-hero-visual-inner {
+    transform: scale(0.62);
+    transform-origin: center;
+  }
 }
 
 /* ===== PUNTO DE PARTIDA ===== */
+
+/* Conector sutil entre las 4 piezas — solo desktop 4 columnas */
+@media (min-width: 1025px) {
+  .punto-partida-grid {
+    position: relative;
+  }
+
+  .punto-partida-grid::before {
+    content: '';
+    position: absolute;
+    top: 72px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background-color: var(--io-border);
+    z-index: 1;
+  }
+
+  .punto-partida-icon {
+    background-color: white !important;
+    border: 1.5px solid var(--io-border);
+  }
+}
 
 @media (max-width: 1024px) {
   .punto-partida-section {
