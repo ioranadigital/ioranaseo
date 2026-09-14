@@ -138,12 +138,22 @@
 
 /* ===== CÓMO FUNCIONA NUESTRO SISTEMA DE CAMPAÑAS ===== */
 
+/* El conector es decorativo y solo debe existir en el flujo del grid
+   en desktop (posicionado absoluto). Por debajo de 1025px debe quedar
+   fuera del flujo (display:none) para no ocupar una celda del grid y
+   desplazar los 4 pasos (bug: 01/03 a la derecha, 02/04 a la izquierda
+   en el grid 2x2 de tablet). */
+.como-funciona-connector {
+  display: none;
+}
+
 @media (min-width: 1025px) {
   .como-funciona-grid {
     position: relative;
   }
 
   .como-funciona-connector {
+    display: block;
     content: '';
     position: absolute;
     top: 23px;
