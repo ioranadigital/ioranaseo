@@ -74,14 +74,14 @@ export default function NoSonServiciosAislados() {
           }}
         >
           {ideas.map((idea) => (
-            <div key={idea.titulo}>
+            <div key={idea.titulo} style={{ maxWidth: '340px' }}>
               <h3
                 style={{
-                  fontSize: '17px',
+                  fontSize: '16px',
                   fontWeight: 700,
                   color: 'var(--io-text)',
-                  margin: '0 0 10px 0',
-                  lineHeight: 1.35,
+                  margin: '0 0 8px 0',
+                  lineHeight: 1.5,
                 }}
               >
                 {idea.titulo}

@@ -1,26 +1,32 @@
 'use client';
 
+import { Search, ListChecks, Zap, TrendingUp } from 'lucide-react';
+
 export default function Metodo() {
   const pasos = [
     {
       numero: '01',
       titulo: 'Analizamos',
       copy: 'Situación, negocio, competencia y datos.',
+      icon: Search,
     },
     {
       numero: '02',
       titulo: 'Priorizamos',
       copy: 'Identificamos la oportunidad con mayor impacto.',
+      icon: ListChecks,
     },
     {
       numero: '03',
       titulo: 'Implementamos',
       copy: 'Ponemos en marcha las capacidades necesarias.',
+      icon: Zap,
     },
     {
       numero: '04',
       titulo: 'Medimos y mejoramos',
       copy: 'Analizamos resultados y decidimos el siguiente paso.',
+      icon: TrendingUp,
     },
   ];
 
@@ -72,61 +78,73 @@ export default function Metodo() {
         >
           <div className="metodo-connector" />
 
-          {pasos.map((paso) => (
-            <div
-              key={paso.numero}
-              className="metodo-item"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                gap: '10px',
-                position: 'relative',
-                zIndex: 1,
-              }}
-            >
+          {pasos.map((paso) => {
+            const Icon = paso.icon;
+            return (
               <div
-                className="metodo-numero"
+                key={paso.numero}
+                className="metodo-item"
                 style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '1.5px solid var(--io-action)',
                   display: 'flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '14px',
-                  fontWeight: 700,
-                  color: 'var(--io-action)',
+                  textAlign: 'center',
+                  gap: '10px',
+                  position: 'relative',
+                  zIndex: 1,
                 }}
               >
-                {paso.numero}
+                <div
+                  className="metodo-numero"
+                  style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--io-bg-soft)',
+                    border: '2px solid var(--io-action)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '15px',
+                    fontWeight: 800,
+                    color: 'var(--io-action)',
+                  }}
+                >
+                  {paso.numero}
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '7px',
+                  }}
+                >
+                  <Icon size={17} strokeWidth={2} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
+                  <h3
+                    style={{
+                      fontSize: '17px',
+                      fontWeight: 800,
+                      color: 'var(--io-text)',
+                      margin: '0',
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {paso.titulo}
+                  </h3>
+                </div>
+                <p
+                  style={{
+                    fontSize: '13px',
+                    color: 'var(--io-text-muted)',
+                    margin: '0',
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {paso.copy}
+                </p>
               </div>
-              <h3
-                style={{
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  color: 'var(--io-text)',
-                  margin: '0',
-                  lineHeight: 1.3,
-                }}
-              >
-                {paso.titulo}
-              </h3>
-              <p
-                style={{
-                  fontSize: '13px',
-                  color: 'var(--io-text-muted)',
-                  margin: '0',
-                  lineHeight: 1.55,
-                }}
-              >
-                {paso.copy}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
