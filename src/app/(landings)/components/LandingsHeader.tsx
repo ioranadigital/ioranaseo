@@ -7,13 +7,17 @@ export default function LandingsHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isHomeVariant, setIsHomeVariant] = useState(false);
   const [isSolucionesPage, setIsSolucionesPage] = useState(false);
+  const [isComoTrabajamosPage, setIsComoTrabajamosPage] = useState(false);
 
   useEffect(() => {
     const pathname = window.location.pathname;
     setIsHomeVariant(
-      pathname.startsWith('/home') || pathname.startsWith('/soluciones')
+      pathname.startsWith('/home') ||
+        pathname.startsWith('/soluciones') ||
+        pathname.startsWith('/como-trabajamos')
     );
     setIsSolucionesPage(pathname.startsWith('/soluciones'));
+    setIsComoTrabajamosPage(pathname.startsWith('/como-trabajamos'));
   }, []);
 
   // MVP de lanzamiento: Recursos y Casos se retiran temporalmente de la
@@ -91,7 +95,9 @@ export default function LandingsHeader() {
           className="hidden md:flex"
         >
           {navItems.map((item) => {
-            const isActive = isSolucionesPage && item.label === 'Soluciones';
+            const isActive =
+              (isSolucionesPage && item.label === 'Soluciones') ||
+              (isComoTrabajamosPage && item.label === 'Cómo trabajamos');
             return (
               <Link
                 key={item.label}
@@ -176,25 +182,27 @@ export default function LandingsHeader() {
           }}
           className="md:hidden"
         >
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              style={{
-                fontSize: '14px',
-                fontWeight: isSolucionesPage && item.label === 'Soluciones' ? 700 : 400,
-                color:
-                  isSolucionesPage && item.label === 'Soluciones'
-                    ? 'var(--io-action)'
-                    : 'var(--io-text-muted)',
-                textDecoration: 'none',
-                padding: '8px 0',
-              }}
-              onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActiveMobile =
+              (isSolucionesPage && item.label === 'Soluciones') ||
+              (isComoTrabajamosPage && item.label === 'Cómo trabajamos');
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                style={{
+                  fontSize: '14px',
+                  fontWeight: isActiveMobile ? 700 : 400,
+                  color: isActiveMobile ? 'var(--io-action)' : 'var(--io-text-muted)',
+                  textDecoration: 'none',
+                  padding: '8px 0',
+                }}
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <Link
             href="#contacto"
             style={{

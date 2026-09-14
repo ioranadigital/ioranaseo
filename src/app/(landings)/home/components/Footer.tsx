@@ -5,6 +5,26 @@ import Link from 'next/link';
 export default function HomeFooter() {
   const currentYear = new Date().getFullYear();
 
+  // MVP de lanzamiento: mismo patrón/flag que LandingsHeader - Recursos y
+  // Casos se retiran temporalmente de la navegación pública del footer
+  // global (sin contenido editorial/casos reales todavía). Se conserva la
+  // configuración completa para reactivarlos más adelante sin rehacer nada.
+  const LAUNCH_MVP_SHOW_RECURSOS_Y_CASOS = false;
+
+  const footerNavFull = [
+    { label: 'Soluciones', href: '#soluciones' },
+    { label: 'Cómo trabajamos', href: '/como-trabajamos' },
+    { label: 'Casos', href: '#casos' },
+    { label: 'Recursos', href: '#recursos' },
+    { label: 'Contacto', href: '#contacto' },
+  ];
+
+  const footerNav = LAUNCH_MVP_SHOW_RECURSOS_Y_CASOS
+    ? footerNavFull
+    : footerNavFull.filter(
+        (item) => item.label !== 'Recursos' && item.label !== 'Casos'
+      );
+
   return (
     <footer
       style={{
@@ -64,74 +84,26 @@ export default function HomeFooter() {
               Navegación
             </h4>
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <Link
-                href="#soluciones"
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--io-action)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--io-text-muted)';
-                }}
-              >
-                Soluciones
-              </Link>
-              <Link
-                href="#casos"
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--io-action)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--io-text-muted)';
-                }}
-              >
-                Casos
-              </Link>
-              <Link
-                href="#recursos"
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--io-action)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--io-text-muted)';
-                }}
-              >
-                Recursos
-              </Link>
-              <Link
-                href="#contacto"
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--io-action)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--io-text-muted)';
-                }}
-              >
-                Contacto
-              </Link>
+              {footerNav.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  style={{
+                    fontSize: '14px',
+                    color: 'var(--io-text-muted)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--io-action)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--io-text-muted)';
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
           </div>
 
