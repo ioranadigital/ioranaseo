@@ -1,0 +1,256 @@
+/* Campañas Landing — Responsive Styles */
+
+/* Global — Header responsive (mismo patrón que Home/Soluciones/Visibilidad) */
+@media (max-width: 768px) {
+  header nav {
+    display: none !important;
+  }
+
+  header button {
+    display: block !important;
+  }
+}
+
+@media (max-width: 430px) {
+  header > div > a[href="#contacto"] {
+    display: none !important;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 1023px) {
+  header > div {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  header > div > a[href="#contacto"] {
+    order: 2 !important;
+    margin-left: auto !important;
+  }
+
+  header > div > button {
+    order: 3 !important;
+    margin-left: 8px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  header nav {
+    display: flex !important;
+  }
+
+  header button {
+    display: none !important;
+  }
+}
+
+/* ===== HERO ===== */
+
+@media (max-width: 1024px) {
+  .campanas-hero-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .campanas-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 48px !important;
+  }
+
+  .campanas-hero-h1 {
+    font-size: clamp(28px, 6vw, 40px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .campanas-hero-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .campanas-hero-beneficios {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px 16px !important;
+  }
+
+  .campanas-hero-visual {
+    min-height: 300px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .campanas-hero-section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .campanas-hero-h1 {
+    font-size: clamp(26px, 7vw, 34px) !important;
+    line-height: 1.18 !important;
+  }
+
+  .campanas-hero-copy {
+    font-size: 16px !important;
+  }
+
+  .campanas-hero-visual {
+    min-height: 260px !important;
+    padding: 24px 16px !important;
+  }
+
+  .campanas-hero-visual-inner {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+}
+
+@media (max-width: 375px) {
+  .campanas-hero-section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .campanas-hero-h1 {
+    font-size: 26px !important;
+  }
+
+  .campanas-hero-beneficios {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px 12px !important;
+  }
+
+  .campanas-hero-visual {
+    min-height: 240px !important;
+  }
+
+  .campanas-hero-visual-inner {
+    transform: scale(0.72);
+    transform-origin: center;
+  }
+}
+
+/* ===== CÓMO FUNCIONA NUESTRO SISTEMA DE CAMPAÑAS ===== */
+
+@media (min-width: 1025px) {
+  .como-funciona-grid {
+    position: relative;
+  }
+
+  .como-funciona-connector {
+    content: '';
+    position: absolute;
+    top: 23px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background-color: var(--io-border);
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  .como-funciona-numero {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .como-funciona-section {
+    padding: 56px 20px !important;
+  }
+
+  .como-funciona-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .como-funciona-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .como-funciona-section {
+    padding: 32px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .como-funciona-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== NO SON ANUNCIOS AISLADOS ===== */
+
+@media (max-width: 1023px) {
+  .no-anuncios-section {
+    padding: 56px 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .no-anuncios-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .no-anuncios-section {
+    padding: 32px 16px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .no-anuncios-section {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ===== QUÉ INCLUYE ===== */
+
+@media (max-width: 1023px) {
+  .que-incluye-section {
+    padding: 56px 20px !important;
+  }
+
+  .que-incluye-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .que-incluye-checklist {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .que-incluye-section {
+    padding: 32px 16px !important;
+  }
+
+  .que-incluye-visual {
+    padding: 24px 20px !important;
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .que-incluye-section {
+    padding: 32px 16px !important;
+  }
+}
