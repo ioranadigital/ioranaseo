@@ -220,6 +220,57 @@ export default function Hero() {
             overflow: 'hidden',
           }}
         >
+          <style>
+            {`
+              @media (max-width: 1023px) {
+                .hero-grid {
+                  grid-template-columns: 1fr !important;
+                  gap: 40px !important;
+                }
+              }
+
+              @media (max-width: 768px) {
+                .hero-grid {
+                  grid-template-columns: 1fr !important;
+                  gap: 32px !important;
+                }
+                .hero-capabilities {
+                  grid-template-columns: repeat(2, 1fr) !important;
+                  gap: 16px !important;
+                  margin-top: 40px !important;
+                }
+                .hero-visual {
+                  min-height: 300px !important;
+                }
+              }
+
+              @media (max-width: 430px) {
+                .hero-section {
+                  padding-top: 40px !important;
+                  padding-bottom: 40px !important;
+                }
+                .hero-h1 {
+                  font-size: 28px !important;
+                  margin-bottom: 16px !important;
+                }
+                .hero-description {
+                  font-size: 14px !important;
+                  margin-bottom: 24px !important;
+                }
+                .hero-capabilities {
+                  grid-template-columns: repeat(2, 1fr) !important;
+                  gap: 12px !important;
+                  margin-top: 32px !important;
+                  padding-top: 32px !important;
+                  border-top: 1px solid var(--io-border);
+                }
+                .hero-visual {
+                  min-height: 280px !important;
+                  padding: 20px 15px !important;
+                }
+              }
+            `}
+          </style>
           {/* CENTRAL: Web Desktop - Pieza principal prominente */}
           <div
             style={{
