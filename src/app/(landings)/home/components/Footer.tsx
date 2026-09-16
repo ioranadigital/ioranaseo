@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { OPEN_COOKIE_PREFERENCES_EVENT } from '@/components/CookieConsent';
 
 export default function HomeFooter() {
   const currentYear = new Date().getFullYear();
@@ -173,6 +174,34 @@ export default function HomeFooter() {
               >
                 Aviso Legal
               </Link>
+              <button
+                type="button"
+                onClick={() =>
+                  window.dispatchEvent(
+                    new CustomEvent(OPEN_COOKIE_PREFERENCES_EVENT)
+                  )
+                }
+                style={{
+                  fontSize: '14px',
+                  color: 'var(--io-text-muted)',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  fontFamily: 'inherit',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--io-action)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--io-text-muted)';
+                }}
+              >
+                Preferencias de cookies
+              </button>
             </nav>
           </div>
         </div>

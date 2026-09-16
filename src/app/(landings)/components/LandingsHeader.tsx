@@ -12,7 +12,8 @@ export default function LandingsHeader() {
   useEffect(() => {
     const pathname = window.location.pathname;
     setIsHomeVariant(
-      pathname.startsWith('/home') ||
+      pathname === '/' ||
+        pathname.startsWith('/home') ||
         pathname.startsWith('/soluciones') ||
         pathname.startsWith('/como-trabajamos')
     );

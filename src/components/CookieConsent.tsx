@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "iorana-cookie-consent";
 const CONSENT_VERSION = "1";
+export const OPEN_COOKIE_PREFERENCES_EVENT = "iorana:open-cookie-preferences";
 
 interface ConsentPreferences {
   analytics: boolean;
@@ -35,6 +36,29 @@ export default function CookieConsent() {
     } else {
       setShowBanner(true);
     }
+  }, []);
+
+  // Allow other components (e.g. Footer "Preferencias de cookies") to
+  // reopen the preference center without routing to a dedicated page.
+  useEffect(() => {
+    const handleOpenPreferences = () => {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as ConsentPreferences;
+        setTempAnalytics(parsed.analytics);
+      }
+      setShowPreferences(true);
+    };
+
+    window.addEventListener(
+      OPEN_COOKIE_PREFERENCES_EVENT,
+      handleOpenPreferences
+    );
+    return () =>
+      window.removeEventListener(
+        OPEN_COOKIE_PREFERENCES_EVENT,
+        handleOpenPreferences
+      );
   }, []);
 
   const initializeGA4 = () => {
