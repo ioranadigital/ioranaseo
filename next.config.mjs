@@ -107,22 +107,74 @@ const nextConfig = {
     ];
   },
 
-  // Redirects for SEO
+  // Redirects for SEO and legacy URLs
   async redirects() {
     return [
+      // English to Spanish redirects
       {
         source: "/services",
-        destination: "/servicios",
+        destination: "/soluciones",
         permanent: true,
       },
       {
         source: "/contact",
-        destination: "/contacto",
+        destination: "/diagnostico",
         permanent: true,
       },
+
+      // Spanish legacy redirects
       {
         source: "/home",
         destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/servicios",
+        destination: "/soluciones",
+        permanent: true,
+      },
+      {
+        source: "/contacto",
+        destination: "/diagnostico",
+        permanent: true,
+      },
+      {
+        source: "/informe-gratuito",
+        destination: "/diagnostico",
+        permanent: true,
+      },
+
+      // Solution-specific redirects
+      {
+        source: "/servicios/posicionamiento-google",
+        destination: "/soluciones/visibilidad",
+        permanent: true,
+      },
+      {
+        source: "/servicios/seo-local",
+        destination: "/soluciones/visibilidad",
+        permanent: true,
+      },
+      {
+        source: "/servicios/google-ads",
+        destination: "/soluciones/campanas",
+        permanent: true,
+      },
+      {
+        source: "/servicios/facebook-ads",
+        destination: "/soluciones/campanas",
+        permanent: true,
+      },
+      {
+        source: "/servicios/pagina-web",
+        destination: "/web-para-empresas",
+        permanent: true,
+      },
+
+      // Company pages
+      {
+        source: "/about",
+        destination: "/como-trabajamos",
         permanent: true,
       },
     ];

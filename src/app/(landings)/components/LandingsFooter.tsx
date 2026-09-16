@@ -82,7 +82,7 @@ export default function LandingsFooter() {
                 Inicio
               </Link>
               <Link
-                href="/servicios"
+                href="/soluciones"
                 style={{
                   fontSize: '14px',
                   color: 'var(--io-text-muted)',
@@ -96,10 +96,10 @@ export default function LandingsFooter() {
                   e.currentTarget.style.color = 'var(--io-text-muted)';
                 }}
               >
-                Servicios
+                Soluciones
               </Link>
               <Link
-                href="/contacto"
+                href="/diagnostico"
                 style={{
                   fontSize: '14px',
                   color: 'var(--io-text-muted)',

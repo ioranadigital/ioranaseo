@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 import LandingClient from "./LandingClient";
 
 export const metadata: Metadata = {
@@ -6,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Multiplica tus clientes apareciendo donde ya te están buscando. Solicita tu análisis gratuito de SEO, Google y presencia digital sin compromiso.",
   robots: {
-    index: true,
+    index: false,
     follow: true,
   },
   openGraph: {
@@ -15,10 +16,10 @@ export const metadata: Metadata = {
     title: "Análisis Gratuito de Visibilidad Digital | IoranaSEO",
     description:
       "Multiplica tus clientes apareciendo donde ya te están buscando. Solicita tu análisis gratuito sin compromiso.",
-    url: "https://iorana.dev/diagnostico",
+    url: siteConfig.url("/diagnostico"),
   },
   alternates: {
-    canonical: "https://iorana.dev/diagnostico",
+    canonical: siteConfig.url("/diagnostico"),
   },
 };
 

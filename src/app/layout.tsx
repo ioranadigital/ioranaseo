@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  metadataBase: siteConfig.metadataBase,
   title: "IoranaSEO - Agencia de Marketing Digital",
   description:
     "Expertos en SEO, Google Ads, Facebook Ads y soluciones digitales. Posicionamiento de empresas en buscadores y redes sociales.",
@@ -26,14 +29,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://iorana.dev",
+    url: siteConfig.origin,
     siteName: "IoranaSEO",
     title: "IoranaSEO - Agencia de Marketing Digital",
     description:
       "Expertos en SEO, Google Ads, Facebook Ads y soluciones digitales.",
     images: [
       {
-        url: "https://iorana.dev/og-image.png",
+        url: siteConfig.url("/og-image.png"),
         width: 1200,
         height: 630,
         alt: "IoranaSEO - Agencia de Marketing Digital",
@@ -45,7 +48,7 @@ export const metadata: Metadata = {
     title: "IoranaSEO - Agencia de Marketing Digital",
     description:
       "Expertos en SEO, Google Ads, Facebook Ads y soluciones digitales.",
-    images: ["https://iorana.dev/og-image.png"],
+    images: [siteConfig.url("/og-image.png")],
     creator: "@iorana",
   },
   robots: {
@@ -64,10 +67,10 @@ export const metadata: Metadata = {
     yandex: "your-yandex-verification-code",
   },
   alternates: {
-    canonical: "https://iorana.dev",
+    canonical: siteConfig.origin,
     languages: {
-      es: "https://iorana.dev",
-      en: "https://iorana.dev/en",
+      es: siteConfig.origin,
+      en: siteConfig.url("/en"),
     },
   },
 };
@@ -122,8 +125,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "IoranaSEO",
-              url: "https://iorana.dev",
-              logo: "https://iorana.dev/logo.png",
+              url: siteConfig.origin,
+              logo: siteConfig.url("/logo.png"),
               description:
                 "Agencia de marketing digital especializada en SEO, Google Ads, Facebook Ads y soluciones digitales",
               sameAs: [
@@ -146,20 +149,23 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              url: "https://iorana.dev",
+              url: siteConfig.origin,
               name: "IoranaSEO",
               description:
                 "Agencia de marketing digital especializada en SEO y soluciones digitales",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://iorana.dev/search?q={search_term_string}",
+                target: siteConfig.url("/search?q={search_term_string}"),
                 "query-input": "required name=search_term_string",
               },
             }),
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }
