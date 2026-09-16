@@ -1,20 +1,20 @@
 "use client";
 import { useState } from "react";
-import LandingHeader from "@/app/Components/Landing/LandingHeader";
-import LandingHero from "@/app/Components/Landing/LandingHero";
-import LandingPainPoints from "@/app/Components/Landing/LandingPainPoints";
-import LandingServices from "@/app/Components/Landing/LandingServices";
+import LandingHeader from "./components/Landing/LandingHeader";
+import LandingHero from "./components/Landing/LandingHero";
+import LandingPainPoints from "./components/Landing/LandingPainPoints";
+import LandingServices from "./components/Landing/LandingServices";
 import LandingGoalSelector, {
   type LandingGoalId,
-} from "@/app/Components/Landing/LandingGoalSelector";
-import LandingMethodology from "@/app/Components/Landing/LandingMethodology";
-import LandingPricing from "@/app/Components/Landing/LandingPricing";
-import LandingTrust from "@/app/Components/Landing/LandingTrust";
-import LandingCTA from "@/app/Components/Landing/LandingCTA";
-import LandingLeadForm from "@/app/Components/Landing/LandingLeadForm";
-import LandingFaq from "@/app/Components/Landing/LandingFaq";
-import LandingFooter from "@/app/Components/Landing/LandingFooter";
-import { LANDING_COLORS } from "@/app/Components/Landing/landingTheme";
+} from "./components/Landing/LandingGoalSelector";
+import LandingMethodology from "./components/Landing/LandingMethodology";
+import LandingPricing from "./components/Landing/LandingPricing";
+import LandingTrust from "./components/Landing/LandingTrust";
+import LandingCTA from "./components/Landing/LandingCTA";
+import LandingLeadForm from "./components/Landing/LandingLeadForm";
+import LandingFaq from "./components/Landing/LandingFaq";
+import LandingFooter from "./components/Landing/LandingFooter";
+import { LANDING_COLORS } from "./components/Landing/landingTheme";
 
 export default function LandingClient() {
   const [selectedGoal, setSelectedGoal] = useState<LandingGoalId | null>(null);

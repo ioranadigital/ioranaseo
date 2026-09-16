@@ -120,6 +120,11 @@ const nextConfig = {
         destination: "/contacto",
         permanent: true,
       },
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 
