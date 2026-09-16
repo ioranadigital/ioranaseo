@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+pnpm-lock.backup.yaml
+
+# Next.js
+.next/
+out/
+dist/
+build/
+
+# Production
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.iml
+
+# Testing
+coverage/
+.nyc_output/
+
+# Vercel
+.vercel/
+
+# Local development
+.cache/
+
+# Misc
+.turbo/
+.eslintcache
+
+# Ioranaseo-old build artifacts (ignore these)
+Ioranaseo-old/node_modules/
+Ioranaseo-old/.next/
+Ioranaseo-old/out/
+Ioranaseo-old/.env.local
+Ioranaseo-old/.turbo/
+Ioranaseo-old/.vercel/
+Ioranaseo-old/coverage/
+
+# Ioranaseo-old source MUST NOT be ignored
+# Everything in snapshot source is needed
+# Only the build artifacts listed above are ignored
