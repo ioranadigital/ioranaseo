@@ -67,15 +67,26 @@ export default function TodoLoQueNecesitas() {
                   gap: '12px',
                 }}
               >
-                <CheckCircle2
-                  size={20}
-                  strokeWidth={2}
+                <div
                   style={{
-                    color: 'var(--io-action)',
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(244, 162, 124, 0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     flexShrink: 0,
-                    marginTop: '2px',
                   }}
-                />
+                >
+                  <CheckCircle2
+                    size={20}
+                    strokeWidth={2}
+                    style={{
+                      color: 'var(--io-action)',
+                    }}
+                  />
+                </div>
                 <span
                   style={{
                     fontSize: '15px',

@@ -34,7 +34,7 @@ export default function Hero() {
         paddingBottom: '60px',
         paddingLeft: '20px',
         paddingRight: '20px',
-        backgroundColor: 'var(--io-bg)',
+        background: 'linear-gradient(180deg, white 0%, rgba(244, 162, 124, 0.04) 100%)',
       }}
     >
       <div

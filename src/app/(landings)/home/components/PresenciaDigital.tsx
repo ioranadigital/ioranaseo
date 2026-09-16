@@ -128,19 +128,19 @@ export default function PresenciaDigital() {
                   </p>
                 </div>
 
-                {/* Arrow - Only between steps, more prominent */}
+                {/* Connector line - Secondary element */}
                 {index < steps.length - 1 && (
                   <div
                     className="presencia-arrow"
                     style={{
-                      fontSize: '32px',
-                      color: 'var(--io-accent)',
+                      fontSize: '24px',
+                      color: 'var(--io-action)',
                       flex: '0 0 auto',
                       display: 'flex',
                       alignItems: 'center',
                       marginTop: '24px',
-                      opacity: 0.8,
-                      fontWeight: 800,
+                      opacity: 0.35,
+                      fontWeight: 600,
                     }}
                   >
                     →
