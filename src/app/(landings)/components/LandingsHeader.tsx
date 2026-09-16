@@ -57,6 +57,33 @@ export default function LandingsHeader() {
         boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08)',
       }}
     >
+      {/*
+        Responsive visibility is handled with plain CSS media queries
+        instead of Tailwind's `hidden`/`md:flex` utilities: Tailwind is
+        not currently being compiled by PostCSS in this project (no
+        postcss.config registering @tailwindcss/postcss), so those
+        utility classes render as no-ops. Using real CSS here guarantees
+        the header behaves correctly regardless of that separate issue.
+      */}
+      <style>
+        {`
+          .landings-header__nav-desktop {
+            display: none;
+          }
+          .landings-header__hamburger {
+            display: flex;
+          }
+          @media (min-width: 1024px) {
+            .landings-header__nav-desktop {
+              display: flex;
+            }
+            .landings-header__hamburger {
+              display: none;
+            }
+          }
+        `}
+      </style>
+
       <div
         style={{
           maxWidth: '1280px',
@@ -86,14 +113,15 @@ export default function LandingsHeader() {
           IORANA SEO
         </Link>
 
-        {/* Desktop Nav - Solo visible en desktop */}
+        {/* Desktop Nav - visible only from 1024px */}
         <nav
+          className="landings-header__nav-desktop"
           style={{
             gap: '32px',
+            alignItems: 'center',
             marginLeft: 'auto',
             marginRight: 'auto',
           }}
-          className="hidden md:flex"
         >
           {navItems.map((item) => {
             const isActive =
@@ -109,6 +137,7 @@ export default function LandingsHeader() {
                   color: isActive ? 'var(--io-action)' : 'var(--io-text-muted)',
                   textDecoration: 'none',
                   transition: 'color 0.2s',
+                  whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = 'var(--io-action)';
@@ -125,7 +154,7 @@ export default function LandingsHeader() {
           })}
         </nav>
 
-        {/* CTA Button - Desktop */}
+        {/* CTA Button - always visible (all breakpoints) */}
         <Link
           href="#contacto"
           style={{
@@ -146,14 +175,14 @@ export default function LandingsHeader() {
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = 'var(--io-action)';
           }}
-          className="hidden sm:block"
         >
           Analizar mi proyecto
         </Link>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - visible below 1024px */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
+          className="landings-header__hamburger"
           style={{
             background: 'none',
             border: 'none',
@@ -162,15 +191,17 @@ export default function LandingsHeader() {
             color: 'var(--io-text)',
             padding: '8px',
             flexShrink: 0,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-          className="md:hidden"
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? '✕' : '☰'}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - only ever opened below 1024px (hamburger hidden above that) */}
       {mobileOpen && (
         <div
           style={{
@@ -181,7 +212,6 @@ export default function LandingsHeader() {
             backgroundColor: 'white',
             borderTop: '1px solid var(--io-border)',
           }}
-          className="md:hidden"
         >
           {navItems.map((item) => {
             const isActiveMobile =
