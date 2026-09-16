@@ -111,7 +111,7 @@ export default function OurMethod() {
               zIndex: 0,
               opacity: 0.25,
             }}
-            className="hidden lg:block"
+            className="method-connector-line"
           />
 
           {/* Connector arrows */}
@@ -127,7 +127,7 @@ export default function OurMethod() {
               zIndex: 1,
               opacity: 0.4,
             }}
-            className="hidden lg:flex"
+            className="method-connector-arrow"
           >
             ▶
           </div>
@@ -143,7 +143,7 @@ export default function OurMethod() {
               zIndex: 1,
               opacity: 0.4,
             }}
-            className="hidden lg:flex"
+            className="method-connector-arrow"
           >
             ▶
           </div>
@@ -159,7 +159,7 @@ export default function OurMethod() {
               zIndex: 1,
               opacity: 0.4,
             }}
-            className="hidden lg:flex"
+            className="method-connector-arrow"
           >
             ▶
           </div>
@@ -234,6 +234,22 @@ export default function OurMethod() {
       {/* Responsive */}
       <style>
         {`
+          /* Decorative desktop-only connectors: hidden by default, shown at 1024px+ */
+          .method-connector-line {
+            display: none;
+          }
+          .method-connector-arrow {
+            display: none;
+          }
+          @media (min-width: 1024px) {
+            .method-connector-line {
+              display: block;
+            }
+            .method-connector-arrow {
+              display: flex;
+            }
+          }
+
           @media (max-width: 1024px) {
             .method-section {
               padding: 60px 20px;

@@ -83,7 +83,7 @@ export default function ProcessSteps() {
               backgroundColor: 'var(--io-border)',
               zIndex: 0,
             }}
-            className="hidden md:block"
+            className="process-connector-line"
           />
 
           {/* Steps */}
@@ -149,6 +149,17 @@ export default function ProcessSteps() {
         {/* Mobile Layout */}
         <style>
           {`
+            /* Decorative desktop-only connector: hidden by default, shown at 1024px+
+               (normalized to the project's 1024px desktop breakpoint) */
+            .process-connector-line {
+              display: none;
+            }
+            @media (min-width: 1024px) {
+              .process-connector-line {
+                display: block;
+              }
+            }
+
             @media (max-width: 768px) {
               section > div > div:last-child {
                 flex-direction: column;

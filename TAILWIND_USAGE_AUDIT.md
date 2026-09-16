@@ -2,7 +2,16 @@
 
 **Date:** 2026-09-17
 **Type:** Investigation only — no code changes made
-**Status:** Complete
+**Status:** RESOLVED / REMOVED — see [TAILWIND_REMOVAL_REPORT.md](./TAILWIND_REMOVAL_REPORT.md)
+
+> **Update (2026-09-17):** Findings below were approved and acted on.
+> Tailwind has since been fully removed from the project — the 7 inert
+> utilities documented here were rewritten as explicit CSS, the `@tailwind`
+> directives were removed from `globals.css`, and the `tailwindcss` /
+> `@tailwindcss/postcss` packages were uninstalled. This document is kept
+> as-is below for historical record of the investigation; see
+> `TAILWIND_REMOVAL_REPORT.md` for what was actually changed and how it was
+> validated.
 
 ---
 

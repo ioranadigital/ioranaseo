@@ -97,7 +97,7 @@ export default function NuestroSistema() {
               zIndex: 0,
               opacity: 0.2,
             }}
-            className="hidden lg:block"
+            className="sistema-connector-line"
           />
 
           {pasos.map((paso, index) => {
@@ -220,7 +220,7 @@ export default function NuestroSistema() {
                       opacity: 0.3,
                       zIndex: 2,
                     }}
-                    className="hidden lg:block"
+                    className="sistema-connector-arrow"
                   >
                     →
                   </div>
@@ -234,11 +234,23 @@ export default function NuestroSistema() {
       {/* Responsive styles */}
       <style>
         {`
+          /* Decorative desktop-only connectors: hidden by default, shown at 1024px+ */
+          .sistema-connector-line,
+          .sistema-connector-arrow {
+            display: none;
+          }
+
           /* Desktop: 4 columns */
           @media (min-width: 1024px) {
             .sistema-grid {
               grid-template-columns: repeat(4, 1fr) !important;
               gap: 24px !important;
+            }
+            .sistema-connector-line {
+              display: block;
+            }
+            .sistema-connector-arrow {
+              display: block;
             }
           }
 
