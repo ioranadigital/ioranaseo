@@ -1,25 +1,32 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function LandingsHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isHomeVariant, setIsHomeVariant] = useState(false);
-  const [isSolucionesPage, setIsSolucionesPage] = useState(false);
-  const [isComoTrabajamosPage, setIsComoTrabajamosPage] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname() ?? '';
+
+  const isHomePage = pathname === '/' || pathname.startsWith('/home');
 
   useEffect(() => {
-    const pathname = window.location.pathname;
-    setIsHomeVariant(
-      pathname === '/' ||
-        pathname.startsWith('/home') ||
-        pathname.startsWith('/soluciones') ||
-        pathname.startsWith('/como-trabajamos')
-    );
-    setIsSolucionesPage(pathname.startsWith('/soluciones'));
-    setIsComoTrabajamosPage(pathname.startsWith('/como-trabajamos'));
-  }, []);
+    if (!isHomePage) return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHomePage]);
+
+  // En HOME el navbar es semitransparente (blanco 70% + blur) sobre el fondo del Hero; el borde aparece al hacer scroll o abrir el menú.
+  const showBorder = !isHomePage || scrolled || mobileOpen;
+
+  const isSolucionesPage = pathname.startsWith('/soluciones');
+  const isComoTrabajamosPage = pathname.startsWith('/como-trabajamos');
+  const isHomeVariant =
+    pathname === '/' || pathname.startsWith('/home') || isSolucionesPage || isComoTrabajamosPage;
 
   // MVP de lanzamiento: Recursos y Casos se retiran temporalmente de la
   // navegación pública (no hay contenido editorial/casos reales todavía).
@@ -49,12 +56,17 @@ export default function LandingsHeader() {
   return (
     <header
       style={{
-        position: 'sticky',
+        position: isHomePage ? 'fixed' : 'sticky',
         top: 0,
-        backgroundColor: 'white',
-        borderBottom: '1px solid var(--io-border)',
+        ...(isHomePage ? { left: 0, right: 0 } : {}),
+        backgroundColor: isHomePage ? 'rgba(255, 255, 255, 0.7)' : 'white',
+        ...(isHomePage
+          ? { backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }
+          : {}),
+        borderBottom: showBorder ? '1px solid var(--io-border)' : '1px solid transparent',
         zIndex: 1000,
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08)',
+        boxShadow: isHomePage ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.08)',
+        transition: 'background-color 0.3s, border-color 0.3s',
       }}
     >
       {/*
@@ -67,11 +79,28 @@ export default function LandingsHeader() {
       */}
       <style>
         {`
+          :root {
+            --io-header-h: 64px;
+          }
+          @media (max-width: 1023px) {
+            :root {
+              --io-header-h: 71px;
+            }
+          }
+          @media (max-width: 430px) {
+            :root {
+              --io-header-h: 67px;
+            }
+          }
           .landings-header__nav-desktop {
             display: none;
           }
           .landings-header__hamburger {
             display: flex;
+          }
+          .landings-header__logo-img {
+            height: 32px;
+            width: auto;
           }
           @media (min-width: 1024px) {
             .landings-header__nav-desktop {
@@ -81,10 +110,34 @@ export default function LandingsHeader() {
               display: none;
             }
           }
+          @media (max-width: 1023px) {
+            .landings-header__logo-img {
+              height: 28px;
+            }
+            .landings-header__cta {
+              margin-left: auto;
+            }
+          }
+          @media (max-width: 430px) {
+            .landings-header__inner {
+              padding: 12px 16px !important;
+              gap: 8px !important;
+            }
+            .landings-header__logo-img {
+              height: 26px;
+            }
+            .landings-header__cta {
+              padding: 8px 14px !important;
+            }
+            .landings-header__hamburger {
+              padding: 6px !important;
+            }
+          }
         `}
       </style>
 
       <div
+        className="landings-header__inner"
         style={{
           maxWidth: '1280px',
           margin: '0 auto',
@@ -95,22 +148,25 @@ export default function LandingsHeader() {
           gap: '20px',
         }}
       >
-        {/* Logo - Wordmark */}
+        {/* Logo - Official IORANA SEO */}
         <Link
           href="/"
           style={{
-            fontSize: '16px',
-            fontWeight: 800,
-            color: 'var(--io-text)',
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
             flexShrink: 0,
-            letterSpacing: '-0.01em',
           }}
+          title="IORANA SEO"
         >
-          IORANA SEO
+          <Image
+            className="landings-header__logo-img"
+            src="/assets/brand/iorana-seo-logo.png"
+            alt="IORANA SEO"
+            width={1000}
+            height={150}
+            priority
+          />
         </Link>
 
         {/* Desktop Nav - visible only from 1024px */}
@@ -156,7 +212,8 @@ export default function LandingsHeader() {
 
         {/* CTA Button - always visible (all breakpoints) */}
         <Link
-          href="#contacto"
+          href="/contacto/"
+          className="landings-header__cta"
           style={{
             padding: '10px 20px',
             backgroundColor: 'var(--io-action)',
@@ -176,7 +233,7 @@ export default function LandingsHeader() {
             e.currentTarget.style.backgroundColor = 'var(--io-action)';
           }}
         >
-          Analizar mi proyecto
+          Contacto
         </Link>
 
         {/* Mobile Menu Button - visible below 1024px */}
@@ -235,7 +292,7 @@ export default function LandingsHeader() {
             );
           })}
           <Link
-            href="#contacto"
+            href="/contacto/"
             style={{
               padding: '10px 16px',
               backgroundColor: 'var(--io-action)',
@@ -248,7 +305,7 @@ export default function LandingsHeader() {
             }}
             onClick={() => setMobileOpen(false)}
           >
-            Analizar mi proyecto
+            Contacto
           </Link>
         </div>
       )}

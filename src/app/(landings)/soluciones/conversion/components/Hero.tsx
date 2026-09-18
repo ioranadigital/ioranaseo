@@ -118,7 +118,7 @@ export default function Hero() {
               e.currentTarget.style.backgroundColor = 'var(--io-action)';
             }}
           >
-            Analizar mi proyecto →
+            Analizar mi proyecto
           </Link>
 
           {/* Beneficios - 4 indicadores */}

@@ -125,7 +125,7 @@ export default function Pricing() {
                     left: '50%',
                     transform: 'translateX(-50%)',
                     backgroundColor: 'var(--io-accent)',
-                    color: 'white',
+                    color: 'var(--io-text)',
                     padding: '4px 12px',
                     borderRadius: '20px',
                     fontSize: '12px',
@@ -241,14 +241,14 @@ export default function Pricing() {
                   transition: 'background-color 0.2s',
                 }}
                 onMouseEnter={(e) => {
-                  if (plan.recommended) {
-                    e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
-                  }
+                  e.currentTarget.style.backgroundColor = plan.recommended
+                    ? 'var(--io-action-hover)'
+                    : 'var(--io-border)';
                 }}
                 onMouseLeave={(e) => {
-                  if (plan.recommended) {
-                    e.currentTarget.style.backgroundColor = 'var(--io-action)';
-                  }
+                  e.currentTarget.style.backgroundColor = plan.recommended
+                    ? 'var(--io-action)'
+                    : 'var(--io-bg-soft)';
                 }}
               >
                 {plan.cta}

@@ -116,11 +116,7 @@ const nextConfig = {
         destination: "/soluciones",
         permanent: true,
       },
-      {
-        source: "/contact",
-        destination: "/diagnostico",
-        permanent: true,
-      },
+      // /contact and /contacto are now real routes, not redirects
 
       // Spanish legacy redirects
       {
@@ -131,11 +127,6 @@ const nextConfig = {
       {
         source: "/servicios",
         destination: "/soluciones",
-        permanent: true,
-      },
-      {
-        source: "/contacto",
-        destination: "/diagnostico",
         permanent: true,
       },
       {

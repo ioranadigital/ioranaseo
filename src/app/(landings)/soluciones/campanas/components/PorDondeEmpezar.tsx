@@ -9,7 +9,7 @@ export default function PorDondeEmpezar() {
       id: 'campanas',
       titulo: 'Necesito lanzar campañas',
       copy: 'Quiero poner en marcha campañas de Google Ads o Meta Ads desde cero.',
-      cta: 'Analizar mi proyecto →',
+      cta: 'Analizar mi proyecto',
       href: '#contacto',
       icon: Rocket,
       badge: 'RECOMENDADA',

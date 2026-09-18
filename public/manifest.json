@@ -1,0 +1,16 @@
+{
+  "name": "IoranaSEO - Agencia de Marketing Digital",
+  "short_name": "IoranaSEO",
+  "description": "Expertos en SEO, Google Ads, Facebook Ads y soluciones digitales.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4D32A5",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

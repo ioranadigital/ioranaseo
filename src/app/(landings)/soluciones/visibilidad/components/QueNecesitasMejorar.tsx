@@ -10,7 +10,7 @@ export default function QueNecesitasMejorar() {
       icon: Search,
       titulo: 'Mejorar mi posicionamiento',
       copy: 'Quiero aparecer mejor para las búsquedas importantes de mi negocio.',
-      cta: 'Analizar mi proyecto →',
+      cta: 'Analizar mi proyecto',
       href: '#contacto',
       badge: 'RECOMENDADA',
       featured: true,

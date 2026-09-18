@@ -50,6 +50,11 @@
 
 /* ===== HERO ===== */
 
+/* Tablet: real CSS reflow (2x2 grid), no transform:scale. Absolute "orbit"
+   nodes become relative grid items — their own internal absolutely-positioned
+   children (labels) keep anchoring correctly since they stay position:relative,
+   not static. Connectors (SVG orbit lines) are hidden — a 2x2 grid doesn't
+   support that geometry meaningfully, so we simplify instead of contorting it. */
 @media (max-width: 1024px) {
   .soluciones-hero-section {
     padding-top: 48px !important;
@@ -58,6 +63,34 @@
 
   .soluciones-hero-h1 {
     font-size: clamp(28px, 6vw, 40px) !important;
+  }
+
+  .soluciones-hero-visual {
+    min-height: auto !important;
+    padding: 36px 24px !important;
+  }
+
+  .soluciones-hero-visual-inner {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-areas: "web visibilidad" "campanas conversion" !important;
+    gap: 36px 20px !important;
+    align-items: center !important;
+    justify-items: center !important;
+  }
+
+  .soluciones-hero-connectors {
+    display: none !important;
+  }
+
+  .sol-hero-node {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
   }
 }
 
@@ -70,16 +103,13 @@
   }
 
   .soluciones-hero-visual {
-    min-height: 280px !important;
+    min-height: auto !important;
     margin-top: 40px !important;
-  }
-
-  .soluciones-hero-visual-inner {
-    transform: scale(0.85);
-    transform-origin: center;
+    padding: 32px 20px !important;
   }
 }
 
+/* Mobile: vertical stack — full labels, no shrinking, no scale(). */
 @media (max-width: 430px) {
   .soluciones-hero-section {
     padding-top: 32px !important;
@@ -94,14 +124,15 @@
   }
 
   .soluciones-hero-visual {
-    min-height: 240px !important;
+    min-height: auto !important;
     margin-top: 32px !important;
-    padding: 24px 16px !important;
+    padding: 28px 16px !important;
   }
 
   .soluciones-hero-visual-inner {
-    transform: scale(0.68);
-    transform-origin: center;
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "web" "visibilidad" "campanas" "conversion" !important;
+    gap: 28px !important;
   }
 }
 
@@ -113,15 +144,6 @@
 
   .soluciones-hero-h1 {
     font-size: 26px !important;
-  }
-
-  .soluciones-hero-visual {
-    min-height: 220px !important;
-  }
-
-  .soluciones-hero-visual-inner {
-    transform: scale(0.62);
-    transform-origin: center;
   }
 }
 

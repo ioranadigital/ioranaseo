@@ -21,7 +21,7 @@ export default function PorDondeEmpezar() {
       titulo: 'Quiero conseguir más clientes',
       texto: 'Para conectar visibilidad, campañas y conversión en un mismo sistema.',
       bullets: ['SEO', 'Campañas', 'Landing pages', 'Analytics', 'CRO'],
-      cta: 'Analizar mi proyecto →',
+      cta: 'Analizar mi proyecto',
       href: '#contacto',
       icon: Users,
       badge: 'RECOMENDADA',

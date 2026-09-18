@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Monitor, Search, Megaphone, Target, HelpCircle, ArrowRight } from 'lucide-react';
+import { Monitor, Search, Megaphone, Target, HelpCircle } from 'lucide-react';
 
 export default function Diagnostico() {
   const situaciones = [
@@ -192,7 +192,6 @@ export default function Diagnostico() {
             }}
           >
             Analizar mi proyecto
-            <ArrowRight size={16} strokeWidth={2.5} />
           </Link>
         </div>
       </div>

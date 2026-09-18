@@ -117,7 +117,7 @@ export default function Hero() {
               e.currentTarget.style.backgroundColor = 'var(--io-action)';
             }}
           >
-            Analizar mi proyecto →
+            Analizar mi proyecto
           </Link>
 
           {/* Beneficios - 4 indicadores */}
@@ -192,7 +192,11 @@ export default function Hero() {
             alignItems: 'center',
             justifyContent: 'center',
             minHeight: '420px',
-            backgroundColor: 'white',
+            background: `
+              radial-gradient(circle at 20% 15%, rgba(51,111,230,0.06) 0%, rgba(51,111,230,0) 40%),
+              radial-gradient(circle at 85% 85%, rgba(244,162,124,0.07) 0%, rgba(244,162,124,0) 40%),
+              white
+            `,
             borderRadius: 'var(--io-radius-lg)',
             border: '1px solid var(--io-border)',
             padding: '40px 30px',
@@ -201,6 +205,26 @@ export default function Hero() {
             overflow: 'hidden',
           }}
         >
+          {/* Conectores muy sutiles */}
+          <svg
+            className="visibilidad-hero-connectors"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 1,
+              pointerEvents: 'none',
+            }}
+          >
+            {/* Línea sutil hacia Maps */}
+            <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="var(--io-border)" strokeWidth="1" opacity="0.4" strokeDasharray="3,3" />
+            {/* Línea sutil hacia móvil */}
+            <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="var(--io-border)" strokeWidth="1" opacity="0.4" strokeDasharray="3,3" />
+            {/* Pequeño punto peach en la conexión hacia Maps */}
+            <circle cx="35%" cy="37%" r="2.5" fill="var(--io-accent)" opacity="0.8" />
+          </svg>
+
           <div
             className="visibilidad-hero-visual-inner"
             style={{ position: 'absolute', inset: 0 }}
@@ -256,7 +280,7 @@ export default function Hero() {
 
             {/* Badge: Google Maps - arriba izquierda */}
             <div
-              className="visibilidad-hero-badge"
+              className="visibilidad-hero-badge visibilidad-hero-badge-maps"
               style={{
                 position: 'absolute',
                 top: '14%',
@@ -281,7 +305,7 @@ export default function Hero() {
 
             {/* Badge: móvil - arriba derecha */}
             <div
-              className="visibilidad-hero-badge"
+              className="visibilidad-hero-badge visibilidad-hero-badge-mobile"
               style={{
                 position: 'absolute',
                 top: '12%',
@@ -304,7 +328,7 @@ export default function Hero() {
 
             {/* Badge: contenido/web - abajo */}
             <div
-              className="visibilidad-hero-badge"
+              className="visibilidad-hero-badge visibilidad-hero-badge-content"
               style={{
                 position: 'absolute',
                 bottom: '10%',

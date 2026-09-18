@@ -1,6 +1,11 @@
 'use client';
 
-import { Monitor, Search, Megaphone, Target, MapPin, TrendingUp, Users } from 'lucide-react';
+import Image from 'next/image';
+import { Monitor, Search, Megaphone, Target } from 'lucide-react';
+
+// Generic small-business interior photo used purely as a demonstrative "screen" inside
+// the laptop/phone mockup — not a real Iorana SEO client, no brand/logo involved.
+const MOCKUP_PHOTO_SRC = '/assets/img/home/hero-small-business.webp';
 
 export default function Hero() {
   const capabilities = [
@@ -30,11 +35,15 @@ export default function Hero() {
     <section
       className="hero-section"
       style={{
-        paddingTop: '60px',
+        paddingTop: 'calc(60px + var(--io-header-h, 64px))',
         paddingBottom: '60px',
         paddingLeft: '20px',
         paddingRight: '20px',
-        background: 'linear-gradient(180deg, white 0%, rgba(244, 162, 124, 0.04) 100%)',
+        backgroundColor: '#F9FBFF',
+        backgroundImage: "url('/assets/img/home/hero-bg.webp')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <div
@@ -43,14 +52,16 @@ export default function Hero() {
           maxWidth: '1280px',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: '1.2fr 0.8fr',
-          gap: '50px',
+          gridTemplateColumns: '0.85fr 1fr',
+          gridTemplateAreas: '"copy visual" "caps visual"',
+          columnGap: '50px',
+          rowGap: '40px',
           alignItems: 'center',
           width: '100%',
         }}
       >
-        {/* Left: Content */}
-        <div>
+        {/* Copy: eyebrow, H1, description, CTA */}
+        <div className="hero-copy" style={{ gridArea: 'copy' }}>
           {/* Eyebrow */}
           <div
             className="hero-eyebrow"
@@ -105,8 +116,7 @@ export default function Hero() {
             className="hero-cta"
             style={{
               padding: '14px 32px',
-              backgroundColor: 'var(--io-action)',
-              color: 'white',
+              color: 'var(--io-text)',
               fontSize: '16px',
               fontWeight: 600,
               border: 'none',
@@ -118,137 +128,75 @@ export default function Hero() {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action)';
-            }}
           >
             Analizar mi proyecto
           </button>
-
-          {/* Capabilities - 4 items with icons */}
-          <div
-            className="hero-capabilities"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '24px',
-              marginTop: '64px',
-              paddingTop: '48px',
-              borderTop: '1px solid var(--io-border)',
-            }}
-          >
-            {capabilities.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.label}
-                  style={{
-                    textAlign: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
-                  {/* Icon circle - More prominent */}
-                  <div
-                    style={{
-                      width: '64px',
-                      height: '64px',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--io-bg-soft)',
-                      border: '2.5px solid var(--io-action)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginBottom: '16px',
-                      color: 'var(--io-action)',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Icon size={28} strokeWidth={1.5} />
-                  </div>
-
-                  {/* Label - Stronger hierarchy */}
-                  <div
-                    style={{
-                      fontSize: '15px',
-                      fontWeight: 800,
-                      color: 'var(--io-text)',
-                      marginBottom: '8px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.04em',
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {item.label}
-                  </div>
-
-                  {/* Description - Improved legibility */}
-                  <div
-                    style={{
-                      fontSize: '13px',
-                      color: 'var(--io-text-muted)',
-                      lineHeight: 1.6,
-                      fontWeight: 500,
-                    }}
-                  >
-                    {item.desc}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
 
-        {/* Right: Visual Storytelling */}
+        {/* Visual: Visual Storytelling */}
         <div
           className="hero-visual"
           aria-hidden="true"
           style={{
+            gridArea: 'visual',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: '420px',
-            backgroundColor: 'white',
-            borderRadius: 'var(--io-radius-lg)',
-            border: '1px solid var(--io-border)',
-            padding: '40px 30px',
+            minHeight: '490px',
+            maxWidth: '650px',
+            backgroundColor: 'transparent',
+            border: 'none',
+            padding: '30px 20px',
             position: 'relative',
             width: '100%',
-            overflow: 'hidden',
           }}
         >
           <style>
             {`
+              /* Hero CTA: peach accent + dark text (white on peach fails contrast). Hover = slightly deeper peach. */
+              .hero-cta {
+                background-color: var(--io-accent);
+              }
+              .hero-cta:hover {
+                background-color: #F2955F;
+              }
+              @media (min-width: 1024px) {
+                .hero-cta {
+                  margin-left: 24px;
+                }
+              }
+
+              /* Tablet/mobile: force explicit row order copy -> visual -> caps (grid areas, not DOM order) */
               @media (max-width: 1023px) {
                 .hero-grid {
+                  display: grid !important;
                   grid-template-columns: 1fr !important;
-                  gap: 40px !important;
+                  grid-template-areas: "copy" "visual" "caps" !important;
+                  column-gap: 0 !important;
+                  row-gap: 40px !important;
                 }
               }
 
               @media (max-width: 768px) {
                 .hero-grid {
-                  grid-template-columns: 1fr !important;
-                  gap: 32px !important;
+                  row-gap: 32px !important;
                 }
                 .hero-capabilities {
                   grid-template-columns: repeat(2, 1fr) !important;
                   gap: 16px !important;
-                  margin-top: 40px !important;
                 }
                 .hero-visual {
-                  min-height: 300px !important;
+                  min-height: 310px !important;
                 }
               }
 
               @media (max-width: 430px) {
                 .hero-section {
-                  padding-top: 40px !important;
+                  padding-top: calc(40px + var(--io-header-h, 67px)) !important;
                   padding-bottom: 40px !important;
+                }
+                .hero-grid {
+                  row-gap: 24px !important;
                 }
                 .hero-h1 {
                   font-size: 28px !important;
@@ -261,13 +209,12 @@ export default function Hero() {
                 .hero-capabilities {
                   grid-template-columns: repeat(2, 1fr) !important;
                   gap: 12px !important;
-                  margin-top: 32px !important;
                   padding-top: 32px !important;
                   border-top: 1px solid var(--io-border);
                 }
                 .hero-visual {
                   min-height: 280px !important;
-                  padding: 20px 15px !important;
+                  padding: 16px 15px !important;
                 }
               }
 
@@ -279,6 +226,13 @@ export default function Hero() {
                 }
               }
 
+              /* Campaign card overhangs the laptop's top-right corner further only where the column has room */
+              @media (min-width: 1280px) {
+                .hero-card-campaign {
+                  right: -60px !important;
+                }
+              }
+
               /* Tablet/mobile: drop the measurement card, keep Maps + Campaign + mockup */
               @media (max-width: 1023px) {
                 .hero-card-measurement {
@@ -286,106 +240,133 @@ export default function Hero() {
                 }
               }
 
-              /* 768px: compact mockup + 2 cards, smaller mobile phone */
+              /* 768px: compact laptop+phone composition, smaller phone, nav hidden for airiness */
               @media (max-width: 768px) {
                 .hero-mockup-desktop {
-                  width: 140px !important;
-                  height: 165px !important;
+                  width: 206px !important;
+                  height: 157px !important;
+                }
+                .hero-laptop-screen {
+                  width: 190px !important;
+                  height: 150px !important;
+                  left: 8px !important;
+                  padding: 10px !important;
+                  gap: 6px !important;
+                  border-radius: 10px 10px 3px 3px !important;
+                }
+                .hero-laptop-base {
+                  width: 206px !important;
+                  height: 7px !important;
+                  top: 148px !important;
+                }
+                .hero-mockup-title {
+                  font-size: 12px !important;
+                  line-height: 1.15 !important;
+                }
+                .hero-mockup-copy {
+                  display: none !important;
                 }
                 .hero-mockup-mobile {
-                  width: 58px !important;
-                  height: 84px !important;
+                  width: 76px !important;
+                  height: 132px !important;
+                  right: -6px !important;
+                  bottom: -14px !important;
+                  border-radius: 16px !important;
+                  padding: 10px 7px !important;
+                  gap: 5px !important;
+                }
+                .hero-mockup-mobile-title {
+                  font-size: 8px !important;
                 }
                 .hero-card-maps,
                 .hero-card-campaign {
-                  width: 78px !important;
-                  height: 64px !important;
-                  padding: 8px !important;
-                  gap: 4px !important;
+                  width: 92px !important;
+                  height: 92px !important;
+                  padding: 9px !important;
+                  gap: 6px !important;
                 }
-                .hero-card-icon {
-                  width: 22px !important;
-                  height: 22px !important;
+                .hero-card-campaign {
+                  top: -64px !important;
+                  right: -20px !important;
                 }
                 .hero-card-text {
-                  font-size: 10px !important;
-                  line-height: 1.25 !important;
+                  font-size: 12px !important;
+                  line-height: 1.3 !important;
                 }
               }
 
-              /* 375-430px: tightest composition, mobile phone dropped for zero-overflow safety */
+              /* 375-430px: tightest composition — phone dropped, microcard visual strips dropped for max clarity */
               @media (max-width: 430px) {
                 .hero-mockup-desktop {
-                  width: 110px !important;
-                  height: 128px !important;
+                  width: 176px !important;
+                  height: 129px !important;
+                }
+                .hero-laptop-screen {
+                  width: 164px !important;
+                  height: 122px !important;
+                  left: 6px !important;
+                  padding: 9px !important;
+                  gap: 5px !important;
+                  border-radius: 9px 9px 3px 3px !important;
+                }
+                .hero-laptop-base {
+                  width: 176px !important;
+                  height: 7px !important;
+                  top: 120px !important;
+                }
+                .hero-mockup-title {
+                  font-size: 11px !important;
+                  line-height: 1.15 !important;
                 }
                 .hero-mockup-mobile {
                   display: none !important;
                 }
+                .hero-card-visual {
+                  display: none !important;
+                }
+                .hero-card-maps {
+                  top: 9% !important;
+                  left: 4% !important;
+                }
+                .hero-card-campaign {
+                  top: -36px !important;
+                  right: -14px !important;
+                }
                 .hero-card-maps,
                 .hero-card-campaign {
-                  width: 68px !important;
-                  height: 56px !important;
-                  padding: 6px !important;
-                  gap: 3px !important;
-                }
-                .hero-card-icon {
-                  width: 18px !important;
-                  height: 18px !important;
+                  width: 80px !important;
+                  height: 48px !important;
+                  padding: 7px !important;
                 }
                 .hero-card-text {
-                  font-size: 9px !important;
-                  line-height: 1.2 !important;
+                  font-size: 11px !important;
+                  line-height: 1.25 !important;
                 }
               }
             `}
           </style>
 
-          {/* Decorative background — halos + dots (no information, purely textural) */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '-50px',
-              left: '-50px',
-              width: '220px',
-              height: '220px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(59,130,246,0.07) 0%, rgba(59,130,246,0) 70%)',
-              zIndex: 0,
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-60px',
-              right: '-60px',
-              width: '240px',
-              height: '240px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(244,162,124,0.09) 0%, rgba(244,162,124,0) 70%)',
-              zIndex: 0,
-            }}
-          />
+          {/* Decorative dots — purely textural, positions stay within 0-100% so they never create scrollable overflow */}
           <div style={{ position: 'absolute', top: '34%', left: '9%', width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--io-border)', zIndex: 1 }} />
           <div style={{ position: 'absolute', bottom: '30%', right: '10%', width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--io-accent)', opacity: 0.5, zIndex: 1 }} />
 
-          {/* Visual note — floating annotation above the composition (desktop only) */}
+          {/* Visual note — floating brand annotation, top-right of the stage (desktop only) */}
           <div
             className="hero-visual-note"
             style={{
               position: 'absolute',
-              top: '2%',
-              left: '50%',
-              transform: 'translateX(-50%) rotate(-2deg)',
-              textAlign: 'center',
+              top: '-54px',
+              right: 'calc(2% + 40px)',
+              textAlign: 'right',
+              transform: 'rotate(-2deg)',
               zIndex: 15,
             }}
           >
             <div
               style={{
-                fontSize: '13px',
+                fontSize: '18px',
                 fontStyle: 'italic',
-                fontWeight: 700,
+                fontWeight: 800,
                 color: 'var(--io-text)',
                 lineHeight: 1.35,
                 whiteSpace: 'nowrap',
@@ -397,11 +378,11 @@ export default function Hero() {
             </div>
             <div
               style={{
-                width: '70%',
-                height: '2px',
-                backgroundColor: '#F4A27C',
+                width: '75%',
+                height: '4px',
+                backgroundColor: 'var(--io-accent)',
                 borderRadius: '2px',
-                margin: '4px auto 0',
+                margin: '7px 0 0 auto',
               }}
             />
           </div>
@@ -411,142 +392,55 @@ export default function Hero() {
             className="hero-card hero-card-maps"
             style={{
               position: 'absolute',
-              top: '12%',
-              left: '3%',
-              width: '98px',
-              height: '80px',
+              top: '10%',
+              left: '0%',
+              width: '132px',
+              height: '128px',
               backgroundColor: 'white',
               border: '1px solid var(--io-border)',
               borderRadius: 'var(--io-radius-md)',
               boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
-              padding: '10px',
+              padding: '12px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '6px',
+              gap: '8px',
               zIndex: 12,
             }}
           >
-            <div
-              className="hero-card-icon"
-              style={{
-                width: '26px',
-                height: '26px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--io-bg-soft)',
-                color: 'var(--io-action)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <MapPin size={14} strokeWidth={2} />
-            </div>
-            <div className="hero-card-text" style={{ fontSize: '11px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
+            <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
               Te encuentran
               <br />
               en tu zona
             </div>
-          </div>
-
-          {/* Campaign card */}
-          <div
-            className="hero-card hero-card-campaign"
-            style={{
-              position: 'absolute',
-              top: '6%',
-              right: '4%',
-              width: '102px',
-              height: '84px',
-              backgroundColor: 'var(--io-action)',
-              borderRadius: 'var(--io-radius-md)',
-              boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
-              padding: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '6px',
-              zIndex: 12,
-            }}
-          >
+            {/* Mini map preview — abstract streets + pin */}
             <div
-              className="hero-card-icon"
+              className="hero-card-visual"
               style={{
-                width: '26px',
-                height: '26px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(255,255,255,0.2)',
-                color: 'white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <Megaphone size={14} strokeWidth={2} />
-            </div>
-            <div className="hero-card-text" style={{ fontSize: '11px', fontWeight: 700, color: 'white', lineHeight: 1.3 }}>
-              Genera demanda
-              <br />
-              cualificada
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-end', gap: '3px', marginTop: 'auto' }}>
-              <div style={{ width: '4px', height: '8px', backgroundColor: 'rgba(255,255,255,0.5)', borderRadius: '1px' }} />
-              <div style={{ width: '4px', height: '13px', backgroundColor: 'rgba(255,255,255,0.75)', borderRadius: '1px' }} />
-              <div style={{ width: '4px', height: '10px', backgroundColor: 'rgba(255,255,255,0.6)', borderRadius: '1px' }} />
-            </div>
-          </div>
-
-          {/* Measurement card — hidden below 1024px */}
-          <div
-            className="hero-card hero-card-measurement"
-            style={{
-              position: 'absolute',
-              bottom: '4%',
-              right: '2%',
-              width: '96px',
-              height: '80px',
-              backgroundColor: 'white',
-              border: '1px solid var(--io-border)',
-              borderRadius: 'var(--io-radius-md)',
-              boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
-              padding: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '4px',
-              zIndex: 12,
-            }}
-          >
-            <div
-              className="hero-card-icon"
-              style={{
-                width: '26px',
-                height: '26px',
-                borderRadius: '50%',
+                flex: 1,
+                minHeight: 0,
+                position: 'relative',
+                borderRadius: '6px',
                 backgroundColor: 'var(--io-bg-soft)',
-                color: 'var(--io-action)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
+                overflow: 'hidden',
               }}
             >
-              <TrendingUp size={14} strokeWidth={2} />
-            </div>
-            <div className="hero-card-text" style={{ fontSize: '11px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
-              Datos para
-              <br />
-              mejorar
-            </div>
-            <svg viewBox="0 0 60 20" style={{ width: '100%', height: '16px', marginTop: 'auto' }}>
-              <polyline
-                points="0,17 15,11 30,13 45,5 60,3"
-                fill="none"
-                stroke="var(--io-action)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <svg viewBox="0 0 100 40" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
+                <path d="M0,30 Q25,10 50,25 T100,15" fill="none" stroke="var(--io-border)" strokeWidth="2" />
+                <path d="M0,8 Q30,26 60,10 T100,28" fill="none" stroke="var(--io-border)" strokeWidth="1.5" opacity="0.6" />
+              </svg>
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '36%',
+                  left: '54%',
+                  width: '9px',
+                  height: '9px',
+                  borderRadius: '50% 50% 50% 0',
+                  backgroundColor: 'var(--io-action)',
+                  transform: 'rotate(-45deg)',
+                }}
               />
-            </svg>
+            </div>
           </div>
 
           {/* Opportunity card — desktop only (1280px+) */}
@@ -554,106 +448,384 @@ export default function Hero() {
             className="hero-card hero-card-opportunity"
             style={{
               position: 'absolute',
-              bottom: '16%',
-              left: '3%',
-              width: '92px',
-              height: '72px',
+              bottom: '14%',
+              left: '1%',
+              width: '128px',
+              height: '116px',
               backgroundColor: 'var(--io-bg-soft)',
               border: '1px solid var(--io-border)',
               borderRadius: 'var(--io-radius-md)',
               boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
-              padding: '10px',
+              padding: '12px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '6px',
+              gap: '8px',
               zIndex: 12,
             }}
           >
-            <div
-              className="hero-card-icon"
-              style={{
-                width: '24px',
-                height: '24px',
-                borderRadius: '50%',
-                backgroundColor: 'white',
-                color: 'var(--io-action)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <Users size={13} strokeWidth={2} />
-            </div>
-            <div className="hero-card-text" style={{ fontSize: '11px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
+            <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
               Más
               <br />
               oportunidades
             </div>
+            {/* Mini interface preview — result-style rows */}
+            <div
+              className="hero-card-visual"
+              style={{
+                flex: 1,
+                minHeight: 0,
+                borderRadius: '6px',
+                backgroundColor: 'white',
+                padding: '6px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '5px',
+                justifyContent: 'center',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#22c55e', flexShrink: 0 }} />
+                <div style={{ height: '4px', width: '60%', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
+              </div>
+              <div style={{ height: '4px', width: '40%', backgroundColor: 'var(--io-border)', borderRadius: '2px', marginLeft: '9px' }} />
+            </div>
           </div>
 
-          {/* Main device mockup — protagonist: web + mobile companion */}
+          {/* Main device mockup — laptop + phone, showing the same coherent mini site */}
           <div
             className="hero-mockup-desktop"
             style={{
               position: 'absolute',
-              left: '50%',
-              top: '47%',
+              left: '54%',
+              top: '48%',
               transform: 'translate(-50%, -50%)',
-              width: '200px',
-              height: '235px',
-              backgroundColor: 'white',
-              border: '3px solid var(--io-text)',
-              borderRadius: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '12px',
-              gap: '8px',
-              boxShadow: '0 16px 32px rgba(15,23,42,0.14)',
+              width: '440px',
+              height: '300px',
               zIndex: 10,
             }}
           >
-            {/* Browser chrome dots */}
-            <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--io-accent)' }} />
+            {/* Laptop screen — wider/shorter for a clear landscape device silhouette */}
+            <div
+              className="hero-laptop-screen"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: '15px',
+                width: '410px',
+                height: '280px',
+                backgroundColor: 'white',
+                border: '4px solid var(--io-text)',
+                borderRadius: '14px 14px 4px 4px',
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '20px',
+                gap: '10px',
+                boxShadow: '0 20px 40px rgba(15,23,42,0.14)',
+                zIndex: 10,
+              }}
+            >
+              {/* Browser chrome dots */}
+              <div style={{ display: 'flex', gap: '7px', flexShrink: 0 }}>
+                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
+                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
+                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: 'var(--io-accent)' }} />
+              </div>
+              {/* Mini site title */}
+              <div className="hero-mockup-title" style={{ fontSize: '17px', fontWeight: 800, color: 'var(--io-text)', lineHeight: 1.2, flexShrink: 0 }}>
+                Tu negocio
+                <br />
+                en buenas manos.
+              </div>
+              {/* Mini site copy */}
+              <div className="hero-mockup-copy" style={{ fontSize: '11px', color: 'var(--io-text-muted)', lineHeight: 1.4, flexShrink: 0 }}>
+                Una web preparada para atraer clientes.
+              </div>
+              {/* Mini site photo — protagonist: generic small-business interior, demonstrative only */}
+              <div
+                className="hero-mockup-photo"
+                style={{
+                  flex: 1,
+                  minHeight: 0,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderRadius: '8px',
+                  backgroundColor: 'var(--io-bg-soft)',
+                }}
+              >
+                <Image
+                  src={MOCKUP_PHOTO_SRC}
+                  alt=""
+                  fill
+                  sizes="(max-width: 430px) 140px, (max-width: 768px) 180px, 400px"
+                  style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+                />
+              </div>
             </div>
-            {/* Hero block */}
-            <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '4px' }} />
-            {/* Text lines */}
-            <div style={{ height: '5px', width: '100%', backgroundColor: 'var(--io-border)', borderRadius: '2px', flexShrink: 0 }} />
-            <div style={{ height: '5px', width: '70%', backgroundColor: 'var(--io-border)', borderRadius: '2px', flexShrink: 0 }} />
-            {/* CTA block */}
-            <div style={{ height: '14px', width: '50%', backgroundColor: 'var(--io-action)', borderRadius: '4px', flexShrink: 0 }} />
-          </div>
 
-          {/* Mobile companion — overlaps the bottom-center of the desktop mockup */}
-          <div
-            className="hero-mockup-mobile"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              bottom: '2%',
-              transform: 'translateX(-50%)',
-              width: '80px',
-              height: '115px',
-              backgroundColor: 'white',
-              border: '3px solid var(--io-text)',
-              borderRadius: '14px',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '8px 6px',
-              gap: '5px',
-              boxShadow: '0 10px 22px rgba(15,23,42,0.14)',
-              zIndex: 11,
-            }}
-          >
-            <div style={{ width: '20px', height: '3px', borderRadius: '2px', backgroundColor: 'var(--io-border)', alignSelf: 'center', flexShrink: 0 }} />
-            <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '3px' }} />
-            <div style={{ height: '4px', width: '100%', backgroundColor: 'var(--io-border)', borderRadius: '2px', flexShrink: 0 }} />
-            <div style={{ height: '4px', width: '60%', backgroundColor: 'var(--io-border)', borderRadius: '2px', flexShrink: 0 }} />
+            {/* Laptop base/deck */}
+            <div
+              className="hero-laptop-base"
+              style={{
+                position: 'absolute',
+                top: '278px',
+                left: 0,
+                width: '440px',
+                height: '16px',
+                background: 'linear-gradient(180deg, #e4e5e8 0%, #c9cbd0 100%)',
+                borderRadius: '0 0 10px 10px',
+                boxShadow: '0 6px 10px rgba(15,23,42,0.12)',
+                zIndex: 9,
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '50px',
+                  height: '4px',
+                  borderRadius: '0 0 4px 4px',
+                  backgroundColor: '#b9bcc2',
+                }}
+              />
+            </div>
+
+            {/* Phone — in front, slightly to the right, showing the same mini site. Realistic vertical proportion + thick bezel */}
+            <div
+              className="hero-mockup-mobile"
+              style={{
+                position: 'absolute',
+                right: '-16px',
+                bottom: '-30px',
+                width: '112px',
+                height: '210px',
+                backgroundColor: 'white',
+                border: '4px solid var(--io-text)',
+                borderRadius: '22px',
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '13px 9px',
+                gap: '7px',
+                boxShadow: '0 14px 28px rgba(15,23,42,0.18)',
+                zIndex: 11,
+              }}
+            >
+              {/* Speaker/notch */}
+              <div style={{ width: '34px', height: '5px', borderRadius: '3px', backgroundColor: 'var(--io-border)', alignSelf: 'center', flexShrink: 0 }} />
+              {/* Header: small brand mark */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+                <div style={{ width: '7px', height: '7px', borderRadius: '2px', backgroundColor: 'var(--io-action)', flexShrink: 0 }} />
+                <div style={{ height: '4px', width: '32px', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
+              </div>
+              {/* Short title */}
+              <div className="hero-mockup-mobile-title" style={{ fontSize: '10px', fontWeight: 800, color: 'var(--io-text)', lineHeight: 1.15, whiteSpace: 'nowrap', flexShrink: 0 }}>
+                Tu negocio
+              </div>
+              {/* Small visual block — protagonist: same photo as the laptop, cropped for a taller frame */}
+              <div
+                style={{
+                  flex: 1,
+                  minHeight: 0,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderRadius: '6px',
+                  backgroundColor: 'var(--io-bg-soft)',
+                }}
+              >
+                <Image
+                  src={MOCKUP_PHOTO_SRC}
+                  alt=""
+                  fill
+                  sizes="220px"
+                  style={{ objectFit: 'cover', objectPosition: '42% center' }}
+                />
+              </div>
+            </div>
+
+            {/* Microcards anchored to the laptop (positions are relative to the mockup so they never cover the phone) */}
+            {/* Campaign card — soft background so it never outweighs the main mockup */}
+            <div
+              className="hero-card hero-card-campaign"
+              style={{
+                position: 'absolute',
+                top: '-46px',
+                right: '-22px',
+                width: '142px',
+                height: '134px',
+                backgroundColor: 'white',
+                border: '1px solid var(--io-border)',
+                borderRadius: 'var(--io-radius-md)',
+                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
+                padding: '12px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                zIndex: 12,
+              }}
+            >
+              <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
+                Genera demanda
+                <br />
+                cualificada
+              </div>
+              {/* Mini KPI chart — ascending bars + trend line */}
+              <div
+                className="hero-card-visual"
+                style={{
+                  flex: 1,
+                  minHeight: 0,
+                  position: 'relative',
+                  borderRadius: '6px',
+                  backgroundColor: 'var(--io-bg-soft)',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  gap: '4px',
+                  padding: '6px',
+                }}
+              >
+                <div style={{ width: '6px', height: '30%', backgroundColor: 'var(--io-action)', opacity: 0.35, borderRadius: '2px' }} />
+                <div style={{ width: '6px', height: '55%', backgroundColor: 'var(--io-action)', opacity: 0.55, borderRadius: '2px' }} />
+                <div style={{ width: '6px', height: '40%', backgroundColor: 'var(--io-action)', opacity: 0.7, borderRadius: '2px' }} />
+                <div style={{ width: '6px', height: '80%', backgroundColor: 'var(--io-action)', borderRadius: '2px' }} />
+                <svg viewBox="0 0 100 40" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+                  <polyline points="0,35 30,20 55,25 78,8 100,4" fill="none" stroke="var(--io-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Measurement card — hidden below 1024px */}
+            <div
+              className="hero-card hero-card-measurement"
+              style={{
+                position: 'absolute',
+                top: '306px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '130px',
+                height: '124px',
+                backgroundColor: 'white',
+                border: '1px solid var(--io-border)',
+                borderRadius: 'var(--io-radius-md)',
+                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
+                padding: '12px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                zIndex: 12,
+              }}
+            >
+              <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
+                Datos para
+                <br />
+                mejorar
+              </div>
+              {/* Mini dashboard — KPI dot + sparkline */}
+              <div
+                className="hero-card-visual"
+                style={{
+                  flex: 1,
+                  minHeight: 0,
+                  borderRadius: '6px',
+                  backgroundColor: 'var(--io-bg-soft)',
+                  padding: '6px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-end',
+                  gap: '4px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--io-action)' }} />
+                  <div style={{ height: '4px', width: '28px', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
+                </div>
+                <svg viewBox="0 0 60 20" style={{ width: '100%', height: '18px' }}>
+                  <polyline
+                    points="0,17 15,11 30,13 45,5 60,3"
+                    fill="none"
+                    stroke="var(--io-action)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
+        </div>
+
+        {/* Capabilities - 4 items with icons (compact summary, not a second hero) */}
+        <div
+          className="hero-capabilities"
+          style={{
+            gridArea: 'caps',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '20px',
+            paddingTop: '28px',
+            borderTop: '1px solid var(--io-border)',
+          }}
+        >
+          {capabilities.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.label}
+                style={{
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                {/* Icon circle - compact with warm accent */}
+                <div
+                  style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--io-bg-soft)',
+                    border: '2px solid var(--io-action)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '10px',
+                    color: 'var(--io-accent)',
+                    flexShrink: 0,
+                  }}
+                >
+                  <Icon size={21} strokeWidth={1.5} />
+                </div>
+
+                {/* Label */}
+                <div
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: 800,
+                    color: 'var(--io-text)',
+                    marginBottom: '6px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {item.label}
+                </div>
+
+                {/* Description */}
+                <div
+                  style={{
+                    fontSize: '12px',
+                    color: 'var(--io-text-muted)',
+                    lineHeight: 1.6,
+                    fontWeight: 500,
+                  }}
+                >
+                  {item.desc}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

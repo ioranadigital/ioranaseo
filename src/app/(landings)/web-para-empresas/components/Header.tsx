@@ -65,9 +65,16 @@ export default function Header() {
               border: 'none',
               borderRadius: 'var(--io-radius-md)',
               cursor: 'pointer',
+              transition: 'background-color 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--io-action)';
             }}
           >
-            Analizar
+            Analizar mi proyecto
           </button>
         </nav>
 
@@ -153,6 +160,13 @@ export default function Header() {
               borderRadius: 'var(--io-radius-md)',
               cursor: 'pointer',
               width: '100%',
+              transition: 'background-color 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--io-action)';
             }}
           >
             Analizar mi proyecto

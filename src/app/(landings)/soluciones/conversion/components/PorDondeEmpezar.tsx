@@ -9,7 +9,7 @@ export default function PorDondeEmpezar() {
       id: 'optimizar',
       titulo: 'Necesito optimizar mi web',
       copy: 'Quiero mejorar la conversión de mi web para conseguir más leads y oportunidades.',
-      cta: 'Analizar mi proyecto →',
+      cta: 'Analizar mi proyecto',
       href: '#contacto',
       icon: Rocket,
       badge: 'RECOMENDADA',

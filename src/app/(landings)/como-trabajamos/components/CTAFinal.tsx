@@ -65,7 +65,7 @@ export default function CTAFinal() {
             e.currentTarget.style.backgroundColor = 'var(--io-action)';
           }}
         >
-          Analizar mi proyecto →
+          Analizar mi proyecto
         </Link>
       </div>
     </section>

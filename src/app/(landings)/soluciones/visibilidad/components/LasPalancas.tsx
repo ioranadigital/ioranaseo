@@ -2,6 +2,50 @@
 
 import { Settings, MapPin, Map, FileText } from 'lucide-react';
 
+function MicroVisual({ id }: { id: string }) {
+  if (id === 'seo-tecnico') {
+    return (
+      <div style={{ width: '52px', height: '40px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '6px', display: 'flex', flexDirection: 'column', padding: '4px', gap: '2px' }}>
+        <div style={{ display: 'flex', gap: '2px' }}>
+          <div style={{ flex: 1, height: '2px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
+          <div style={{ flex: 1, height: '2px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
+        </div>
+        <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '90%' }} />
+        <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '70%' }} />
+      </div>
+    );
+  }
+  if (id === 'seo-local') {
+    return (
+      <div style={{ width: '52px', height: '40px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px' }}>
+        <MapPin size={10} color="var(--io-action)" />
+        <div style={{ width: '20px', height: '16px', border: '1px solid var(--io-action)', borderRadius: '2px', position: 'relative' }}>
+          <div style={{ position: 'absolute', bottom: '3px', right: '3px', width: '4px', height: '4px', backgroundColor: 'var(--io-accent)', borderRadius: '50%' }} />
+        </div>
+      </div>
+    );
+  }
+  if (id === 'gbp-maps') {
+    return (
+      <div style={{ width: '52px', height: '40px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '6px', display: 'flex', flexDirection: 'column', padding: '4px', gap: '2px', justifyContent: 'center' }}>
+        <svg viewBox="0 0 40 20" style={{ width: '100%', height: '14px' }}>
+          <path d="M2,16 Q10,8 20,14 T38,10" stroke="var(--io-action)" strokeWidth="1.5" fill="none" opacity="0.6" />
+          <circle cx="20" cy="14" r="2" fill="var(--io-accent)" />
+        </svg>
+        <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '80%', alignSelf: 'center' }} />
+      </div>
+    );
+  }
+  // contenidos
+  return (
+    <div style={{ width: '52px', height: '40px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '6px', display: 'flex', flexDirection: 'column', padding: '4px', gap: '2px' }}>
+      <div style={{ height: '3px', backgroundColor: 'var(--io-action)', borderRadius: '1px', width: '70%' }} />
+      <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '90%' }} />
+      <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '60%' }} />
+    </div>
+  );
+}
+
 export default function LasPalancas() {
   const palancas = [
     {
@@ -95,20 +139,23 @@ export default function LasPalancas() {
                   gap: '14px',
                 }}
               >
-                <div
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: 'var(--io-radius-md)',
-                    backgroundColor: 'var(--io-bg-soft)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--io-action)',
-                    flexShrink: 0,
-                  }}
-                >
-                  <Icon size={22} strokeWidth={1.5} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start' }}>
+                  <div
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: 'var(--io-radius-md)',
+                      backgroundColor: 'var(--io-bg-soft)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--io-action)',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon size={22} strokeWidth={1.5} />
+                  </div>
+                  <MicroVisual id={p.id} />
                 </div>
 
                 <h3

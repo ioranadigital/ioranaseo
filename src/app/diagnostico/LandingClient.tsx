@@ -59,6 +59,13 @@ export default function LandingClient() {
       <LandingFooter />
 
       <style>{`
+        /* Scoped to this landing only — the global site no longer forces
+           orange on link hover/focus, but /diagnostico keeps its own
+           accent color for its links (previously a global rule). */
+        .landing-page-root a:hover,
+        .landing-page-root a:focus {
+          color: ${LANDING_COLORS.accent} !important;
+        }
         .landing-cta-btn:hover {
           transform: translateY(-2px);
           filter: brightness(1.05);

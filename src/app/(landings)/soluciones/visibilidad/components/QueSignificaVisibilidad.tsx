@@ -2,6 +2,44 @@
 
 import { Search, FileText, CheckCircle, ArrowRight } from 'lucide-react';
 
+function MicroVisualEncuentran() {
+  return (
+    <div style={{ width: '48px', height: '36px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '6px', display: 'flex', flexDirection: 'column', padding: '4px', gap: '3px', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '3px', height: '4px' }}>
+        <Search size={8} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
+        <div style={{ flex: 1, height: '2px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
+      </div>
+      <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '70%' }} />
+      <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '55%' }} />
+    </div>
+  );
+}
+
+function MicroVisualComparan() {
+  return (
+    <div style={{ width: '48px', height: '36px', display: 'flex', gap: '4px', alignItems: 'center' }}>
+      <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '4px', height: '100%', display: 'flex', flexDirection: 'column', padding: '3px', gap: '2px', justifyContent: 'center' }}>
+        <div style={{ height: '2px', backgroundColor: 'var(--io-action)', borderRadius: '1px', width: '70%' }} />
+        <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '90%' }} />
+      </div>
+      <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '4px', height: '100%', display: 'flex', flexDirection: 'column', padding: '3px', gap: '2px', justifyContent: 'center' }}>
+        <div style={{ height: '2px', backgroundColor: 'var(--io-action)', borderRadius: '1px', width: '75%' }} />
+        <div style={{ height: '2px', backgroundColor: 'var(--io-border)', borderRadius: '1px', width: '80%' }} />
+      </div>
+    </div>
+  );
+}
+
+function MicroVisualEligen() {
+  return (
+    <div style={{ width: '48px', height: '36px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+      <div style={{ width: '28px', height: '20px', border: '1.5px solid var(--io-action)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: '4px', height: '8px', borderRight: '1.5px solid var(--io-action)', borderBottom: '1.5px solid var(--io-action)', transform: 'rotate(-45deg)', marginRight: '2px' }} />
+      </div>
+    </div>
+  );
+}
+
 export default function QueSignificaVisibilidad() {
   const pasos = [
     {
@@ -85,21 +123,26 @@ export default function QueSignificaVisibilidad() {
                     maxWidth: '220px',
                   }}
                 >
-                  <div
-                    style={{
-                      width: '68px',
-                      height: '68px',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--io-bg-soft)',
-                      border: '2px solid var(--io-action)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--io-action)',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Icon size={28} strokeWidth={1.5} />
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                    <div
+                      style={{
+                        width: '68px',
+                        height: '68px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--io-bg-soft)',
+                        border: '2px solid var(--io-action)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--io-action)',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Icon size={28} strokeWidth={1.5} />
+                    </div>
+                    {paso.titulo.includes('encuentran') && <MicroVisualEncuentran />}
+                    {paso.titulo.includes('comparan') && <MicroVisualComparan />}
+                    {paso.titulo.includes('eligen') && <MicroVisualEligen />}
                   </div>
                   <h3
                     style={{

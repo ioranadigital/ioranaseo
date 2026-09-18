@@ -1,6 +1,49 @@
 'use client';
 
-import { Monitor, Search, Megaphone, Target, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+
+// Símbolo simplificado por capacidad — mismo lenguaje visual que el Hero y
+// las 4 solution cards, pero reducido a su forma esencial (nivel de detalle
+// bajo, coherente con la jerarquía Hero > cards > este bloque).
+function NodeSymbol({ id }: { id: string }) {
+  if (id === 'web') {
+    return (
+      <div style={{ width: '22px', height: '18px', border: '1.5px solid var(--io-action)', borderRadius: '3px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{ height: '4px', backgroundColor: 'var(--io-action)' }} />
+      </div>
+    );
+  }
+  if (id === 'visibilidad') {
+    return (
+      <div
+        style={{
+          width: '14px',
+          height: '14px',
+          borderRadius: '50% 50% 50% 0',
+          backgroundColor: 'var(--io-action)',
+          transform: 'rotate(-45deg)',
+        }}
+      />
+    );
+  }
+  if (id === 'campanas') {
+    return (
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: '3px', height: '20px' }}>
+        <div style={{ width: '4px', height: '45%', backgroundColor: 'var(--io-action)', opacity: 0.5, borderRadius: '1px' }} />
+        <div style={{ width: '4px', height: '70%', backgroundColor: 'var(--io-action)', opacity: 0.75, borderRadius: '1px' }} />
+        <div style={{ width: '4px', height: '100%', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
+      </div>
+    );
+  }
+  // conversion — mini funnel
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
+      <div style={{ width: '20px', height: '5px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
+      <div style={{ width: '12px', height: '5px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
+      <div style={{ width: '6px', height: '5px', backgroundColor: 'var(--io-accent)', borderRadius: '1px' }} />
+    </div>
+  );
+}
 
 export default function NoSonServiciosAislados() {
   const ideas = [
@@ -19,10 +62,10 @@ export default function NoSonServiciosAislados() {
   ];
 
   const piezas = [
-    { icon: Monitor, label: 'Web' },
-    { icon: Search, label: 'Visibilidad' },
-    { icon: Megaphone, label: 'Campañas' },
-    { icon: Target, label: 'Conversión' },
+    { id: 'web', label: 'Web' },
+    { id: 'visibilidad', label: 'Visibilidad' },
+    { id: 'campanas', label: 'Campañas' },
+    { id: 'conversion', label: 'Conversión' },
   ];
 
   return (
@@ -118,7 +161,6 @@ export default function NoSonServiciosAislados() {
             }}
           >
             {piezas.map((pieza, index) => {
-              const Icon = pieza.icon;
               return (
                 <div
                   key={pieza.label}
@@ -144,10 +186,9 @@ export default function NoSonServiciosAislados() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'var(--io-action)',
                       }}
                     >
-                      <Icon size={24} strokeWidth={1.5} />
+                      <NodeSymbol id={pieza.id} />
                     </div>
                     <span
                       style={{

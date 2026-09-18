@@ -1,7 +1,75 @@
 'use client';
 
 import Link from 'next/link';
+import type { CSSProperties } from 'react';
 import { Monitor, Search, Megaphone, Target } from 'lucide-react';
+
+// Compact micro-visual per capability — same visual language as the Hero,
+// scaled down to a secondary role (~20-30% of the card). No fake metrics.
+function MicroVisual({ id, innerBg }: { id: string; innerBg: string }) {
+  const wrap: CSSProperties = {
+    height: '52px',
+    borderRadius: 'var(--io-radius-md)',
+    backgroundColor: innerBg,
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 12px',
+    gap: '8px',
+    overflow: 'hidden',
+  };
+
+  if (id === 'web') {
+    return (
+      <div style={wrap}>
+        <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
+          <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
+          <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
+          <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--io-accent)' }} />
+        </div>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <div style={{ height: '4px', width: '70%', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
+          <div style={{ height: '4px', width: '45%', backgroundColor: 'var(--io-action)', borderRadius: '2px' }} />
+        </div>
+      </div>
+    );
+  }
+
+  if (id === 'visibilidad') {
+    return (
+      <div style={wrap}>
+        <Search size={13} strokeWidth={2.5} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
+        <div style={{ flex: 1, height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
+        <svg viewBox="0 0 60 24" style={{ width: '48px', height: '20px', flexShrink: 0 }}>
+          <path d="M0,18 Q15,6 30,15 T60,9" fill="none" stroke="var(--io-border)" strokeWidth="2" />
+          <circle cx="42" cy="12" r="2.5" fill="var(--io-action)" />
+        </svg>
+      </div>
+    );
+  }
+
+  if (id === 'campanas') {
+    return (
+      <div style={{ ...wrap, alignItems: 'flex-end', position: 'relative' }}>
+        <div style={{ width: '6px', height: '30%', backgroundColor: 'var(--io-action)', opacity: 0.4, borderRadius: '1px' }} />
+        <div style={{ width: '6px', height: '55%', backgroundColor: 'var(--io-action)', opacity: 0.6, borderRadius: '1px' }} />
+        <div style={{ width: '6px', height: '40%', backgroundColor: 'var(--io-action)', opacity: 0.8, borderRadius: '1px' }} />
+        <div style={{ width: '6px', height: '75%', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
+        <svg viewBox="0 0 100 30" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+          <polyline points="0,26 25,16 50,19 75,7 100,3" fill="none" stroke="var(--io-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    );
+  }
+
+  // conversion — mini funnel
+  return (
+    <div style={{ ...wrap, flexDirection: 'column', justifyContent: 'center', gap: '4px', padding: '8px 16px' }}>
+      <div style={{ width: '90%', height: '6px', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
+      <div style={{ width: '58%', height: '6px', backgroundColor: 'var(--io-action)', opacity: 0.6, borderRadius: '2px' }} />
+      <div style={{ width: '30%', height: '6px', backgroundColor: 'var(--io-action)', borderRadius: '2px' }} />
+    </div>
+  );
+}
 
 export default function LasCuatroSoluciones() {
   const soluciones = [
@@ -163,6 +231,8 @@ export default function LasCuatroSoluciones() {
                 >
                   {sol.copy}
                 </p>
+
+                <MicroVisual id={sol.id} innerBg={sol.bg === 'soft' ? 'white' : 'var(--io-bg-soft)'} />
 
                 <ul
                   style={{

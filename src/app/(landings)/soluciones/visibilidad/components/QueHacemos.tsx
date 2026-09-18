@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CheckCircle2, Search, Star } from 'lucide-react';
+import { CheckCircle2, Search } from 'lucide-react';
 
 export default function QueHacemos() {
   const checklist = [
@@ -143,7 +143,7 @@ export default function QueHacemos() {
               <div style={{ width: '60%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
             </div>
 
-            {/* Reseñas + Maps en fila */}
+            {/* Búsquedas relevantes — chips/tags */}
             <div style={{ display: 'flex', gap: '12px', marginBottom: '14px' }}>
               <div
                 style={{
@@ -155,9 +155,11 @@ export default function QueHacemos() {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
                 }}
               >
-                <div style={{ display: 'flex', gap: '2px', marginBottom: '6px' }}>
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <Star key={n} size={10} strokeWidth={0} fill="var(--io-accent)" />
+                <div style={{ display: 'flex', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                  {['servicio', 'local', 'solución'].map((tag) => (
+                    <div key={tag} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '12px', padding: '4px 8px', fontSize: '8px', fontWeight: 600, color: 'var(--io-action)' }}>
+                      {tag}
+                    </div>
                   ))}
                 </div>
                 <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--io-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>

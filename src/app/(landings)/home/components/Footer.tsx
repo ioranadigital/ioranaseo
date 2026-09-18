@@ -17,7 +17,7 @@ export default function HomeFooter() {
     { label: 'Cómo trabajamos', href: '/como-trabajamos' },
     { label: 'Casos', href: '#casos' },
     { label: 'Recursos', href: '#recursos' },
-    { label: 'Contacto', href: '#contacto' },
+    { label: 'Contacto', href: '/contacto/' },
   ];
 
   const footerNav = LAUNCH_MVP_SHOW_RECURSOS_Y_CASOS

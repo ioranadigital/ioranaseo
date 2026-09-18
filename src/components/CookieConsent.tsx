@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties, type MouseEvent } from "react";
 
 const STORAGE_KEY = "iorana-cookie-consent";
 const CONSENT_VERSION = "1";
@@ -119,6 +119,28 @@ export default function CookieConsent() {
     return null;
   }
 
+  const cookieButtonStyle: CSSProperties = {
+    backgroundColor: "white",
+    border: "1px solid var(--io-border)",
+    color: "var(--io-text)",
+    padding: "10px 20px",
+    borderRadius: "var(--io-radius-sm)",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: 600,
+    transition: "all 0.2s",
+  };
+
+  const handleCookieButtonEnter = (e: MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.style.borderColor = "var(--io-action)";
+    e.currentTarget.style.color = "var(--io-action)";
+  };
+
+  const handleCookieButtonLeave = (e: MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.style.borderColor = "var(--io-border)";
+    e.currentTarget.style.color = "var(--io-text)";
+  };
+
   return (
     <>
       {showBanner && (
@@ -128,14 +150,33 @@ export default function CookieConsent() {
             bottom: 0,
             left: 0,
             right: 0,
-            backgroundColor: "#1a1a1a",
-            color: "#ffffff",
+            backgroundColor: "white",
+            color: "var(--io-text)",
             padding: "20px",
             zIndex: 9999,
-            boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
+            borderTop: "1px solid var(--io-border)",
+            boxShadow: "0 -4px 20px rgba(15, 23, 42, 0.08)",
           }}
         >
+          <style>
+            {`
+              @media (max-width: 640px) {
+                .cookie-consent-inner {
+                  flex-direction: column !important;
+                  align-items: stretch !important;
+                }
+                .cookie-consent-actions {
+                  flex-direction: column !important;
+                  width: 100% !important;
+                }
+                .cookie-consent-actions button {
+                  width: 100% !important;
+                }
+              }
+            `}
+          </style>
           <div
+            className="cookie-consent-inner"
             style={{
               maxWidth: "1280px",
               margin: "0 auto",
@@ -147,7 +188,7 @@ export default function CookieConsent() {
             }}
           >
             <div style={{ flex: 1, minWidth: "250px" }}>
-              <p style={{ margin: "0 0 12px 0", fontSize: "14px" }}>
+              <p style={{ margin: "0 0 12px 0", fontSize: "14px", color: "var(--io-text)" }}>
                 Utilizamos cookies para mejorar tu experiencia. Puedes aceptar
                 todas o configurar tus preferencias.
               </p>
@@ -155,80 +196,44 @@ export default function CookieConsent() {
                 href="/legal/cookies"
                 style={{
                   fontSize: "12px",
-                  color: "#4a9eff",
+                  color: "var(--io-action)",
                   textDecoration: "none",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "var(--io-action-hover)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "var(--io-action)";
                 }}
               >
                 Política de Cookies
               </a>
             </div>
 
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            <div className="cookie-consent-actions" style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
               <button
                 onClick={handleRejectAll}
-                style={{
-                  backgroundColor: "transparent",
-                  border: "1px solid #666",
-                  color: "#ffffff",
-                  padding: "10px 20px",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#999";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#666";
-                }}
+                style={cookieButtonStyle}
+                onMouseEnter={handleCookieButtonEnter}
+                onMouseLeave={handleCookieButtonLeave}
               >
                 Rechazar
               </button>
 
               <button
                 onClick={() => setShowPreferences(true)}
-                style={{
-                  backgroundColor: "transparent",
-                  border: "1px solid #666",
-                  color: "#ffffff",
-                  padding: "10px 20px",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#999";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#666";
-                }}
+                style={cookieButtonStyle}
+                onMouseEnter={handleCookieButtonEnter}
+                onMouseLeave={handleCookieButtonLeave}
               >
                 Configurar
               </button>
 
               <button
                 onClick={handleAcceptAll}
-                style={{
-                  backgroundColor: "#4a9eff",
-                  border: "1px solid #4a9eff",
-                  color: "#ffffff",
-                  padding: "10px 20px",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#2e7fd9";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#4a9eff";
-                }}
+                style={cookieButtonStyle}
+                onMouseEnter={handleCookieButtonEnter}
+                onMouseLeave={handleCookieButtonLeave}
               >
                 Aceptar
               </button>
@@ -259,8 +264,9 @@ export default function CookieConsent() {
         >
           <div
             style={{
-              backgroundColor: "#ffffff",
-              borderRadius: "12px",
+              backgroundColor: "white",
+              border: "1px solid var(--io-border)",
+              borderRadius: "var(--io-radius-md)",
               padding: "30px",
               maxWidth: "500px",
               width: "90%",
@@ -268,7 +274,7 @@ export default function CookieConsent() {
               overflowY: "auto",
             }}
           >
-            <h2 style={{ margin: "0 0 20px 0", fontSize: "20px" }}>
+            <h2 style={{ margin: "0 0 20px 0", fontSize: "20px", color: "var(--io-text)" }}>
               Preferencias de Cookies
             </h2>
 
@@ -281,10 +287,10 @@ export default function CookieConsent() {
               }}
             >
               <div>
-                <h3 style={{ margin: "0 0 4px 0", fontSize: "14px" }}>
+                <h3 style={{ margin: "0 0 4px 0", fontSize: "14px", color: "var(--io-text)" }}>
                   Cookies Necesarias
                 </h3>
-                <p style={{ margin: 0, fontSize: "12px", color: "#666" }}>
+                <p style={{ margin: 0, fontSize: "12px", color: "var(--io-text-muted)" }}>
                   Siempre activas. Permiten funcionalidad básica.
                 </p>
               </div>
@@ -300,17 +306,17 @@ export default function CookieConsent() {
               style={{
                 marginBottom: "20px",
                 paddingBottom: "20px",
-                borderBottom: "1px solid #eee",
+                borderBottom: "1px solid var(--io-border)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
               }}
             >
               <div>
-                <h3 style={{ margin: "0 0 4px 0", fontSize: "14px" }}>
+                <h3 style={{ margin: "0 0 4px 0", fontSize: "14px", color: "var(--io-text)" }}>
                   Analítica
                 </h3>
-                <p style={{ margin: 0, fontSize: "12px", color: "#666" }}>
+                <p style={{ margin: 0, fontSize: "12px", color: "var(--io-text-muted)" }}>
                   Nos ayuda a mejorar tu experiencia.
                 </p>
               </div>
@@ -325,15 +331,9 @@ export default function CookieConsent() {
             <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
               <button
                 onClick={() => setShowPreferences(false)}
-                style={{
-                  backgroundColor: "transparent",
-                  border: "1px solid #ccc",
-                  color: "#333",
-                  padding: "10px 20px",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                }}
+                style={cookieButtonStyle}
+                onMouseEnter={handleCookieButtonEnter}
+                onMouseLeave={handleCookieButtonLeave}
               >
                 Cancelar
               </button>
@@ -341,14 +341,21 @@ export default function CookieConsent() {
               <button
                 onClick={handleSavePreferences}
                 style={{
-                  backgroundColor: "#4a9eff",
-                  border: "1px solid #4a9eff",
-                  color: "#ffffff",
+                  backgroundColor: "var(--io-action)",
+                  border: "1px solid var(--io-action)",
+                  color: "white",
                   padding: "10px 20px",
-                  borderRadius: "6px",
+                  borderRadius: "var(--io-radius-md)",
                   cursor: "pointer",
                   fontSize: "14px",
                   fontWeight: 600,
+                  transition: "background-color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--io-action-hover)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--io-action)";
                 }}
               >
                 Guardar Preferencias
