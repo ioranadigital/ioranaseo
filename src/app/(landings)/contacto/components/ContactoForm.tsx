@@ -70,17 +70,37 @@ export default function ContactoForm({ onSubmitted, submitted: propsSubmitted }:
 
     setIsSubmitting(true);
     try {
-      // PENDING BACKEND: form submission will be implemented via:
-      // - API route (POST /api/contacto)
-      // - or server action
-      // - or webhook integration (n8n/zapier)
-      // For now, show success state after brief delay to simulate async behavior
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setSubmitted(true);
-      if (onSubmitted) onSubmitted();
+      const response = await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          email: formData.email,
+          empresa: formData.empresa,
+          telefono: formData.telefono,
+          motivo: formData.motivo,
+          mensaje: formData.mensaje,
+          utilizas: formData.utilizas,
+          privacidad: formData.privacidad,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        setSubmitted(true);
+        if (onSubmitted) onSubmitted();
+      } else if (result.reason === 'rate_limited') {
+        setErrors({ submit: 'Demasiados intentos. Intenta más tarde.' });
+      } else if (result.reason === 'email_not_configured') {
+        setSubmitted(true);
+        if (onSubmitted) onSubmitted();
+      } else {
+        setErrors({ submit: 'Error al enviar. Intenta de nuevo.' });
+      }
     } catch (error) {
       console.error('Form submission error:', error);
-      setErrors({ submit: 'Error al enviar. Intenta de nuevo.' });
+      setErrors({ submit: 'Error de conexión. Intenta de nuevo.' });
     } finally {
       setIsSubmitting(false);
     }
