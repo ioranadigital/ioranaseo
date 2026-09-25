@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
-import LandingClient from "./LandingClient";
+import DiagnosticoWizard from "./components/Wizard/DiagnosticoWizard";
+import LandingsHeader from "@/app/(landings)/components/LandingsHeader";
 
 export const metadata: Metadata = {
   title: "Análisis Gratuito de Visibilidad Digital | IoranaSEO",
@@ -23,6 +24,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LandingPage() {
-  return <LandingClient />;
+export default function DiagnosticoPage() {
+  return (
+    <>
+      <LandingsHeader />
+      <DiagnosticoWizard />
+    </>
+  );
 }
