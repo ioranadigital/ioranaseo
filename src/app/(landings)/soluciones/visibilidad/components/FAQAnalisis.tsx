@@ -1,369 +1,151 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { Check } from 'lucide-react';
+
+const FAQS = [
+  {
+    q: '¿Cuánto tiempo tarda en verse resultados?',
+    a: 'Depende del punto de partida y la competencia. El SEO es una estrategia progresiva: los primeros cambios se aplican de inmediato y los resultados se consolidan en las semanas y meses siguientes.',
+  },
+  {
+    q: '¿Incluye la gestión de Google Business Profile?',
+    a: 'Sí. Optimizamos categorías, servicios, contenidos y el resto de elementos de tu ficha para mejorar tu presencia local.',
+  },
+  {
+    q: '¿Funciona si ya tengo una web?',
+    a: 'Sí. Analizamos tu web actual para determinar si puede optimizarse o si existen limitaciones que conviene resolver primero.',
+  },
+  {
+    q: '¿Qué necesito para empezar?',
+    a: 'Conocer tu negocio, tu zona de actuación y disponer de acceso a tu web y a tu ficha de Google. Te guiamos durante todo el proceso.',
+  },
+];
+
+const BENEFICIOS = ['Sin acceso a tus cuentas', 'Detectamos prioridades claras', 'Diagnóstico por email'];
 
 export default function FAQAnalisis() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [formStep, setFormStep] = useState(0);
-
-  const faqs = [
-    {
-      q: '¿Cuánto tiempo tarda en verse el resultado del SEO?',
-      a: 'Depende del punto de partida, la competencia y el tipo de búsqueda. El SEO es una estrategia progresiva y los resultados evolucionan a medida que mejoramos la presencia y Google procesa los cambios.',
-    },
-    {
-      q: '¿Necesito una web nueva para posicionar?',
-      a: 'No necesariamente. Primero analizamos la web actual para determinar si puede mejorarse o si existen limitaciones que justifiquen un rediseño.',
-    },
-    {
-      q: '¿Qué diferencia hay entre SEO y SEO Local?',
-      a: 'El SEO trabaja la visibilidad general en buscadores. El SEO Local se concentra en búsquedas relacionadas con una ubicación, Google Maps y negocios cercanos.',
-    },
-    {
-      q: '¿Gestionáis también la ficha de Google?',
-      a: 'Sí. Podemos optimizar Google Business Profile, categorías, servicios, contenidos, reseñas y otros elementos relacionados con la presencia local.',
-    },
-    {
-      q: '¿También podéis crear los contenidos?',
-      a: 'Sí. Podemos trabajar la investigación, planificación, redacción y optimización de contenidos orientados a búsquedas relevantes.',
-    },
-    {
-      q: '¿Cómo medís los resultados?',
-      a: 'Analizamos visibilidad, consultas, tráfico, comportamiento y conversiones para entender qué está funcionando y dónde existen nuevas oportunidades.',
-    },
-  ];
-
-  const opciones = [
-    {
-      titulo: 'Quiero aparecer más en Google',
-      desc: 'Necesito mejorar mi posicionamiento.',
-    },
-    {
-      titulo: 'Quiero mejorar mi visibilidad local',
-      desc: 'Quiero que me encuentren en mi zona.',
-    },
-    {
-      titulo: 'Quiero atraer tráfico más cualificado',
-      desc: 'Necesito búsquedas con mayor intención.',
-    },
-    {
-      titulo: 'No lo tengo claro',
-      desc: 'Necesito orientación.',
-    },
-  ];
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section
-      id="analisis"
-      className="faq-analisis-section"
-      style={{
-        padding: '80px 20px',
-        backgroundColor: 'white',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '60px',
-          alignItems: 'flex-start',
-        }}
-        className="faq-grid"
-      >
-        {/* FAQ */}
-        <div>
-          <h2
-            style={{
-              fontSize: 'clamp(28px, 4vw, 36px)',
-              fontWeight: 700,
-              color: 'var(--io-text)',
-              lineHeight: 1.2,
-              margin: '0 0 32px 0',
-            }}
-          >
-            Preguntas frecuentes
-          </h2>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                style={{
-                  border: '1px solid var(--io-border)',
-                  borderRadius: 'var(--io-radius-md)',
-                  overflow: 'hidden',
-                  backgroundColor: 'white',
-                }}
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  style={{
-                    width: '100%',
-                    padding: '16px',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    transition: 'background-color 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--io-bg-soft)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                  }}
-                  aria-expanded={openFaq === index}
-                >
-                  <ChevronDown
-                    size={20}
-                    style={{
-                      color: 'var(--io-action)',
-                      transition: 'transform 0.3s',
-                      transform: openFaq === index ? 'rotate(180deg)' : 'rotate(0deg)',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontSize: '14px',
-                      fontWeight: 600,
-                      color: 'var(--io-text)',
-                      flex: 1,
-                    }}
+    <section className="va-section">
+      <div className="va-grid">
+        <div className="va-left">
+          <h2 className="va-title">Preguntas frecuentes</h2>
+          <div className="va-list">
+            {FAQS.map((faq, i) => {
+              const isOpen = open === i;
+              return (
+                <div key={faq.q} className="va-item">
+                  <button
+                    type="button"
+                    className="va-btn"
+                    aria-expanded={isOpen}
+                    aria-controls={`va-panel-${i}`}
+                    onClick={() => setOpen(isOpen ? null : i)}
                   >
-                    {faq.q}
-                  </span>
-                </button>
-
-                {openFaq === index && (
-                  <div
-                    style={{
-                      padding: '16px',
-                      paddingTop: '0',
-                      borderTop: '1px solid var(--io-border)',
-                      backgroundColor: 'white',
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--io-text-muted)',
-                        margin: '0',
-                        lineHeight: 1.6,
-                      }}
-                    >
+                    <span className="va-btn__q">{faq.q}</span>
+                    <span className="va-btn__icon" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+                  </button>
+                  {isOpen && (
+                    <p id={`va-panel-${i}`} className="va-answer">
                       {faq.a}
                     </p>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Análisis Inicial */}
-        <div
-          style={{
-            backgroundColor: 'var(--io-bg-soft)',
-            borderRadius: 'var(--io-radius-lg)',
-            border: '1px solid var(--io-border)',
-            padding: '40px',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              color: 'var(--io-action)',
-              marginBottom: '16px',
-              textTransform: 'uppercase',
-            }}
-          >
-            Análisis inicial
-          </div>
-
-          <h3
-            style={{
-              fontSize: '24px',
-              fontWeight: 700,
-              color: 'var(--io-text)',
-              margin: '0 0 12px 0',
-              lineHeight: 1.2,
-            }}
-          >
-            Cuéntanos qué quieres mejorar
-          </h3>
-
-          <p
-            style={{
-              fontSize: '14px',
-              color: 'var(--io-text-muted)',
-              margin: '0 0 32px 0',
-              lineHeight: 1.6,
-            }}
-          >
-            Responde unas preguntas breves y te ayudaremos a identificar el
-            mejor punto de partida.
+        <aside className="va-promo" aria-labelledby="va-promo-title">
+          <p className="va-eyebrow">
+            <span className="va-eyebrow__line" aria-hidden="true" />
+            Diagnóstico digital gratuito
           </p>
-
-          {/* Progress */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '8px',
-              marginBottom: '32px',
-              fontSize: '12px',
-              color: 'var(--io-text-muted)',
-              fontWeight: 600,
-            }}
-          >
-            {[1, 2, 3, 4].map((step) => (
-              <div
-                key={step}
-                style={{
-                  flex: 1,
-                  height: '4px',
-                  backgroundColor:
-                    step <= formStep + 1 ? 'var(--io-action)' : 'var(--io-border)',
-                  borderRadius: '2px',
-                  transition: 'background-color 0.3s',
-                }}
-              />
+          <h3 id="va-promo-title" className="va-promo__title">
+            Analizamos tu visibilidad actual
+          </h3>
+          <p className="va-promo__copy">
+            Revisamos tu presencia digital y te indicamos las mejores oportunidades de mejora.
+          </p>
+          <ul className="va-checks">
+            {BENEFICIOS.map((b) => (
+              <li key={b}>
+                <span className="va-check" aria-hidden="true">
+                  <Check size={11} strokeWidth={3} />
+                </span>
+                {b}
+              </li>
             ))}
-          </div>
-
-          {/* Question */}
-          {formStep === 0 && (
-            <div>
-              <h4
-                style={{
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  color: 'var(--io-text)',
-                  margin: '0 0 20px 0',
-                }}
-              >
-                ¿Qué necesitas mejorar?
-              </h4>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {opciones.map((opcion, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setFormStep(1)}
-                    style={{
-                      padding: '16px',
-                      backgroundColor: 'white',
-                      border: '1.5px solid var(--io-border)',
-                      borderRadius: 'var(--io-radius-md)',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      transition: 'all 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--io-action)';
-                      e.currentTarget.style.backgroundColor = 'var(--io-bg-soft)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--io-border)';
-                      e.currentTarget.style.backgroundColor = 'white';
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: '14px',
-                        fontWeight: 600,
-                        color: 'var(--io-text)',
-                        marginBottom: '4px',
-                      }}
-                    >
-                      {opcion.titulo}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '12px',
-                        color: 'var(--io-text-muted)',
-                      }}
-                    >
-                      {opcion.desc}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {formStep === 1 && (
-            <div style={{ textAlign: 'center', color: 'var(--io-text-muted)' }}>
-              <p>Pregunta 2 de 4</p>
-              <p>Próximamente más pasos...</p>
-            </div>
-          )}
-
-          {/* CTA */}
-          {formStep === 0 && (
-            <div
-              style={{
-                marginTop: '24px',
-                fontSize: '13px',
-                color: 'var(--io-text-muted)',
-              }}
-            >
-              Continuar →
-            </div>
-          )}
-        </div>
+          </ul>
+          <Link href="/diagnostico/" className="va-cta">
+            Empezar diagnóstico
+          </Link>
+        </aside>
       </div>
 
-      {/* Responsive styles */}
-      <style>
-        {`
-          @media (min-width: 1024px) {
-            .faq-grid {
-              grid-template-columns: 1fr 1fr !important;
-              gap: 60px !important;
-            }
-          }
+      <style>{`
+        .va-section { padding: 56px 20px 12px; background-color: var(--io-bg); }
+        .va-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 58fr) minmax(0, 42fr); gap: 56px; align-items: start; }
+        .va-title { font-size: clamp(26px, 3.2vw, 34px); font-weight: 700; color: var(--io-text); line-height: 1.2; margin: 0 0 20px; }
 
-          @media (max-width: 1023px) {
-            .faq-analisis-section {
-              padding: 60px 20px;
-            }
-            .faq-grid {
-              grid-template-columns: 1fr !important;
-              gap: 40px !important;
-            }
-          }
+        .va-list { border-top: 1px solid var(--io-border); }
+        .va-item { border-bottom: 1px solid var(--io-border); }
+        .va-btn {
+          display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 16px 4px;
+          text-align: left; font-family: inherit; cursor: pointer; background: none; border: none; color: var(--io-text);
+        }
+        .va-btn:hover .va-btn__q { color: var(--io-action-hover); }
+        .va-btn:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; border-radius: 4px; }
+        .va-btn__q { font-size: 15px; font-weight: 600; line-height: 1.4; transition: color 150ms ease; }
+        .va-btn__icon { flex: none; font-size: 18px; color: var(--io-action); line-height: 1; }
+        .va-answer { margin: 0; padding: 0 44px 18px 4px; font-size: 15px; line-height: 1.6; color: var(--io-text-muted); }
 
-          @media (max-width: 768px) {
-            .faq-analisis-section {
-              padding: 40px 20px;
-            }
-            .faq-grid {
-              gap: 32px !important;
-            }
-          }
+        .va-promo {
+          position: relative; overflow: hidden; padding: 30px; border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
+          background: radial-gradient(circle at 100% 0%, rgba(51, 111, 230, 0.10) 0%, rgba(51, 111, 230, 0) 55%), var(--io-bg-soft);
+        }
+        .va-eyebrow {
+          display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-size: 12px; font-weight: 700;
+          letter-spacing: 0.08em; text-transform: uppercase; color: var(--io-action-hover);
+        }
+        .va-eyebrow__line { width: 22px; height: 3px; border-radius: 2px; background: var(--io-accent); flex: none; }
+        .va-promo__title { font-size: 24px; font-weight: 700; color: var(--io-text); line-height: 1.25; margin: 0 0 12px; }
+        .va-promo__copy { font-size: 15px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 18px; }
 
-          @media (max-width: 430px) {
-            .faq-analisis-section {
-              padding: 32px 20px;
-            }
-          }
+        .va-checks { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+        .va-checks li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--io-text); }
+        .va-check {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 18px; height: 18px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.14); color: var(--io-action);
+        }
 
-          @media (max-width: 375px) {
-            .faq-analisis-section {
-              padding: 32px 16px;
-            }
-          }
-        `}
-      </style>
+        .va-cta {
+          display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 12px 24px;
+          font-size: 15px; font-weight: 600; color: #fff; text-decoration: none; background: var(--io-action);
+          border: 1.5px solid var(--io-action); border-radius: var(--io-radius-md);
+          transition: background-color 180ms ease, border-color 180ms ease;
+        }
+        .va-cta:hover, .va-cta:focus-visible { background: var(--io-action-hover); border-color: var(--io-action-hover); color: #fff; }
+        .va-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 3px; }
+
+        @media (max-width: 1023px) {
+          .va-section { padding: 48px 20px 12px; }
+          .va-grid { grid-template-columns: 1fr; gap: 36px; }
+        }
+        @media (max-width: 767px) {
+          .va-section { padding: 40px 20px 0; }
+          .va-grid { gap: 28px; }
+          .va-btn__q { font-size: 14.5px; }
+          .va-answer { padding-right: 8px; font-size: 14px; }
+          .va-promo { padding: 24px 20px; }
+          .va-promo__title { font-size: 21px; }
+          .va-promo__copy { font-size: 14px; margin-bottom: 16px; }
+        }
+        @media (max-width: 430px) { .va-section { padding: 32px 16px 0; } }
+      `}</style>
     </section>
   );
 }

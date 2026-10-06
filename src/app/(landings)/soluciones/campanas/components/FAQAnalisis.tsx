@@ -1,369 +1,151 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { Check } from 'lucide-react';
+
+const FAQS = [
+  {
+    q: '¿Qué presupuesto necesito?',
+    a: 'Depende del mercado, la competencia y el objetivo. Antes de lanzar una campaña definimos un presupuesto que permita obtener datos suficientes y tenga sentido para tu negocio.',
+  },
+  {
+    q: '¿En qué plataformas trabajáis?',
+    a: 'Google Ads y Meta Ads. Seleccionamos el canal o la combinación de canales según el objetivo, la audiencia y el proceso de compra.',
+  },
+  {
+    q: '¿Cuánto tiempo se tarda en ver resultados?',
+    a: 'Las campañas pueden generar tráfico y datos desde el lanzamiento, pero necesitan tiempo y volumen suficiente para analizar resultados y optimizar correctamente.',
+  },
+  {
+    q: '¿Cómo sé que las campañas funcionan?',
+    a: 'Configuramos las conversiones y analizamos indicadores relevantes como contactos y oportunidades para entender qué está funcionando y dónde ajustar.',
+  },
+];
+
+const BENEFICIOS = ['Sin acceso a tus cuentas', 'Detectamos prioridades claras', 'Diagnóstico por email'];
 
 export default function FAQAnalisis() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [formStep, setFormStep] = useState(0);
-
-  const faqs = [
-    {
-      q: '¿Qué presupuesto necesito para empezar?',
-      a: 'Depende del mercado, la competencia, el objetivo y el canal. Antes de lanzar una campaña definimos un presupuesto que permita obtener datos suficientes y tenga sentido para tu negocio.',
-    },
-    {
-      q: '¿Cuándo empezaré a ver resultados?',
-      a: 'Las campañas pueden empezar a generar tráfico y datos desde el lanzamiento, pero necesitan tiempo y volumen suficiente para analizar resultados y optimizar correctamente.',
-    },
-    {
-      q: '¿Trabajáis Google Ads y Meta Ads?',
-      a: 'Sí. Seleccionamos el canal o la combinación de canales según el objetivo, la audiencia y el proceso de compra.',
-    },
-    {
-      q: '¿Incluye la creación de la landing page?',
-      a: 'Puede incluirla. Si la página actual no está preparada para convertir, podemos diseñar o mejorar una landing específica para las campañas.',
-    },
-    {
-      q: '¿Cómo medís los resultados?',
-      a: 'Configuramos las conversiones y analizamos indicadores relevantes como contactos, oportunidades y coste por resultado para entender qué está funcionando.',
-    },
-    {
-      q: '¿Puedo pausar o modificar las campañas?',
-      a: 'Sí. Las campañas se revisan y ajustan según los datos, los objetivos y las necesidades del negocio.',
-    },
-  ];
-
-  const opciones = [
-    {
-      titulo: 'Conseguir más leads y contactos',
-      desc: 'Quiero generar oportunidades comerciales.',
-    },
-    {
-      titulo: 'Conseguir más ventas',
-      desc: 'Quiero aumentar la captación directa.',
-    },
-    {
-      titulo: 'Mejorar mis campañas actuales',
-      desc: 'Ya tengo campañas y quiero optimizarlas.',
-    },
-    {
-      titulo: 'Crear una landing',
-      desc: 'Necesito una página preparada para convertir.',
-    },
-  ];
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section
-      id="analisis"
-      className="faq-analisis-section"
-      style={{
-        padding: '80px 20px',
-        backgroundColor: 'white',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '60px',
-          alignItems: 'flex-start',
-        }}
-        className="faq-grid"
-      >
-        {/* FAQ */}
-        <div>
-          <h2
-            style={{
-              fontSize: 'clamp(28px, 4vw, 36px)',
-              fontWeight: 700,
-              color: 'var(--io-text)',
-              lineHeight: 1.2,
-              margin: '0 0 32px 0',
-            }}
-          >
-            Preguntas frecuentes
-          </h2>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                style={{
-                  border: '1px solid var(--io-border)',
-                  borderRadius: 'var(--io-radius-md)',
-                  overflow: 'hidden',
-                  backgroundColor: 'white',
-                }}
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  style={{
-                    width: '100%',
-                    padding: '16px',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    transition: 'background-color 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--io-bg-soft)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                  }}
-                  aria-expanded={openFaq === index}
-                >
-                  <ChevronDown
-                    size={20}
-                    style={{
-                      color: 'var(--io-action)',
-                      transition: 'transform 0.3s',
-                      transform: openFaq === index ? 'rotate(180deg)' : 'rotate(0deg)',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontSize: '14px',
-                      fontWeight: 600,
-                      color: 'var(--io-text)',
-                      flex: 1,
-                    }}
+    <section className="cf-section">
+      <div className="cf-grid">
+        <div className="cf-left">
+          <h2 className="cf-title">Preguntas frecuentes</h2>
+          <div className="cf-list">
+            {FAQS.map((faq, i) => {
+              const isOpen = open === i;
+              return (
+                <div key={faq.q} className="cf-item">
+                  <button
+                    type="button"
+                    className="cf-btn"
+                    aria-expanded={isOpen}
+                    aria-controls={`cf-panel-${i}`}
+                    onClick={() => setOpen(isOpen ? null : i)}
                   >
-                    {faq.q}
-                  </span>
-                </button>
-
-                {openFaq === index && (
-                  <div
-                    style={{
-                      padding: '16px',
-                      paddingTop: '0',
-                      borderTop: '1px solid var(--io-border)',
-                      backgroundColor: 'white',
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--io-text-muted)',
-                        margin: '0',
-                        lineHeight: 1.6,
-                      }}
-                    >
+                    <span className="cf-btn__q">{faq.q}</span>
+                    <span className="cf-btn__icon" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+                  </button>
+                  {isOpen && (
+                    <p id={`cf-panel-${i}`} className="cf-answer">
                       {faq.a}
                     </p>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Análisis Inicial */}
-        <div
-          style={{
-            backgroundColor: 'var(--io-bg-soft)',
-            borderRadius: 'var(--io-radius-lg)',
-            border: '1px solid var(--io-border)',
-            padding: '40px',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              color: 'var(--io-action)',
-              marginBottom: '16px',
-              textTransform: 'uppercase',
-            }}
-          >
-            Análisis inicial
-          </div>
-
-          <h3
-            style={{
-              fontSize: '24px',
-              fontWeight: 700,
-              color: 'var(--io-text)',
-              margin: '0 0 12px 0',
-              lineHeight: 1.2,
-            }}
-          >
-            Cuéntanos qué quieres conseguir
-          </h3>
-
-          <p
-            style={{
-              fontSize: '14px',
-              color: 'var(--io-text-muted)',
-              margin: '0 0 32px 0',
-              lineHeight: 1.6,
-            }}
-          >
-            Responde unas preguntas breves y te propondremos el mejor punto
-            de partida.
+        <aside className="cf-promo" aria-labelledby="cf-promo-title">
+          <p className="cf-eyebrow">
+            <span className="cf-eyebrow__line" aria-hidden="true" />
+            Diagnóstico digital gratuito
           </p>
-
-          {/* Progress */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '8px',
-              marginBottom: '32px',
-              fontSize: '12px',
-              color: 'var(--io-text-muted)',
-              fontWeight: 600,
-            }}
-          >
-            {[1, 2, 3, 4].map((step) => (
-              <div
-                key={step}
-                style={{
-                  flex: 1,
-                  height: '4px',
-                  backgroundColor:
-                    step <= formStep + 1 ? 'var(--io-action)' : 'var(--io-border)',
-                  borderRadius: '2px',
-                  transition: 'background-color 0.3s',
-                }}
-              />
+          <h3 id="cf-promo-title" className="cf-promo__title">
+            ¿Quieres mejorar tus resultados?
+          </h3>
+          <p className="cf-promo__copy">
+            Analizamos tu situación y te proponemos la mejor estrategia de campañas para tu negocio.
+          </p>
+          <ul className="cf-checks">
+            {BENEFICIOS.map((b) => (
+              <li key={b}>
+                <span className="cf-check" aria-hidden="true">
+                  <Check size={11} strokeWidth={3} />
+                </span>
+                {b}
+              </li>
             ))}
-          </div>
-
-          {/* Question */}
-          {formStep === 0 && (
-            <div>
-              <h4
-                style={{
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  color: 'var(--io-text)',
-                  margin: '0 0 20px 0',
-                }}
-              >
-                ¿Cuál es tu objetivo principal?
-              </h4>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {opciones.map((opcion, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setFormStep(1)}
-                    style={{
-                      padding: '16px',
-                      backgroundColor: 'white',
-                      border: '1.5px solid var(--io-border)',
-                      borderRadius: 'var(--io-radius-md)',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      transition: 'all 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--io-action)';
-                      e.currentTarget.style.backgroundColor = 'var(--io-bg-soft)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--io-border)';
-                      e.currentTarget.style.backgroundColor = 'white';
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: '14px',
-                        fontWeight: 600,
-                        color: 'var(--io-text)',
-                        marginBottom: '4px',
-                      }}
-                    >
-                      {opcion.titulo}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '12px',
-                        color: 'var(--io-text-muted)',
-                      }}
-                    >
-                      {opcion.desc}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {formStep === 1 && (
-            <div style={{ textAlign: 'center', color: 'var(--io-text-muted)' }}>
-              <p>Pregunta 2 de 4</p>
-              <p>Próximamente más pasos...</p>
-            </div>
-          )}
-
-          {/* CTA */}
-          {formStep === 0 && (
-            <div
-              style={{
-                marginTop: '24px',
-                fontSize: '13px',
-                color: 'var(--io-text-muted)',
-              }}
-            >
-              Continuar →
-            </div>
-          )}
-        </div>
+          </ul>
+          <Link href="/diagnostico/" className="cf-cta">
+            Empezar diagnóstico
+          </Link>
+        </aside>
       </div>
 
-      {/* Responsive styles */}
-      <style>
-        {`
-          @media (min-width: 1024px) {
-            .faq-grid {
-              grid-template-columns: 1fr 1fr !important;
-              gap: 60px !important;
-            }
-          }
+      <style>{`
+        .cf-section { padding: 56px 20px 12px; background-color: var(--io-bg); }
+        .cf-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 58fr) minmax(0, 42fr); gap: 56px; align-items: start; }
+        .cf-title { font-size: clamp(26px, 3.2vw, 34px); font-weight: 700; color: var(--io-text); line-height: 1.2; margin: 0 0 20px; }
 
-          @media (max-width: 1023px) {
-            .faq-analisis-section {
-              padding: 60px 20px;
-            }
-            .faq-grid {
-              grid-template-columns: 1fr !important;
-              gap: 40px !important;
-            }
-          }
+        .cf-list { border-top: 1px solid var(--io-border); }
+        .cf-item { border-bottom: 1px solid var(--io-border); }
+        .cf-btn {
+          display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 16px 4px;
+          text-align: left; font-family: inherit; cursor: pointer; background: none; border: none; color: var(--io-text);
+        }
+        .cf-btn:hover .cf-btn__q { color: var(--io-action-hover); }
+        .cf-btn:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; border-radius: 4px; }
+        .cf-btn__q { font-size: 15px; font-weight: 600; line-height: 1.4; transition: color 150ms ease; }
+        .cf-btn__icon { flex: none; font-size: 18px; color: var(--io-action); line-height: 1; }
+        .cf-answer { margin: 0; padding: 0 44px 18px 4px; font-size: 15px; line-height: 1.6; color: var(--io-text-muted); }
 
-          @media (max-width: 768px) {
-            .faq-analisis-section {
-              padding: 40px 20px;
-            }
-            .faq-grid {
-              gap: 32px !important;
-            }
-          }
+        .cf-promo {
+          position: relative; overflow: hidden; padding: 30px; border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
+          background: radial-gradient(circle at 100% 0%, rgba(51, 111, 230, 0.10) 0%, rgba(51, 111, 230, 0) 55%), var(--io-bg-soft);
+        }
+        .cf-eyebrow {
+          display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-size: 12px; font-weight: 700;
+          letter-spacing: 0.08em; text-transform: uppercase; color: var(--io-action-hover);
+        }
+        .cf-eyebrow__line { width: 22px; height: 3px; border-radius: 2px; background: var(--io-accent); flex: none; }
+        .cf-promo__title { font-size: 24px; font-weight: 700; color: var(--io-text); line-height: 1.25; margin: 0 0 12px; }
+        .cf-promo__copy { font-size: 15px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 18px; }
 
-          @media (max-width: 430px) {
-            .faq-analisis-section {
-              padding: 32px 20px;
-            }
-          }
+        .cf-checks { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+        .cf-checks li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--io-text); }
+        .cf-check {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 18px; height: 18px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.14); color: var(--io-action);
+        }
 
-          @media (max-width: 375px) {
-            .faq-analisis-section {
-              padding: 32px 16px;
-            }
-          }
-        `}
-      </style>
+        .cf-cta {
+          display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 12px 24px;
+          font-size: 15px; font-weight: 600; color: #fff; text-decoration: none; background: var(--io-action);
+          border: 1.5px solid var(--io-action); border-radius: var(--io-radius-md);
+          transition: background-color 180ms ease, border-color 180ms ease;
+        }
+        .cf-cta:hover, .cf-cta:focus-visible { background: var(--io-action-hover); border-color: var(--io-action-hover); color: #fff; }
+        .cf-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 3px; }
+
+        @media (max-width: 1023px) {
+          .cf-section { padding: 48px 20px 12px; }
+          .cf-grid { grid-template-columns: 1fr; gap: 36px; }
+        }
+        @media (max-width: 767px) {
+          .cf-section { padding: 40px 20px 0; }
+          .cf-grid { gap: 28px; }
+          .cf-btn__q { font-size: 14.5px; }
+          .cf-answer { padding-right: 8px; font-size: 14px; }
+          .cf-promo { padding: 24px 20px; }
+          .cf-promo__title { font-size: 21px; }
+          .cf-promo__copy { font-size: 14px; margin-bottom: 16px; }
+        }
+        @media (max-width: 430px) { .cf-section { padding: 32px 16px 0; } }
+      `}</style>
     </section>
   );
 }

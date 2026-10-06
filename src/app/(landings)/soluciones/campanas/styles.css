@@ -1,50 +1,11 @@
 /* Campañas Landing — Responsive Styles */
 
-/* Global — Header responsive (mismo patrón que Home/Soluciones/Visibilidad) */
-@media (max-width: 768px) {
-  header nav {
-    display: none !important;
-  }
-
-  header button {
-    display: block !important;
-  }
-}
-
-@media (max-width: 430px) {
-  header > div > a[href="#contacto"] {
-    display: none !important;
-  }
-}
-
-@media (min-width: 431px) and (max-width: 1023px) {
-  header > div {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    gap: 12px !important;
-  }
-
-  header > div > a[href="#contacto"] {
-    order: 2 !important;
-    margin-left: auto !important;
-  }
-
-  header > div > button {
-    order: 3 !important;
-    margin-left: 8px !important;
-  }
-}
-
-@media (min-width: 769px) {
-  header nav {
-    display: flex !important;
-  }
-
-  header button {
-    display: none !important;
-  }
-}
+/* Header responsive: retirado (2026-09-29) — reglas heredadas de una versión
+   anterior del header con selectores genéricos (header nav/header button/
+   header > div) que colisionaban con el LandingsHeader.tsx compartido actual
+   (con !important, ganan siempre y ocultaban el botón "Soluciones" en desktop
+   y rompían el hamburger en tablet). El header compartido ya gestiona su
+   propio responsive con clases propias — ver docs/analysis/GLOBAL_NAVIGATION_AUDIT.md. */
 
 /* ===== HERO ===== */
 

@@ -1,378 +1,169 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { TrendingUp, Target, LineChart, Sprout, Megaphone, Users2, Mail } from 'lucide-react';
+import { Target, Users2, Sparkles } from 'lucide-react';
+import { HeroAdsLaptopVisual, HeroSocialCardVisual } from './CampanasVisuals';
 
-export default function Hero() {
-  const beneficios = [
-    {
-      icon: TrendingUp,
-      label: 'Más demanda',
-      desc: 'Consigue más leads.',
-    },
-    {
-      icon: Target,
-      label: 'Campañas rentables',
-      desc: 'Invierte con criterio.',
-    },
-    {
-      icon: LineChart,
-      label: 'Medición real',
-      desc: 'Datos que importan.',
-    },
-    {
-      icon: Sprout,
-      label: 'Crecimiento',
-      desc: 'Resultados sostenibles.',
-    },
-  ];
+const HERO_PHOTO = '/assets/img/campanas/hero-campanas-business.webp';
+
+const MICROCARDS = [
+  { Icon: Target, title: 'Audiencias precisas', pos: { left: '2%', top: 4 } },
+  { Icon: Users2, title: 'Nuevas audiencias', pos: { right: '2%', top: 4 } },
+  { Icon: Sparkles, title: 'Más demanda', pos: { left: '34%', bottom: 2 } },
+];
+
+/** Foto local con placeholder si el archivo aún no existe (sin imágenes externas ni reutilizar otras páginas). */
+function HeroPhoto() {
+  const [failed, setFailed] = useState(false);
+  const ref = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
 
   return (
-    <section
-      className="campanas-hero-section"
-      style={{
-        paddingTop: '60px',
-        paddingBottom: '60px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        backgroundColor: 'var(--io-bg)',
-      }}
-    >
-      <div
-        className="campanas-hero-grid"
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1.2fr 0.8fr',
-          gap: '50px',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        {/* Left: Content */}
-        <div>
-          <div
-            style={{
-              display: 'inline-block',
-              backgroundColor: 'var(--io-bg-soft)',
-              color: 'var(--io-action)',
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              padding: '8px 16px',
-              borderRadius: 'var(--io-radius-md)',
-              marginBottom: '24px',
-              textTransform: 'uppercase',
-            }}
-          >
-            Soluciones de campañas
-          </div>
+    <span className="cph-photo" data-missing={failed || undefined}>
+      {!failed && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          ref={ref}
+          src={HERO_PHOTO}
+          alt="Persona gestionando las campañas publicitarias de su negocio"
+          width={480}
+          height={480}
+          loading="eager"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      )}
+      {failed && (
+        <span className="cph-photo__ph" aria-hidden="true">
+          <Target size={30} strokeWidth={1.4} />
+        </span>
+      )}
+    </span>
+  );
+}
 
-          <h1
-            className="campanas-hero-h1"
-            style={{
-              fontSize: 'clamp(32px, 4.6vw, 52px)',
-              fontWeight: 800,
-              color: 'var(--io-text)',
-              lineHeight: 1.18,
-              margin: '0 0 24px 0',
-              letterSpacing: '-0.015em',
-            }}
-          >
-            Atrae demanda cuando necesitas acelerar.
-          </h1>
-
-          <p
-            className="campanas-hero-copy"
-            style={{
-              fontSize: '18px',
-              lineHeight: 1.65,
-              color: 'var(--io-text-muted)',
-              margin: '0 0 32px 0',
-              maxWidth: '520px',
-            }}
-          >
-            Campañas de Google Ads y Meta Ads conectadas con landing pages,
-            tracking y optimización continua para conseguir más leads y
-            ventas para tu negocio.
+export default function Hero() {
+  return (
+    <section className="cph-section">
+      <div className="cph-grid">
+        <div className="cph-left">
+          <span className="cph-eyebrow">Campañas</span>
+          <h1 className="cph-title">Genera demanda para tu negocio.</h1>
+          <p className="cph-sub">
+            Campañas en Google y redes sociales para llegar a más personas y conseguir resultados.
           </p>
-
-          <Link
-            href="#contacto"
-            style={{
-              display: 'inline-block',
-              padding: '14px 32px',
-              backgroundColor: 'var(--io-action)',
-              color: 'white',
-              fontSize: '16px',
-              fontWeight: 600,
-              borderRadius: 'var(--io-radius-md)',
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action)';
-            }}
-          >
-            Analizar mi proyecto
-          </Link>
-
-          {/* Beneficios - 4 indicadores */}
-          <div
-            className="campanas-hero-beneficios"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '20px',
-              marginTop: '56px',
-              paddingTop: '40px',
-              borderTop: '1px solid var(--io-border)',
-            }}
-          >
-            {beneficios.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div
-                  key={b.label}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: 'var(--io-radius-md)',
-                      backgroundColor: 'var(--io-bg-soft)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--io-action)',
-                      marginBottom: '10px',
-                    }}
-                  >
-                    <Icon size={19} strokeWidth={1.5} />
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '13px',
-                      fontWeight: 700,
-                      color: 'var(--io-text)',
-                      marginBottom: '4px',
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {b.label}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '12px',
-                      color: 'var(--io-text-muted)',
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {b.desc}
-                  </div>
-                </div>
-              );
-            })}
+          <div className="cph-ctas">
+            <Link href="/diagnostico/" className="cph-cta cph-cta--primary">
+              Analizar mi proyecto
+            </Link>
+            <a href="#como-trabajamos-campanas" className="cph-cta cph-cta--secondary">
+              Ver cómo funciona
+            </a>
           </div>
         </div>
 
-        {/* Right: Visual — ecosistema de captación */}
-        <div
-          className="campanas-hero-visual"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '420px',
-            backgroundColor: 'white',
-            borderRadius: 'var(--io-radius-lg)',
-            border: '1px solid var(--io-border)',
-            padding: '40px 30px',
-            position: 'relative',
-            width: '100%',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            className="campanas-hero-visual-inner"
-            style={{ position: 'absolute', inset: 0 }}
-          >
-            {/* CENTRAL: landing page */}
-            <div
-              style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '128px',
-                height: '150px',
-                backgroundColor: 'white',
-                border: '3px solid var(--io-text)',
-                borderRadius: '8px',
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '8px',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-                zIndex: 10,
-              }}
-            >
-              <div style={{ height: '8px', backgroundColor: 'var(--io-action)', marginBottom: '8px', borderRadius: '2px' }} />
-              <div style={{ height: '18px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '2px', marginBottom: '8px' }} />
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px', justifyContent: 'flex-end' }}>
-                <div style={{ width: '100%', height: '5px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-                <div style={{ width: '70%', height: '5px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-                <div style={{ width: '100%', height: '10px', backgroundColor: 'var(--io-action)', borderRadius: '2px', marginTop: '4px' }} />
-              </div>
-              <span
-                style={{
-                  position: 'absolute',
-                  bottom: '-22px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  fontSize: '10px',
-                  fontWeight: 700,
-                  color: 'var(--io-text-muted)',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                Landing
-              </span>
-            </div>
-
-            {/* Badge: Google Ads - arriba izquierda */}
-            <div
-              className="campanas-hero-badge"
-              style={{
-                position: 'absolute',
-                top: '14%',
-                left: '6%',
-                width: '90px',
-                height: '48px',
-                backgroundColor: 'var(--io-action)',
-                borderRadius: '8px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                padding: '8px 10px',
-                gap: '4px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                zIndex: 3,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <Megaphone size={11} strokeWidth={2} style={{ color: 'white', flexShrink: 0 }} />
-                <span style={{ fontSize: '9px', fontWeight: 700, color: 'white' }}>Google Ads</span>
-              </div>
-              <div style={{ width: '70%', height: '3px', backgroundColor: 'rgba(255,255,255,0.5)', borderRadius: '1px' }} />
-            </div>
-
-            {/* Badge: Meta Ads - arriba derecha */}
-            <div
-              className="campanas-hero-badge"
-              style={{
-                position: 'absolute',
-                top: '14%',
-                right: '6%',
-                width: '90px',
-                height: '48px',
-                backgroundColor: 'white',
-                border: '1.5px solid var(--io-border)',
-                borderRadius: '8px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                padding: '8px 10px',
-                gap: '4px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                zIndex: 3,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <Users2 size={11} strokeWidth={2} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
-                <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--io-text)' }}>Meta Ads</span>
-              </div>
-              <div style={{ width: '70%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-            </div>
-
-            {/* Badge: Leads / oportunidades - abajo izquierda */}
-            <div
-              className="campanas-hero-badge"
-              style={{
-                position: 'absolute',
-                bottom: '12%',
-                left: '9%',
-                width: '86px',
-                height: '52px',
-                backgroundColor: 'var(--io-bg-soft)',
-                border: '1.5px solid var(--io-accent)',
-                borderRadius: '8px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '4px',
-                boxShadow: '0 2px 8px rgba(244,162,124,0.08)',
-                zIndex: 3,
-              }}
-            >
-              <Mail size={15} strokeWidth={1.5} style={{ color: 'var(--io-text)' }} />
-              <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--io-text)' }}>Leads</span>
-            </div>
-
-            {/* Badge: Medición - abajo derecha */}
-            <div
-              className="campanas-hero-badge"
-              style={{
-                position: 'absolute',
-                bottom: '12%',
-                right: '9%',
-                width: '84px',
-                height: '52px',
-                backgroundColor: 'white',
-                border: '1.5px solid var(--io-border)',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'flex-end',
-                gap: '3px',
-                padding: '8px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                zIndex: 3,
-              }}
-            >
-              <div style={{ width: '4px', height: '10px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-              <div style={{ width: '4px', height: '16px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
-              <div style={{ width: '4px', height: '22px', backgroundColor: 'var(--io-accent)', borderRadius: '1px' }} />
-              <div style={{ width: '4px', height: '14px', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
-            </div>
-
-            {/* Anotación */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '16px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '11px',
-                color: 'var(--io-accent)',
-                fontWeight: 700,
-                textAlign: 'center',
-                zIndex: 15,
-              }}
-            >
-              Campañas + landing + medición
-            </div>
+        <div className="cph-stage">
+          <div className="cph-stage__laptop">
+            <HeroAdsLaptopVisual className="cph-stage__svg" />
           </div>
+          <div className="cph-stage__social">
+            <HeroSocialCardVisual className="cph-stage__social-svg" />
+          </div>
+          <HeroPhoto />
+          {MICROCARDS.map((c, i) => {
+            const Icon = c.Icon;
+            return (
+              <div key={c.title} className={`cph-mc cph-mc--${i}`} style={c.pos}>
+                <span className="cph-mc__icon" aria-hidden="true">
+                  <Icon size={14} strokeWidth={2.2} />
+                </span>
+                <strong>{c.title}</strong>
+              </div>
+            );
+          })}
         </div>
       </div>
+
+      <style>{`
+        .cph-section { padding: 56px 20px; background-color: var(--io-bg); }
+        .cph-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 48px; align-items: center; }
+        .cph-left { display: flex; flex-direction: column; }
+        .cph-eyebrow {
+          display: inline-block; align-self: flex-start; background: var(--io-bg-soft); color: var(--io-action);
+          font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+          padding: 7px 14px; border-radius: var(--io-radius-md); margin-bottom: 20px;
+        }
+        .cph-title { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; color: var(--io-text); line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 18px; }
+        .cph-sub { font-size: 17px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 28px; max-width: 440px; }
+
+        .cph-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+        .cph-cta {
+          display: inline-flex; align-items: center; justify-content: center; padding: 13px 26px;
+          font-size: 15.5px; font-weight: 600; text-decoration: none; border-radius: var(--io-radius-md);
+          transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+        }
+        .cph-cta--primary {
+          background: var(--io-accent-dark); color: #fff; border: 1.5px solid var(--io-accent-dark);
+          box-shadow: 0 6px 16px rgba(246, 119, 82, 0.35);
+        }
+        .cph-cta--primary:hover { background: var(--io-accent-dark-hover); border-color: var(--io-accent-dark-hover); color: #fff; }
+        .cph-cta--secondary { background: #fff; color: var(--io-action); border: 1.5px solid var(--io-action); }
+        .cph-cta--secondary:hover { background: rgba(51, 111, 230, 0.06); }
+        .cph-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; }
+
+        .cph-stage { position: relative; width: 100%; min-height: 420px; }
+        .cph-stage__laptop { position: absolute; left: 4%; top: 0; width: 82%; }
+        .cph-stage__svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 22px rgba(15, 23, 42, 0.10)); }
+
+        .cph-photo {
+          position: absolute; left: 1%; bottom: 0; width: 27%; aspect-ratio: 1 / 1; display: block; overflow: hidden;
+          border-radius: 50%; border: 4px solid #fff; box-shadow: 0 10px 22px rgba(15, 23, 42, 0.14);
+          background: linear-gradient(135deg, #dbe7ff 0%, #ece5fb 100%); z-index: 2;
+        }
+        .cph-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+        .cph-photo__ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(51, 111, 230, 0.45); }
+
+        .cph-stage__social { position: absolute; right: 0; bottom: 4%; width: 38%; z-index: 3; }
+        .cph-stage__social-svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 22px rgba(15, 23, 42, 0.16)); }
+
+        .cph-mc {
+          position: absolute; z-index: 4; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
+          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
+        }
+        .cph-mc__icon {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
+        }
+        .cph-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+
+        @media (max-width: 1023px) {
+          .cph-section { padding: 48px 20px; }
+          .cph-grid { grid-template-columns: 1fr; gap: 40px; }
+          .cph-left { align-items: center; text-align: center; }
+          .cph-sub { max-width: 560px; }
+          .cph-ctas { justify-content: center; }
+          .cph-stage { min-height: 380px; max-width: 560px; margin: 0 auto; }
+        }
+        @media (max-width: 767px) {
+          .cph-section { padding: 40px 20px; }
+          .cph-stage { min-height: 320px; }
+          .cph-mc { padding: 6px 10px; }
+          .cph-mc strong { font-size: 11.5px; }
+          .cph-mc--2 { display: none; }
+          .cph-mc--0 { top: -8px !important; left: 0 !important; }
+          .cph-mc--1 { top: -8px !important; right: 0 !important; }
+        }
+        @media (max-width: 430px) {
+          .cph-section { padding: 32px 16px; }
+          .cph-stage { min-height: 280px; }
+        }
+      `}</style>
     </section>
   );
 }

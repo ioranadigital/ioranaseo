@@ -1,365 +1,212 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Search } from 'lucide-react';
+import { Users, TrendingUp, Handshake, Monitor, Search, MousePointerClick } from 'lucide-react';
+
+const HERO_PHOTO = '/assets/img/soluciones/hero-soluciones-business.webp';
+
+const BENEFITS = [
+  { Icon: Users, title: 'Más clientes', text: 'Atrae y convierte' },
+  { Icon: TrendingUp, title: 'Crecimiento real', text: 'Estrategias medibles' },
+  { Icon: Handshake, title: 'Acompañamiento', text: 'De principio a fin' },
+];
+
+// Posiciones comprobadas contra la foto real (recorte panorámico 2.2:1): las
+// dos caras están centro-derecha (45-75% x); las 3 microcards flotan sobre
+// zonas sin cara/manos — ventana arriba-izquierda del grupo, estanterías
+// arriba-derecha, mesa abajo-derecha.
+const MICROCARDS = [
+  { Icon: Search, title: 'SEO preparado', pos: { left: '38%', top: 10 } },
+  { Icon: Monitor, title: 'Diseño responsive', pos: { right: '4%', top: 10 } },
+  { Icon: MousePointerClick, title: 'CTA claros', pos: { right: '4%', bottom: 10 } },
+];
+
+/** Foto local con placeholder si el archivo aún no existe (sin imágenes externas ni reutilizar la de otras páginas). */
+function HeroPhoto() {
+  const [failed, setFailed] = useState(false);
+  const ref = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
+
+  return (
+    <span className="sh-bg-photo" data-missing={failed || undefined}>
+      {!failed && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          ref={ref}
+          src={HERO_PHOTO}
+          alt="Dos profesionales de un pequeño negocio trabajando juntos en su presencia digital"
+          width={1920}
+          height={873}
+          loading="eager"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      )}
+      {failed && (
+        <span className="sh-bg-photo__ph" aria-hidden="true">
+          <Monitor size={40} strokeWidth={1.4} />
+        </span>
+      )}
+    </span>
+  );
+}
 
 export default function Hero() {
   return (
-    <section
-      className="soluciones-hero-section"
-      style={{
-        paddingTop: '60px',
-        paddingBottom: '60px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        backgroundColor: 'var(--io-bg)',
-      }}
-    >
-      <div
-        className="soluciones-hero-inner"
-        style={{
-          maxWidth: '780px',
-          margin: '0 auto',
-          textAlign: 'center',
-        }}
-      >
-        {/* Eyebrow */}
-        <div
-          style={{
-            display: 'inline-block',
-            backgroundColor: 'var(--io-bg-soft)',
-            color: 'var(--io-action)',
-            fontSize: '12px',
-            fontWeight: 700,
-            letterSpacing: '0.08em',
-            padding: '8px 16px',
-            borderRadius: 'var(--io-radius-md)',
-            marginBottom: '24px',
-            textTransform: 'uppercase',
-          }}
-        >
-          Soluciones de captación digital
-        </div>
+    <section className="sh-section">
+      {/* Fondo a sangre: foto + degradado que se difumina hacia la derecha
+          (sólido/legible a la izquierda, revela la foto según avanza) */}
+      <div className="sh-bg" aria-hidden="true">
+        <HeroPhoto />
+        <div className="sh-bg__fade" />
+        {MICROCARDS.map((c, i) => {
+          const Icon = c.Icon;
+          return (
+            <div key={c.title} className={`sh-mc sh-mc--${i}`} style={c.pos}>
+              <span className="sh-mc__icon" aria-hidden="true">
+                <Icon size={14} strokeWidth={2.2} />
+              </span>
+              <strong>{c.title}</strong>
+            </div>
+          );
+        })}
+      </div>
 
-        {/* H1 */}
-        <h1
-          className="soluciones-hero-h1"
-          style={{
-            fontSize: 'clamp(32px, 5vw, 52px)',
-            fontWeight: 800,
-            color: 'var(--io-text)',
-            lineHeight: 1.15,
-            margin: '0 0 20px 0',
-            letterSpacing: '-0.02em',
-          }}
-        >
-          Las piezas que necesita tu negocio para captar mejor.
-        </h1>
-
-        {/* Copy */}
-        <p
-          style={{
-            fontSize: '17px',
-            color: 'var(--io-text-muted)',
-            lineHeight: 1.6,
-            margin: '0 0 32px 0',
-            maxWidth: '560px',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          Web, visibilidad, campañas y conversión conectadas para ayudarte a
-          generar más oportunidades.
+      <div className="sh-content">
+        <span className="sh-eyebrow">Soluciones</span>
+        <h1 className="sh-title">Soluciones para hacer crecer tu negocio</h1>
+        <p className="sh-sub">
+          Web, visibilidad, campañas y conversión conectadas para convertir tu presencia digital en
+          oportunidades.
         </p>
 
-        {/* CTA */}
-        <Link
-          href="#contacto"
-          style={{
-            display: 'inline-block',
-            padding: '14px 32px',
-            backgroundColor: 'var(--io-action)',
-            color: 'white',
-            fontSize: '15px',
-            fontWeight: 600,
-            borderRadius: 'var(--io-radius-md)',
-            textDecoration: 'none',
-            transition: 'background-color 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--io-action)';
-          }}
-        >
-          Analizar mi proyecto
-        </Link>
-      </div>
+        <div className="sh-ctas">
+          <a href="#nuestras-soluciones" className="sh-cta sh-cta--primary">
+            Ver todas las soluciones
+          </a>
+          <Link href="/diagnostico/" className="sh-cta sh-cta--secondary">
+            Analizar mi proyecto
+          </Link>
+        </div>
 
-      {/* Visual Ecosystem — identidad propia: 4 capacidades conectadas (no un mockup de HOME) */}
-      <div
-        className="soluciones-hero-visual"
-        style={{
-          maxWidth: '760px',
-          margin: '56px auto 0',
-          minHeight: '440px',
-          background: `
-            radial-gradient(circle at 20% 15%, rgba(59,130,246,0.06) 0%, rgba(59,130,246,0) 40%),
-            radial-gradient(circle at 85% 85%, rgba(244,162,124,0.07) 0%, rgba(244,162,124,0) 40%),
-            white
-          `,
-          borderRadius: 'var(--io-radius-lg)',
-          border: '1px solid var(--io-border)',
-          position: 'relative',
-          overflow: 'hidden',
-          padding: '40px 30px',
-        }}
-      >
-        {/* Real responsive layout: absolute "orbit" on desktop, CSS grid on tablet/mobile
-            (see styles.css) — no transform:scale() anywhere. */}
-        <div
-          className="soluciones-hero-visual-inner"
-          style={{
-            position: 'absolute',
-            inset: 0,
-          }}
-        >
-          {/* Conectores — finos, bajo contraste, un único acento peach marcando el destino (Conversión) */}
-          <svg
-            className="soluciones-hero-connectors"
-            width="100%"
-            height="100%"
-            style={{ position: 'absolute', inset: 0, zIndex: 1 }}
-            preserveAspectRatio="none"
-          >
-            <line x1="50%" y1="50%" x2="16%" y2="24%" stroke="var(--io-border)" strokeWidth="1.5" strokeDasharray="3 4" />
-            <line x1="50%" y1="50%" x2="84%" y2="24%" stroke="var(--io-border)" strokeWidth="1.5" strokeDasharray="3 4" />
-            <line x1="50%" y1="50%" x2="50%" y2="86%" stroke="var(--io-border)" strokeWidth="1.5" strokeDasharray="3 4" />
-            <circle cx="50%" cy="68%" r="3" fill="var(--io-accent)" />
-          </svg>
-
-          {/* CENTRAL: WEB — mini navegador reconocible (mismo lenguaje que HOME, simplificado) */}
-          <div
-            className="sol-hero-node sol-hero-node-web"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              gridArea: 'web',
-              width: '136px',
-              height: '148px',
-              backgroundColor: 'white',
-              border: '3px solid var(--io-text)',
-              borderRadius: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '10px',
-              gap: '6px',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-              zIndex: 10,
-            }}
-          >
-            <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
-              <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
-              <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
-              <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--io-accent)' }} />
-            </div>
-            <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '4px' }} />
-            <div style={{ height: '4px', width: '100%', backgroundColor: 'var(--io-border)', borderRadius: '2px', flexShrink: 0 }} />
-            <div style={{ height: '4px', width: '65%', backgroundColor: 'var(--io-border)', borderRadius: '2px', flexShrink: 0 }} />
-            <div style={{ height: '12px', width: '45%', backgroundColor: 'var(--io-action)', borderRadius: '3px', flexShrink: 0 }} />
-            <span
-              className="sol-hero-node-label"
-              style={{
-                position: 'absolute',
-                bottom: '-22px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '10px',
-                fontWeight: 700,
-                color: 'var(--io-text-muted)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Web
-            </span>
-          </div>
-
-          {/* VISIBILIDAD: mini buscador + mini mapa con pin — "te encuentran" */}
-          <div
-            className="sol-hero-node sol-hero-node-visibilidad"
-            style={{
-              position: 'absolute',
-              top: '14%',
-              left: '5%',
-              gridArea: 'visibilidad',
-              width: '118px',
-              height: '92px',
-              backgroundColor: 'white',
-              border: '1.5px solid var(--io-border)',
-              borderRadius: 'var(--io-radius-md)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '6px',
-              padding: '10px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-              zIndex: 3,
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: 'var(--io-bg-soft)', borderRadius: '10px', padding: '4px 8px', flexShrink: 0 }}>
-              <Search size={10} strokeWidth={2.5} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
-              <div style={{ flex: 1, height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-            </div>
-            <div style={{ flex: 1, position: 'relative', borderRadius: '6px', backgroundColor: 'var(--io-bg-soft)', overflow: 'hidden' }}>
-              <svg viewBox="0 0 100 40" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
-                <path d="M0,30 Q25,10 50,25 T100,15" fill="none" stroke="var(--io-border)" strokeWidth="2" />
-              </svg>
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '40%',
-                  left: '55%',
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50% 50% 50% 0',
-                  backgroundColor: 'var(--io-action)',
-                  transform: 'rotate(-45deg)',
-                }}
-              />
-            </div>
-            <span
-              className="sol-hero-node-label"
-              style={{
-                position: 'absolute',
-                bottom: '-20px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '10px',
-                fontWeight: 700,
-                color: 'var(--io-text-muted)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Visibilidad
-            </span>
-          </div>
-
-          {/* CAMPAÑAS: mini anuncio + mini gráfico con línea ascendente — "generar demanda" */}
-          <div
-            className="sol-hero-node sol-hero-node-campanas"
-            style={{
-              position: 'absolute',
-              top: '14%',
-              right: '5%',
-              gridArea: 'campanas',
-              width: '112px',
-              height: '92px',
-              backgroundColor: 'white',
-              border: '1.5px solid var(--io-border)',
-              borderRadius: 'var(--io-radius-md)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '6px',
-              padding: '10px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-              zIndex: 3,
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', flexShrink: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', height: '12px', borderRadius: '2px', backgroundColor: 'var(--io-action)', flexShrink: 0 }}>
-                <span style={{ fontSize: '7px', fontWeight: 800, color: 'white', lineHeight: 1 }}>Ad</span>
+        <div className="sh-benefits">
+          {BENEFITS.map((b) => {
+            const Icon = b.Icon;
+            return (
+              <div key={b.title} className="sh-benefit">
+                <span className="sh-benefit__icon" aria-hidden="true">
+                  <Icon size={16} strokeWidth={2.1} />
+                </span>
+                <span className="sh-benefit__text">
+                  <strong>{b.title}</strong>
+                  <span>{b.text}</span>
+                </span>
               </div>
-              <div style={{ flex: 1, height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-            </div>
-            <div style={{ flex: 1, position: 'relative', borderRadius: '6px', backgroundColor: 'var(--io-bg-soft)', display: 'flex', alignItems: 'flex-end', gap: '3px', padding: '6px' }}>
-              <div style={{ width: '5px', height: '35%', backgroundColor: 'var(--io-action)', opacity: 0.4, borderRadius: '1px' }} />
-              <div style={{ width: '5px', height: '55%', backgroundColor: 'var(--io-action)', opacity: 0.6, borderRadius: '1px' }} />
-              <div style={{ width: '5px', height: '40%', backgroundColor: 'var(--io-action)', opacity: 0.75, borderRadius: '1px' }} />
-              <div style={{ width: '5px', height: '75%', backgroundColor: 'var(--io-action)', borderRadius: '1px' }} />
-              <svg viewBox="0 0 100 40" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-                <polyline points="0,35 30,22 55,26 78,10 100,5" fill="none" stroke="var(--io-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <span
-              className="sol-hero-node-label"
-              style={{
-                position: 'absolute',
-                bottom: '-20px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '10px',
-                fontWeight: 700,
-                color: 'var(--io-text-muted)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Campañas
-            </span>
-          </div>
-
-          {/* CONVERSIÓN: mini funnel — "convertir visitas en oportunidades" */}
-          <div
-            className="sol-hero-node sol-hero-node-conversion"
-            style={{
-              position: 'absolute',
-              bottom: '6%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              gridArea: 'conversion',
-              width: '118px',
-              height: '80px',
-              backgroundColor: 'white',
-              border: '1.5px solid var(--io-border)',
-              borderRadius: 'var(--io-radius-md)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '4px',
-              padding: '10px 12px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-              zIndex: 3,
-            }}
-          >
-            <div style={{ width: '85%', height: '8px', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
-            <div style={{ width: '60%', height: '8px', backgroundColor: 'var(--io-action)', opacity: 0.6, borderRadius: '2px' }} />
-            <div style={{ width: '32%', height: '8px', backgroundColor: 'var(--io-action)', borderRadius: '2px' }} />
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--io-accent)', marginTop: '2px' }} />
-            <span
-              className="sol-hero-node-label"
-              style={{
-                position: 'absolute',
-                bottom: '-20px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: '10px',
-                fontWeight: 700,
-                color: 'var(--io-text-muted)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Conversión
-            </span>
-          </div>
-
-          {/* Microacento discreto */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '14px',
-              right: '18px',
-              fontSize: '11px',
-              color: 'var(--io-accent)',
-              fontWeight: 700,
-              zIndex: 15,
-            }}
-          >
-            ✦ Trabajan juntas
-          </div>
+            );
+          })}
         </div>
       </div>
+
+      <style>{`
+        .sh-section { position: relative; overflow: hidden; background-color: var(--io-bg); }
+
+        /* Fondo a sangre (foto + degradado + microcards), detrás del contenido */
+        .sh-bg { position: absolute; inset: 0; z-index: 0; }
+        .sh-bg-photo { position: absolute; inset: 0; display: block; overflow: hidden; }
+        .sh-bg-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% 45%; }
+        .sh-bg-photo__ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(51, 111, 230, 0.35); background: linear-gradient(135deg, #dbe7ff 0%, #fbe3d6 100%); }
+        /* Sólido/legible a la izquierda (mismo tono que el fondo de página), se difumina y revela la foto hacia la derecha */
+        .sh-bg__fade {
+          position: absolute; inset: 0;
+          background: linear-gradient(to right, var(--io-bg) 0%, var(--io-bg) 32%, rgba(248, 250, 252, 0.82) 44%, rgba(248, 250, 252, 0) 62%);
+        }
+
+        .sh-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 72px 20px; }
+        .sh-eyebrow {
+          display: inline-block; background: var(--io-bg-soft); color: var(--io-action);
+          font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+          padding: 7px 14px; border-radius: var(--io-radius-md); margin-bottom: 20px;
+        }
+        .sh-title { font-size: clamp(30px, 4.6vw, 48px); font-weight: 800; color: var(--io-text); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 18px; max-width: 520px; }
+        .sh-sub { font-size: 17px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 28px; max-width: 460px; }
+
+        .sh-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 32px; }
+        .sh-cta {
+          display: inline-flex; align-items: center; justify-content: center; padding: 13px 26px;
+          font-size: 15.5px; font-weight: 600; text-decoration: none; border-radius: var(--io-radius-md);
+          transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+        }
+        .sh-cta--primary { background: var(--io-action); color: #fff; border: 1.5px solid var(--io-action); }
+        .sh-cta--primary:hover { background: var(--io-action-hover); border-color: var(--io-action-hover); color: #fff; }
+        .sh-cta--secondary {
+          background: var(--io-accent-dark); color: #fff; border: 1.5px solid var(--io-accent-dark);
+          box-shadow: 0 6px 16px rgba(246, 119, 82, 0.35);
+        }
+        .sh-cta--secondary:hover { background: var(--io-accent-dark-hover); border-color: var(--io-accent-dark-hover); }
+        .sh-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; }
+
+        .sh-benefits { display: flex; flex-wrap: wrap; gap: 22px; padding-top: 24px; border-top: 1px solid var(--io-border); max-width: 480px; }
+        .sh-benefit { display: flex; align-items: flex-start; gap: 10px; }
+        .sh-benefit__icon {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 30px; height: 30px;
+          border-radius: 50%; background: var(--io-bg-soft); color: var(--io-action); margin-top: 1px;
+        }
+        .sh-benefit__text { display: flex; flex-direction: column; gap: 1px; }
+        .sh-benefit__text strong { font-size: 13.5px; font-weight: 700; color: var(--io-text); line-height: 1.3; }
+        .sh-benefit__text span { font-size: 12.5px; color: var(--io-text-muted); }
+
+        .sh-mc {
+          position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
+          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12); white-space: nowrap;
+        }
+        .sh-mc__icon {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
+        }
+        .sh-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+
+        /* Desktop (≥1024px, mismo corte que el resto del sitio): fondo a sangre
+           con altura fija cómoda para foto + degradado. A 768-1023px el texto
+           (max-width fijo en px) ya no cabe dentro de la zona sólida del
+           degradado — se probó y el copy quedaba ilegible sobre la foto. */
+        @media (min-width: 1024px) {
+          .sh-section { min-height: 560px; display: flex; align-items: center; }
+          .sh-content { width: 100%; }
+        }
+        @media (min-width: 1440px) {
+          .sh-section { min-height: 600px; }
+        }
+
+        /* Mobile/tablet (<1024px): sin fondo a sangre (el texto no cabe con
+           legibilidad garantizada dentro del degradado a estas anchuras) —
+           vuelve al patrón habitual de foto rectangular apilada bajo el texto. */
+        @media (max-width: 1023px) {
+          .sh-section { padding: 40px 20px 0; }
+          .sh-bg { position: static; display: flex; flex-direction: column; margin-top: 28px; }
+          .sh-bg-photo {
+            position: relative; width: 100%; aspect-ratio: 1.6; border-radius: var(--io-radius-lg);
+            border: 1px solid var(--io-border);
+          }
+          .sh-bg-photo img { object-position: 55% 45%; }
+          .sh-bg__fade { display: none; }
+          .sh-content { padding: 0 0 40px; }
+          .sh-title, .sh-sub, .sh-benefits { max-width: none; }
+          .sh-mc { padding: 6px 10px; }
+          .sh-mc strong { font-size: 11.5px; }
+          .sh-mc--0 { left: 3% !important; right: auto !important; top: 10px !important; }
+          .sh-mc--1 { right: 3% !important; top: 10px !important; }
+          .sh-mc--2 { right: 3% !important; bottom: 10px !important; }
+        }
+        @media (max-width: 430px) {
+          .sh-section { padding: 32px 16px 0; }
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,374 +1,129 @@
 'use client';
 
 import Link from 'next/link';
-import { Eye, Target, TrendingUp, Sprout, Search, MapPin } from 'lucide-react';
+import { MapPin, FileText, Sparkles } from 'lucide-react';
+import { HeroSearchVisual, HeroMapCardVisual } from './VisibilidadVisuals';
+
+const MICROCARDS = [
+  { Icon: MapPin, title: 'Cerca de ti', pos: { left: '2%', top: 6 } },
+  { Icon: FileText, title: 'Contenido relevante', pos: { left: '30%', bottom: 4 } },
+  { Icon: Sparkles, title: 'Más visible', pos: { right: '2%', top: 6 } },
+];
 
 export default function Hero() {
-  const beneficios = [
-    {
-      icon: Eye,
-      label: 'Más visibilidad',
-      desc: 'Te encuentran antes.',
-    },
-    {
-      icon: Target,
-      label: 'Tráfico cualificado',
-      desc: 'Personas que realmente buscan lo que ofreces.',
-    },
-    {
-      icon: TrendingUp,
-      label: 'Más oportunidades',
-      desc: 'Más posibilidades de contacto.',
-    },
-    {
-      icon: Sprout,
-      label: 'Crecimiento sostenible',
-      desc: 'Resultados que pueden mejorar con el tiempo.',
-    },
-  ];
-
   return (
-    <section
-      className="visibilidad-hero-section"
-      style={{
-        paddingTop: '60px',
-        paddingBottom: '60px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        backgroundColor: 'var(--io-bg)',
-      }}
-    >
-      <div
-        className="visibilidad-hero-grid"
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1.2fr 0.8fr',
-          gap: '50px',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        {/* Left: Content */}
-        <div>
-          <div
-            style={{
-              display: 'inline-block',
-              backgroundColor: 'var(--io-bg-soft)',
-              color: 'var(--io-action)',
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              padding: '8px 16px',
-              borderRadius: 'var(--io-radius-md)',
-              marginBottom: '24px',
-              textTransform: 'uppercase',
-            }}
-          >
-            Soluciones de visibilidad
-          </div>
-
-          <h1
-            className="visibilidad-hero-h1"
-            style={{
-              fontSize: 'clamp(32px, 4.6vw, 52px)',
-              fontWeight: 800,
-              color: 'var(--io-text)',
-              lineHeight: 1.18,
-              margin: '0 0 24px 0',
-              letterSpacing: '-0.015em',
-            }}
-          >
-            Aparece cuando tus clientes te buscan.
-          </h1>
-
-          <p
-            className="visibilidad-hero-copy"
-            style={{
-              fontSize: '18px',
-              lineHeight: 1.65,
-              color: 'var(--io-text-muted)',
-              margin: '0 0 32px 0',
-              maxWidth: '520px',
-            }}
-          >
-            Trabajamos SEO, SEO Local, Google Maps y contenidos para que tu
-            negocio gane visibilidad en búsquedas con intención real.
+    <section className="vh-section">
+      <div className="vh-grid">
+        <div className="vh-left">
+          <span className="vh-eyebrow">Visibilidad</span>
+          <h1 className="vh-title">Que te encuentren cuando te necesitan.</h1>
+          <p className="vh-sub">
+            SEO, SEO Local y Google Maps para aumentar tu visibilidad y atraer más clientes.
           </p>
-
-          <Link
-            href="#contacto"
-            style={{
-              display: 'inline-block',
-              padding: '14px 32px',
-              backgroundColor: 'var(--io-action)',
-              color: 'white',
-              fontSize: '16px',
-              fontWeight: 600,
-              borderRadius: 'var(--io-radius-md)',
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action)';
-            }}
-          >
-            Analizar mi proyecto
-          </Link>
-
-          {/* Beneficios - 4 indicadores */}
-          <div
-            className="visibilidad-hero-beneficios"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '20px',
-              marginTop: '56px',
-              paddingTop: '40px',
-              borderTop: '1px solid var(--io-border)',
-            }}
-          >
-            {beneficios.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div
-                  key={b.label}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: 'var(--io-radius-md)',
-                      backgroundColor: 'var(--io-bg-soft)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--io-action)',
-                      marginBottom: '10px',
-                    }}
-                  >
-                    <Icon size={19} strokeWidth={1.5} />
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '13px',
-                      fontWeight: 700,
-                      color: 'var(--io-text)',
-                      marginBottom: '4px',
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {b.label}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '12px',
-                      color: 'var(--io-text-muted)',
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {b.desc}
-                  </div>
-                </div>
-              );
-            })}
+          <div className="vh-ctas">
+            <Link href="/diagnostico/" className="vh-cta vh-cta--primary">
+              Analizar mi proyecto
+            </Link>
+            <a href="#como-trabajamos" className="vh-cta vh-cta--secondary">
+              Ver cómo funciona
+            </a>
           </div>
         </div>
 
-        {/* Right: Visual — búsqueda / resultados / Maps / móvil */}
-        <div
-          className="visibilidad-hero-visual"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '420px',
-            background: `
-              radial-gradient(circle at 20% 15%, rgba(51,111,230,0.06) 0%, rgba(51,111,230,0) 40%),
-              radial-gradient(circle at 85% 85%, rgba(244,162,124,0.07) 0%, rgba(244,162,124,0) 40%),
-              white
-            `,
-            borderRadius: 'var(--io-radius-lg)',
-            border: '1px solid var(--io-border)',
-            padding: '40px 30px',
-            position: 'relative',
-            width: '100%',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Conectores muy sutiles */}
-          <svg
-            className="visibilidad-hero-connectors"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              zIndex: 1,
-              pointerEvents: 'none',
-            }}
-          >
-            {/* Línea sutil hacia Maps */}
-            <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="var(--io-border)" strokeWidth="1" opacity="0.4" strokeDasharray="3,3" />
-            {/* Línea sutil hacia móvil */}
-            <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="var(--io-border)" strokeWidth="1" opacity="0.4" strokeDasharray="3,3" />
-            {/* Pequeño punto peach en la conexión hacia Maps */}
-            <circle cx="35%" cy="37%" r="2.5" fill="var(--io-accent)" opacity="0.8" />
-          </svg>
-
-          <div
-            className="visibilidad-hero-visual-inner"
-            style={{ position: 'absolute', inset: 0 }}
-          >
-            {/* CENTRAL: resultados de búsqueda */}
-            <div
-              style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '176px',
-                backgroundColor: 'white',
-                border: '3px solid var(--io-text)',
-                borderRadius: '10px',
-                padding: '10px',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-                zIndex: 10,
-              }}
-            >
-              {/* barra de búsqueda */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  backgroundColor: 'var(--io-bg-soft)',
-                  borderRadius: '999px',
-                  padding: '6px 10px',
-                  marginBottom: '10px',
-                }}
-              >
-                <Search size={11} strokeWidth={2} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
-                <div style={{ flex: 1, height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-              </div>
-              {/* resultado 1 - destacado (tu negocio) */}
-              <div style={{ marginBottom: '8px' }}>
-                <div style={{ width: '70%', height: '5px', backgroundColor: 'var(--io-action)', borderRadius: '1px', marginBottom: '4px' }} />
-                <div style={{ width: '90%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px', marginBottom: '3px' }} />
-                <div style={{ width: '60%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-              </div>
-              {/* resultado 2 */}
-              <div style={{ marginBottom: '8px', opacity: 0.5 }}>
-                <div style={{ width: '55%', height: '4px', backgroundColor: 'var(--io-text-muted)', borderRadius: '1px', marginBottom: '4px' }} />
-                <div style={{ width: '75%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-              </div>
-              {/* resultado 3 */}
-              <div style={{ opacity: 0.3 }}>
-                <div style={{ width: '50%', height: '4px', backgroundColor: 'var(--io-text-muted)', borderRadius: '1px', marginBottom: '4px' }} />
-                <div style={{ width: '65%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-              </div>
-            </div>
-
-            {/* Badge: Google Maps - arriba izquierda */}
-            <div
-              className="visibilidad-hero-badge visibilidad-hero-badge-maps"
-              style={{
-                position: 'absolute',
-                top: '14%',
-                left: '6%',
-                width: '92px',
-                height: '58px',
-                backgroundColor: 'white',
-                border: '1.5px solid var(--io-border)',
-                borderRadius: '8px',
-                padding: '8px 10px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                zIndex: 3,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '6px' }}>
-                <MapPin size={13} strokeWidth={2} style={{ color: 'var(--io-action)', flexShrink: 0 }} />
-                <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--io-text)' }}>Maps</span>
-              </div>
-              <div style={{ width: '80%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px', marginBottom: '3px' }} />
-              <div style={{ width: '55%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-            </div>
-
-            {/* Badge: móvil - arriba derecha */}
-            <div
-              className="visibilidad-hero-badge visibilidad-hero-badge-mobile"
-              style={{
-                position: 'absolute',
-                top: '12%',
-                right: '8%',
-                width: '58px',
-                height: '92px',
-                backgroundColor: 'white',
-                border: '3px solid var(--io-text)',
-                borderRadius: '9px',
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '5px',
-                boxShadow: '0 6px 16px rgba(0,0,0,0.1)',
-                zIndex: 5,
-              }}
-            >
-              <div style={{ height: '4px', backgroundColor: 'var(--io-action)', marginBottom: '4px', borderRadius: '1px' }} />
-              <div style={{ flex: 1, backgroundColor: 'var(--io-bg-soft)', borderRadius: '1px' }} />
-            </div>
-
-            {/* Badge: contenido/web - abajo */}
-            <div
-              className="visibilidad-hero-badge visibilidad-hero-badge-content"
-              style={{
-                position: 'absolute',
-                bottom: '10%',
-                left: '10%',
-                width: '96px',
-                height: '52px',
-                backgroundColor: 'var(--io-bg-soft)',
-                border: '1.5px solid var(--io-border)',
-                borderRadius: '8px',
-                padding: '8px 10px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-                zIndex: 3,
-              }}
-            >
-              <div style={{ width: '60%', height: '4px', backgroundColor: 'var(--io-action)', borderRadius: '1px', marginBottom: '5px' }} />
-              <div style={{ width: '85%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px', marginBottom: '3px' }} />
-              <div style={{ width: '70%', height: '3px', backgroundColor: 'var(--io-border)', borderRadius: '1px' }} />
-            </div>
-
-            {/* Anotación */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '16px',
-                right: '18px',
-                fontSize: '11px',
-                color: 'var(--io-accent)',
-                fontWeight: 700,
-                lineHeight: 1.3,
-                textAlign: 'right',
-                zIndex: 15,
-              }}
-            >
-              Más visibilidad.
-              <br />
-              Más oportunidades.
-            </div>
+        <div className="vh-stage">
+          <div className="vh-stage__main">
+            <HeroSearchVisual className="vh-stage__svg" />
           </div>
+          <div className="vh-stage__card">
+            <HeroMapCardVisual className="vh-stage__card-svg" />
+          </div>
+          {MICROCARDS.map((c, i) => {
+            const Icon = c.Icon;
+            return (
+              <div key={c.title} className={`vh-mc vh-mc--${i}`} style={c.pos}>
+                <span className="vh-mc__icon" aria-hidden="true">
+                  <Icon size={14} strokeWidth={2.2} />
+                </span>
+                <strong>{c.title}</strong>
+              </div>
+            );
+          })}
         </div>
       </div>
+
+      <style>{`
+        .vh-section { padding: 56px 20px; background-color: var(--io-bg); }
+        .vh-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 48px; align-items: center; }
+        .vh-left { display: flex; flex-direction: column; }
+        .vh-eyebrow {
+          display: inline-block; align-self: flex-start; background: var(--io-bg-soft); color: var(--io-action);
+          font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+          padding: 7px 14px; border-radius: var(--io-radius-md); margin-bottom: 20px;
+        }
+        .vh-title { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; color: var(--io-text); line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 18px; }
+        .vh-sub { font-size: 17px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 28px; max-width: 440px; }
+
+        .vh-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+        .vh-cta {
+          display: inline-flex; align-items: center; justify-content: center; padding: 13px 26px;
+          font-size: 15.5px; font-weight: 600; text-decoration: none; border-radius: var(--io-radius-md);
+          transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+        }
+        .vh-cta--primary {
+          background: var(--io-accent-dark); color: #fff; border: 1.5px solid var(--io-accent-dark);
+          box-shadow: 0 6px 16px rgba(246, 119, 82, 0.35);
+        }
+        .vh-cta--primary:hover { background: var(--io-accent-dark-hover); border-color: var(--io-accent-dark-hover); color: #fff; }
+        .vh-cta--secondary { background: #fff; color: var(--io-action); border: 1.5px solid var(--io-action); }
+        .vh-cta--secondary:hover { background: rgba(51, 111, 230, 0.06); }
+        .vh-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; }
+
+        .vh-stage { position: relative; width: 100%; min-height: 400px; }
+        .vh-stage__main {
+          position: absolute; left: 0; top: 0; width: 76%; padding: 8px; background: #fff;
+          border: 1px solid var(--io-border); border-radius: var(--io-radius-lg); box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+        }
+        .vh-stage__svg { display: block; width: 100%; height: auto; }
+        .vh-stage__card {
+          position: absolute; right: 0; bottom: 0; width: 54%; z-index: 2;
+        }
+        .vh-stage__card-svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 22px rgba(15, 23, 42, 0.14)); }
+
+        .vh-mc {
+          position: absolute; z-index: 3; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
+          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
+        }
+        .vh-mc__icon {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
+        }
+        .vh-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+
+        @media (max-width: 1023px) {
+          .vh-section { padding: 48px 20px; }
+          .vh-grid { grid-template-columns: 1fr; gap: 40px; }
+          .vh-left { align-items: center; text-align: center; }
+          .vh-sub { max-width: 560px; }
+          .vh-ctas { justify-content: center; }
+          .vh-stage { min-height: 360px; max-width: 560px; margin: 0 auto; }
+        }
+        @media (max-width: 767px) {
+          .vh-section { padding: 40px 20px; }
+          .vh-stage { min-height: 300px; }
+          .vh-stage__main { width: 100%; }
+          .vh-stage__card { width: 66%; }
+          .vh-mc { padding: 6px 10px; }
+          .vh-mc strong { font-size: 11.5px; }
+          .vh-mc--0 { left: 0 !important; right: auto !important; top: -6px !important; }
+          .vh-mc--1 { left: auto !important; right: 0 !important; top: -6px !important; bottom: auto !important; }
+          .vh-mc--2 { display: none; }
+        }
+        @media (max-width: 430px) {
+          .vh-section { padding: 32px 16px; }
+          .vh-stage { min-height: 270px; }
+        }
+      `}</style>
     </section>
   );
 }

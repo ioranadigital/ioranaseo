@@ -1,22 +1,18 @@
 'use client';
 
 import Hero from './components/Hero';
-import ComoFunciona from './components/ComoFunciona';
-import NoEsSoloUnaWeb from './components/NoEsSoloUnaWeb';
-import QueIncluye from './components/QueIncluye';
-import DondeSePierde from './components/DondeSePierde';
-import PorDondeEmpezar from './components/PorDondeEmpezar';
+import QueOptimizamos from './components/QueOptimizamos';
+import ComoTrabajamos from './components/ComoTrabajamos';
+import Resultados from './components/Resultados';
 import FAQAnalisis from './components/FAQAnalisis';
 
 export default function ConversionPage() {
   return (
     <>
       <Hero />
-      <ComoFunciona />
-      <NoEsSoloUnaWeb />
-      <QueIncluye />
-      <DondeSePierde />
-      <PorDondeEmpezar />
+      <QueOptimizamos />
+      <ComoTrabajamos />
+      <Resultados />
       <FAQAnalisis />
     </>
   );
