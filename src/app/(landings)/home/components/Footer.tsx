@@ -1,30 +1,55 @@
 'use client';
 
 import Link from 'next/link';
+import type { CSSProperties, ReactNode } from 'react';
 import { OPEN_COOKIE_PREFERENCES_EVENT } from '@/components/CookieConsent';
+
+const linkStyle: CSSProperties = {
+  fontSize: '14px',
+  color: 'var(--io-text-muted)',
+  textDecoration: 'none',
+  transition: 'color 0.2s',
+};
+
+const headingStyle: CSSProperties = {
+  fontSize: '12px',
+  fontWeight: 600,
+  marginBottom: '12px',
+  textTransform: 'uppercase',
+  letterSpacing: '0.06em',
+  color: 'var(--io-text-muted)',
+};
+
+function FooterLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Link
+      href={href}
+      style={linkStyle}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.color = 'var(--io-action)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.color = 'var(--io-text-muted)';
+      }}
+    >
+      {children}
+    </Link>
+  );
+}
+
+// Arquitectura final (GLOBAL_NAVIGATION_AUDIT.md, 2026-09-28): 4 columnas —
+// Marca / Soluciones / Navegación / Legal — igual en HomeFooter y en
+// LandingsFooter, las dos únicas implementaciones de footer del sitio.
+const SOLUTIONS_LINKS = [
+  { label: 'Todas las soluciones', href: '/soluciones' },
+  { label: 'Web para empresas', href: '/web-para-empresas' },
+  { label: 'Visibilidad', href: '/soluciones/visibilidad' },
+  { label: 'Campañas', href: '/soluciones/campanas' },
+  { label: 'Conversión', href: '/soluciones/conversion' },
+];
 
 export default function HomeFooter() {
   const currentYear = new Date().getFullYear();
-
-  // MVP de lanzamiento: mismo patrón/flag que LandingsHeader - Recursos y
-  // Casos se retiran temporalmente de la navegación pública del footer
-  // global (sin contenido editorial/casos reales todavía). Se conserva la
-  // configuración completa para reactivarlos más adelante sin rehacer nada.
-  const LAUNCH_MVP_SHOW_RECURSOS_Y_CASOS = false;
-
-  const footerNavFull = [
-    { label: 'Soluciones', href: '#soluciones' },
-    { label: 'Cómo trabajamos', href: '/como-trabajamos' },
-    { label: 'Casos', href: '#casos' },
-    { label: 'Recursos', href: '#recursos' },
-    { label: 'Contacto', href: '/contacto/' },
-  ];
-
-  const footerNav = LAUNCH_MVP_SHOW_RECURSOS_Y_CASOS
-    ? footerNavFull
-    : footerNavFull.filter(
-        (item) => item.label !== 'Recursos' && item.label !== 'Casos'
-      );
 
   return (
     <footer
@@ -41,8 +66,8 @@ export default function HomeFooter() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '50px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '40px',
             marginBottom: '50px',
           }}
         >
@@ -70,110 +95,35 @@ export default function HomeFooter() {
             </p>
           </div>
 
+          {/* Soluciones */}
+          <div>
+            <h4 style={headingStyle}>Soluciones</h4>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {SOLUTIONS_LINKS.map((item) => (
+                <FooterLink key={item.href} href={item.href}>
+                  {item.label}
+                </FooterLink>
+              ))}
+            </nav>
+          </div>
+
           {/* Navegación */}
           <div>
-            <h4
-              style={{
-                fontSize: '12px',
-                fontWeight: 600,
-                marginBottom: '12px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--io-text-muted)',
-              }}
-            >
-              Navegación
-            </h4>
+            <h4 style={headingStyle}>Navegación</h4>
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {footerNav.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  style={{
-                    fontSize: '14px',
-                    color: 'var(--io-text-muted)',
-                    textDecoration: 'none',
-                    transition: 'color 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--io-action)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--io-text-muted)';
-                  }}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <FooterLink href="/como-trabajamos">Cómo trabajamos</FooterLink>
+              <FooterLink href="/quienes-somos">Quiénes somos</FooterLink>
+              <FooterLink href="/contacto/">Contacto</FooterLink>
             </nav>
           </div>
 
           {/* Legal */}
           <div>
-            <h4
-              style={{
-                fontSize: '12px',
-                fontWeight: 600,
-                marginBottom: '12px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--io-text-muted)',
-              }}
-            >
-              Legal
-            </h4>
+            <h4 style={headingStyle}>Legal</h4>
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <Link
-                href="/legal/privacidad"
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--io-action)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--io-text-muted)';
-                }}
-              >
-                Privacidad
-              </Link>
-              <Link
-                href="/legal/cookies"
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--io-action)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--io-text-muted)';
-                }}
-              >
-                Cookies
-              </Link>
-              <Link
-                href="/legal/aviso-legal"
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--io-action)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--io-text-muted)';
-                }}
-              >
-                Aviso Legal
-              </Link>
+              <FooterLink href="/legal/privacidad">Privacidad</FooterLink>
+              <FooterLink href="/legal/cookies">Cookies</FooterLink>
+              <FooterLink href="/legal/aviso-legal">Aviso Legal</FooterLink>
               <button
                 type="button"
                 onClick={() =>
@@ -182,10 +132,7 @@ export default function HomeFooter() {
                   )
                 }
                 style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
+                  ...linkStyle,
                   background: 'none',
                   border: 'none',
                   padding: 0,
@@ -224,7 +171,7 @@ export default function HomeFooter() {
             © {currentYear} IORANA SEO. Todos los derechos reservados.
           </p>
           <p style={{ margin: 0 }}>
-            Hecho en España
+            © NEOSUMA
           </p>
         </div>
       </div>

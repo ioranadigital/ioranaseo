@@ -116,7 +116,7 @@ export default function Hero() {
             className="hero-cta"
             style={{
               padding: '14px 32px',
-              color: 'var(--io-text)',
+              color: '#fff',
               fontSize: '16px',
               fontWeight: 600,
               border: 'none',
@@ -153,12 +153,15 @@ export default function Hero() {
         >
           <style>
             {`
-              /* Hero CTA: peach accent + dark text (white on peach fails contrast). Hover = slightly deeper peach. */
+              /* Hero CTA: melocotón oscuro + texto blanco (pasa contraste AA, a
+                 diferencia de --io-accent puro con blanco). Sombra suave para
+                 destacarlo del fondo. Hover = tono aún más oscuro. */
               .hero-cta {
-                background-color: var(--io-accent);
+                background-color: var(--io-accent-dark);
+                box-shadow: 0 6px 16px rgba(246, 119, 82, 0.35);
               }
               .hero-cta:hover {
-                background-color: #F2955F;
+                background-color: var(--io-accent-dark-hover);
               }
               @media (min-width: 1024px) {
                 .hero-cta {
