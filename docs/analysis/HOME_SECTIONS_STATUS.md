@@ -1,6 +1,6 @@
 # HOME — estado de las secciones rediseñadas
 
-**Última actualización:** 2026-09-27 · Regla común: no modificar una sección FROZEN salvo bug real, regresión responsive o problema de accesibilidad.
+**Última actualización:** 2026-10-07 (QA de BASELINE-UI-001; sin cambios de código en Home) · Regla común: no modificar una sección FROZEN salvo bug real, regresión responsive o problema de accesibilidad.
 
 | Sección | Componente | Estado |
 |---|---|---|
@@ -49,6 +49,37 @@ donde vive el wizard real. Desktop/1024+: FAQ (izq.) + panel (der.); tablet 768 
 
 **Nota para quien retome esto:** si algún día se reduce el "gap" de 80px, hay que tocar `Footer.tsx` (`marginTop`),
 no esta sección — aquí ya no queda padding que recortar.
+
+## BASELINE-UI-001 — verificación de Home (2026-10-07)
+
+Detalle completo en `BASELINE_UI_001.md`. No se ha cambiado el estado de ninguna sección.
+
+**Estados (vocabulario del baseline):** FROZEN = aprobación visual documentada · FROZEN PARCIAL = solo los bloques
+indicados · QA PASS = validado técnicamente · PENDING VISUAL APPROVAL = pendiente de aprobación · KNOWN ISSUES.
+
+| Elemento de Home | QA | Estado |
+|---|---|---|
+| Hero de Home | QA PASS | **FROZEN** (`GLOBAL_CTA_COOKIE_VISUAL_AUDIT.md`, `GLOBAL_CTA_COOKIE_IMPLEMENTATION_REPORT.md`) |
+| PresenciaDigital, NuestroSistema, PorDondeEmpezar, FAQAnalisis | QA PASS | **FROZEN** (secciones de arriba) |
+| TodoLoQueNecesitas | QA PASS | **PENDING VISUAL APPROVAL** (fotos reales integradas, aprobación final pendiente) |
+| Home en conjunto | QA PASS | **FROZEN PARCIAL** |
+
+**KNOWN ISSUES relacionados con Home y el sitio:**
+- Excepción local `overflow-x: clip` en los Heroes de Visibilidad, Campañas y Conversión (no afecta a Home).
+- 5 errores de TypeScript preexistentes en `src/lib/technical-seo.ts` (`next build` no valida tipos).
+- Interfaces de Google, Maps e IA de Visibilidad: pendientes de integrar.
+- GA4/GTM no integrados: el toggle "Analítica" no activa nada. Quedan pendientes las pruebas de consentimiento con
+  analítica real (carga condicional del script, Consent Mode, ausencia de cookies `_ga*` antes de consentir, revocación).
+- `globals.css` sin `line-height: 1.5` respecto a HEAD (trabajo de tipografía previo; afecta a todo el sitio).
+
+- `/` y `/home/` a 375, 430, 768, 1024, 1280, 1440 y 1920: overflow horizontal 0, Manrope y CSS cargados, un único `h1`,
+  sin errores de consola ni respuestas ≥400.
+- Archivos de Home (`home/`), `LandingsFooter`, `CookieConsent` y `layout.tsx`: sin diferencias frente a HEAD, por lo que las
+  secciones FROZEN conservan su diseño.
+- Banner y preferencias de cookies: PASS (aceptar, rechazar, configurar, persistencia, reapertura desde el Footer).
+- A 375/430 el `Hero` oculta `.hero-mockup-mobile` con `display:none` (intencionado, "phone dropped"); su `<img>` lazy no
+  se descarga y no es un fallo.
+- La nota de 1024px de "¿Por dónde quieres empezar?" no se ha vuelto a medir en esta ronda y sigue vigente.
 
 ## Incidencias técnicas abiertas
 - `node_modules` se vacía de forma inesperada durante el desarrollo: ver `INCIDENT_node_modules_empty_2026-09-25.md`.

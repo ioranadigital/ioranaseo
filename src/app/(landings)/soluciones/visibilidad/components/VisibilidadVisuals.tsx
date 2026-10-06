@@ -101,26 +101,6 @@ export function CardSeoVisual({ className }: VisualProps) {
   );
 }
 
-/** SEO Local: búsqueda + radio de cercanía alrededor de un pin (concepto "cerca de mí"). */
-export function CardSeoLocalVisual({ className }: VisualProps) {
-  return (
-    <svg viewBox="0 0 260 130" className={className} {...svgProps}>
-      <rect x="16" y="12" width="228" height="28" rx="14" style={card} />
-      <circle cx="36" cy="26" r="6" style={line('var(--io-action)', 2)} />
-      <path d="M40.5 30.5 L45 35" style={line('var(--io-action)', 2)} />
-      <rect x="56" y="22" width="110" height="7" rx="3.5" style={dark} />
-
-      <circle cx="130" cy="90" r="34" style={{ ...blue, fillOpacity: 0.06 }} />
-      <circle cx="130" cy="90" r="22" style={{ ...noFill, stroke: 'var(--io-action)', strokeWidth: 1.5, strokeOpacity: 0.35, strokeDasharray: '3 4' }} />
-      <circle cx="94" cy="76" r="5" style={blueSoft} />
-      <circle cx="168" cy="102" r="5" style={blueSoft} />
-      <circle cx="130" cy="90" r="11" style={peach} />
-      <path d="M124 98 L130 112 L136 98 Z" style={peach} />
-      <circle cx="130" cy="90" r="4" style={{ fill: '#fff' }} />
-    </svg>
-  );
-}
-
 /** Google Maps: mapa con cuadrícula + pin + ficha simplificada (sin estrellas/reseñas). */
 export function CardMapsVisual({ className }: VisualProps) {
   return (
@@ -137,6 +117,28 @@ export function CardMapsVisual({ className }: VisualProps) {
       <rect x="178" y="72" width="46" height="6" rx="3" style={dark} />
       <rect x="178" y="82" width="36" height="4" rx="2" style={muted} />
       <rect x="178" y="90" width="26" height="8" rx="4" style={blue} />
+    </svg>
+  );
+}
+
+/** GEO: burbuja de chat con una pregunta + respuesta que lista negocios (sin logos de marcas de IA). */
+export function CardGeoVisual({ className }: VisualProps) {
+  return (
+    <svg viewBox="0 0 260 130" className={className} {...svgProps}>
+      <rect x="16" y="14" width="150" height="26" rx="13" style={softStroke} />
+      <circle cx="34" cy="27" r="6" style={peach} />
+      <path d="M31 27 l2 2.4 l4.5 -5.2" style={line('#fff', 1.8)} />
+      <rect x="50" y="22" width="100" height="10" rx="5" style={dark} />
+
+      <rect x="16" y="48" width="228" height="66" rx="10" style={card} />
+      <circle cx="34" cy="64" r="8" style={blue} />
+      <path d="M30 64 a4 4 0 1 1 8 0 a4 4 0 1 1 -8 0 M30 70 q4 -4 8 0" style={{ ...noFill, stroke: '#fff', strokeWidth: 1.4 }} />
+      <rect x="50" y="60" width="150" height="4" rx="2" style={muted} />
+      <rect x="50" y="68" width="110" height="4" rx="2" style={muted} />
+
+      <rect x="30" y="86" width="208" height="20" rx="6" style={softStroke} />
+      <rect x="40" y="93" width="14" height="6" rx="2" style={blueSoft} />
+      <rect x="60" y="94" width="90" height="4" rx="2" style={dark} />
     </svg>
   );
 }

@@ -174,9 +174,9 @@ export default function ContactoForm({ onSubmitted, submitted: propsSubmitted }:
       </h2>
 
       <style>{`
-        .cf-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .cf-form-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
         @media (max-width: 480px) {
-          .cf-form-row { grid-template-columns: 1fr; }
+          .cf-form-row { grid-template-columns: minmax(0, 1fr); }
         }
       `}</style>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>

@@ -48,20 +48,23 @@ export default function Hero() {
       </div>
 
       <style>{`
-        .qh-section { padding: 64px 20px 48px; background-color: var(--io-bg); text-align: center; }
-        .qh-container { max-width: 640px; margin: 0 auto; }
+        .qh-section { padding: 60px 20px; background-color: var(--io-bg); text-align: center; }
+        /* Composición centrada propia de esta página (sin fotografía). El contenedor se ensancha (640 → 900px)
+           para que el H1 estándar de 56px siga en 2 líneas; el párrafo mantiene el máximo estándar de 500px. */
+        .qh-container { max-width: 900px; margin: 0 auto; }
+        /* Tipografía y espaciados estándar (referencia /web-para-empresas/, ver docs/analysis/HERO_TYPOGRAPHY_STANDARD.md) */
         .qh-eyebrow {
           display: inline-block; background: var(--io-bg-soft); color: var(--io-action); font-size: 12px;
-          font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px;
-          border-radius: var(--io-radius-md); margin-bottom: 16px;
+          font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px;
+          border-radius: var(--io-radius-md); margin-bottom: 24px;
         }
-        .qh-title { font-size: clamp(28px, 4.4vw, 40px); font-weight: 700; color: var(--io-text); line-height: 1.2; margin: 0 0 14px; }
-        .qh-copy { font-size: 16px; line-height: 1.6; color: var(--io-text-muted); margin: 0 auto 28px; max-width: 520px; }
+        .qh-title { font-size: clamp(32px, 5.2vw, 56px); font-weight: 800; color: var(--io-text); line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 24px; }
+        .qh-copy { font-size: 18px; line-height: 1.65; color: var(--io-text-muted); margin: 0 auto 32px; max-width: 500px; }
 
-        .qh-ctas { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+        .qh-ctas { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
         .qh-cta {
-          display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px;
-          font-size: 15px; font-weight: 600; border-radius: var(--io-radius-md); text-decoration: none;
+          display: inline-flex; align-items: center; justify-content: center; padding: 13px 31px; min-height: 48px; /* + borde (1–1,5px) ≈ 14/32 de la referencia */
+          font-size: 16px; font-weight: 600; border-radius: var(--io-radius-md); text-decoration: none;
           transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
         }
         .qh-cta--primary { background: var(--io-action); border: 1.5px solid var(--io-action); color: #fff; }
@@ -87,17 +90,27 @@ export default function Hero() {
           transform: translateY(-50%) rotate(-45deg);
         }
 
+        @media (max-width: 768px) {
+          .qh-section { padding: 40px 20px; }
+        }
         @media (max-width: 767px) {
-          .qh-section { padding: 48px 20px 40px; }
           .qh-ctas { margin-bottom: 36px; }
           .qh-flow__arrow { width: 20px; }
         }
+        /* Escala móvil estándar (referencia): H1 36px; ≤375px interlineado/tracking y párrafo más compactos. */
         @media (max-width: 430px) {
-          .qh-section { padding: 40px 16px 32px; }
-          .qh-cta { width: 100%; }
+          .qh-section { padding: 32px 20px; }
+          .qh-title { font-size: 36px; line-height: 1.25; }
+          .qh-cta { width: 100%; font-size: 15px; }
           .qh-ctas { flex-direction: column; align-items: stretch; }
           .qh-flow__node { padding: 0 10px; }
           .qh-flow__arrow { width: 14px; }
+        }
+        @media (max-width: 375px) {
+          .qh-section { padding: 32px 16px; }
+          .qh-eyebrow { font-size: 11px; padding: 6px 12px; margin-bottom: 12px; }
+          .qh-title { line-height: 1.08; letter-spacing: -0.015em; margin-bottom: 16px; }
+          .qh-copy { font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
         }
       `}</style>
     </section>

@@ -113,7 +113,7 @@ export default function Hero() {
       </div>
 
       <style>{`
-        .sh-section { position: relative; overflow: hidden; background-color: var(--io-bg); }
+        .sh-section { position: relative; overflow: hidden; background-color: var(--io-bg); padding: 0 20px; }
 
         /* Fondo a sangre (foto + degradado + microcards), detrás del contenido */
         .sh-bg { position: absolute; inset: 0; z-index: 0; }
@@ -126,19 +126,24 @@ export default function Hero() {
           background: linear-gradient(to right, var(--io-bg) 0%, var(--io-bg) 32%, rgba(248, 250, 252, 0.82) 44%, rgba(248, 250, 252, 0) 62%);
         }
 
-        .sh-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 72px 20px; }
+        /* Contenedor estándar de los Heroes (referencia /web-para-empresas/): 1280px, padding lateral 20px
+           (en la sección) y 60px de margen superior. El fondo fotográfico sigue a sangre (inset: 0). */
+        .sh-content { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 60px 0; }
+        /* Tipografía y espaciados estándar (referencia /web-para-empresas/, ver docs/analysis/HERO_TYPOGRAPHY_STANDARD.md) */
         .sh-eyebrow {
           display: inline-block; background: var(--io-bg-soft); color: var(--io-action);
           font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-          padding: 7px 14px; border-radius: var(--io-radius-md); margin-bottom: 20px;
+          padding: 8px 16px; border-radius: var(--io-radius-md); margin-bottom: 24px;
         }
-        .sh-title { font-size: clamp(30px, 4.6vw, 48px); font-weight: 800; color: var(--io-text); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 18px; max-width: 520px; }
-        .sh-sub { font-size: 17px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 28px; max-width: 460px; }
+        /* max-width = zona segura de ESTE texto: el degradado deja ≥45 % de foto a partir de ≈50 % del ancho
+           de la sección; el H1 (2 líneas, la más larga ≈598px) llega como máximo hasta ahí. */
+        .sh-title { font-size: clamp(32px, 5.2vw, 56px); font-weight: 800; color: var(--io-text); line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 24px; max-width: 610px; }
+        .sh-sub { font-size: 18px; line-height: 1.65; color: var(--io-text-muted); margin: 0 0 32px; max-width: 500px; }
 
         .sh-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 32px; }
         .sh-cta {
-          display: inline-flex; align-items: center; justify-content: center; padding: 13px 26px;
-          font-size: 15.5px; font-weight: 600; text-decoration: none; border-radius: var(--io-radius-md);
+          display: inline-flex; align-items: center; justify-content: center; padding: 13px 31px; min-height: 48px; /* + borde (1–1,5px) ≈ 14/32 de la referencia */
+          font-size: 16px; font-weight: 600; text-decoration: none; border-radius: var(--io-radius-md);
           transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
         }
         .sh-cta--primary { background: var(--io-action); color: #fff; border: 1.5px solid var(--io-action); }
@@ -187,7 +192,7 @@ export default function Hero() {
            legibilidad garantizada dentro del degradado a estas anchuras) —
            vuelve al patrón habitual de foto rectangular apilada bajo el texto. */
         @media (max-width: 1023px) {
-          .sh-section { padding: 40px 20px 0; }
+          .sh-section { padding: 60px 20px 0; }
           .sh-bg { position: static; display: flex; flex-direction: column; margin-top: 28px; }
           .sh-bg-photo {
             position: relative; width: 100%; aspect-ratio: 1.6; border-radius: var(--io-radius-lg);
@@ -196,15 +201,27 @@ export default function Hero() {
           .sh-bg-photo img { object-position: 55% 45%; }
           .sh-bg__fade { display: none; }
           .sh-content { padding: 0 0 40px; }
-          .sh-title, .sh-sub, .sh-benefits { max-width: none; }
+          .sh-title, .sh-benefits { max-width: none; }
           .sh-mc { padding: 6px 10px; }
           .sh-mc strong { font-size: 11.5px; }
           .sh-mc--0 { left: 3% !important; right: auto !important; top: 10px !important; }
           .sh-mc--1 { right: 3% !important; top: 10px !important; }
           .sh-mc--2 { right: 3% !important; bottom: 10px !important; }
         }
+        @media (max-width: 768px) {
+          .sh-section { padding: 40px 20px 0; }
+        }
+        /* Escala móvil estándar (referencia): H1 36px; ≤375px interlineado/tracking y párrafo más compactos. */
         @media (max-width: 430px) {
+          .sh-section { padding: 32px 20px 0; }
+          .sh-title { font-size: 36px; line-height: 1.25; }
+          .sh-cta { font-size: 15px; }
+        }
+        @media (max-width: 375px) {
           .sh-section { padding: 32px 16px 0; }
+          .sh-eyebrow { font-size: 11px; padding: 6px 12px; margin-bottom: 12px; }
+          .sh-title { line-height: 1.08; letter-spacing: -0.015em; margin-bottom: 16px; }
+          .sh-sub { font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
         }
       `}</style>
     </section>

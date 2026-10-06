@@ -8,10 +8,10 @@ import {
 } from './VisibilidadVisuals';
 
 const STEPS = [
-  { number: '01', title: 'Análisis', text: 'Estudiamos tu negocio y tu competencia.', Visual: StepAnalisisVisual },
-  { number: '02', title: 'Optimización', text: 'Mejoramos tu presencia en Google.', Visual: StepOptimizacionVisual },
-  { number: '03', title: 'Contenido', text: 'Creamos contenido relevante para tu sector.', Visual: StepContenidoVisual },
-  { number: '04', title: 'Seguimiento', text: 'Medimos resultados y ajustamos la estrategia.', Visual: StepSeguimientoVisual },
+  { number: '01', title: 'Analizamos', text: 'Tu situación actual.', Visual: StepAnalisisVisual },
+  { number: '02', title: 'Priorizamos', text: 'Las mejores oportunidades.', Visual: StepOptimizacionVisual },
+  { number: '03', title: 'Implementamos', text: 'Las mejoras necesarias.', Visual: StepContenidoVisual },
+  { number: '04', title: 'Medimos', text: 'Resultados y próximos pasos.', Visual: StepSeguimientoVisual },
 ];
 
 export default function ComoTrabajamos() {
@@ -19,8 +19,9 @@ export default function ComoTrabajamos() {
     <section id="como-trabajamos" className="ct-section">
       <div className="ct-container">
         <div className="ct-header">
-          <span className="ct-eyebrow">Cómo trabajamos tu visibilidad</span>
-          <h2 className="ct-title">Una estrategia completa y conectada</h2>
+          <span className="ct-eyebrow">Cómo trabajamos</span>
+          <h2 className="ct-title">Un proceso claro para mejorar tu visibilidad</h2>
+          <p className="ct-subtitle">Analizamos tu situación, priorizamos las oportunidades, implementamos las mejoras y medimos resultados.</p>
         </div>
 
         <ol className="ct-grid">
@@ -52,7 +53,8 @@ export default function ComoTrabajamos() {
           font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px;
           border-radius: var(--io-radius-md); margin-bottom: 14px;
         }
-        .ct-title { font-size: clamp(26px, 4vw, 36px); font-weight: 700; color: var(--io-text); line-height: 1.25; margin: 0; }
+        .ct-title { font-size: clamp(26px, 4vw, 36px); font-weight: 700; color: var(--io-text); line-height: 1.25; margin: 0 0 12px; }
+        .ct-subtitle { font-size: 15.5px; line-height: 1.6; color: var(--io-text-muted); max-width: 640px; margin: 0 auto; }
 
         .ct-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .ct-step { position: relative; }

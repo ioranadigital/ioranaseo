@@ -287,3 +287,59 @@ PAGE STATUS: FROZEN
 FINAL RESPONSIVE QA: PASS
 QA HOVER ARTIFACT: CONFIRMED
 ```
+
+---
+
+## HERO — fotografía integrada como fondo (PR-CLA-IOR-001 v2.1, 2026-10-06)
+
+Sustituye los dos microvisuales SVG del Hero (`HeroWebsiteVisual`, `HeroAbTestVisual`) por una fotografía real integrada. Revisión visual pendiente (no aprobado todavía).
+Referencias: técnica de `/web-para-empresas/` (la ruta `/soluciones/web-para-empresas/` de la plantilla no existe) y geometría de `/soluciones/visibilidad/`. Ninguna se ha modificado.
+
+### Asset
+| | |
+|---|---|
+| Original (no modificado) | `docs/img/ads-business.webp` — 1000×667 (3:2), 62 KB _(no versionado: solo en local)_ |
+| Asset definitivo | `public/assets/img/conversion/hero-conversion.webp` — copia idéntica (md5 `85b763f0…`); ya era WebP, no se recomprime ni se amplía |
+| Servido | `next/image` (`fill`, `priority`, `sizes="(min-width: 1025px) 660px, 540px"`) |
+
+### ⚠ Observaciones sobre la fotografía (decisión del usuario)
+- **Es el mismo archivo que usa HOME** (`public/assets/img/home/capabilities/ads-business.webp`, md5 idéntico; foto de la capacidad "Google Ads y Meta Ads" en `TodoLoQueNecesitas.tsx`). La plantilla pide no reutilizar fotos de Web para empresas ni de Visibilidad; HOME no está prohibida, pero la misma foto aparece en dos páginas.
+- **Resolución baja:** 1000 px de ancho para una capa de 655 px (≈1,5× a 1× DPR); a pantallas 2× la foto se ve algo blanda. No hay versión mayor en el proyecto.
+- **Contexto:** carpintero hablando por teléfono con un portapapeles en un taller. Encaja con "contacto / revisión de resultados", aunque no muestra una web.
+
+### Análisis de la foto (% del ancho/alto de la imagen)
+- Hombre (único protagonista): cabeza x≈64–80 %, y≈6–35 %; cuerpo hasta el borde derecho (x≈94 %) y el inferior. Cara y móvil en x≈66–78 %.
+- Izquierda (0–45 %): taller de madera desenfocado ⇒ zona para el fundido. Entorno suficiente (no `WIDER PHOTO REQUIRED`).
+
+### Geometría final (desktop >1024 px, misma técnica que Visibilidad/Campañas)
+- `padding: 60px 20px`, contenedor 1280 px, `align-items: start`: eyebrow a 60 px del borde. Sin `min-height` ni `height` fijos.
+- Capa en el flujo de la 2ª columna: `margin-left: -50px; width: min(655px, 100% + 50px); aspect-ratio: 3/2`, desplazada `--cvh-r` (0–40 px) para conservar posición con el contenedor ampliado. Foto completa, sin `cover` ni recorte.
+  Altura del hero **603 px** a ≥1280 (60 + 437 + 107 de aire inferior; el copy de 3 líneas de H1 + párrafo de 4 líneas mide 475 px, más alto que la foto). Cabeza ≈ 127 px.
+- H1 estándar de 56 px: `width: calc(100% + 70px - --cvh-r)` ⇒ 3 líneas, termina a +26 px dentro de la capa a 1280 y a −1 px a 1440/1920 (en la zona más difuminada: alfa ≤ 13 %).
+  Se eliminó la cesión de ancho del escenario anterior (`max(380px, 100% − 620px)`): la foto vuelve a ser una capa con ancho propio.
+- **Máscaras:** horizontal `transparent 0 → #000 30 % … #000 90 % → transparent 100 %`; vertical `transparent 0 → #000 6 % … #000 86 % → transparent 100 %` (el pelo llega al 6 % de la altura).
+- Sin borde, sombra de caja, radio ni fondo propio.
+
+### Microcards
+Las 2 aprobadas, sin cambios de texto ni métricas: `Analiza y optimiza` (top 7 %, left 33 %) y `A/B Test` (bottom 6 %, left 34 %), sobre la madera del fondo, a la izquierda del hombre; hermanas de las máscaras.
+El visual anterior mostraba un A/B de tarjetas A y B (SVG) y un formulario; no se conserva (tapaba al protagonista); la microcard `A/B Test` mantiene la idea de prueba A/B.
+
+### Responsive (≤1024 px = apilado aprobado, copy centrado)
+Foto bajo el copy: `max-width: 540px; aspect-ratio: 6/5; object-position: 100% 50 %` (se ve del 20 % al 100 %: el hombre completo), máscara simétrica 6 %/94 %; microcards a la izquierda.
+| Ancho | Hero | Capa | Cabeza ≈ |
+|---|---|---|---|
+| 375 | 820 px | 328×273 | 79 px |
+| 430 | 954 px | 375×313 | 91 px |
+| 768 | 924 px | 540×450 | 131 px |
+| 1024 | 996 px | 540×450 | 131 px |
+| 1280 / 1440 / 1920 | 603 px | 655×437 | 127 px |
+
+Antes (con SVG): 833 / 868 px en 375 / 768 y 603 px a 1280. Overflow del Hero y de la página: 0 px en los 7 anchos. 0 errores de consola; 0 respuestas HTTP ≥400.
+
+### Limitaciones
+- Alturas apiladas altas (1024 → 996 px) porque la foto 6:5 va bajo un copy de 4 bloques con H1 de 2–4 líneas; Visibilidad (936) y Campañas (827) tienen el mismo patrón con menos texto.
+- Capturas: `docs/analysis/screenshots/hero-photography/conversion/hero-{375,430,768,1024,1280,1440}.png`, `hero-1920-extra.png`, `before/`. _(no versionado: solo en local)_
+- `HeroWebsiteVisual` y `HeroAbTestVisual` siguen exportados en `ConversionVisuals.tsx`, ya sin uso (código muerto; no se borra por el alcance "solo Hero").
+
+### QA técnico
+`pnpm build` · lockfile sin cambios · enlaces de CTAs intactos (`/diagnostico/`, `#como-trabajamos-conversion`) · Manrope real · typecheck sin errores.

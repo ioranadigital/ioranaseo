@@ -331,3 +331,140 @@ Ningún otro archivo del proyecto necesitaría cambios para ejecutar las 5 mejor
 ---
 
 **FIN DE LA AUDITORÍA. No se modificó código. Pendiente de aprobación del usuario para cualquier ronda de implementación.**
+
+---
+
+## HERO — fotografía integrada como fondo (PR-CLA-IOR-001, 2026-10-06)
+
+Ruta real: `/soluciones/visibilidad` (la ruta `/visibilidad/` indicada en la plantilla no existe).
+Sustituye las dos ilustraciones SVG del stage (`HeroSearchVisual`, `HeroMapCardVisual`) por una fotografía real integrada.
+Los SVG siguen exportados en `VisibilidadVisuals.tsx` (no se ha tocado ese archivo). Revisión visual pendiente (no aprobado todavía).
+
+**Configuración:** `FONDO_INTEGRADO` · personas a la `DERECHA` · escala `MODERADA` · degradado `BLANCO_IZQUIERDA` · microcards conservadas.
+Referencia técnica: Hero de `/soluciones/` y Hero de `/web-para-empresas/` (misma técnica de capa + máscaras).
+
+### Asset
+| | |
+|---|---|
+| Original (no modificado) | `C:\Users\rivarela\Downloads\smiling-couple-enjoying-coffee-shop-with-digital-d-2026-09-22-03-42-06-utc.jpg` — 5472×3648 (3:2), 11,36 MB |
+| Asset definitivo | `public/assets/img/visibilidad/hero-visibilidad.webp` — 1600×1067, 100 KB, WebP q0.82 (canvas de Chromium; sin sharp/cwebp) |
+| Servido | `next/image` (`fill`, `priority`, `sizes="(min-width: 1024px) 600px, 540px"`) |
+| Temporal | copia del original en `public/` solo para procesarla; eliminada |
+
+### Análisis de la foto (% del ancho/alto de la imagen)
+- Hombre: cara x≈42–58 %, cabeza y≈13–45 %. Mujer: cara x≈63–80 %, cabeza y≈11–42 %; su cuerpo llega al borde derecho.
+- Zona izquierda (0–35 %): ventana con árboles desenfocados y el portátil ⇒ fondo claro y suave, ideal para fundir bajo/junto al texto.
+- Entorno visible: ventana, estantería, mesa, portátil, tablet, bebida. Suficiente ⇒ NO se requiere `WIDER PHOTO REQUIRED`.
+- Las personas ocupan ~22 % de la altura de la foto; se controla la escala con la altura de la capa (ver abajo).
+
+### Escala y colocación (desktop ≥1024px)
+- Capa absoluta, `top: 3%; height: 94%` del hero (nunca más alta que él), `aspect-ratio: 3/2` ⇒ foto completa sin recorte ni `cover` sobre una franja ancha.
+  A 1280/1440 mide 595×397 en un hero de 422 px: cabeza ≈ 85 px (≈ 20 % del hero); el H1 domina.
+- Centrada en el espacio libre a la derecha del texto: `left: calc((100% + var(--vh-text-end) - 16px) / 2)` + `translateX(-50%)`, con `--vh-text-end = max(20px,(100%-1200px)/2) + 480px`.
+  `max-width: calc(100% - 16px - var(--vh-text-end))`: a ≈1024px no cabe entera ⇒ `cover` recorta árboles de los lados (la capa pasa a 493×445), nunca las caras (42–80 %).
+- Centro del grupo a 1280: x≈952 (centro de la mitad derecha: 949).
+
+### Integración (sin efecto tarjeta)
+Sin borde, sin sombra de caja, sin `border-radius`, sin fondo propio.
+Máscara horizontal `transparent 0 → #000 30 % … #000 88 % → transparent 100 %` (las caras empiezan en el 42 %; el cuerpo de la mujer, cortado por el borde de la foto, se disuelve a la derecha).
+Máscara vertical `transparent 0 → #000 12 % … #000 86 % → transparent 100 %`.
+
+### Microcards
+Solo las 3 aprobadas (`Cerca de ti`, `Contenido relevante`, `Más visible`), en % de la capa sobre zonas sin rostros (estantería sup. dcha., frente de la mesa, blusa inferior).
+≤1023px se oculta `Contenido relevante` (decorativa) y las otras dos pasan a la parte inferior de la foto.
+
+### Copy
+Sin cambios: eyebrow, H1, descripción, CTAs (`/diagnostico/`, `#como-trabajamos`).
+
+### Responsive (≤1023px = layout apilado ya aprobado, copy centrado)
+Foto en flujo bajo el copy, `max-width: 540px`, `aspect-ratio: 6/5`, `object-position: 100% 50%` (recorta ~20 % de ventana por la izquierda para centrar a la pareja), máscaras simétricas 6 % / 10 %.
+| Ancho | Hero | Capa | Resultado |
+|---|---|---|---|
+| 375 | 725 px | 328×273 | PASS |
+| 430 | 743 px | 383×319 | PASS |
+| 768 | 803 px | 540×450 | PASS |
+| 1024 | 473 px | 493×445 (recorte lateral) | PASS |
+| 1280 | 422 px | 595×397 | PASS |
+| 1440 | 422 px | 595×397 | PASS |
+
+Overflow horizontal: 0 elementos del Hero y 0 px de página en los 6 anchos (y a 1920).
+
+### Limitaciones / observaciones
+- A 1024px la capa es más pequeña y recortada lateralmente (el texto ocupa casi la mitad); la microcard `Más visible` queda rozando el pelo de la mujer (no la cara).
+- A anchos >1440 la capa mantiene tamaño y queda centrada en el espacio libre (validado visualmente a 1920 con la versión final: `hero-1920-extra.png`; allí queda un vacío de ≈250 px entre el final del texto y la foto, suavizado por el fundido izquierdo).
+- Las dos ilustraciones SVG ya no se usan en este Hero.
+- Capturas: `docs/analysis/screenshots/hero-photography/visibilidad/hero-{375,430,768,1024,1280,1440}.png`. _(no versionado: solo en local)_
+
+### QA técnico
+`pnpm build` PASS (lockfile idéntico) · 0 errores de consola · 0 respuestas HTTP ≥400 · Manrope real (5 pesos `loaded`) · typecheck sin errores · enlaces de CTAs intactos.
+
+### AJUSTE PR-CLA-IOR-001B — altura común del Hero (2026-10-06)
+Sustituye la geometría de la capa descrita arriba (`top: 3%; height: 94%`, que escalaba la foto con la altura del hero).
+
+- **Altura común:** `@media (min-width: 1024px) { .vh-section { min-height: 594px; display:flex; align-items:center } .vh-grid { width:100% } }`.
+  Referencia `/web-para-empresas/` = 594 px (padding 60, copy de 474 px). `min-height`, no `height`; sin padding artificial.
+  Se usa el breakpoint existente de la página (≤1023 px = apilado, altura natural).
+- **Bloque editorial centrado verticalmente** con sus dimensiones intactas (copy 310 px ⇒ 142 px de espacio negativo arriba y abajo a ≥1024 px).
+- **Escala de la foto independiente de la altura del hero:** capa de tamaño propio `width: min(595px, espacio libre); height: 397px`
+  (proporción ≈ 3:2), centrada con `translate(-50%, -50%)`. Las personas NO crecen con el hero (cabeza ≈ 87 px, igual que antes del ajuste).
+  A ≈1024 px el ancho disponible (493 px) lo limita y `cover` recorta árboles laterales, nunca caras.
+- Fundidos, microcards (posiciones en % de la capa, recalculadas por la proporción de esta foto), copy y rutas: sin cambios.
+
+| Desktop | Altura hero | Copy (alto / aire arriba-abajo) | Capa foto | Cabeza aprox. |
+|---|---|---|---|---|
+| Visibilidad 1280/1440/1920 | 594 px | 310 / 142 px | 595×397 (hueco 99 px arriba y abajo) | ≈ 87 px |
+| Referencia web-para-empresas 1280 | 594 px | 474 / 60 px | 641×441 | ≈ 124 px |
+| Referencia web-para-empresas 1440/1920 | 594 px | 474 / 60 px | 720×496 | ≈ 139 px |
+| Visibilidad 1024 | 594 px | 361 / 117 px | 493×397 | ≈ 87 px |
+
+Apilado (≤1023 px, sin cambios): 375 → 725 px · 430 → 743 px · 768 → 803 px.
+Overflow: 0 elementos del Hero y 0 px de página en 375/430/768/1024/1280/1440/1920.
+Capturas: `hero-{375,430,768,1024,1280,1440}.png`, `hero-1920-extra.png` y `comparison/` (Visibilidad vs referencia a 1280/1440/1920 con la altura común).
+Diferencia a tener en cuenta: las caras de Visibilidad (≈87 px) son ≈30 % más pequeñas que las de la referencia (≈124 px) porque se mantuvo la escala moderada y no se ampliaron para rellenar la altura.
+
+### RECTIFICACIÓN DE COMPOSICIÓN (2026-10-06) — sustituye al ajuste 1B
+El ajuste 1B (`min-height: 594px` + contenido centrado + capa de 595×397) no produjo una composición equivalente a la referencia:
+141 px de aire arriba/abajo, foto un 23–40 % menor en área visible (≈162k px² frente a ≈212k/267k) y separada del texto.
+Se elimina la altura obligatoria y se reutilizan las reglas compositivas de `/web-para-empresas/` (sin copiar sus valores).
+
+**Medición previa (1280 / 1440)**
+| | Referencia | Visibilidad antes |
+|---|---|---|
+| Sección → eyebrow | 60 / 60 px | 142 / 142 px |
+| Altura del bloque editorial | 474 px | 310 px |
+| Capa de foto | 641×441 / 720×496 | 595×397 |
+| Sección → foto (arriba) | 59 / 31 px | 99 / 99 px |
+| Cabeza aprox. | 124 / 139 px | 87 px |
+| Texto → capa (fin del H1) | −38 px (la foto entra bajo el texto, ya difuminada) | +84 / +124 px |
+
+**Geometría final (desktop ≥1024px)**
+- `padding-top/bottom: 60px` y `.vh-grid { align-items: start }`: contenido alineado arriba (eyebrow a 60 px del borde, como la referencia). Sin `min-height` ni `height` fijos.
+- Foto en el flujo de la 2ª columna (`position: relative; margin-left: -120px; aspect-ratio: 3/2`): su altura forma parte de la composición y **la altura del hero resulta de ella** (60 + 483 + 60 = 603 px a ≥1280).
+  El `margin-left` negativo la mete 120 px en la columna de texto (zona libre: el H1 termina antes; fin del H1 → inicio de capa = +9 px a 1280/1440/1920).
+- Foto completa en su proporción real: sin recorte ni `cover`. Capa 725×483 ⇒ cabeza ≈ 106 px (referencia 124–139 px; no se amplían los rostros en exceso). Área visible tras máscaras ≈ 240k px².
+- Fundidos y microcards sin cambios respecto a la versión anterior (posiciones en % de la capa, verificadas sobre zonas sin rostros).
+
+| Ancho | Hero | Capa | Notas |
+|---|---|---|---|
+| 1920 / 1440 / 1280 | 603 px | 725×483 | eyebrow a 60 px; capa a 60 px arriba y abajo |
+| 1024 | 522 px | 604×402 | la capa entra ~40 px bajo el final del H1 (zona ya difuminada) |
+| 768 / 430 / 375 | 803 / 743 / 725 px | 540×450 / 383×319 / 328×273 | apilado, sin cambios |
+
+Overflow: 0 elementos del Hero y 0 px de página en 375/430/768/1024/1280/1440/1920.
+Observación: a la izquierda, bajo el bloque editorial (310 px de alto), queda espacio negativo junto a la parte baja de la foto; es consecuencia deliberada de la alineación superior.
+
+### CAMBIO DE FOTOGRAFÍA (2026-10-06)
+Se sustituye únicamente la imagen del Hero; geometría, fundidos, copy y CTAs sin cambios.
+
+| | Antes | Ahora |
+|---|---|---|
+| Original (no modificado) | `…\Downloads\smiling-couple-enjoying-coffee-shop-…jpg` 5472×3648, 11,36 MB | `docs/img/smiling-man-working-on-laptop-in-workshop-2026-09-24-13-41-00-utc.jpg` 5221×3481 (3:2), 14,1 MB |
+| Asset (`public/assets/img/visibilidad/hero-visibilidad.webp`, mismo nombre) | 1600×1067, 100 KB | 1600×1067, 158 KB |
+
+- Misma proporción 3:2 ⇒ la capa (725×483 a ≥1280 px, hero de 603 px) no necesita cambios; foto completa, sin `cover` ni recorte.
+- Una sola persona (hombre sonriente en un taller con paneles de herramientas). Cabeza ≈ 100 px sobre 483 px de capa. Cara y cuerpo en el 55–100 % del ancho: quedan fuera del fundido izquierdo (0–30 %), que cae sobre el techo/pared del taller.
+- **Única diferencia de código:** posiciones de las microcards (con la foto anterior una cubría la mitad del portátil):
+  `Más visible` → `top 7 %, left 17 %` (pared); `Cerca de ti` → `bottom 7 %, left 17 %` (papeles, no sobre el portátil);
+  `Contenido relevante` → `bottom 7 %, right 7 %` (manga). En ≤1023 px `Más visible` pasa a `bottom 7 %, right 5 %` (se resetea `left`).
+- Comentario del asset actualizado en `Hero.tsx`. Copia temporal del original en `public/` eliminada; el original no se ha modificado.
+- Revisión: ninguna microcard cubre rostro, cabello ni el botón secundario (comprobado a 1024/1280/1440). Overflow 0 en todos los anchos.

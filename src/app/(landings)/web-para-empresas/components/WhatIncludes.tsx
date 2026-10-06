@@ -2,22 +2,20 @@
 
 import { useState } from 'react';
 import { Smartphone, Search, MessageCircle, ChartColumn, FileText, GraduationCap } from 'lucide-react';
-import { SharedWebVisual, type WebZone } from './WebVisuals';
 
-const ITEMS: { label: string; zone: WebZone; Icon: typeof Smartphone }[] = [
-  { label: 'Diseño personalizado y responsive', zone: 'responsive', Icon: Smartphone },
-  { label: 'Arquitectura y optimización SEO inicial', zone: 'seo', Icon: Search },
-  { label: 'Formularios, llamadas y WhatsApp', zone: 'contact', Icon: MessageCircle },
-  { label: 'Analytics y medición de conversiones', zone: 'analytics', Icon: ChartColumn },
-  { label: 'Textos orientados a conversión', zone: 'copy', Icon: FileText },
-  { label: 'Formación básica para gestionar tu web', zone: 'training', Icon: GraduationCap },
+const ITEMS = [
+  { label: 'Diseño personalizado y responsive', Icon: Smartphone },
+  { label: 'Arquitectura y optimización SEO inicial', Icon: Search },
+  { label: 'Formularios, llamadas y WhatsApp', Icon: MessageCircle },
+  { label: 'Analytics y medición de conversiones', Icon: ChartColumn },
+  { label: 'Textos orientados a conversión', Icon: FileText },
+  { label: 'Formación básica para gestionar tu web', Icon: GraduationCap },
 ];
 
 export default function WhatIncludes() {
-  // Board de capacidades: hover previsualiza, click fija; una sola capacidad resaltada a la vez.
+  // Foto derecha, lista izquierda interactiva.
   const [selected, setSelected] = useState(0);
   const [hover, setHover] = useState<number | null>(null);
-  const shown = hover ?? selected;
 
   return (
     <section className="includes-section wi-section">
@@ -32,14 +30,13 @@ export default function WhatIncludes() {
           <ul className="wi-list">
             {ITEMS.map((item, i) => {
               const Icon = item.Icon;
-              const active = shown === i;
+              const active = selected === i;
               return (
                 <li key={item.label}>
                   <button
                     type="button"
                     className={`wi-chip${active ? ' is-active' : ''}`}
                     aria-pressed={selected === i}
-                    aria-controls="wi-visual"
                     onClick={() => setSelected(i)}
                     onPointerEnter={(e) => {
                       if (e.pointerType === 'mouse') setHover(i);
@@ -59,8 +56,16 @@ export default function WhatIncludes() {
           </ul>
         </div>
 
-        <div id="wi-visual" className="wi-visual" role="img" aria-label={ITEMS[shown].label}>
-          <SharedWebVisual zone={ITEMS[shown].zone} className="wi-visual__svg" />
+        <div className="wi-visual" role="img" aria-label="Propietario de negocio pequeño gestionando su web">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/img/home/hero-small-business.webp"
+            alt="Propietario de negocio pequeño gestionando su web"
+            loading="lazy"
+            decoding="async"
+            width={560}
+            height={374}
+          />
         </div>
       </div>
 
@@ -95,6 +100,7 @@ export default function WhatIncludes() {
           padding: 24px; background: var(--io-bg-soft); border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
         }
         .wi-visual__svg { display: block; width: 100%; height: auto; }
+        .wi-visual img { max-width: 100%; height: auto; aspect-ratio: 560 / 374; }
 
         @media (max-width: 1023px) {
           .wi-section { padding: 48px 20px; }

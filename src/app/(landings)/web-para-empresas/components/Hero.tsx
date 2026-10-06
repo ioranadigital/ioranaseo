@@ -1,57 +1,26 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Monitor, Search, MousePointerClick } from 'lucide-react';
-import { HeroBrowserVisual } from './WebVisuals';
 
+// WebP optimizado (1600×1102) a partir de la fotografía original (4854×3343).
 const HERO_PHOTO = '/assets/img/web-para-empresas/hero-business.webp';
 
+// Microcards aprobadas (sin añadir ni inventar ninguna). Posiciones en % de la capa
+// fotográfica, elegidas sobre zonas sin rostros (estanterías, mostrador).
 const MICROCARDS = [
-  { Icon: Monitor, title: 'Diseño responsive', pos: { left: '0%', bottom: 6 } },
-  { Icon: Search, title: 'SEO preparado', pos: { left: '38%', top: 4 } },
-  { Icon: MousePointerClick, title: 'CTA claros', pos: { right: '0%', top: 2 } },
+  { Icon: Search, title: 'SEO preparado', cls: 'wh-mc--seo' },
+  { Icon: Monitor, title: 'Diseño responsive', cls: 'wh-mc--resp' },
+  { Icon: MousePointerClick, title: 'CTA claros', cls: 'wh-mc--cta' },
 ];
-
-/** Foto local con placeholder si el archivo aún no existe (sin imágenes externas). */
-function HeroPhoto() {
-  const [failed, setFailed] = useState(false);
-  const ref = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const img = ref.current;
-    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
-  }, []);
-
-  return (
-    <span className="hero-photo" data-missing={failed || undefined}>
-      {!failed && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          ref={ref}
-          src={HERO_PHOTO}
-          alt="Propietario de un pequeño negocio atendiendo su web"
-          width={620}
-          height={520}
-          loading="eager"
-          decoding="async"
-          onError={() => setFailed(true)}
-        />
-      )}
-      {failed && (
-        <span className="hero-photo__ph" aria-hidden="true">
-          <Monitor size={40} strokeWidth={1.4} />
-        </span>
-      )}
-    </span>
-  );
-}
 
 export default function Hero() {
   return (
     <section
       className="hero-section"
       style={{
+        position: 'relative',
         paddingTop: '60px',
         paddingBottom: '60px',
         paddingLeft: '20px',
@@ -71,8 +40,8 @@ export default function Hero() {
           width: '100%',
         }}
       >
-        {/* Left: Content */}
-        <div>
+        {/* Left: Content (por encima de la capa fotográfica, que se ancla a la sección) */}
+        <div style={{ position: 'relative', zIndex: 1 }}>
           {/* Eyebrow */}
           <div
             className="hero-eyebrow"
@@ -100,7 +69,6 @@ export default function Hero() {
               fontWeight: 800,
               color: 'var(--io-text)',
               lineHeight: 1.2,
-              marginBottom: '24px',
               margin: '0 0 24px 0',
               maxWidth: '100%',
               letterSpacing: '-0.01em',
@@ -118,7 +86,6 @@ export default function Hero() {
               fontSize: '18px',
               lineHeight: 1.65,
               color: 'var(--io-text-muted)',
-              marginBottom: '32px',
               margin: '0 0 32px 0',
               maxWidth: '500px',
             }}
@@ -159,7 +126,7 @@ export default function Hero() {
 
           {/* Benefits — 2x2 on mobile, 4 on desktop */}
           <div
-            className="benefits-grid"
+            className="benefits-grid wh-benefits"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
@@ -203,17 +170,29 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right: composición foto real + mini navegador + microcards flotantes */}
-        <div className="hero-stage">
-          <HeroPhoto />
-          <div className="hero-stage__browser">
-            <HeroBrowserVisual className="hero-stage__browser-svg" />
+        {/* Fondo fotográfico integrado. En desktop es una capa absoluta anclada a la
+            derecha del hero (detrás del contenido); en ≤1024px (donde el layout
+            aprobado ya apila) pasa a ser un bloque en flujo bajo el copy.
+            La escala se controla con la proporción real de la foto (sin recorte, sin
+            `cover` sobre una franja ancha) y los bordes se funden con el fondo. */}
+        <div className="wh-bg" aria-hidden="true">
+          <div className="wh-bg__fade-x">
+            <div className="wh-bg__fade-y">
+              <Image
+                src={HERO_PHOTO}
+                alt=""
+                fill
+                priority
+                sizes="(min-width: 1025px) 720px, 640px"
+                className="wh-bg__img"
+              />
+            </div>
           </div>
-          {MICROCARDS.map((c, i) => {
+          {MICROCARDS.map((c) => {
             const Icon = c.Icon;
             return (
-              <div key={c.title} className={`hero-mc hero-mc--${i}`} style={c.pos}>
-                <span className="hero-mc__icon" aria-hidden="true">
+              <div key={c.title} className={`wh-mc ${c.cls}`}>
+                <span className="wh-mc__icon">
                   <Icon size={14} strokeWidth={2.2} />
                 </span>
                 <strong>{c.title}</strong>
@@ -224,46 +203,74 @@ export default function Hero() {
       </div>
 
       <style>{`
-        .hero-stage { position: relative; width: 100%; min-height: 420px; padding: 0; }
-        .hero-photo {
-          position: absolute; left: 0; top: 0; width: 62%; height: 100%; display: block; overflow: hidden;
-          border-radius: var(--io-radius-lg); border: 1px solid var(--io-border);
-          background: linear-gradient(135deg, #dbe7ff 0%, #fbe3d6 100%);
+        /* ── Capa fotográfica (desktop >1024px) ───────────────────────────── */
+        .wh-bg {
+          --wh-w: clamp(440px, calc(66.7vw - 213px), 720px);
+          --wh-r: clamp(16px, calc(7vw + 160px), 260px);
+          /* Posición mínima por la izquierda: sigue a la columna de texto (rejilla centrada, máx. 1280px).
+             El H1 termina ~553px dentro de la rejilla; la foto puede entrar unos px en ese margen (zona
+             ya muy difuminada) pero no pasar por detrás del texto, que es el protagonista. */
+          --wh-min-left: calc(max(20px, (100% - 1280px) / 2) + 515px);
+          position: absolute; z-index: 0; top: 47%; transform: translateY(-50%);
+          /* La foto se desplaza a la izquierda con un margen --wh-r respecto al borde derecho (más
+             margen cuanto más ancho el viewport), sin bajar de --wh-min-left. */
+          left: max(var(--wh-min-left), calc(100% - var(--wh-w) - var(--wh-r)));
+          width: min(var(--wh-w), calc(100% - var(--wh-min-left) - 16px));
+          aspect-ratio: 4854 / 3343; pointer-events: none;
         }
-        .hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 58% 50%; }
-        .hero-photo__ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(51, 111, 230, 0.45); }
+        .wh-bg__fade-x, .wh-bg__fade-y { position: absolute; inset: 0; }
+        /* Degradado de integración: izquierda → fondo de la sección (blanco suave), la
+           foto aparece progresivamente; el rostro de la mujer (x≈16-27%) queda ya opaco. */
+        .wh-bg__fade-x {
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 16%, #000 90%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 16%, #000 90%, transparent 100%);
+        }
+        /* Sin cortes duros arriba/abajo: la capa es más baja que el hero y se disuelve. */
+        .wh-bg__fade-y {
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+        }
+        .wh-bg__img { object-fit: cover; object-position: 50% 50%; }
 
-        .hero-stage__browser { position: absolute; right: 0; top: 60%; width: 58%; transform: translateY(-50%); z-index: 2; }
-        .hero-stage__browser-svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 24px rgba(15, 23, 42, 0.14)); }
-
-        .hero-mc {
-          position: absolute; z-index: 3; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+        .wh-mc {
+          position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
           background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
           box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
         }
-        .hero-mc__icon {
+        .wh-mc__icon {
           display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
           border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
         }
-        .hero-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+        .wh-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+        /* Posiciones sobre zonas sin rostros: estantería sup. dcha., estantería dcha., mostrador. */
+        .wh-mc--seo  { top: 9%;  right: 8%; }
+        .wh-mc--resp { top: 41%; right: 5%; }
+        .wh-mc--cta  { bottom: 9%; right: 6%; }
 
+        /* Los beneficios no deben invadir la zona de la foto en desktop */
+        @media (min-width: 1025px) {
+          .wh-benefits { max-width: 560px; }
+        }
+
+        /* ── ≤1024px: layout apilado aprobado; foto en flujo bajo el copy ──── */
         @media (max-width: 1024px) {
-          .hero-stage { min-height: 380px; }
+          .wh-bg {
+            position: relative; left: auto; right: auto; top: auto; transform: none;
+            width: 100%; max-width: 640px; margin: -28px auto 0;
+          }
+          .wh-bg__fade-x {
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+          }
+          .wh-mc { padding: 6px 10px; }
+          .wh-mc strong { font-size: 11.5px; }
         }
+        /* Móvil: se omite la microcard puramente decorativa para preservar encuadre y lectura */
         @media (max-width: 767px) {
-          .hero-stage { min-height: 300px; }
-          .hero-photo { width: 100%; height: 62%; }
-          .hero-photo img { object-position: 58% 10%; }
-          .hero-stage__browser { width: 78%; top: auto; bottom: 0; right: 4%; transform: none; }
-          .hero-mc { padding: 6px 10px; }
-          .hero-mc strong { font-size: 11.5px; }
-          /* Reposicionar para evitar solape en un stage estrecho (apiladas, no lado a lado) */
-          .hero-mc--0 { left: 0 !important; right: auto !important; top: auto !important; bottom: 6px !important; }
-          .hero-mc--1 { left: 4% !important; right: auto !important; top: 8px !important; bottom: auto !important; }
-          .hero-mc--2 { left: auto !important; right: 4% !important; top: 8px !important; bottom: auto !important; }
-        }
-        @media (max-width: 430px) {
-          .hero-stage { min-height: 260px; }
+          .wh-bg { margin-top: -20px; }
+          .wh-mc--resp { display: none; }
+          .wh-mc--seo  { top: 6%;  right: 0; }
+          .wh-mc--cta  { bottom: 10%; right: 4%; }
         }
       `}</style>
     </section>

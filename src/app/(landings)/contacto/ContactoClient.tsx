@@ -26,6 +26,7 @@ export default function ContactoClient() {
               flex-direction: column !important;
               gap: 40px !important;
             }
+            .contacto-main-grid > * { max-width: 100%; }
           }
         `}</style>
 

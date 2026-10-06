@@ -439,3 +439,65 @@ HORIZONTAL OVERFLOW: 0px
 BUILD: PASS
 PAGE STATUS: FROZEN
 ```
+
+---
+
+## HERO — fotografía integrada como fondo (PR-CLA-IOR-001, 2026-10-06)
+
+Sustituye al tratamiento anterior del Hero (foto 500×500 + mini navegador + microcards). Petición explícita del usuario;
+el resto de la página no se ha modificado en esta tarea. Revisión visual pendiente (no aprobado todavía).
+
+**Configuración:** `FONDO_INTEGRADO` · personas a la `DERECHA` · escala `MODERADA` · degradado `BLANCO_IZQUIERDA` · microcards conservadas.
+Referencia técnica: Hero de `/soluciones/` (foto a sangre + fade lateral), sin copiar su recorte.
+
+### Asset
+| | |
+|---|---|
+| Original (no modificado) | `C:\Users\rivarela\Downloads\two-smiling-young-adults-working-in-a-cafe-2026-09-22-04-31-30-utc.jpg` — 4854×3343, 3,81 MB |
+| Asset definitivo | `public/assets/img/web-para-empresas/hero-business.webp` — 1600×1102, 117 KB, WebP q0.82 (canvas de Chromium; no había sharp/cwebp) |
+| Servido | `next/image` (`fill`, `priority`, `sizes="(min-width: 1025px) 720px, 640px"`) → `/_next/image?...w=640` etc. |
+| Limpieza | retirados mis artefactos `hero-business.jpg` (copia de 3,8 MB) y `hero-business.webp.png` (2,3 MB) de `public/`; el original sigue en Descargas |
+
+### Encuadre y escala (la causa de los intentos fallidos anteriores)
+- Posición de los protagonistas en la foto original (fracción del ancho): mujer x≈7–32 % (cara 16–27 %), hombre x≈31–77 % (cara 42–53 %); cabezas y≈4–36 %.
+- Fallos previos: `object-fit: cover` sobre una franja ~2:1 a todo el ancho ⇒ el hombre salía enorme y el degradado blanco (opaco al 32 %) tapaba a la mujer.
+- Solución: la foto se muestra **completa y sin recorte** (`aspect-ratio: 4854 / 3343`) en una capa de ancho `clamp(480px, 50vw, 720px)` anclada a la derecha del hero.
+  Cabeza del hombre ≈ 115–140 px sobre un hero de 594 px (≈ 20 %); el H1 (56 px) sigue dominando. No se usa `transform: scale()`, no se aumenta la altura del hero (594 px, igual que antes de la foto).
+- `object-position: 50% 50%` (irrelevante: sin recorte).
+
+### Integración (sin efecto tarjeta)
+- Sin borde, sin sombra de caja, sin `border-radius`, sin fondo propio.
+- Máscara horizontal `linear-gradient(to right, transparent 0%, #000 16%)` ⇒ la foto emerge del fondo `var(--io-bg)`; el rostro de la mujer (≥16 %) ya queda opaco.
+- Máscara vertical `transparent 0 → #000 14 % … #000 86 % → transparent` (capa más baja que el hero, sin cortes duros arriba/abajo).
+- Capa anclada a la sección (`right: 0`): la foto llega al borde del viewport a 1280 y 1440.
+- Beneficios acotados a `max-width: 560px` solo en >1024 px para no entrar en la zona de la foto.
+
+### Microcards
+Solo las 3 aprobadas (`SEO preparado`, `Diseño responsive`, `CTA claros`), posicionadas en % de la capa sobre estanterías/mostrador, nunca sobre rostros.
+≤767 px se oculta `Diseño responsive` (decorativa) para preservar encuadre y lectura.
+
+### Copy
+Restaurado el copy/CTA/beneficios aprobados del commit `a85510a7` (en iteraciones anteriores de esta sesión se había sustituido por texto no aprobado — incluido un CTA "Ver planes → #planes" inexistente — y se ha revertido).
+Se omite el mini navegador (`HeroBrowserVisual`) del Hero anterior: taparía a los protagonistas y no forma parte de la composición `FONDO_INTEGRADO`.
+
+### Responsive (≤1024 px = layout apilado ya aprobado en `styles.css`, no modificado)
+| Ancho | Hero | Foto | Resultado |
+|---|---|---|---|
+| 375 | 694 px | 328×226, bajo el copy, CTA sobre el pliegue | PASS |
+| 430 | 777 px | 375×258 | PASS |
+| 768 | 984 px | 640×441, centrada | PASS |
+| 1024 | 1042 px | 640×441, centrada | PASS |
+| 1280 | 594 px | 640×441, a la derecha, fusión izq. | PASS |
+| 1440 | 594 px | 720×496, a la derecha, a sangre | PASS |
+
+Overflow horizontal **dentro del Hero: 0 elementos / 0 px** en los 6 anchos.
+Overflow a nivel de página: 0 px a 375/768/1280/1440; **199 px a 430 y ~22–31 px a 1024** procedentes de `WhatIncludes` (`wi-section`, imagen de la tarea fotográfica anterior sin `max-width`), fuera del alcance de esta tarea y SIN corregir.
+
+### Limitaciones / observaciones
+- A 1024 px el layout apilado aprobado (flex en columna ≤1024) hace el Hero alto (1042 px); es el comportamiento heredado, no un breakpoint nuevo.
+- A anchos >1440 la capa seguiría anclada al borde derecho, dejando más aire entre texto y foto (no validado más allá de 1440).
+- No hay evidencia de "WIDER PHOTO REQUIRED": la foto contiene entorno suficiente (estantería, mostrador, bollería).
+- Capturas: `docs/analysis/screenshots/hero-photography/web-para-empresas/hero-{375,430,768,1024,1280,1440}.png`. _(no versionado: solo en local)_
+
+### QA técnico
+`pnpm build` PASS (lockfile idéntico, md5 `b8b4860c…`) · 0 errores de consola · 0 respuestas HTTP ≥400 en `/web-para-empresas` · Manrope real (5 pesos `loaded`) · CTA → `/diagnostico/` intacto · typecheck sin errores en `web-para-empresas`.
