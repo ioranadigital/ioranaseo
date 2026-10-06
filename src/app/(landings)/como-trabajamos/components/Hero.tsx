@@ -1,307 +1,113 @@
 'use client';
 
 import Link from 'next/link';
-import { Coffee, Sprout, NotebookPen } from 'lucide-react';
+import { HeroDiagnosticoVisual, HeroPlanVisual, HeroSeguimientoVisual } from './ComoTrabajamosVisuals';
+
+const CARDS = [
+  { number: '01', title: 'Diagnóstico', tone: 'blue', Visual: HeroDiagnosticoVisual },
+  { number: '02', title: 'Plan de acción', tone: 'peach', Visual: HeroPlanVisual },
+  { number: '03', title: 'Seguimiento', tone: 'green', Visual: HeroSeguimientoVisual },
+] as const;
 
 export default function Hero() {
   return (
-    <section
-      className="ct-hero-section"
-      style={{
-        paddingTop: '60px',
-        paddingBottom: '60px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        backgroundColor: 'var(--io-bg)',
-      }}
-    >
-      <div
-        className="ct-hero-grid"
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1.1fr 0.9fr',
-          gap: '50px',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        {/* Left: Content */}
-        <div>
-          <div
-            style={{
-              display: 'inline-block',
-              backgroundColor: 'var(--io-bg-soft)',
-              color: 'var(--io-action)',
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              padding: '8px 16px',
-              borderRadius: 'var(--io-radius-md)',
-              marginBottom: '24px',
-              textTransform: 'uppercase',
-            }}
-          >
-            Cómo trabajamos
-          </div>
-
-          <h1
-            className="ct-hero-h1"
-            style={{
-              fontSize: 'clamp(32px, 4.6vw, 52px)',
-              fontWeight: 800,
-              color: 'var(--io-text)',
-              lineHeight: 1.18,
-              margin: '0 0 24px 0',
-              letterSpacing: '-0.015em',
-            }}
-          >
-            Un partner estratégico para hacer crecer tu negocio.
-          </h1>
-
-          <p
-            className="ct-hero-copy"
-            style={{
-              fontSize: '18px',
-              lineHeight: 1.65,
-              color: 'var(--io-text-muted)',
-              margin: '0 0 32px 0',
-              maxWidth: '520px',
-            }}
-          >
-            Nos implicamos en cada proyecto como un equipo más, combinando
-            estrategia, experiencia y ejecución para conseguir resultados
-            reales.
+    <section className="cth-section">
+      <div className="cth-grid">
+        <div className="cth-left">
+          <span className="cth-eyebrow">Cómo trabajamos</span>
+          <h1 className="cth-title">Te acompañamos de principio a fin.</h1>
+          <p className="cth-sub">
+            Combinamos estrategia, ejecución y seguimiento continuo para que conviertas más visitas en
+            oportunidades reales. Siempre con comunicación clara y total transparencia.
           </p>
-
-          <Link
-            href="#contacto"
-            style={{
-              display: 'inline-block',
-              padding: '14px 32px',
-              backgroundColor: 'var(--io-action)',
-              color: 'white',
-              fontSize: '16px',
-              fontWeight: 600,
-              borderRadius: 'var(--io-radius-md)',
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action)';
-            }}
-          >
-            Analizar mi proyecto
-          </Link>
+          <div className="cth-ctas">
+            <Link href="/diagnostico/" className="cth-cta cth-cta--primary">
+              Empezar diagnóstico
+            </Link>
+            <Link href="/contacto/" className="cth-cta cth-cta--secondary">
+              Hablar con nosotros
+            </Link>
+          </div>
         </div>
 
-        {/* Right: Visual — escena de escritorio/oficina (Opción C) */}
-        <div
-          className="ct-hero-visual"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '420px',
-            backgroundColor: 'white',
-            borderRadius: 'var(--io-radius-lg)',
-            border: '1px solid var(--io-border)',
-            padding: '40px 30px',
-            position: 'relative',
-            width: '100%',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Luz natural — glow discreto superior izquierdo */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '-60px',
-              left: '-60px',
-              width: '220px',
-              height: '220px',
-              borderRadius: '50%',
-              backgroundColor: 'rgba(244,162,124,0.08)',
-              filter: 'blur(10px)',
-              zIndex: 0,
-            }}
-          />
-
-          <div
-            className="ct-hero-visual-inner"
-            style={{ position: 'relative', width: '100%', zIndex: 1 }}
-          >
-            {/* Escritorio: portátil + panel Ideas/Estrategia/Acción/Resultados + props */}
-            <div
-              style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              {/* Pantalla del portátil */}
-              <div
-                style={{
-                  backgroundColor: 'white',
-                  border: '3px solid var(--io-text)',
-                  borderRadius: '10px 10px 4px 4px',
-                  padding: '14px',
-                  boxShadow: '0 10px 28px rgba(0,0,0,0.12)',
-                  width: '100%',
-                  maxWidth: '300px',
-                }}
-              >
-                <div
-                  className="ct-hero-board-grid"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                    gap: '8px',
-                  }}
-                >
-                  {[
-                    { label: 'Ideas', tone: 'soft' },
-                    { label: 'Estrategia', tone: 'soft' },
-                    { label: 'Acción', tone: 'action' },
-                    { label: 'Resultados', tone: 'accent' },
-                  ].map((col) => (
-                    <div
-                      key={col.label}
-                      style={{
-                        backgroundColor:
-                          col.tone === 'action' ? 'var(--io-action)' : 'var(--io-bg-soft)',
-                        border: col.tone === 'accent' ? '1.5px solid var(--io-accent)' : 'none',
-                        borderRadius: '7px',
-                        padding: '10px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '6px',
-                        minHeight: '58px',
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontSize: '9px',
-                          fontWeight: 700,
-                          color: col.tone === 'action' ? 'white' : 'var(--io-text)',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.04em',
-                        }}
-                      >
-                        {col.label}
-                      </span>
-                      <div
-                        style={{
-                          width: '80%',
-                          height: '4px',
-                          borderRadius: '1px',
-                          backgroundColor:
-                            col.tone === 'action' ? 'rgba(255,255,255,0.5)' : 'var(--io-border)',
-                        }}
-                      />
-                    </div>
-                  ))}
+        <div className="cth-stage">
+          {CARDS.map((c, i) => {
+            const Visual = c.Visual;
+            return (
+              <div key={c.number} className="cth-cardwrap">
+                {i < CARDS.length - 1 && <span className="cth-arrow" aria-hidden="true" />}
+                <div className={`cth-card cth-card--${c.tone}`}>
+                  <span className="cth-card__num">{c.number}</span>
+                  <div className="cth-card__visual">
+                    <Visual className="cth-card__svg" />
+                  </div>
+                  <span className="cth-card__title">{c.title}</span>
                 </div>
               </div>
-
-              {/* Base del portátil (teclado) */}
-              <div
-                style={{
-                  width: 'calc(100% + 28px)',
-                  maxWidth: '328px',
-                  height: '12px',
-                  backgroundColor: 'var(--io-text)',
-                  borderRadius: '0 0 6px 6px',
-                  marginTop: '2px',
-                }}
-              />
-
-              {/* Superficie del escritorio */}
-              <div
-                className="ct-hero-desk-line"
-                style={{
-                  width: '100%',
-                  height: '1px',
-                  backgroundColor: 'var(--io-border)',
-                  marginTop: '28px',
-                  marginBottom: '-1px',
-                  position: 'relative',
-                }}
-              />
-
-              {/* Props sobre el escritorio: café + planta */}
-              <div
-                className="ct-hero-props-row"
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                  maxWidth: '300px',
-                  marginTop: '20px',
-                }}
-              >
-                <div
-                  style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--io-bg-soft)',
-                    border: '1.5px solid var(--io-border)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--io-action)',
-                  }}
-                >
-                  <Coffee size={19} strokeWidth={1.5} />
-                </div>
-
-                <div
-                  style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--io-bg-soft)',
-                    border: '1.5px solid var(--io-accent)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--io-text)',
-                  }}
-                >
-                  <Sprout size={19} strokeWidth={1.5} />
-                </div>
-              </div>
-
-              {/* Badge: notas/estrategia colaborativa */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-18px',
-                  right: '-6px',
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '1.5px solid var(--io-border)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'var(--io-action)',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                }}
-              >
-                <NotebookPen size={20} strokeWidth={1.5} />
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
+
+      <style>{`
+        .cth-section { padding: 56px 20px; background-color: var(--io-bg); }
+        .cth-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 48px; align-items: center; }
+        .cth-left { display: flex; flex-direction: column; }
+        .cth-eyebrow {
+          display: inline-block; align-self: flex-start; background: var(--io-bg-soft); color: var(--io-action);
+          font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+          padding: 7px 14px; border-radius: var(--io-radius-md); margin-bottom: 20px;
+        }
+        .cth-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--io-text); line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 18px; }
+        .cth-sub { font-size: 16.5px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 28px; max-width: 440px; }
+
+        .cth-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+        .cth-cta {
+          display: inline-flex; align-items: center; justify-content: center; padding: 13px 26px;
+          font-size: 15.5px; font-weight: 600; text-decoration: none; border-radius: var(--io-radius-md);
+          transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+        }
+        .cth-cta--primary { background: var(--io-action); color: #fff; border: 1.5px solid var(--io-action); }
+        .cth-cta--primary:hover { background: var(--io-action-hover); border-color: var(--io-action-hover); color: #fff; }
+        .cth-cta--secondary { background: #fff; color: var(--io-action); border: 1.5px solid var(--io-action); }
+        .cth-cta--secondary:hover { background: rgba(51, 111, 230, 0.06); }
+        .cth-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; }
+
+        .cth-stage { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; align-items: start; }
+        .cth-cardwrap { position: relative; padding: 0 6px; }
+        .cth-arrow {
+          display: block; position: absolute; top: 44px; right: -7px; width: 14px; height: 14px; z-index: 2;
+          border-top: 2px solid var(--io-border); border-right: 2px solid var(--io-border); transform: rotate(45deg);
+        }
+        .cth-card {
+          display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
+          padding: 16px 10px 18px; background: #fff; border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
+        }
+        .cth-card--blue { box-shadow: inset 0 3px 0 0 var(--io-action); }
+        .cth-card--peach { box-shadow: inset 0 3px 0 0 var(--io-accent); }
+        .cth-card--green { box-shadow: inset 0 3px 0 0 #34A86A; }
+        .cth-card__num { font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; color: var(--io-text-muted); }
+        .cth-card__visual { width: 100%; }
+        .cth-card__svg { display: block; width: 100%; height: auto; }
+        .cth-card__title { font-size: 14.5px; font-weight: 700; color: var(--io-text); }
+
+        @media (max-width: 1023px) {
+          .cth-section { padding: 48px 20px; }
+          .cth-grid { grid-template-columns: 1fr; gap: 36px; }
+          .cth-left { align-items: center; text-align: center; }
+          .cth-sub { max-width: 560px; }
+          .cth-ctas { justify-content: center; }
+        }
+        @media (max-width: 767px) {
+          .cth-section { padding: 40px 20px; }
+          .cth-stage { grid-template-columns: 1fr; gap: 14px; max-width: 300px; margin: 0 auto; }
+          .cth-arrow { display: none; }
+          .cth-card { flex-direction: row; text-align: left; padding: 14px 16px; }
+          .cth-card__visual { width: 56px; flex: none; }
+          .cth-card__num { display: none; }
+        }
+        @media (max-width: 430px) { .cth-section { padding: 32px 16px; } }
+      `}</style>
     </section>
   );
 }
