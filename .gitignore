@@ -69,3 +69,6 @@ Ioranaseo-old/coverage/
 # Ioranaseo-old source MUST NOT be ignored
 # Everything in snapshot source is needed
 # Only the build artifacts listed above are ignored
+
+# Playwright MCP artifacts
+.playwright-mcp/
