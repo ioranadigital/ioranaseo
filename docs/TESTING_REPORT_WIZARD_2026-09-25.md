@@ -296,13 +296,13 @@ src/app/diagnostico/components/Wizard/
 ### ⏳ PENDING BROWSER TESTING (14/40)
 
 Tests that require visual browser verification (Playwright MCP unavailable):
-- [ ] 375px: PASS / FAIL
-- [ ] 430px: PASS / FAIL
-- [ ] 768px: PASS / FAIL
-- [ ] 1024px: PASS / FAIL
-- [ ] 1280px: PASS / FAIL
-- [ ] 1440px: PASS / FAIL
-- [ ] HORIZONTAL OVERFLOW: 0px
+- [x] 375px: PASS (analysis/screenshots/diagnostico-375*.png)
+- [x] 430px: PASS (analysis/screenshots/diagnostico-430*.png)
+- [x] 768px: PASS (analysis/screenshots/diagnostico-768*.png)
+- [x] 1024px: PASS (analysis/screenshots/diagnostico-1024*.png)
+- [x] 1280px: PASS (analysis/screenshots/diagnostico-1280*.png)
+- [x] 1440px: PASS (analysis/screenshots/diagnostico-1440*.png)
+- [x] HORIZONTAL OVERFLOW: 0px (intro y paso 4, 6 breakpoints)
 - [ ] FORM SUBMISSION: Works end-to-end
 - [ ] SUCCESS STATE: Displays correctly
 - [ ] BUTTON HOVER STATES: Visible
@@ -371,3 +371,42 @@ All critical tests passed. Component architecture clean and modular. Data model 
 None. All blocking issues resolved. Ready for next phase.
 
 **Status:** ✅ READY FOR RESPONSIVE TESTING & DEPLOYMENT
+
+
+---
+
+## Responsive Verification (2026-09-25, Playwright)
+
+- Viewports: 375, 430, 768, 1024, 1280, 1440 px. scrollWidth <= clientWidth en todos; ningún elemento excede el viewport.
+- Capturas en `docs/analysis/screenshots/`: intro por breakpoint (`diagnostico-{w}.png`), pasos 1-4 a 375px (`diagnostico-375-pasoN.png`) y paso 4 por breakpoint (`diagnostico-{w}-paso4.png`).
+- Nota: en las capturas fullPage el header fijo aparece a media altura (artefacto de captura, no bug).
+- No verificado: envío end-to-end (evita email real), hover/focus/errores, contador de caracteres, pasos 1-3 en breakpoints distintos de 375.
+
+---
+
+## Visual Correction Round (2026-09-25)
+
+- Causa raíz de la serif: `/diagnostico` está fuera del route group `(landings)`, que es donde se carga Manrope. Solución: `src/app/diagnostico/layout.tsx` (Manrope + `font-family: inherit` en controles).
+- Header: `LandingsHeader` muestra Soluciones / Cómo trabajamos en `/diagnostico`.
+- Progreso movido dentro de la card (prop `progress` en los 4 pasos).
+- Intro compactada; botones de navegación en una línea; resumen del paso 4 compactado.
+- Header "atravesando" contenido en capturas full-page: ARTEFACTO (header sticky top:0, z-index 1000, verificado con scroll real).
+- Capturas finales: `docs/analysis/screenshots/diagnostico-final/` (sustituyen a las de la primera ronda).
+- Medido en 375/430/768/1024/1280/1440: 0 elementos sin Manrope, 0 botones con wrap, 0px de overflow horizontal.
+
+---
+
+## FREEZE STATUS (2026-09-25)
+
+| Área | Estado |
+| --- | --- |
+| /diagnostico/ LANDING UI | **FROZEN** |
+| /diagnostico/ WIZARD UI | **FROZEN** |
+| BACKEND | PENDING |
+| REPORT GENERATION | OUT OF SCOPE |
+
+- Landing y wizard son dos estados separados (nunca se muestran a la vez). Header: logo + Contacto.
+- Microcopy de confianza del hero: "Sin acceso a tus cuentas · Sin conocimientos técnicos · Diagnóstico por email".
+- Espacio libre bajo "Qué analizamos" en desktop: aceptado, sin contenido de relleno ni `min-height` artificial en la landing.
+- No se aceptan más cambios visuales sin una nueva petición explícita.
+- Capturas de referencia: `docs/analysis/screenshots/diagnostico-estados/`.
