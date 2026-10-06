@@ -1,189 +1,68 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import LegalHero from './components/LegalHero';
 
 export const metadata: Metadata = {
-  title: 'Términos Legales | IORANA SEO',
+  title: 'Información Legal | IORANA SEO',
   description:
-    'Términos y condiciones de uso de IORANA SEO. Lee nuestras políticas y acuerdos.',
+    'Política de privacidad, política de cookies y aviso legal de IORANA SEO.',
   openGraph: {
-    title: 'Términos Legales | IORANA SEO',
+    title: 'Información Legal | IORANA SEO',
     description:
-      'Términos y condiciones de uso de IORANA SEO. Lee nuestras políticas y acuerdos.',
+      'Política de privacidad, política de cookies y aviso legal de IORANA SEO.',
     type: 'website',
     locale: 'es_ES',
   },
 };
 
+const DOCS = [
+  {
+    href: '/legal/privacidad',
+    title: 'Política de Privacidad',
+    text: 'Cómo tratamos y protegemos tus datos personales.',
+  },
+  {
+    href: '/legal/cookies',
+    title: 'Política de Cookies',
+    text: 'Qué cookies utiliza este sitio y cómo puedes gestionarlas.',
+  },
+  {
+    href: '/legal/aviso-legal',
+    title: 'Aviso Legal',
+    text: 'Condiciones de uso del sitio web.',
+  },
+];
+
 export default function LegalIndexPage() {
   return (
-    <section
-      style={{
-        paddingTop: '60px',
-        paddingBottom: '60px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        backgroundColor: 'var(--io-bg)',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1000px',
-          margin: '0 auto',
-          width: '100%',
-        }}
-      >
-        <div className="legal-content">
-          <h1
-            style={{
-              marginBottom: '32px',
-              fontSize: '42px',
-              fontWeight: '700',
-              color: 'var(--io-text-primary)',
-            }}
-          >
-            Información Legal
-          </h1>
+    <>
+      <LegalHero
+        title="Información legal"
+        intro="Encuentra aquí nuestra política de privacidad, la política de cookies y el aviso legal del sitio."
+      />
 
-          <p
-            style={{
-              marginBottom: '24px',
-              lineHeight: '1.6',
-              color: 'var(--io-text-secondary)',
-              fontSize: '16px',
-            }}
-          >
-            En esta sección encontrarás información importante sobre nuestras políticas y términos de uso.
-          </p>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '24px',
-              marginTop: '48px',
-            }}
-          >
-            <a
-              href="/legal/privacidad"
-              style={{
-                padding: '24px',
-                border: '1px solid #e0e0e0',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--io-action)';
-                e.currentTarget.style.backgroundColor = '#f9f9f9';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#e0e0e0';
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              <h3
-                style={{
-                  marginBottom: '12px',
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  color: 'var(--io-text-primary)',
-                }}
-              >
-                Política de Privacidad
-              </h3>
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-secondary)',
-                  lineHeight: '1.5',
-                }}
-              >
-                Conoce cómo tratamos tus datos personales y tus derechos.
-              </p>
-            </a>
-
-            <a
-              href="/legal/cookies"
-              style={{
-                padding: '24px',
-                border: '1px solid #e0e0e0',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--io-action)';
-                e.currentTarget.style.backgroundColor = '#f9f9f9';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#e0e0e0';
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              <h3
-                style={{
-                  marginBottom: '12px',
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  color: 'var(--io-text-primary)',
-                }}
-              >
-                Política de Cookies
-              </h3>
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-secondary)',
-                  lineHeight: '1.5',
-                }}
-              >
-                Información sobre las cookies que utilizamos en nuestro sitio.
-              </p>
-            </a>
-
-            <a
-              href="/legal/aviso-legal"
-              style={{
-                padding: '24px',
-                border: '1px solid #e0e0e0',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--io-action)';
-                e.currentTarget.style.backgroundColor = '#f9f9f9';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#e0e0e0';
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              <h3
-                style={{
-                  marginBottom: '12px',
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  color: 'var(--io-text-primary)',
-                }}
-              >
-                Aviso Legal
-              </h3>
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: 'var(--io-text-secondary)',
-                  lineHeight: '1.5',
-                }}
-              >
-                Términos y condiciones de uso de nuestro sitio web.
-              </p>
-            </a>
-          </div>
-        </div>
+      <div className="lgl-index">
+        {DOCS.map((doc) => (
+          <Link key={doc.href} href={doc.href} className="lgl-index__card">
+            <h2 className="lgl-index__title">{doc.title}</h2>
+            <p className="lgl-index__text">{doc.text}</p>
+          </Link>
+        ))}
       </div>
-    </section>
+
+      <style>{`
+        .lgl-index { display: flex; flex-direction: column; gap: 12px; }
+        .lgl-index__card {
+          display: block; padding: 20px; border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
+          background: #fff; text-decoration: none; transition: border-color 180ms ease, box-shadow 180ms ease;
+        }
+        .lgl-index__card:hover {
+          border-color: var(--io-action);
+          box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+        }
+        .lgl-index__title { font-size: 16px; font-weight: 700; color: var(--io-text); margin: 0 0 4px; }
+        .lgl-index__text { font-size: 14px; line-height: 1.5; color: var(--io-text-muted); margin: 0; }
+      `}</style>
+    </>
   );
 }

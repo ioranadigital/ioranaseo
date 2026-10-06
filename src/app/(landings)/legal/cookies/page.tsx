@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import LegalHero from '../components/LegalHero';
 
 export const metadata: Metadata = {
   title: 'Política de Cookies | IORANA SEO',
@@ -15,138 +16,87 @@ export const metadata: Metadata = {
 
 export default function CookiesPage() {
   return (
-    <section
-      style={{
-        paddingTop: '60px',
-        paddingBottom: '60px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        backgroundColor: 'var(--io-bg)',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '900px',
-          margin: '0 auto',
-          width: '100%',
-        }}
-      >
-        <div className="legal-content">
-          <h1
-            style={{
-              marginBottom: '32px',
-              fontSize: '42px',
-              fontWeight: '700',
-              color: 'var(--io-text-primary)',
-            }}
-          >
-            Política de Cookies
-          </h1>
+    <>
+      <LegalHero
+        title="Política de cookies"
+        intro="Qué son las cookies, qué categorías utilizamos realmente y cómo puedes cambiar tu elección en cualquier momento."
+      />
 
-          <p
-            style={{
-              marginBottom: '24px',
-              lineHeight: '1.6',
-              color: 'var(--io-text-secondary)',
-              fontSize: '16px',
-            }}
-          >
-            Este sitio utiliza cookies para mejorar la experiencia del usuario. Al continuar navegando,
-            aceptas el uso de cookies de acuerdo con nuestra política.
+      <div className="lgl-doc">
+        <div className="lgl-doc__section">
+          <h2>¿Qué son las cookies?</h2>
+          <p>
+            Las cookies son pequeños archivos que un sitio web puede guardar en tu navegador para
+            recordar información entre visitas. En este sitio, tu elección de cookies se guarda mediante{' '}
+            <strong>almacenamiento local del navegador (localStorage)</strong>, no mediante una cookie
+            HTTP tradicional.
           </p>
+        </div>
 
-          <h2
-            style={{
-              marginTop: '40px',
-              marginBottom: '20px',
-              fontSize: '24px',
-              fontWeight: '600',
-              color: 'var(--io-text-primary)',
-            }}
-          >
-            ¿Qué son las cookies?
-          </h2>
-          <p
-            style={{
-              marginBottom: '16px',
-              lineHeight: '1.6',
-              color: 'var(--io-text-secondary)',
-            }}
-          >
-            Las cookies son pequeños archivos de texto que se almacenan en tu navegador. Se utilizan para
-            recordar preferencias, mejorar la funcionalidad del sitio y analizar el uso.
+        <div className="lgl-doc__section">
+          <h2>Categorías que utilizamos</h2>
+          <p>
+            Actualmente el panel de preferencias de este sitio distingue dos categorías:
           </p>
-
-          <h2
-            style={{
-              marginTop: '40px',
-              marginBottom: '20px',
-              fontSize: '24px',
-              fontWeight: '600',
-              color: 'var(--io-text-primary)',
-            }}
-          >
-            Tipos de Cookies
-          </h2>
-          <ul
-            style={{
-              marginBottom: '16px',
-              marginLeft: '20px',
-              color: 'var(--io-text-secondary)',
-              lineHeight: '1.6',
-            }}
-          >
+          <ul>
             <li>
-              <strong>Cookies Esenciales:</strong> Necesarias para el funcionamiento básico del sitio
+              <strong>Necesarias:</strong> imprescindibles para el funcionamiento básico del sitio.
+              Siempre activas, no se pueden desactivar.
             </li>
             <li>
-              <strong>Cookies de Análisis:</strong> Nos ayudan a entender cómo usas el sitio
-            </li>
-            <li>
-              <strong>Cookies de Funcionalidad:</strong> Mejoran la experiencia del usuario
+              <strong>Analítica:</strong> nos ayudaría a entender cómo se usa el sitio para mejorarlo.
+              Solo se activa si das tu consentimiento.
             </li>
           </ul>
-
-          <h2
-            style={{
-              marginTop: '40px',
-              marginBottom: '20px',
-              fontSize: '24px',
-              fontWeight: '600',
-              color: 'var(--io-text-primary)',
-            }}
-          >
-            Cómo Gestionar Cookies
-          </h2>
-          <p
-            style={{
-              marginBottom: '16px',
-              lineHeight: '1.6',
-              color: 'var(--io-text-secondary)',
-            }}
-          >
-            Puedes controlar y eliminar cookies desde la configuración de tu navegador. Sin embargo,
-            algunas cookies son necesarias para que el sitio funcione correctamente.
+          <p className="lgl-doc__note">
+            Estado actual: el sitio no tiene instalado ningún script de analítica (Google Analytics u
+            otro) en el momento de esta revisión. Aceptar la categoría &quot;Analítica&quot; guarda tu
+            preferencia para cuando se active, pero hoy no se envía ni se recibe ningún dato de
+            medición ni se instala ninguna cookie de terceros.
           </p>
-
-          <div
-            style={{
-              marginTop: '48px',
-              paddingTop: '24px',
-              borderTop: '1px solid #e0e0e0',
-            }}
-          >
-            <p
-              style={{
-                fontSize: '14px',
-                color: 'var(--io-text-secondary)',
-              }}
-            >
-              Última actualización: 2026
-            </p>
-          </div>
         </div>
+
+        <div className="lgl-doc__section">
+          <h2>Cookies y almacenamiento en uso</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Finalidad</th>
+                <th>Duración</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>iorana-cookie-consent</td>
+                <td>localStorage (necesaria)</td>
+                <td>Recuerda tu elección de cookies para no volver a preguntarte</td>
+                <td>Hasta que borres los datos del sitio en tu navegador</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            No se listan cookies de analítica o de terceros porque, a fecha de esta política, no hay
+            ninguna activa en el sitio.
+          </p>
+        </div>
+
+        <div className="lgl-doc__section">
+          <h2>Cómo cambiar tu elección</h2>
+          <p>
+            Puedes modificar tu elección en cualquier momento desde{' '}
+            <strong>&quot;Preferencias de cookies&quot;</strong>, disponible en el pie de página de
+            cualquier sección del sitio y en la navegación de esta página legal.
+          </p>
+          <p>
+            También puedes eliminar cookies y datos de sitios directamente desde la configuración de tu
+            navegador.
+          </p>
+        </div>
+
+        <p className="lgl-doc__updated">Última actualización: 2026</p>
       </div>
-    </section>
+    </>
   );
 }

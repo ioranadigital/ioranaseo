@@ -6,6 +6,13 @@
   --io-action: #336FE6;
   --io-action-hover: #2559C6;
   --io-accent: #F4A27C;
+  /* Variante del melocotón usada con texto blanco encima (CTA "Analizar mi
+     proyecto"). PRUEBA a petición del usuario: #F67752 da ~2.73:1 con blanco,
+     sigue sin pasar el mínimo de accesibilidad (3:1 large text / 4.5:1 normal)
+     — más claro que la versión anterior (#A8501F, ~5.48:1) pero con el mismo
+     problema de fondo que --io-accent puro (~2.1:1). Ver nota en el chat. */
+  --io-accent-dark: #F67752;
+  --io-accent-dark-hover: #E5613C;
 
   --io-bg: #F8FAFC;
   --io-bg-soft: #EFF6FF;

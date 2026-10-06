@@ -41,6 +41,7 @@ export const siteConfig = {
     "/soluciones/campanas",
     "/soluciones/conversion",
     "/como-trabajamos",
+    "/contacto",
     "/legal/privacidad",
     "/legal/cookies",
     "/legal/aviso-legal",
