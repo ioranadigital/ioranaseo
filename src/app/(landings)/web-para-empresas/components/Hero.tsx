@@ -1,5 +1,52 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { Monitor, Search, MousePointerClick } from 'lucide-react';
+import { HeroBrowserVisual } from './WebVisuals';
+
+const HERO_PHOTO = '/assets/img/web-para-empresas/hero-business.webp';
+
+const MICROCARDS = [
+  { Icon: Monitor, title: 'Diseño responsive', pos: { left: '0%', bottom: 6 } },
+  { Icon: Search, title: 'SEO preparado', pos: { left: '38%', top: 4 } },
+  { Icon: MousePointerClick, title: 'CTA claros', pos: { right: '0%', top: 2 } },
+];
+
+/** Foto local con placeholder si el archivo aún no existe (sin imágenes externas). */
+function HeroPhoto() {
+  const [failed, setFailed] = useState(false);
+  const ref = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
+
+  return (
+    <span className="hero-photo" data-missing={failed || undefined}>
+      {!failed && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          ref={ref}
+          src={HERO_PHOTO}
+          alt="Propietario de un pequeño negocio atendiendo su web"
+          width={620}
+          height={520}
+          loading="eager"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      )}
+      {failed && (
+        <span className="hero-photo__ph" aria-hidden="true">
+          <Monitor size={40} strokeWidth={1.4} />
+        </span>
+      )}
+    </span>
+  );
+}
+
 export default function Hero() {
   return (
     <section
@@ -81,15 +128,16 @@ export default function Hero() {
           </p>
 
           {/* CTA */}
-          <button
+          <Link
+            href="/diagnostico/"
             className="hero-cta"
             style={{
               padding: '14px 32px',
-              backgroundColor: 'var(--io-action)',
+              backgroundColor: 'var(--io-accent-dark)',
               color: 'white',
               fontSize: '16px',
               fontWeight: 600,
-              border: 'none',
+              textDecoration: 'none',
               borderRadius: 'var(--io-radius-md)',
               cursor: 'pointer',
               transition: 'background-color 0.2s',
@@ -97,16 +145,17 @@ export default function Hero() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
+              boxShadow: '0 6px 16px rgba(246, 119, 82, 0.35)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
+              e.currentTarget.style.backgroundColor = 'var(--io-accent-dark-hover)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--io-action)';
+              e.currentTarget.style.backgroundColor = 'var(--io-accent-dark)';
             }}
           >
             Analizar mi proyecto
-          </button>
+          </Link>
 
           {/* Benefits — 2x2 on mobile, 4 on desktop */}
           <div
@@ -154,290 +203,69 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right: Mockup Visual */}
-        <div
-          className="hero-mockup"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '420px',
-            backgroundColor: 'var(--io-bg-soft)',
-            borderRadius: 'var(--io-radius-lg)',
-            border: '1px solid var(--io-border)',
-            padding: '40px 20px',
-            position: 'relative',
-            width: '100%',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Desktop mockup */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '24px',
-              alignItems: 'flex-end',
-            }}
-          >
-            {/* Desktop Web — More realistic */}
-            <div
-              style={{
-                width: '280px',
-                height: '180px',
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                border: '8px solid #1a1a1a',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              {/* Header / Navigation Bar */}
-              <div
-                style={{
-                  height: '24px',
-                  backgroundColor: 'white',
-                  borderBottom: '1px solid var(--io-border)',
-                  padding: '6px 12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '8px',
-                }}
-              >
-                {/* Logo */}
-                <div
-                  style={{
-                    width: '6px',
-                    height: '6px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--io-action)',
-                    flexShrink: 0,
-                  }}
-                />
-                {/* Nav Links */}
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '3px',
-                    flex: 1,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '8px',
-                      height: '2px',
-                      backgroundColor: 'var(--io-border)',
-                      borderRadius: '1px',
-                    }}
-                  />
-                  <div
-                    style={{
-                      width: '8px',
-                      height: '2px',
-                      backgroundColor: 'var(--io-border)',
-                      borderRadius: '1px',
-                    }}
-                  />
-                  <div
-                    style={{
-                      width: '6px',
-                      height: '2px',
-                      backgroundColor: 'var(--io-border)',
-                      borderRadius: '1px',
-                    }}
-                  />
-                </div>
-                {/* CTA small */}
-                <div
-                  style={{
-                    width: '16px',
-                    height: '3px',
-                    backgroundColor: 'var(--io-action)',
-                    borderRadius: '1px',
-                    flexShrink: 0,
-                  }}
-                />
-              </div>
-              {/* Hero / Content Section */}
-              <div
-                style={{
-                  flex: 1,
-                  padding: '10px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '6px',
-                }}
-              >
-                {/* Hero Title */}
-                <div
-                  style={{
-                    height: '12px',
-                    backgroundColor: 'var(--io-action)',
-                    borderRadius: '2px',
-                    width: '90%',
-                  }}
-                />
-                {/* Hero Subtitle */}
-                <div
-                  style={{
-                    height: '5px',
-                    backgroundColor: 'var(--io-border)',
-                    borderRadius: '1px',
-                    width: '75%',
-                  }}
-                />
-                {/* Visual area (image) */}
-                <div
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'var(--io-bg)',
-                    borderRadius: '2px',
-                    marginTop: '3px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {/* Small accent dot */}
-                  <div
-                    style={{
-                      width: '8px',
-                      height: '8px',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--io-action)',
-                      opacity: 0.2,
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Web — Responsive version */}
-            <div
-              style={{
-                width: '110px',
-                height: '160px',
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                border: '6px solid #1a1a1a',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              {/* Mobile Header */}
-              <div
-                style={{
-                  height: '20px',
-                  backgroundColor: 'white',
-                  borderBottom: '1px solid var(--io-border)',
-                  padding: '5px 8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '6px',
-                }}
-              >
-                {/* Logo */}
-                <div
-                  style={{
-                    width: '5px',
-                    height: '5px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--io-action)',
-                    flexShrink: 0,
-                  }}
-                />
-                {/* Menu icon */}
-                <div
-                  style={{
-                    width: '4px',
-                    height: '3px',
-                    backgroundColor: 'var(--io-border)',
-                    borderRadius: '1px',
-                    flexShrink: 0,
-                  }}
-                />
-              </div>
-              {/* Mobile Hero / Content */}
-              <div
-                style={{
-                  flex: 1,
-                  padding: '6px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '4px',
-                }}
-              >
-                {/* Hero Title */}
-                <div
-                  style={{
-                    height: '8px',
-                    backgroundColor: 'var(--io-action)',
-                    borderRadius: '1px',
-                    width: '85%',
-                  }}
-                />
-                {/* Hero Subtitle */}
-                <div
-                  style={{
-                    height: '3px',
-                    backgroundColor: 'var(--io-border)',
-                    borderRadius: '1px',
-                    width: '60%',
-                  }}
-                />
-                {/* Visual area */}
-                <div
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'var(--io-bg)',
-                    borderRadius: '1px',
-                    marginTop: '2px',
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                    paddingBottom: '2px',
-                    paddingLeft: '2px',
-                  }}
-                >
-                  {/* Button indicator */}
-                  <div
-                    style={{
-                      width: '10px',
-                      height: '2px',
-                      backgroundColor: 'var(--io-action)',
-                      borderRadius: '1px',
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
+        {/* Right: composición foto real + mini navegador + microcards flotantes */}
+        <div className="hero-stage">
+          <HeroPhoto />
+          <div className="hero-stage__browser">
+            <HeroBrowserVisual className="hero-stage__browser-svg" />
           </div>
-
-          {/* Accent note with small accent bar */}
-          <div
-            className="hero-accent-note"
-            style={{
-              position: 'absolute',
-              bottom: '24px',
-              right: '24px',
-              fontSize: '11px',
-              color: 'var(--io-accent)',
-              fontWeight: 700,
-              lineHeight: 1.4,
-              textAlign: 'right',
-            }}
-          >
-            ✦ Negocios locales.
-            <br />
-            Grandes oportunidades.
-          </div>
+          {MICROCARDS.map((c, i) => {
+            const Icon = c.Icon;
+            return (
+              <div key={c.title} className={`hero-mc hero-mc--${i}`} style={c.pos}>
+                <span className="hero-mc__icon" aria-hidden="true">
+                  <Icon size={14} strokeWidth={2.2} />
+                </span>
+                <strong>{c.title}</strong>
+              </div>
+            );
+          })}
         </div>
       </div>
 
+      <style>{`
+        .hero-stage { position: relative; width: 100%; min-height: 420px; padding: 0; }
+        .hero-photo {
+          position: absolute; left: 0; top: 0; width: 62%; height: 100%; display: block; overflow: hidden;
+          border-radius: var(--io-radius-lg); border: 1px solid var(--io-border);
+          background: linear-gradient(135deg, #dbe7ff 0%, #fbe3d6 100%);
+        }
+        .hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 58% 50%; }
+        .hero-photo__ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(51, 111, 230, 0.45); }
+
+        .hero-stage__browser { position: absolute; right: 0; top: 60%; width: 58%; transform: translateY(-50%); z-index: 2; }
+        .hero-stage__browser-svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 24px rgba(15, 23, 42, 0.14)); }
+
+        .hero-mc {
+          position: absolute; z-index: 3; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
+          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
+        }
+        .hero-mc__icon {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
+        }
+        .hero-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+
+        @media (max-width: 1024px) {
+          .hero-stage { min-height: 380px; }
+        }
+        @media (max-width: 767px) {
+          .hero-stage { min-height: 300px; }
+          .hero-photo { width: 100%; height: 62%; }
+          .hero-photo img { object-position: 58% 10%; }
+          .hero-stage__browser { width: 78%; top: auto; bottom: 0; right: 4%; transform: none; }
+          .hero-mc { padding: 6px 10px; }
+          .hero-mc strong { font-size: 11.5px; }
+          /* Reposicionar para evitar solape en un stage estrecho (apiladas, no lado a lado) */
+          .hero-mc--0 { left: 0 !important; right: auto !important; top: auto !important; bottom: 6px !important; }
+          .hero-mc--1 { left: 4% !important; right: auto !important; top: 8px !important; bottom: auto !important; }
+          .hero-mc--2 { left: auto !important; right: 4% !important; top: 8px !important; bottom: auto !important; }
+        }
+        @media (max-width: 430px) {
+          .hero-stage { min-height: 260px; }
+        }
+      `}</style>
     </section>
   );
 }

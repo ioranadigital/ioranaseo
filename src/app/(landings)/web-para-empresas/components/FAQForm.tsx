@@ -1,430 +1,175 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { Check } from 'lucide-react';
+
+const FAQS = [
+  {
+    id: 0,
+    question: '¿Cuánto tiempo tarda en estar lista la web?',
+    answer: 'Habitualmente entre 4 y 6 semanas, dependiendo del alcance del proyecto y de los tiempos de validación.',
+  },
+  {
+    id: 1,
+    question: '¿Qué necesito para empezar?',
+    answer:
+      'Necesitaremos conocer tu negocio, servicios, objetivos y disponer de los materiales y accesos necesarios. Te guiamos durante todo el proceso.',
+  },
+  {
+    id: 2,
+    question: '¿La web estará preparada para SEO?',
+    answer: 'Sí. La arquitectura y la optimización inicial se plantean desde el principio.',
+  },
+  {
+    id: 3,
+    question: '¿La web y el dominio serán míos?',
+    answer: 'Sí. El dominio y los activos del proyecto permanecen bajo control del cliente.',
+  },
+  {
+    id: 4,
+    question: '¿Podré gestionar la web yo mismo?',
+    answer: 'Sí. Incluimos formación básica para realizar cambios habituales.',
+  },
+  {
+    id: 5,
+    question: '¿Qué ocurre después del lanzamiento?',
+    answer:
+      'Puedes gestionarla por tu cuenta, contratar mantenimiento o continuar trabajando con Iorana SEO en captación y crecimiento.',
+  },
+];
+
+const BENEFICIOS = ['Web y estructura', 'SEO básico', 'Conversión', 'Diagnóstico por email'];
 
 export default function FAQForm() {
   const [expandedId, setExpandedId] = useState<number | null>(0);
-  const [formStep, setFormStep] = useState(0);
-
-  const faqs = [
-    {
-      id: 0,
-      question: '¿Cuánto tiempo tarda en estar lista la web?',
-      answer:
-        'Habitualmente entre 4 y 6 semanas, dependiendo del alcance del proyecto y de los tiempos de validación.',
-    },
-    {
-      id: 1,
-      question: '¿Qué necesito para empezar?',
-      answer:
-        'Necesitaremos conocer tu negocio, servicios, objetivos y disponer de los materiales y accesos necesarios. Te guiamos durante todo el proceso.',
-    },
-    {
-      id: 2,
-      question: '¿La web estará preparada para SEO?',
-      answer:
-        'Sí. La arquitectura y la optimización inicial se plantean desde el principio.',
-    },
-    {
-      id: 3,
-      question: '¿La web y el dominio serán míos?',
-      answer:
-        'Sí. El dominio y los activos del proyecto permanecen bajo control del cliente.',
-    },
-    {
-      id: 4,
-      question: '¿Podré gestionar la web yo mismo?',
-      answer:
-        'Sí. Incluimos formación básica para realizar cambios habituales.',
-    },
-    {
-      id: 5,
-      question: '¿Qué ocurre después del lanzamiento?',
-      answer:
-        'Puedes gestionarla por tu cuenta, contratar mantenimiento o continuar trabajando con Iorana SEO en captación y crecimiento.',
-    },
-  ];
-
-  const formOptions = [
-    'Crear una nueva web',
-    'Renovar mi web actual',
-    'Mi web no consigue resultados',
-    'No estoy seguro',
-  ];
 
   return (
-    <section
-      className="faq-section"
-      style={{
-        padding: '80px 20px',
-        backgroundColor: 'white',
-      }}
-    >
-      <div
-        className="faq-grid"
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '80px',
-          alignItems: 'flex-start',
-        }}
-      >
+    <section className="faq-section wf-section">
+      <div className="wf-grid">
         {/* Left: FAQ */}
         <div>
-          <h2
-            style={{
-              fontSize: 'clamp(32px, 5vw, 44px)',
-              fontWeight: 700,
-              color: 'var(--io-text)',
-              margin: '0 0 40px 0',
-            }}
-          >
-            Preguntas frecuentes
-          </h2>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {faqs.map((faq) => (
-              <div
-                key={faq.id}
-                style={{
-                  borderBottom: '1px solid var(--io-border)',
-                  paddingBottom: '16px',
-                }}
-              >
-                <button
-                  onClick={() =>
-                    setExpandedId(expandedId === faq.id ? null : faq.id)
-                  }
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    padding: '0',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    width: '100%',
-                  }}
-                >
-                  <h3
-                    style={{
-                      fontSize: '15px',
-                      fontWeight: 600,
-                      color: 'var(--io-text)',
-                      margin: '0',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      gap: '12px',
-                      lineHeight: 1.4,
-                    }}
+          <h2 className="wf-title">Preguntas frecuentes</h2>
+          <div className="wf-list">
+            {FAQS.map((faq) => {
+              const open = expandedId === faq.id;
+              return (
+                <div key={faq.id} className="wf-item">
+                  <button
+                    type="button"
+                    className="wf-btn"
+                    aria-expanded={open}
+                    aria-controls={`wf-panel-${faq.id}`}
+                    onClick={() => setExpandedId(open ? null : faq.id)}
                   >
-                    {faq.question}
-                    <span
-                      style={{
-                        fontSize: '18px',
-                        color: 'var(--io-action)',
-                        flexShrink: 0,
-                        transform:
-                          expandedId === faq.id ? 'rotate(180deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.2s',
-                      }}
-                    >
-                      ▼
-                    </span>
-                  </h3>
-                </button>
-
-                {expandedId === faq.id && (
-                  <p
-                    style={{
-                      fontSize: '15px',
-                      lineHeight: 1.6,
-                      color: 'var(--io-text-muted)',
-                      margin: '12px 0 0 0',
-                      paddingTop: '12px',
-                    }}
-                  >
-                    {faq.answer}
-                  </p>
-                )}
-              </div>
-            ))}
+                    <span className="wf-btn__q">{faq.question}</span>
+                    <span className="wf-btn__icon" aria-hidden="true">{open ? '−' : '+'}</span>
+                  </button>
+                  {open && (
+                    <p id={`wf-panel-${faq.id}`} className="wf-answer">
+                      {faq.answer}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Right: Form */}
-        <div
-          className="form-box"
-          style={{
-            backgroundColor: 'white',
-            padding: '48px',
-            borderRadius: 'var(--io-radius-md)',
-            border: '2px solid var(--io-action)',
-            boxShadow: '0 10px 40px rgba(59, 130, 246, 0.1)',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-              color: 'var(--io-action)',
-              marginBottom: '16px',
-              textTransform: 'uppercase',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-            }}
-          >
-            <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--io-accent)',
-              }}
-            />
-            Cuéntanos tu proyecto
-          </div>
-
-          <h2
-            style={{
-              fontSize: '28px',
-              fontWeight: 700,
-              color: 'var(--io-text)',
-              margin: '0 0 12px 0',
-              lineHeight: 1.2,
-            }}
-          >
-            Analizamos tu proyecto sin compromiso
-          </h2>
-
-          <p
-            style={{
-              fontSize: '14px',
-              lineHeight: 1.6,
-              color: 'var(--io-text-muted)',
-              margin: '0 0 40px 0',
-            }}
-          >
-            Responde unas preguntas breves y podremos orientarte sobre la
-            solución que mejor encaja.
+        {/* Right: promoción del diagnóstico real (el wizard vive en /diagnostico/) */}
+        <aside className="wf-promo" aria-labelledby="wf-promo-title">
+          <p className="wf-eyebrow">
+            <span className="wf-eyebrow__line" aria-hidden="true" />
+            Diagnóstico digital gratuito
+          </p>
+          <h3 id="wf-promo-title" className="wf-promo__title">
+            Descubre qué debería mejorar tu web primero.
+          </h3>
+          <p className="wf-promo__copy">
+            Analizamos tu web y tu presencia digital para detectar las principales oportunidades de mejora.
           </p>
 
-          {/* Progress */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '40px',
-              fontSize: '13px',
-              fontWeight: 600,
-              color: 'var(--io-text-muted)',
-              gap: '8px',
-            }}
-          >
-            {[1, 2, 3, 4].map((step) => (
-              <div key={step} style={{ display: 'flex', alignItems: 'center' }}>
-                <div
-                  style={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '50%',
-                    backgroundColor:
-                      step <= formStep + 1 ? 'var(--io-action)' : 'var(--io-border)',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                  }}
-                >
-                  {step}
-                </div>
-                {step < 4 && (
-                  <div
-                    style={{
-                      width: '8px',
-                      height: '1px',
-                      backgroundColor: 'var(--io-border)',
-                      margin: '0 6px',
-                    }}
-                  />
-                )}
-              </div>
+          <ul className="wf-checks">
+            {BENEFICIOS.map((b) => (
+              <li key={b}>
+                <span className="wf-check" aria-hidden="true">
+                  <Check size={11} strokeWidth={3} />
+                </span>
+                {b}
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* Step 1 */}
-          {formStep === 0 && (
-            <div>
-              <label
-                style={{
-                  display: 'block',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: 'var(--io-text)',
-                  marginBottom: '16px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}
-              >
-                ¿Qué necesitas?
-              </label>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {formOptions.map((option) => (
-                  <label
-                    key={option}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '14px',
-                      padding: '16px 18px',
-                      backgroundColor: 'var(--io-bg-soft)',
-                      borderRadius: 'var(--io-radius-md)',
-                      border: '2px solid transparent',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s',
-                      minHeight: '52px',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--io-action)';
-                      e.currentTarget.style.backgroundColor = 'var(--io-bg)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'transparent';
-                      e.currentTarget.style.backgroundColor = 'var(--io-bg-soft)';
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="need"
-                      value={option}
-                      style={{
-                        width: '18px',
-                        height: '18px',
-                        cursor: 'pointer',
-                        flexShrink: 0,
-                        accentColor: 'var(--io-action)',
-                      }}
-                    />
-                    <span
-                      style={{
-                        fontSize: '15px',
-                        fontWeight: 500,
-                        color: 'var(--io-text)',
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {option}
-                    </span>
-                  </label>
-                ))}
-              </div>
-
-              <button
-                onClick={() => setFormStep(1)}
-                style={{
-                  marginTop: '40px',
-                  width: '100%',
-                  padding: '16px 24px',
-                  backgroundColor: 'var(--io-action)',
-                  color: 'white',
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  border: 'none',
-                  borderRadius: 'var(--io-radius-md)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--io-action-hover)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.3)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--io-action)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.2)';
-                }}
-              >
-                Continuar →
-              </button>
-            </div>
-          )}
-
-          {/* Steps 2-4: Placeholder */}
-          {formStep > 0 && (
-            <div
-              style={{
-                padding: '24px',
-                backgroundColor: 'white',
-                borderRadius: 'var(--io-radius-md)',
-                textAlign: 'center',
-                color: 'var(--io-text-muted)',
-                fontSize: '14px',
-              }}
-            >
-              Paso {formStep + 1}/4 — Formulario multistep a completar
-            </div>
-          )}
-        </div>
+          <Link href="/diagnostico/" className="wf-cta">
+            Empezar diagnóstico
+          </Link>
+        </aside>
       </div>
 
-      {/* Responsive */}
-      <style>
-        {`
-          @media (max-width: 1024px) {
-            .faq-section {
-              padding: 60px 20px;
-            }
-            .faq-grid {
-              grid-template-columns: 1fr !important;
-              gap: 60px !important;
-            }
-          }
-          @media (max-width: 768px) {
-            .faq-section {
-              padding: 40px 20px;
-            }
-            .faq-grid {
-              gap: 40px !important;
-            }
-            .form-box {
-              padding: 32px 24px !important;
-            }
-          }
-          @media (max-width: 430px) {
-            .faq-section {
-              padding: 32px 20px;
-            }
-            .faq-grid {
-              gap: 32px !important;
-            }
-            .form-box {
-              padding: 24px 16px !important;
-              border: 1px solid var(--io-action) !important;
-            }
-          }
-          @media (max-width: 375px) {
-            .faq-section {
-              padding: 32px 16px;
-            }
-            .faq-grid {
-              gap: 28px !important;
-            }
-            .form-box {
-              padding: 20px 14px !important;
-              border: 1px solid var(--io-action) !important;
-            }
-          }
-        `}
-      </style>
+      <style>{`
+        .wf-section { padding: 56px 20px; background-color: #fff; }
+        .wf-grid {
+          max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+          gap: 56px; align-items: start;
+        }
+        .wf-title { font-size: clamp(28px, 4.4vw, 40px); font-weight: 700; color: var(--io-text); line-height: 1.2; margin: 0 0 28px; }
+
+        .wf-list { border-top: 1px solid var(--io-border); }
+        .wf-item { border-bottom: 1px solid var(--io-border); }
+        .wf-btn {
+          display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 16px 4px;
+          text-align: left; font-family: inherit; cursor: pointer; background: none; border: none; color: var(--io-text);
+        }
+        .wf-btn:hover .wf-btn__q { color: var(--io-action-hover); }
+        .wf-btn:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; border-radius: 4px; }
+        .wf-btn__q { font-size: 15px; font-weight: 600; line-height: 1.4; transition: color 150ms ease; }
+        .wf-btn__icon { flex: none; font-size: 18px; color: var(--io-action); line-height: 1; }
+        .wf-answer { margin: 0; padding: 0 44px 18px 4px; font-size: 15px; line-height: 1.6; color: var(--io-text-muted); }
+
+        .wf-promo {
+          position: relative; overflow: hidden; padding: 32px; border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
+          background: radial-gradient(circle at 100% 0%, rgba(51, 111, 230, 0.10) 0%, rgba(51, 111, 230, 0) 55%), var(--io-bg-soft);
+        }
+        .wf-eyebrow {
+          display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-size: 12px; font-weight: 700;
+          letter-spacing: 0.08em; text-transform: uppercase; color: var(--io-action-hover);
+        }
+        .wf-eyebrow__line { width: 22px; height: 3px; border-radius: 2px; background: var(--io-accent); flex: none; }
+        .wf-promo__title { font-size: 24px; font-weight: 700; color: var(--io-text); line-height: 1.25; margin: 0 0 12px; }
+        .wf-promo__copy { font-size: 15px; line-height: 1.6; color: var(--io-text-muted); margin: 0 0 18px; }
+
+        .wf-checks { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+        .wf-checks li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--io-text); }
+        .wf-check {
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 18px; height: 18px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.14); color: var(--io-action);
+        }
+
+        .wf-cta {
+          display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 12px 24px;
+          font-size: 15px; font-weight: 600; color: #fff; text-decoration: none; background: var(--io-action);
+          border: 1.5px solid var(--io-action); border-radius: var(--io-radius-md);
+          transition: background-color 180ms ease, border-color 180ms ease;
+        }
+        .wf-cta:hover, .wf-cta:focus-visible { background: var(--io-action-hover); border-color: var(--io-action-hover); color: #fff; }
+        .wf-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 3px; }
+
+        @media (max-width: 1023px) {
+          .wf-section { padding: 48px 20px; }
+          .wf-grid { grid-template-columns: 1fr; gap: 36px; }
+        }
+        @media (max-width: 767px) {
+          .wf-section { padding: 40px 20px; }
+          .wf-grid { gap: 28px; }
+          .wf-title { margin-bottom: 20px; }
+          .wf-btn__q { font-size: 14.5px; }
+          .wf-answer { padding-right: 8px; font-size: 14px; }
+          .wf-promo { padding: 24px 20px; }
+          .wf-promo__title { font-size: 21px; }
+          .wf-promo__copy { font-size: 14px; margin-bottom: 16px; }
+        }
+        @media (max-width: 375px) { .wf-section { padding: 32px 16px; } }
+      `}</style>
     </section>
   );
 }

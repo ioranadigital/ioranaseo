@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function Pricing() {
   const plans = [
     {
@@ -14,6 +16,7 @@ export default function Pricing() {
         'Formulario de contacto',
       ],
       cta: 'Quiero este plan',
+      href: '/contacto/',
       recommended: false,
     },
     {
@@ -30,6 +33,7 @@ export default function Pricing() {
         'Orientación a captación',
       ],
       cta: 'Analizar mi proyecto',
+      href: '/diagnostico/',
       recommended: true,
     },
     {
@@ -47,6 +51,7 @@ export default function Pricing() {
         'Acompañamiento',
       ],
       cta: 'Quiero saber más',
+      href: '/contacto/',
       recommended: false,
     },
   ];
@@ -54,7 +59,7 @@ export default function Pricing() {
   return (
     <section
       id="precios"
-      className="pricing-section"
+      className="pricing-section pr-section"
       style={{
         padding: '80px 20px',
         backgroundColor: 'var(--io-bg)',
@@ -62,7 +67,7 @@ export default function Pricing() {
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Title */}
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div className="pr-header" style={{ textAlign: 'center', marginBottom: '60px' }}>
           <h2
             style={{
               fontSize: 'clamp(32px, 5vw, 44px)',
@@ -99,7 +104,7 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <div
               key={plan.name}
-              className={`pricing-card ${plan.recommended ? 'recommended' : ''}`}
+              className={`pricing-card pr-card ${plan.recommended ? 'recommended' : ''}`}
               style={{
                 position: 'relative',
                 padding: plan.recommended ? '48px 32px 40px' : '40px 32px',
@@ -110,7 +115,7 @@ export default function Pricing() {
                 flexDirection: 'column',
                 transform: plan.recommended ? 'translateY(-16px)' : 'translateY(0)',
                 boxShadow: plan.recommended
-                  ? '0 20px 50px rgba(59, 130, 246, 0.15)'
+                  ? '0 20px 50px rgba(51, 111, 230, 0.15)'
                   : '0 2px 8px rgba(0, 0, 0, 0.04)',
                 transition: 'all 0.2s',
                 order: plan.recommended ? -1 : index,
@@ -153,6 +158,7 @@ export default function Pricing() {
 
               {/* Price */}
               <div
+                className="pr-price"
                 style={{
                   marginBottom: '24px',
                 }}
@@ -179,6 +185,7 @@ export default function Pricing() {
 
               {/* Description */}
               <p
+                className="pr-desc"
                 style={{
                   fontSize: '15px',
                   lineHeight: 1.6,
@@ -191,6 +198,7 @@ export default function Pricing() {
 
               {/* Features */}
               <div
+                className="pr-features"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -202,6 +210,7 @@ export default function Pricing() {
                 {plan.features.map((feature) => (
                   <div
                     key={feature}
+                    className="pr-feature"
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',
@@ -226,33 +235,37 @@ export default function Pricing() {
               </div>
 
               {/* CTA */}
-              <button
+              <Link
+                href={plan.href}
                 style={{
+                  display: 'block',
+                  textAlign: 'center',
                   padding: '12px 24px',
                   backgroundColor: plan.recommended
-                    ? 'var(--io-action)'
+                    ? 'var(--io-accent-dark)'
                     : 'var(--io-bg-soft)',
                   color: plan.recommended ? 'white' : 'var(--io-action)',
                   fontSize: '14px',
                   fontWeight: 600,
-                  border: 'none',
+                  textDecoration: 'none',
                   borderRadius: 'var(--io-radius-md)',
                   cursor: 'pointer',
                   transition: 'background-color 0.2s',
+                  boxShadow: plan.recommended ? '0 6px 16px rgba(246, 119, 82, 0.35)' : 'none',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = plan.recommended
-                    ? 'var(--io-action-hover)'
+                    ? 'var(--io-accent-dark-hover)'
                     : 'var(--io-border)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = plan.recommended
-                    ? 'var(--io-action)'
+                    ? 'var(--io-accent-dark)'
                     : 'var(--io-bg-soft)';
                 }}
               >
                 {plan.cta}
-              </button>
+              </Link>
             </div>
           ))}
         </div>
@@ -280,6 +293,28 @@ export default function Pricing() {
         </div>
       </div>
 
+      <style>{`
+        /* Micro polish: solo densidad/spacing en mobile — sin ocultar contenido ni cambiar precios */
+        @media (max-width: 1024px) {
+          .pr-section { padding: 60px 20px !important; }
+        }
+        @media (max-width: 767px) {
+          .pr-section { padding: 40px 20px !important; }
+          .pr-header { margin-bottom: 36px !important; }
+        }
+        @media (max-width: 430px) {
+          .pr-section { padding: 32px 20px !important; }
+          .pricing-grid { gap: 20px !important; margin-bottom: 32px !important; }
+          .pr-card { padding: 28px 24px !important; }
+          .pr-card.recommended { padding: 34px 24px 28px !important; }
+          .pr-price { margin-bottom: 16px !important; }
+          .pr-desc { margin-bottom: 16px !important; }
+          .pr-features { gap: 8px !important; margin-bottom: 20px !important; }
+        }
+        @media (max-width: 375px) {
+          .pr-section { padding: 32px 16px !important; }
+        }
+      `}</style>
     </section>
   );
 }
