@@ -207,27 +207,44 @@ export default function DiagnosticoWizard() {
     }
   };
 
+  const submitting = useRef(false);
+
   const handleSubmit = async () => {
-    // Prepare payload for future backend integration
+    if (submitting.current) return;
+    submitting.current = true;
+
     const payload = {
       business: formData.business,
       presence: formData.presence,
       objectives: formData.objectives,
       contact: formData.contact,
-      timestamp: new Date().toISOString(),
     };
 
-    console.log('Submission payload (PENDING BACKEND):', payload);
+    try {
+      const response = await fetch('/api/diagnostico', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    // TODO: When backend is ready, implement:
-    // const response = await fetch('/api/diagnostico', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(payload),
-    // });
+      if (response.ok) {
+        setStepErrors({});
+        setCurrentStep('success');
+        return;
+      }
 
-    // For now, just show success state
-    setCurrentStep('success');
+      const body = await response.json().catch(() => ({}));
+      setStepErrors({
+        submit:
+          body?.reason === 'rate_limited'
+            ? 'Has enviado demasiadas solicitudes. Inténtalo de nuevo más tarde.'
+            : 'No hemos podido enviar tu solicitud. Inténtalo de nuevo en unos minutos.',
+      });
+    } catch {
+      setStepErrors({ submit: 'No hemos podido conectar. Revisa tu conexión e inténtalo de nuevo.' });
+    } finally {
+      submitting.current = false;
+    }
   };
 
   return (

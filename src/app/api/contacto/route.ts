@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { CONTACTO_MOTIVOS } from './motivos';
 
-const CONTACTO_EMAIL = process.env.IORANASEO_CONTACT_EMAIL || 'contacto@ioranaseo.com';
+const CONTACTO_EMAIL = process.env.IORANASEO_CONTACT_EMAIL || 'contacto@neosuma.com';
 const ADMIN_EMAILS = (process.env.IORANASEO_ADMIN_EMAILS || '').split(',').map((e) => e.trim()).filter(Boolean);
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

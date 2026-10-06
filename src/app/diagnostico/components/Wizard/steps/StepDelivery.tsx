@@ -329,6 +329,12 @@ export default function StepDelivery({
         </span>
       )}
 
+      {errors['submit'] && (
+        <span style={{ fontSize: '12px', color: '#ef4444', marginBottom: '16px', display: 'block' }}>
+          {errors['submit']}
+        </span>
+      )}
+
       {/* Trust Message */}
       <p
         style={{
