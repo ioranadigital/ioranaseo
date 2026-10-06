@@ -9,17 +9,17 @@ export default function WizardProgress({ currentStep, totalSteps }: WizardProgre
   return (
     <div
       style={{
-        marginBottom: '32px',
+        marginBottom: '28px',
         animation: 'fadeInDown 0.3s ease-out',
       }}
     >
       {/* Step Counter */}
       <div
         style={{
-          fontSize: '14px',
+          fontSize: '13px',
           fontWeight: 600,
-          color: '#666',
-          marginBottom: '12px',
+          color: 'var(--io-text-muted)',
+          marginBottom: '10px',
         }}
       >
         Paso {currentStep} de {totalSteps}
@@ -30,7 +30,7 @@ export default function WizardProgress({ currentStep, totalSteps }: WizardProgre
         style={{
           width: '100%',
           height: '6px',
-          backgroundColor: '#e0e0e0',
+          backgroundColor: 'var(--io-border)',
           borderRadius: '3px',
           overflow: 'hidden',
         }}
@@ -39,7 +39,7 @@ export default function WizardProgress({ currentStep, totalSteps }: WizardProgre
           style={{
             width: `${progressPercent}%`,
             height: '100%',
-            backgroundColor: '#336FE6',
+            backgroundColor: 'var(--io-action)',
             transition: 'width 0.3s ease-out',
           }}
         />

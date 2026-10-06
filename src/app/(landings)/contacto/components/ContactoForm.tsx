@@ -173,9 +173,15 @@ export default function ContactoForm({ onSubmitted, submitted: propsSubmitted }:
         Cuéntanos qué necesitas.
       </h2>
 
+      <style>{`
+        .cf-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 480px) {
+          .cf-form-row { grid-template-columns: 1fr; }
+        }
+      `}</style>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
         {/* Row 1: Nombre | Email */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        <div className="cf-form-row">
           {/* Nombre */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <label
@@ -270,7 +276,7 @@ export default function ContactoForm({ onSubmitted, submitted: propsSubmitted }:
         </div>
 
         {/* Row 2: Empresa | Teléfono */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        <div className="cf-form-row">
           {/* Empresa */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <label

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DiagnosticoIntro from './DiagnosticoIntro';
 import WizardProgress from './WizardProgress';
 import StepBusiness from './steps/StepBusiness';
@@ -69,6 +69,31 @@ const OBJECTIVE_OPTIONS = [
 
 export default function DiagnosticoWizard() {
   const [currentStep, setCurrentStep] = useState<WizardStep>('intro');
+  const [leaving, setLeaving] = useState(false);
+  const isFirstRender = useRef(true);
+
+  // Landing → wizard: fade corto de salida y después se monta el wizard (nunca conviven).
+  const handleStart = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      setCurrentStep(1);
+      return;
+    }
+    setLeaving(true);
+    window.setTimeout(() => {
+      setCurrentStep(1);
+      setLeaving(false);
+    }, 180);
+  };
+
+  // Al cambiar de estado/paso, la vista vuelve arriba (bajo el header sticky).
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0 });
+  }, [currentStep]);
   const [formData, setFormData] = useState<WizardFormData>({
     business: {
       company: '',
@@ -158,9 +183,7 @@ export default function DiagnosticoWizard() {
   const handleNext = () => {
     const stepNum = typeof currentStep === 'number' ? currentStep : 0;
     if (validateStep(stepNum)) {
-      if (currentStep === 'intro') {
-        setCurrentStep(1);
-      } else if (currentStep === 1) {
+      if (currentStep === 1) {
         setCurrentStep(2);
       } else if (currentStep === 2) {
         setCurrentStep(3);
@@ -208,16 +231,15 @@ export default function DiagnosticoWizard() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa', paddingTop: '20px', paddingBottom: '60px' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--io-bg, #F8FAFC)', paddingTop: currentStep === 'intro' ? 0 : '20px', paddingBottom: currentStep === 'intro' ? 0 : '60px' }}>
       {currentStep === 'intro' && (
-        <DiagnosticoIntro onStart={() => setCurrentStep(1)} />
-      )}
-
-      {currentStep !== 'intro' && currentStep !== 'success' && (
-        <div style={{ maxWidth: '860px', margin: '0 auto', paddingLeft: '20px', paddingRight: '20px' }}>
-          <WizardProgress currentStep={currentStep as number} totalSteps={4} />
+        <div className={leaving ? 'dg-leave' : undefined}>
+          <DiagnosticoIntro onStart={handleStart} />
         </div>
       )}
+
+      {currentStep !== 'intro' && (
+      <div className="dg-enter">
 
       {currentStep === 1 && (
         <div style={{ maxWidth: '860px', margin: '0 auto', paddingLeft: '20px', paddingRight: '20px' }}>
@@ -227,6 +249,7 @@ export default function DiagnosticoWizard() {
             onChange={(data) => handleUpdateFormData('business', data)}
             onNext={handleNext}
             onPrevious={handlePrevious}
+            progress={<WizardProgress currentStep={currentStep as number} totalSteps={4} />}
           />
         </div>
       )}
@@ -241,6 +264,7 @@ export default function DiagnosticoWizard() {
             onChange={(data) => handleUpdateFormData('presence', data)}
             onNext={handleNext}
             onPrevious={handlePrevious}
+            progress={<WizardProgress currentStep={currentStep as number} totalSteps={4} />}
           />
         </div>
       )}
@@ -254,6 +278,7 @@ export default function DiagnosticoWizard() {
             onChange={(data) => handleUpdateFormData('objectives', data)}
             onNext={handleNext}
             onPrevious={handlePrevious}
+            progress={<WizardProgress currentStep={currentStep as number} totalSteps={4} />}
           />
         </div>
       )}
@@ -271,6 +296,7 @@ export default function DiagnosticoWizard() {
             onChange={(data) => handleUpdateFormData('contact', data)}
             onNext={handleNext}
             onPrevious={handlePrevious}
+            progress={<WizardProgress currentStep={currentStep as number} totalSteps={4} />}
           />
         </div>
       )}
@@ -308,6 +334,8 @@ export default function DiagnosticoWizard() {
             setStepErrors({});
           }}
         />
+      )}
+      </div>
       )}
     </div>
   );

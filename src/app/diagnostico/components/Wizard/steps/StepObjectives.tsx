@@ -7,6 +7,7 @@ interface StepObjectivesProps {
   onChange: (data: WizardFormData['objectives']) => void;
   onNext: () => void;
   onPrevious: () => void;
+  progress?: React.ReactNode;
 }
 
 export default function StepObjectives({
@@ -16,6 +17,7 @@ export default function StepObjectives({
   onChange,
   onNext,
   onPrevious,
+  progress,
 }: StepObjectivesProps) {
   const toggleObjective = (objective: string) => {
     const newSelected = data.selected.includes(objective)
@@ -31,16 +33,19 @@ export default function StepObjectives({
 
   return (
     <div
+      className="diag-card"
       style={{
         backgroundColor: 'white',
         border: '1px solid var(--io-border, #e0e0e0)',
         borderRadius: 'var(--io-radius-lg, 8px)',
-        padding: '40px 32px',
+        padding: '28px 32px 40px',
         marginTop: '20px',
         marginBottom: '40px',
         animation: 'fadeIn 0.3s ease-out',
       }}
     >
+      {progress}
+
       {/* Title */}
       <h2
         style={{
@@ -192,6 +197,8 @@ export default function StepObjectives({
           onClick={onPrevious}
           style={{
             padding: '12px 24px',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
             fontSize: '14px',
             fontWeight: 600,
             border: '1px solid #e0e0e0',
@@ -214,6 +221,7 @@ export default function StepObjectives({
           onClick={onNext}
           style={{
             padding: '12px 32px',
+            whiteSpace: 'nowrap',
             fontSize: '14px',
             fontWeight: 600,
             backgroundColor: '#336FE6',

@@ -11,6 +11,7 @@ interface StepDeliveryProps {
   onChange: (data: WizardFormData['contact']) => void;
   onNext: () => void;
   onPrevious: () => void;
+  progress?: React.ReactNode;
 }
 
 export default function StepDelivery({
@@ -20,6 +21,7 @@ export default function StepDelivery({
   onChange,
   onNext,
   onPrevious,
+  progress,
 }: StepDeliveryProps) {
   const handleChange = (field: keyof typeof data, value: any) => {
     onChange({ ...data, [field]: value });
@@ -27,16 +29,19 @@ export default function StepDelivery({
 
   return (
     <div
+      className="diag-card"
       style={{
         backgroundColor: 'white',
         border: '1px solid var(--io-border, #e0e0e0)',
         borderRadius: 'var(--io-radius-lg, 8px)',
-        padding: '40px 32px',
+        padding: '28px 32px 40px',
         marginTop: '20px',
         marginBottom: '40px',
         animation: 'fadeIn 0.3s ease-out',
       }}
     >
+      {progress}
+
       {/* Title */}
       <h2
         style={{
@@ -66,8 +71,8 @@ export default function StepDelivery({
           backgroundColor: '#f8f9fa',
           border: '1px solid #e0e0e0',
           borderRadius: 'var(--io-radius-md, 6px)',
-          padding: '20px',
-          marginBottom: '32px',
+          padding: '16px 18px',
+          marginBottom: '28px',
         }}
       >
         <h3
@@ -77,14 +82,14 @@ export default function StepDelivery({
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
             color: '#666',
-            marginBottom: '16px',
+            marginBottom: '12px',
             marginTop: 0,
           }}
         >
           TU SOLICITUD
         </h3>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {/* Web */}
           <div>
             <span style={{ fontSize: '12px', fontWeight: 600, color: '#999' }}>Web:</span>
@@ -117,7 +122,7 @@ export default function StepDelivery({
         <button
           onClick={onPrevious}
           style={{
-            marginTop: '16px',
+            marginTop: '12px',
             padding: '6px 12px',
             fontSize: '12px',
             fontWeight: 600,
@@ -342,6 +347,8 @@ export default function StepDelivery({
           onClick={onPrevious}
           style={{
             padding: '12px 24px',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
             fontSize: '14px',
             fontWeight: 600,
             border: '1px solid #e0e0e0',
