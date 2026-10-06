@@ -6,6 +6,13 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: var(--io-font);
+  color: var(--io-text);
+  background-color: var(--io-bg);
+  line-height: 1.5;
+}
+
 /* Default link hover — IORANA SEO 2.0 blue. No !important: inline styles
    (e.g. CTA links with color:white) must keep the upper hand on hover. */
 a:hover {
