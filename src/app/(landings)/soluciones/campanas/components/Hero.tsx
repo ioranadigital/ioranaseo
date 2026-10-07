@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Target, Users2, Sparkles } from 'lucide-react';
+import { Search, Users2, Gauge } from 'lucide-react';
 
 // WebP optimizado (1600×1066) a partir de la fotografía original (4603×3066, ratio 3:2).
 const HERO_PHOTO = '/assets/img/campanas/hero-campanas.webp';
@@ -10,9 +10,9 @@ const HERO_PHOTO = '/assets/img/campanas/hero-campanas.webp';
 // Microcards aprobadas (sin añadir ni inventar ninguna). Posiciones en % de la capa fotográfica,
 // elegidas sobre zonas sin rostros: pared entre las dos personas, ventana y mesa bajo el portátil.
 const MICROCARDS = [
-  { Icon: Target, title: 'Audiencias precisas', cls: 'cph-mc--aud' },
-  { Icon: Users2, title: 'Nuevas audiencias', cls: 'cph-mc--new' },
-  { Icon: Sparkles, title: 'Más demanda', cls: 'cph-mc--demand' },
+  { Icon: Search, title: 'Alta intención', copy: 'Llega a personas que ya están buscando una solución.', cls: 'cph-mc--intent' },
+  { Icon: Users2, title: 'Nuevas audiencias', copy: 'Descubre clientes potenciales en redes sociales.', cls: 'cph-mc--new' },
+  { Icon: Gauge, title: 'Medición continua', copy: 'Medimos resultados para optimizar cada campaña.', cls: 'cph-mc--meas' },
 ];
 
 export default function Hero() {
@@ -51,14 +51,17 @@ export default function Hero() {
               />
             </div>
           </div>
-          {MICROCARDS.map((c) => {
+          {MICROCARDS.map((c, i) => {
             const Icon = c.Icon;
             return (
               <div key={c.title} className={`cph-mc ${c.cls}`}>
-                <span className="cph-mc__icon">
+                <span className={`cph-mc__icon${i === 1 ? ' is-accent' : ''}`}>
                   <Icon size={14} strokeWidth={2.2} />
                 </span>
-                <strong>{c.title}</strong>
+                <span className="cph-mc__text">
+                  <strong>{c.title}</strong>
+                  <span>{c.copy}</span>
+                </span>
               </div>
             );
           })}
@@ -137,20 +140,27 @@ export default function Hero() {
         .cph-bg__img { object-fit: cover; object-position: 50% 50%; }
 
         .cph-mc {
-          position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
-          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
+          position: absolute; z-index: 1; display: flex; align-items: flex-start; gap: 8px; width: 176px; padding: 8px 10px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 14px;
+          box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08); pointer-events: auto;
         }
         .cph-mc__icon {
-          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 24px; height: 24px;
           border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
         }
-        .cph-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+        .cph-mc__icon.is-accent { background: rgba(244, 162, 124, 0.25); color: #c8663a; }
+        .cph-mc__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+        .cph-mc__text strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); line-height: 1.25; }
+        .cph-mc__text span { font-size: 11.5px; line-height: 1.3; color: var(--io-text-muted); }
+        @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+          .cph-mc { transition: transform 180ms ease, box-shadow 180ms ease; }
+          .cph-mc:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12); }
+        }
         /* Zonas libres (% de la capa): pared entre las dos personas (arriba), ventana (arriba dcha.)
            y mesa bajo el portátil (abajo). Ninguna sobre rostros, manos ni el portátil. */
-        .cph-mc--demand { top: 5%; left: 37%; }
-        .cph-mc--new    { top: 6%; right: 4%; }
-        .cph-mc--aud    { bottom: 6%; left: 40%; }
+        .cph-mc--intent { top: 5%; left: 32%; }
+        .cph-mc--new    { top: 6%; right: 2%; }
+        .cph-mc--meas   { bottom: 6%; left: 30%; }
 
         /* Desktop: contenido alineado arriba con el mismo margen superior que las páginas aprobadas
            (60px). La altura resulta de la composición (texto vs. foto), no de un valor fijo. */
@@ -174,11 +184,12 @@ export default function Hero() {
             -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
           }
-          .cph-mc { padding: 6px 10px; }
-          .cph-mc strong { font-size: 11.5px; }
-          .cph-mc--demand { display: none; }
-          .cph-mc--new { top: 6%; right: 5%; }
-          .cph-mc--aud { bottom: 6%; left: 5%; }
+          .cph-mc { width: auto; padding: 6px 10px; align-items: center; }
+          .cph-mc__text span { display: none; }
+          .cph-mc__text strong { font-size: 11.5px; white-space: nowrap; }
+          .cph-mc--intent { top: 6%; left: 5%; right: auto; bottom: auto; }
+          .cph-mc--new { top: 6%; right: 5%; left: auto; bottom: auto; }
+          .cph-mc--meas { bottom: 6%; left: 5%; top: auto; right: auto; }
         }
         @media (max-width: 768px) {
           .cph-section { padding: 40px 20px; }

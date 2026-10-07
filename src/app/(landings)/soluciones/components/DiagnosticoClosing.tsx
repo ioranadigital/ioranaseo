@@ -26,7 +26,7 @@ export default function DiagnosticoClosing() {
         .dc-panel {
           max-width: 1000px; margin: 0 auto; position: relative; overflow: hidden; display: flex; align-items: center;
           gap: 20px; padding: 28px 32px; border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
-          background: radial-gradient(circle at 100% 0%, rgba(51, 111, 230, 0.10) 0%, rgba(51, 111, 230, 0) 55%), var(--io-bg-soft);
+          background: radial-gradient(circle at 100% 0%, rgba(244, 162, 124, 0.32) 0%, rgba(244, 162, 124, 0) 60%), rgba(244, 162, 124, 0.14);
         }
         .dc-icon {
           display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px;

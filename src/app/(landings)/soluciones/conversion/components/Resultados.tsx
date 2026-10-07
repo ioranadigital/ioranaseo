@@ -1,11 +1,11 @@
 'use client';
 
-import { ResultContactsVisual, ResultBookingsVisual, ResultPerformanceVisual } from './ConversionVisuals';
+import Image from 'next/image';
 
 const CARDS = [
-  { title: 'Más contactos', copy: 'Facilita que más visitantes den el paso de ponerse en contacto contigo.', Visual: ResultContactsVisual },
-  { title: 'Más reservas o solicitudes', copy: 'Optimiza tus páginas clave para facilitar reservas, presupuestos o solicitudes.', Visual: ResultBookingsVisual },
-  { title: 'Mejor rendimiento de tu web', copy: 'Mejora la experiencia y aprovecha mejor el tráfico que ya recibes.', Visual: ResultPerformanceVisual },
+  { title: 'Más contactos', copy: 'Facilita que más visitantes den el paso de ponerse en contacto contigo.', image: '/assets/img/conversion/resultado-mas-contactos.webp' },
+  { title: 'Más reservas o solicitudes', copy: 'Optimiza tus páginas clave para facilitar reservas, presupuestos o solicitudes.', image: '/assets/img/conversion/resultado-reservas-solicitudes.webp' },
+  { title: 'Mejor rendimiento de tu web', copy: 'Mejora la experiencia y aprovecha mejor el tráfico que ya recibes.', image: '/assets/img/conversion/resultado-rendimiento-web.webp' },
 ];
 
 export default function Resultados() {
@@ -23,11 +23,16 @@ export default function Resultados() {
 
         <div className="rs-grid">
           {CARDS.map((c) => {
-            const Visual = c.Visual;
             return (
               <article key={c.title} className="rs-card">
-                <span className="rs-card__icon" aria-hidden="true">
-                  <Visual className="rs-card__svg" />
+                <span className="rs-card__visual">
+                  <Image
+                    src={c.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1000px) 300px, (min-width: 768px) 30vw, 320px"
+                    className="rs-card__img"
+                  />
                 </span>
                 <h3 className="rs-card__title">{c.title}</h3>
                 <p className="rs-card__copy">{c.copy}</p>
@@ -54,8 +59,9 @@ export default function Resultados() {
           display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
           padding: 22px 16px; background: var(--io-bg-soft); border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
         }
-        .rs-card__icon { display: block; width: 76px; }
-        .rs-card__svg { display: block; width: 100%; height: auto; }
+        /* Ilustraciones 4:3 con margen transparente: marco fijo 3:2 + contain (sin recortes), misma altura en las tres. */
+        .rs-card__visual { position: relative; display: block; width: 100%; aspect-ratio: 3 / 2; }
+        .rs-card__img { object-fit: contain; object-position: center; }
         .rs-card__title { font-size: 16px; font-weight: 700; color: var(--io-text); margin: 4px 0 0; }
         .rs-card__copy { font-size: 13.5px; line-height: 1.45; color: var(--io-text-muted); margin: 0; }
 
@@ -63,8 +69,8 @@ export default function Resultados() {
           .rs-section { padding: 40px 20px; }
           .rs-header { margin-bottom: 24px; }
           .rs-grid { grid-template-columns: 1fr; gap: 12px; }
-          .rs-card { flex-direction: row; text-align: left; padding: 14px 16px; }
-          .rs-card__icon { flex: none; width: 56px; }
+          .rs-card { padding: 16px; }
+          .rs-card__visual { max-width: 280px; }
         }
         @media (max-width: 430px) { .rs-section { padding: 32px 16px; } }
       `}</style>

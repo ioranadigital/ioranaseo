@@ -17,9 +17,9 @@ const BENEFITS = [
 // zonas sin cara/manos — ventana arriba-izquierda del grupo, estanterías
 // arriba-derecha, mesa abajo-derecha.
 const MICROCARDS = [
-  { Icon: Search, title: 'SEO preparado', pos: { left: '38%', top: 10 } },
-  { Icon: Monitor, title: 'Diseño responsive', pos: { right: '4%', top: 10 } },
-  { Icon: MousePointerClick, title: 'CTA claros', pos: { right: '4%', bottom: 10 } },
+  { Icon: Search, title: 'SEO preparado', tone: 'blue', text: 'Una base pensada para ganar visibilidad.', pos: { left: '50%', top: '9%' } },
+  { Icon: Monitor, title: 'Diseño responsive', tone: 'green', text: 'Una experiencia clara en cualquier dispositivo.', pos: { right: '12%', top: '24%' } },
+  { Icon: MousePointerClick, title: 'CTA claros', tone: 'orange', text: 'Facilitamos el siguiente paso del usuario.', pos: { right: '5%', bottom: '9%' } },
 ];
 
 /** Foto local con placeholder si el archivo aún no existe (sin imágenes externas ni reutilizar la de otras páginas). */
@@ -68,10 +68,13 @@ export default function Hero() {
           const Icon = c.Icon;
           return (
             <div key={c.title} className={`sh-mc sh-mc--${i}`} style={c.pos}>
-              <span className="sh-mc__icon" aria-hidden="true">
-                <Icon size={14} strokeWidth={2.2} />
+              <span className={`sh-mc__icon sh-mc__icon--${c.tone}`} aria-hidden="true">
+                <Icon size={22} strokeWidth={2} />
               </span>
-              <strong>{c.title}</strong>
+              <span className="sh-mc__text">
+                <strong>{c.title}</strong>
+                <span>{c.text}</span>
+              </span>
             </div>
           );
         })}
@@ -155,8 +158,8 @@ export default function Hero() {
         .sh-cta--secondary:hover { background: var(--io-accent-dark-hover); border-color: var(--io-accent-dark-hover); }
         .sh-cta:focus-visible { outline: 3px solid var(--io-action-hover); outline-offset: 2px; }
 
-        .sh-benefits { display: flex; flex-wrap: wrap; gap: 22px; padding-top: 24px; border-top: 1px solid var(--io-border); max-width: 480px; }
-        .sh-benefit { display: flex; align-items: flex-start; gap: 10px; }
+        .sh-benefits { display: flex; flex-wrap: nowrap; gap: 20px; padding-top: 24px; border-top: 1px solid var(--io-border); max-width: 540px; }
+        .sh-benefit { white-space: nowrap; display: flex; align-items: flex-start; gap: 10px; }
         .sh-benefit__icon {
           display: inline-flex; align-items: center; justify-content: center; flex: none; width: 30px; height: 30px;
           border-radius: 50%; background: var(--io-bg-soft); color: var(--io-action); margin-top: 1px;
@@ -166,15 +169,22 @@ export default function Hero() {
         .sh-benefit__text span { font-size: 12.5px; color: var(--io-text-muted); }
 
         .sh-mc {
-          position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
-          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12); white-space: nowrap;
+          position: absolute; z-index: 1; display: flex; align-items: center; gap: 12px; width: 212px; box-sizing: border-box;
+          padding: 12px 15px; background: #fff; border: 1px solid var(--io-border); border-radius: 16px;
+          box-shadow: 0 6px 18px rgba(15, 23, 42, 0.10);
+          transition: transform 200ms ease, box-shadow 200ms ease;
         }
+        .sh-mc:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(15, 23, 42, 0.13); }
         .sh-mc__icon {
-          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
-          border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 36px; height: 36px;
+          border-radius: 50%; background: rgba(51, 111, 230, 0.1); color: var(--io-action);
         }
-        .sh-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+        .sh-mc__icon--blue { background: rgba(51, 111, 230, 0.1); color: #336FE6; }
+        .sh-mc__icon--green { background: rgba(22, 163, 74, 0.1); color: #16a34a; }
+        .sh-mc__icon--orange { background: rgba(246, 119, 82, 0.14); color: #e8603a; }
+        .sh-mc__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .sh-mc strong { font-size: 13.5px; font-weight: 700; color: var(--io-text); line-height: 1.25; }
+        .sh-mc__text span { font-size: 11.5px; line-height: 1.3; color: var(--io-text-muted); }
 
         /* Desktop (≥1024px, mismo corte que el resto del sitio): fondo a sangre
            con altura fija cómoda para foto + degradado. A 768-1023px el texto
@@ -202,14 +212,22 @@ export default function Hero() {
           .sh-bg__fade { display: none; }
           .sh-content { padding: 0 0 40px; }
           .sh-title, .sh-benefits { max-width: none; }
-          .sh-mc { padding: 6px 10px; }
-          .sh-mc strong { font-size: 11.5px; }
-          .sh-mc--0 { left: 3% !important; right: auto !important; top: 10px !important; }
-          .sh-mc--1 { right: 3% !important; top: 10px !important; }
-          .sh-mc--2 { right: 3% !important; bottom: 10px !important; }
+          /* Sin posicionamiento absoluto: las microcards pasan a una rejilla bajo la foto */
+          .sh-bg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 28px; }
+          .sh-bg-photo { grid-column: 1 / -1; }
+          .sh-mc { position: static; width: auto; left: auto !important; right: auto !important; top: auto !important; bottom: auto !important; padding: 10px 12px; gap: 10px; }
+          .sh-mc:hover { transform: none; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.10); }
+          .sh-mc__icon { width: 32px; height: 32px; }
+          .sh-mc__icon svg { width: 20px; height: 20px; }
+          .sh-mc strong { font-size: 12.5px; }
+          .sh-mc__text span { font-size: 11px; }
         }
         @media (max-width: 768px) {
           .sh-section { padding: 40px 20px 0; }
+        }
+        @media (max-width: 560px) {
+          .sh-bg { grid-template-columns: 1fr; gap: 10px; }
+          .sh-benefits { flex-wrap: wrap; gap: 14px 20px; }
         }
         /* Escala móvil estándar (referencia): H1 36px; ≤375px interlineado/tracking y párrafo más compactos. */
         @media (max-width: 430px) {

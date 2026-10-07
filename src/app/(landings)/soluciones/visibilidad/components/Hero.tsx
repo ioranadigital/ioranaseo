@@ -10,9 +10,9 @@ const HERO_PHOTO = '/assets/img/visibilidad/hero-visibilidad.webp';
 // Microcards aprobadas (sin añadir ni inventar ninguna). Posiciones en % de la capa fotográfica,
 // elegidas sobre zonas sin rostros (estantería, mostrador de la mesa).
 const MICROCARDS = [
-  { Icon: MapPin, title: 'Cerca de ti', cls: 'vh-mc--near' },
-  { Icon: FileText, title: 'Contenido relevante', cls: 'vh-mc--content' },
-  { Icon: Sparkles, title: 'Más visible', cls: 'vh-mc--visible' },
+  { Icon: MapPin, title: 'Cerca de ti', copy: 'Presencia preparada para búsquedas locales.', cls: 'vh-mc--near' },
+  { Icon: Sparkles, title: 'Más visible', copy: 'Mejor presencia en Google y otros buscadores.', cls: 'vh-mc--visible' },
+  { Icon: FileText, title: 'Contenido relevante', copy: 'Información clara para buscadores y asistentes de IA.', cls: 'vh-mc--content' },
 ];
 
 export default function Hero() {
@@ -52,14 +52,17 @@ export default function Hero() {
               />
             </div>
           </div>
-          {MICROCARDS.map((c) => {
+          {MICROCARDS.map((c, i) => {
             const Icon = c.Icon;
             return (
               <div key={c.title} className={`vh-mc ${c.cls}`}>
-                <span className="vh-mc__icon">
+                <span className={`vh-mc__icon${i === 1 ? ' is-accent' : ''}`}>
                   <Icon size={14} strokeWidth={2.2} />
                 </span>
-                <strong>{c.title}</strong>
+                <span className="vh-mc__text">
+                  <strong>{c.title}</strong>
+                  <span>{c.copy}</span>
+                </span>
               </div>
             );
           })}
@@ -138,20 +141,27 @@ export default function Hero() {
         .vh-bg__img { object-fit: cover; object-position: 50% 50%; }
 
         .vh-mc {
-          position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
-          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
+          position: absolute; z-index: 1; display: flex; align-items: flex-start; gap: 8px; width: 176px; padding: 8px 10px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 14px;
+          box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08); pointer-events: auto;
         }
         .vh-mc__icon {
-          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 24px; height: 24px;
           border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
         }
-        .vh-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
-        /* Posiciones sobre zonas sin rostro ni cabello (foto del taller): pared/techo arriba a la izquierda,
-           zona de papeles abajo a la izquierda (no sobre el portátil) y manga del jersey abajo a la derecha. */
-        .vh-mc--visible { top: 7%; left: 17%; }
-        .vh-mc--near    { bottom: 7%; left: 17%; }
-        .vh-mc--content { bottom: 7%; right: 7%; }
+        .vh-mc__icon.is-accent { background: rgba(244, 162, 124, 0.25); color: #c8663a; }
+        .vh-mc__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+        .vh-mc__text strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); line-height: 1.25; }
+        .vh-mc__text span { font-size: 11.5px; line-height: 1.3; color: var(--io-text-muted); }
+        @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+          .vh-mc { transition: transform 180ms ease, box-shadow 180ms ease; }
+          .vh-mc:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12); }
+        }
+        /* Posiciones sobre zonas sin rostro ni manos (foto del taller): pared/techo arriba a la izquierda
+           y zona de papeles abajo a la izquierda. La cara y las manos están a la derecha: no se ocupa. */
+        .vh-mc--near    { top: 7%; left: 7%; }
+        .vh-mc--content { top: 7%; left: 34%; }
+        .vh-mc--visible { bottom: 7%; left: 17%; }
 
         /* Desktop: contenido alineado arriba con el mismo margen superior que /web-para-empresas/
            (60px). La altura resulta de la composición (texto vs. foto), no de un valor fijo. */
@@ -176,11 +186,12 @@ export default function Hero() {
             -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
           }
-          .vh-mc { padding: 6px 10px; }
-          .vh-mc strong { font-size: 11.5px; }
-          .vh-mc--content { display: none; }
-          .vh-mc--near    { bottom: 7%; left: 5%; }
-          .vh-mc--visible { top: auto; left: auto; bottom: 7%; right: 5%; }
+          .vh-mc { width: auto; padding: 6px 10px; align-items: center; }
+          .vh-mc__text span { display: none; }
+          .vh-mc__text strong { font-size: 11.5px; white-space: nowrap; }
+          .vh-mc--near    { top: 6%; left: 5%; bottom: auto; right: auto; }
+          .vh-mc--content { top: 20%; left: 5%; bottom: auto; right: auto; }
+          .vh-mc--visible { bottom: 7%; left: 5%; top: auto; right: auto; }
         }
         @media (max-width: 768px) {
           .vh-section { padding: 40px 20px; }

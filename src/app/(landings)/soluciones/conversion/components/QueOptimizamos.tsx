@@ -1,25 +1,22 @@
 'use client';
 
-import { PillarFormsVisual, PillarUxVisual, PillarMeasureVisual } from './ConversionVisuals';
+import Image from 'next/image';
 
 const PILLARS = [
   {
     title: 'Formularios y contacto',
     copy: 'Simplificamos y optimizamos tus formularios para que sea más fácil contactar o solicitar información.',
-    tone: 'blue',
-    Visual: PillarFormsVisual,
+    image: '/assets/img/conversion/formularios-contacto.webp',
   },
   {
     title: 'Experiencia de usuario (UX)',
     copy: 'Mejoramos la claridad, la estructura y los contenidos para guiar a tus visitantes hacia la acción.',
-    tone: 'green',
-    Visual: PillarUxVisual,
+    image: '/assets/img/conversion/experiencia-usuario.webp',
   },
   {
     title: 'Medición y mejora continua',
     copy: 'Analizamos datos, probamos cambios y optimizamos de forma continua.',
-    tone: 'peach',
-    Visual: PillarMeasureVisual,
+    image: '/assets/img/conversion/medicion-mejora-continua.webp',
   },
 ] as const;
 
@@ -34,11 +31,16 @@ export default function QueOptimizamos() {
 
         <div className="qo-grid">
           {PILLARS.map((p) => {
-            const Visual = p.Visual;
             return (
               <article key={p.title} className="qo-card">
-                <div className={`qo-card__visual qo-card__visual--${p.tone}`}>
-                  <Visual className="qo-card__svg" />
+                <div className="qo-card__visual">
+                  <Image
+                    src={p.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1120px) 338px, (min-width: 768px) 45vw, 92vw"
+                    className="qo-card__img"
+                  />
                 </div>
                 <h3 className="qo-card__title">{p.title}</h3>
                 <p className="qo-card__copy">{p.copy}</p>
@@ -67,11 +69,9 @@ export default function QueOptimizamos() {
         @media (hover: hover) {
           .qo-card:hover { border-color: var(--io-action); box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07); transform: translateY(-2px); }
         }
-        .qo-card__visual { border-radius: var(--io-radius-md); padding: 10px; margin-bottom: 14px; }
-        .qo-card__visual--blue { background: var(--io-bg-soft); }
-        .qo-card__visual--green { background: rgba(52, 168, 106, 0.08); }
-        .qo-card__visual--peach { background: rgba(244, 162, 124, 0.12); }
-        .qo-card__svg { display: block; width: 100%; height: auto; }
+        /* Proporción fija 4:3 (la de las ilustraciones): misma altura en las tres tarjetas, sin recorte ni layout shift. */
+        .qo-card__visual { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--io-radius-md); margin-bottom: 14px; background: var(--io-bg-soft); }
+        .qo-card__img { object-fit: cover; object-position: center; }
         .qo-card__title { font-size: 17.5px; font-weight: 700; color: var(--io-text); margin: 0 0 6px; }
         .qo-card__copy { font-size: 14.5px; line-height: 1.5; color: var(--io-text-muted); margin: 0; }
 

@@ -1,11 +1,31 @@
 'use client';
 
-import { Search, MapPin, Sparkles } from 'lucide-react';
+import { Fragment } from 'react';
+import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
+
+/* Logos de canal definitivos aportados por el cliente. Ojo: las directrices de Google exigen aprobación previa para
+   usar su «G» / iconos de producto en marketing (ver docs/analysis/VISIBILIDAD_VISUAL_ASSETS.md §3.2).
+   Cada PNG tiene un padding transparente distinto, así que el tamaño de render se ajusta por logo para igualar el
+   peso visual (contenido aparente ≈ 22–24 px; el PNG de Google está recortado al logo, sin margen dentro del círculo de 40 px). */
+const LOGO_BASE = '/assets/img/visibilidad/canales';
+
+function GoogleMark() {
+  return <Image className="vi-logo" src={`${LOGO_BASE}/google.png`} alt="" width={24} height={24} />;
+}
+
+function MapsMark() {
+  return <Image className="vi-logo" src={`${LOGO_BASE}/google-maps.png`} alt="" width={17} height={24} />;
+}
+
+function AssistantMark() {
+  return <Image className="vi-logo" src={`${LOGO_BASE}/inteligencia-artificial.png`} alt="" width={23} height={23} />;
+}
 
 const CANALES = [
-  { Icon: Search, title: 'Google', text: 'Buscan servicios, comparan y eligen.' },
-  { Icon: MapPin, title: 'Maps', text: 'Buscan negocios cercanos en su zona.' },
-  { Icon: Sparkles, title: 'Inteligencia artificial', text: 'Piden recomendaciones y opciones fiables.' },
+  { Mark: GoogleMark, title: 'Google', text: 'Buscan servicios, comparan y eligen.' },
+  { Mark: MapsMark, title: 'Maps', text: 'Buscan negocios cercanos en su zona.' },
+  { Mark: AssistantMark, title: 'Inteligencia artificial', text: 'Piden recomendaciones y opciones fiables.' },
 ];
 
 export default function Introduccion() {
@@ -25,18 +45,24 @@ export default function Introduccion() {
 
         <div className="vi-row">
           {CANALES.map((c, i) => {
-            const Icon = c.Icon;
+            const Mark = c.Mark;
             return (
-              <div key={c.title} className="vi-item">
-                <span className="vi-item__icon">
-                  <Icon size={20} strokeWidth={2} />
-                </span>
-                <div className="vi-item__copy">
-                  <strong>{c.title}</strong>
-                  <p>{c.text}</p>
+              <Fragment key={c.title}>
+                {i > 0 && (
+                  <span className="vi-arrow" aria-hidden="true">
+                    <ArrowRight size={18} strokeWidth={2.4} />
+                  </span>
+                )}
+                <div className="vi-item">
+                  <span className="vi-item__icon">
+                    <Mark />
+                  </span>
+                  <div className="vi-item__copy">
+                    <strong>{c.title}</strong>
+                    <p>{c.text}</p>
+                  </div>
                 </div>
-                {i < CANALES.length - 1 && <span className="vi-arrow" aria-hidden="true">→</span>}
-              </div>
+              </Fragment>
             );
           })}
         </div>
@@ -44,33 +70,45 @@ export default function Introduccion() {
 
       <style>{`
         .vi-section { padding: 56px 20px; background-color: #fff; }
-        .vi-container { max-width: 900px; margin: 0 auto; text-align: center; }
+        /* Contenedor del mismo ancho que el bloque de soluciones (1120px); el texto conserva su medida de lectura. */
+        .vi-container { max-width: 1120px; margin: 0 auto; text-align: center; }
         .vi-eyebrow {
           display: inline-block; background: var(--io-bg-soft); color: var(--io-action); font-size: 12px;
           font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px;
           border-radius: var(--io-radius-md); margin-bottom: 14px;
         }
-        .vi-title { font-size: clamp(26px, 4vw, 36px); font-weight: 700; color: var(--io-text); line-height: 1.3; margin: 0 0 16px; }
+        .vi-title { font-size: clamp(26px, 4vw, 36px); font-weight: 700; color: var(--io-text); line-height: 1.3; max-width: 900px; margin: 0 auto 16px; }
         .vi-title__accent { color: var(--io-action); display: block; }
-        .vi-copy { font-size: 16px; line-height: 1.65; color: var(--io-text-muted); max-width: 720px; margin: 0 auto 36px; }
+        .vi-copy { font-size: 16px; line-height: 1.65; color: var(--io-text-muted); max-width: 780px; margin: 0 auto 36px; }
 
-        .vi-row { display: flex; align-items: center; justify-content: center; gap: 18px; background: var(--io-bg); border: 1px solid var(--io-border); border-radius: var(--io-radius-lg); padding: 20px 24px; }
-        .vi-item { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+        /* Tres tarjetas independientes unidas por flechas de izquierda a derecha. */
+        .vi-row { display: flex; align-items: stretch; justify-content: center; gap: 12px; }
+        .vi-item {
+          display: flex; align-items: center; gap: 14px; flex: 1 1 0; min-width: 0; padding: 22px 24px; text-align: left;
+          background: var(--io-bg); border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
+        }
         .vi-item__icon {
           display: inline-flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px;
           border-radius: 50%; background: #fff; border: 1px solid var(--io-border); color: var(--io-action);
         }
+        .vi-logo { display: block; flex: none; object-fit: contain; }
         .vi-item__copy { text-align: left; min-width: 0; }
         .vi-item__copy strong { display: block; font-size: 15px; font-weight: 700; color: var(--io-text); }
         .vi-item__copy p { margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: var(--io-text-muted); }
-        .vi-arrow { flex: none; color: var(--io-border); font-size: 18px; }
+        .vi-arrow {
+          align-self: center; flex: none; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+          border-radius: 50%; background: #fff; border: 1px solid var(--io-border); color: var(--io-action);
+        }
 
+        /* Tablet: en fila, con el icono sobre el texto para que las tarjetas no queden estrechas. */
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .vi-item { flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px 16px; }
+        }
         @media (max-width: 767px) {
           .vi-section { padding: 40px 20px; }
-          .vi-row { flex-direction: column; align-items: stretch; gap: 16px; padding: 20px; }
-          .vi-item { flex-direction: column; text-align: center; }
-          .vi-item__copy { text-align: center; }
-          .vi-arrow { transform: rotate(90deg); align-self: center; }
+          .vi-row { flex-direction: column; align-items: stretch; gap: 10px; }
+          .vi-item { flex: none; padding: 18px 20px; }
+          .vi-arrow { transform: rotate(90deg); }
         }
         @media (max-width: 430px) { .vi-section { padding: 32px 16px; } }
       `}</style>

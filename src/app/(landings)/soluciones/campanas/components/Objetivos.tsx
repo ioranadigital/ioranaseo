@@ -1,11 +1,11 @@
 'use client';
 
-import { ObjectiveLeadsVisual, ObjectiveVentasVisual, ObjectiveMarcaVisual } from './CampanasVisuals';
+import Image from 'next/image';
 
 const CARDS = [
-  { title: 'Generación de contactos', copy: 'Capta clientes interesados en tu negocio.', Visual: ObjectiveLeadsVisual },
-  { title: 'Ventas y reservas', copy: 'Impulsa ventas online o reservas.', Visual: ObjectiveVentasVisual },
-  { title: 'Reconocimiento de marca', copy: 'Llega a más personas y da a conocer tu negocio.', Visual: ObjectiveMarcaVisual },
+  { title: 'Generación de contactos', copy: 'Capta clientes interesados en tu negocio.', img: '/assets/img/campanas/objetivo-generacion-contactos.webp' },
+  { title: 'Ventas y reservas', copy: 'Impulsa ventas online o reservas.', img: '/assets/img/campanas/objetivo-ventas-y-reservas.webp' },
+  { title: 'Reconocimiento de marca', copy: 'Llega a más personas y da a conocer tu negocio.', img: '/assets/img/campanas/objetivo-reconocimiento-de-marca.webp' },
 ];
 
 export default function Objetivos() {
@@ -18,18 +18,15 @@ export default function Objetivos() {
         </div>
 
         <div className="ob-grid">
-          {CARDS.map((c) => {
-            const Visual = c.Visual;
-            return (
-              <article key={c.title} className="ob-card">
-                <span className="ob-card__icon" aria-hidden="true">
-                  <Visual className="ob-card__svg" />
-                </span>
-                <h3 className="ob-card__title">{c.title}</h3>
-                <p className="ob-card__copy">{c.copy}</p>
-              </article>
-            );
-          })}
+          {CARDS.map((c) => (
+            <article key={c.title} className="ob-card">
+              <span className="ob-card__media">
+                <Image src={c.img} alt="" width={800} height={800} sizes="(max-width: 767px) 280px, 320px" className="ob-card__img" />
+              </span>
+              <h3 className="ob-card__title">{c.title}</h3>
+              <p className="ob-card__copy">{c.copy}</p>
+            </article>
+          ))}
         </div>
       </div>
 
@@ -49,8 +46,8 @@ export default function Objetivos() {
           display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
           padding: 22px 16px; background: var(--io-bg-soft); border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
         }
-        .ob-card__icon { display: block; width: 76px; }
-        .ob-card__svg { display: block; width: 100%; height: auto; }
+        .ob-card__media { display: block; width: 100%; aspect-ratio: 1 / 1; background: #fff; border-radius: var(--io-radius-md); overflow: hidden; margin-bottom: 6px; }
+        .ob-card__img { display: block; width: 100%; height: 100%; object-fit: contain; }
         .ob-card__title { font-size: 16px; font-weight: 700; color: var(--io-text); margin: 4px 0 0; }
         .ob-card__copy { font-size: 13.5px; line-height: 1.45; color: var(--io-text-muted); margin: 0; }
 
@@ -58,8 +55,8 @@ export default function Objetivos() {
           .ob-section { padding: 40px 20px; }
           .ob-header { margin-bottom: 24px; }
           .ob-grid { grid-template-columns: 1fr; gap: 12px; }
-          .ob-card { flex-direction: row; text-align: left; padding: 14px 16px; }
-          .ob-card__icon { flex: none; width: 56px; }
+          .ob-card { padding: 16px; }
+          .ob-card__media { max-width: 280px; }
         }
         @media (max-width: 430px) { .ob-section { padding: 32px 16px; } }
       `}</style>

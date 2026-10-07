@@ -1,57 +1,46 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  CardWebVisual,
-  CardSeoVisual,
-  CardMapsVisual,
-  CardAdsVisual,
-  CardAnalyticsVisual,
-  CardCroVisual,
-} from './SolutionsVisuals';
+import Image from 'next/image';
+
+const IMG = '/assets/img/soluciones';
 
 const CARDS = [
   {
     title: 'Web para empresas',
     copy: 'Una web profesional orientada a captar clientes.',
     href: '/web-para-empresas/',
-    tone: 'blue',
-    Visual: CardWebVisual,
+    image: `${IMG}/web-para-empresas.webp`,
   },
   {
     title: 'SEO y SEO Local',
     copy: 'Para que te encuentren en Google y en tu zona.',
     href: '/soluciones/visibilidad/',
-    tone: 'green',
-    Visual: CardSeoVisual,
+    image: `${IMG}/seo-seo-local.webp`,
   },
   {
     title: 'Google Maps',
     copy: 'Aparece en Google Maps y atrae clientes de tu zona.',
     href: '/soluciones/visibilidad/',
-    tone: 'peach',
-    Visual: CardMapsVisual,
+    image: `${IMG}/google-maps.webp`,
   },
   {
     title: 'Google Ads y Meta Ads',
     copy: 'Genera demanda con campañas en Google y redes sociales.',
     href: '/soluciones/campanas/',
-    tone: 'lavender',
-    Visual: CardAdsVisual,
+    image: `${IMG}/google-meta-ads.webp`,
   },
   {
     title: 'Analytics y medición',
     copy: 'Mide resultados y toma decisiones basadas en datos.',
     href: '/soluciones/conversion/',
-    tone: 'blue',
-    Visual: CardAnalyticsVisual,
+    image: `${IMG}/analytics-medicion.webp`,
   },
   {
     title: 'CRO y mejora continua',
     copy: 'Convierte más visitas en clientes y optimiza tu negocio.',
     href: '/soluciones/conversion/',
-    tone: 'green',
-    Visual: CardCroVisual,
+    image: `${IMG}/cro-mejora-continua.webp`,
   },
 ] as const;
 
@@ -66,11 +55,16 @@ export default function NuestrasSoluciones() {
 
         <div className="ns-grid">
           {CARDS.map((c) => {
-            const Visual = c.Visual;
             return (
               <article key={c.title} className="ns-card">
-                <div className={`ns-card__visual ns-card__visual--${c.tone}`}>
-                  <Visual className="ns-card__svg" />
+                <div className="ns-card__visual">
+                  <Image
+                    src={c.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1280px) 372px, (min-width: 1024px) 30vw, (min-width: 768px) 45vw, 92vw"
+                    className="ns-card__img"
+                  />
                 </div>
                 <h3 className="ns-card__title">{c.title}</h3>
                 <p className="ns-card__copy">{c.copy}</p>
@@ -101,16 +95,13 @@ export default function NuestrasSoluciones() {
         }
         @media (hover: hover) {
           .ns-card:hover { border-color: var(--io-action); box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07); transform: translateY(-2px); }
-          .ns-card:hover .ns-card__svg { opacity: 1; }
+          .ns-card:hover .ns-card__img { transform: scale(1.02); }
         }
         .ns-card:focus-within { border-color: var(--io-action); }
 
-        .ns-card__visual { border-radius: var(--io-radius-md); padding: 10px; margin-bottom: 14px; }
-        .ns-card__visual--blue { background: var(--io-bg-soft); }
-        .ns-card__visual--green { background: rgba(52, 168, 106, 0.08); }
-        .ns-card__visual--peach { background: rgba(244, 162, 124, 0.12); }
-        .ns-card__visual--lavender { background: rgba(139, 124, 246, 0.10); }
-        .ns-card__svg { display: block; width: 100%; height: auto; opacity: 0.92; transition: opacity 150ms ease; }
+        /* Proporción fija 5:2 (fotos panorámicas 3:1, recorte lateral mínimo): misma altura en las seis tarjetas, sin layout shift. */
+        .ns-card__visual { position: relative; aspect-ratio: 5 / 2; overflow: hidden; border-radius: var(--io-radius-md); margin-bottom: 14px; background: var(--io-bg-soft); }
+        .ns-card__img { object-fit: cover; object-position: 50% 50%; transition: transform 300ms ease; }
 
         .ns-card__title { font-size: 17px; font-weight: 700; color: var(--io-text); margin: 0 0 6px; line-height: 1.25; }
         .ns-card__copy { font-size: 14px; line-height: 1.5; color: var(--io-text-muted); margin: 0 0 12px; flex: 1; }
@@ -130,7 +121,7 @@ export default function NuestrasSoluciones() {
           .ns-grid { grid-template-columns: 1fr; gap: 16px; }
         }
         @media (max-width: 430px) { .ns-section { padding: 32px 16px; } }
-        @media (prefers-reduced-motion: reduce) { .ns-card { transition: none; } .ns-card:hover { transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .ns-card { transition: none; } .ns-card:hover { transform: none; } .ns-card__img { transition: none; } .ns-card:hover .ns-card__img { transform: none; } }
       `}</style>
     </section>
   );

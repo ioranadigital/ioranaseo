@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { HeroDiagnosticoVisual, HeroPlanVisual, HeroSeguimientoVisual } from './ComoTrabajamosVisuals';
+import Image from 'next/image';
+
+const IMG_BASE = '/assets/img/como-trabajamos';
 
 const CARDS = [
-  { number: '01', title: 'Diagnóstico', tone: 'blue', Visual: HeroDiagnosticoVisual },
-  { number: '02', title: 'Plan de acción', tone: 'peach', Visual: HeroPlanVisual },
-  { number: '03', title: 'Seguimiento', tone: 'green', Visual: HeroSeguimientoVisual },
+  { number: '01', title: 'Diagnóstico', tone: 'blue', image: `${IMG_BASE}/diagnostico.webp` },
+  { number: '02', title: 'Plan de acción', tone: 'peach', image: `${IMG_BASE}/plan-accion.webp` },
+  { number: '03', title: 'Seguimiento', tone: 'green', image: `${IMG_BASE}/seguimiento.webp` },
 ] as const;
 
 export default function Hero() {
@@ -32,14 +34,13 @@ export default function Hero() {
 
         <div className="cth-stage">
           {CARDS.map((c, i) => {
-            const Visual = c.Visual;
             return (
               <div key={c.number} className="cth-cardwrap">
                 {i < CARDS.length - 1 && <span className="cth-arrow" aria-hidden="true" />}
                 <div className={`cth-card cth-card--${c.tone}`}>
                   <span className="cth-card__num">{c.number}</span>
                   <div className="cth-card__visual">
-                    <Visual className="cth-card__svg" />
+                    <Image className="cth-card__svg" src={c.image} alt="" width={512} height={572} sizes="(max-width: 767px) 56px, 220px" />
                   </div>
                   <span className="cth-card__title">{c.title}</span>
                 </div>
@@ -105,7 +106,7 @@ export default function Hero() {
         .cth-card--green { box-shadow: inset 0 3px 0 0 #34A86A; }
         .cth-card__num { font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; color: var(--io-text-muted); }
         .cth-card__visual { width: 100%; }
-        .cth-card__svg { display: block; width: 100%; height: auto; }
+        .cth-card__svg { display: block; width: 100%; height: auto; aspect-ratio: 512 / 572; object-fit: contain; }
         .cth-card__title { font-size: 14.5px; font-weight: 700; color: var(--io-text); }
 
         /* Desktop: contenido alineado arriba con el mismo margen superior que /web-para-empresas/ (60px). */

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Gauge, FlaskConical } from 'lucide-react';
+import { MousePointerClick, Route, TrendingUp } from 'lucide-react';
 
 // WebP original (1000×667, ratio 3:2) usado tal cual: sin recomprimir ni ampliar (la fuente ya es WebP de 62 KB).
 const HERO_PHOTO = '/assets/img/conversion/hero-conversion.webp';
@@ -10,8 +10,9 @@ const HERO_PHOTO = '/assets/img/conversion/hero-conversion.webp';
 // Microcards aprobadas (se conservan las dos; ninguna métrica). Posiciones en % de la capa fotográfica,
 // sobre zonas sin rostro ni manos: fondo de madera a la izquierda del hombre, arriba y abajo.
 const MICROCARDS = [
-  { Icon: Gauge, title: 'Analiza y optimiza', cls: 'cvh-mc--opt' },
-  { Icon: FlaskConical, title: 'A/B Test', cls: 'cvh-mc--ab' },
+  { Icon: MousePointerClick, title: 'Contacto fácil', copy: 'Menos pasos para convertir una visita en oportunidad.', cls: 'cvh-mc--contact', tone: '' },
+  { Icon: Route, title: 'Menos fricción', copy: 'Una experiencia clara que facilita avanzar.', cls: 'cvh-mc--friction', tone: ' is-green' },
+  { Icon: TrendingUp, title: 'Mejora continua', copy: 'Medimos y optimizamos para convertir mejor.', cls: 'cvh-mc--improve', tone: ' is-accent' },
 ];
 
 export default function Hero() {
@@ -55,10 +56,13 @@ export default function Hero() {
             const Icon = c.Icon;
             return (
               <div key={c.title} className={`cvh-mc ${c.cls}`}>
-                <span className="cvh-mc__icon">
+                <span className={`cvh-mc__icon${c.tone}`}>
                   <Icon size={14} strokeWidth={2.2} />
                 </span>
-                <strong>{c.title}</strong>
+                <span className="cvh-mc__text">
+                  <strong>{c.title}</strong>
+                  <span>{c.copy}</span>
+                </span>
               </div>
             );
           })}
@@ -132,18 +136,27 @@ export default function Hero() {
         .cvh-bg__img { object-fit: cover; object-position: 50% 50%; }
 
         .cvh-mc {
-          position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
-          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
+          position: absolute; z-index: 1; display: flex; align-items: flex-start; gap: 8px; width: 176px; padding: 8px 10px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 14px;
+          box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08); pointer-events: auto;
         }
         .cvh-mc__icon {
-          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 24px; height: 24px;
           border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
         }
-        .cvh-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+        .cvh-mc__icon.is-green { background: rgba(34, 160, 96, 0.14); color: #1f8f57; }
+        .cvh-mc__icon.is-accent { background: rgba(244, 162, 124, 0.25); color: #c8663a; }
+        .cvh-mc__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+        .cvh-mc__text strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); line-height: 1.25; }
+        .cvh-mc__text span { font-size: 11.5px; line-height: 1.3; color: var(--io-text-muted); }
+        @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+          .cvh-mc { transition: transform 180ms ease, box-shadow 180ms ease; }
+          .cvh-mc:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12); }
+        }
         /* Zonas libres (% de la capa): madera del fondo a la izquierda del hombre (cabeza en x ≥ 64 %). */
-        .cvh-mc--opt { top: 7%; left: 33%; }
-        .cvh-mc--ab  { bottom: 6%; left: 34%; }
+        .cvh-mc--contact  { top: 6%; left: 30%; }
+        .cvh-mc--friction { top: 42%; left: 6%; }
+        .cvh-mc--improve  { bottom: 6%; left: 34%; }
 
         /* Desktop: contenido alineado arriba con el mismo margen superior que /web-para-empresas/ (60px). */
         @media (min-width: 1025px) {
@@ -164,10 +177,12 @@ export default function Hero() {
             -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
           }
-          .cvh-mc { padding: 6px 10px; }
-          .cvh-mc strong { font-size: 11.5px; }
-          .cvh-mc--opt { top: 6%; left: 5%; }
-          .cvh-mc--ab  { bottom: 6%; left: 5%; }
+          .cvh-mc { width: auto; padding: 6px 10px; align-items: center; }
+          .cvh-mc__text span { display: none; }
+          .cvh-mc__text strong { font-size: 11.5px; white-space: nowrap; }
+          .cvh-mc--contact  { top: 6%; left: 5%; bottom: auto; }
+          .cvh-mc--friction { top: 40%; left: 5%; bottom: auto; }
+          .cvh-mc--improve  { bottom: 6%; left: 5%; top: auto; }
         }
         @media (max-width: 768px) {
           .cvh-section { padding: 40px 20px; }

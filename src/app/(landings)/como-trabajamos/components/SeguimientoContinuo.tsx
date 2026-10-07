@@ -1,12 +1,14 @@
 'use client';
 
-import { Search, ListChecks, PlayCircle, LineChart } from 'lucide-react';
+import Image from 'next/image';
+
+const IMG_BASE = '/assets/img/como-trabajamos';
 
 const NODES = [
-  { Icon: Search, title: 'Revisar', text: 'Analizamos resultados y nuevos datos.' },
-  { Icon: ListChecks, title: 'Priorizar', text: 'Definimos las siguientes oportunidades.' },
-  { Icon: PlayCircle, title: 'Ejecutar', text: 'Implementamos las mejoras.' },
-  { Icon: LineChart, title: 'Mejorar', text: 'Medimos el impacto y repetimos el ciclo.' },
+  { image: 'revisar', title: 'Revisar', text: 'Analizamos resultados y nuevos datos.' },
+  { image: 'priorizar', title: 'Priorizar', text: 'Definimos las siguientes oportunidades.' },
+  { image: 'ejecutar', title: 'Ejecutar', text: 'Implementamos las mejoras.' },
+  { image: 'mejorar', title: 'Mejorar', text: 'Medimos el impacto y repetimos el ciclo.' },
 ];
 
 export default function SeguimientoContinuo() {
@@ -21,13 +23,17 @@ export default function SeguimientoContinuo() {
 
         <div className="sc-loop">
           {NODES.map((n, i) => {
-            const Icon = n.Icon;
             return (
               <div key={n.title} className="sc-node">
                 {i < NODES.length - 1 && <span className="sc-arrow" aria-hidden="true" />}
-                <span className="sc-node__icon" aria-hidden="true">
-                  <Icon size={18} strokeWidth={2.1} />
-                </span>
+                <Image
+                  className="sc-node__img"
+                  src={`${IMG_BASE}/${n.image}.webp`}
+                  alt=""
+                  width={640}
+                  height={448}
+                  sizes="(max-width: 767px) 45vw, 240px"
+                />
                 <span className="sc-node__title">{n.title}</span>
                 <span className="sc-node__text">{n.text}</span>
               </div>
@@ -53,11 +59,7 @@ export default function SeguimientoContinuo() {
           position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;
           padding: 18px 10px; background: var(--io-bg-soft); border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
         }
-        .sc-node__icon {
-          display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;
-          border-radius: 50%; background: #fff; border: 1px solid var(--io-border); color: var(--io-action);
-        }
-        .sc-node:last-child .sc-node__icon { color: var(--io-accent); border-color: var(--io-accent); }
+        .sc-node__img { display: block; width: 100%; height: auto; aspect-ratio: 640 / 448; object-fit: contain; margin-bottom: 4px; }
         .sc-node__title { font-size: 15px; font-weight: 700; color: var(--io-text); }
         .sc-node__text { font-size: 12.5px; line-height: 1.4; color: var(--io-text-muted); }
 

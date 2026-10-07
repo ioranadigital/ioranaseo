@@ -116,6 +116,7 @@ export default function NuestroSistema() {
                 type="button"
                 className="ps-mod__btn"
                 aria-pressed={i === selected}
+                aria-current={i === shown ? 'true' : undefined}
                 aria-controls="ps-detail"
                 onClick={() => setSelected(i)}
               >
@@ -173,7 +174,7 @@ export default function NuestroSistema() {
       </div>
 
       <style>{`
-        .ps-section { padding: 24px 20px; background-color: var(--io-bg-soft); }
+        .ps-section { padding: 68px 20px; background-color: var(--io-bg-soft); }
         .ps-container { max-width: 1280px; margin: 0 auto; }
         .ps-header { text-align: center; margin-bottom: 16px; }
         .ps-title {
@@ -185,15 +186,16 @@ export default function NuestroSistema() {
         /* Desktop: pipeline horizontal — 4 módulos + salida, detalle en banda inferior */
         .ps-grid {
           display: grid; grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr 28px auto;
-          align-items: center; row-gap: 12px;
+          align-items: center; row-gap: 36px;
         }
 
         .ps-mod {
           display: flex; flex-direction: column; align-self: stretch; min-width: 0; padding: 8px 8px 10px; background: #fff;
           border: 1.5px solid var(--io-border); border-radius: var(--io-radius-lg);
-          transition: border-color 150ms ease, background-color 150ms ease;
+          transition: border-color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
         }
-        .ps-mod:hover, .ps-mod.is-active { border-color: var(--io-action); }
+        .ps-mod:hover, .ps-mod.is-active { border-color: var(--io-accent); }
+        .ps-mod.is-active { box-shadow: 0 4px 14px rgba(244, 162, 124, 0.35); }
         .ps-mod__btn {
           display: flex; flex-direction: column; gap: 8px; flex: 1; width: 100%; padding: 0; text-align: left;
           font-family: inherit; color: inherit; cursor: pointer; background: none; border: none;
@@ -241,15 +243,17 @@ export default function NuestroSistema() {
         .ps-detail { grid-column: 1 / -1; order: 99; }
         .ps-detail__body {
           display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; padding: 10px 20px;
-          background: #fff; border: 1px solid var(--io-border); border-radius: var(--io-radius-lg);
+          background: color-mix(in srgb, var(--io-accent) 24%, #fff); border: 1px solid var(--io-accent);
+          border-radius: var(--io-radius-lg);
         }
         .ps-detail__text h3 { font-size: 16px; font-weight: 800; color: var(--io-text); margin: 0 0 2px; line-height: 1.25; }
-        .ps-detail__text p { font-size: 15px; line-height: 1.5; color: var(--io-text-muted); margin: 0; }
+        .ps-detail__text p { font-size: 15px; line-height: 1.5; color: var(--io-text); margin: 0; }
         .ps-detail__link {
-          font-size: 15px; font-weight: 700; color: var(--io-action); text-decoration: none; white-space: nowrap;
-          padding: 8px 14px; border: 1.5px solid var(--io-action); border-radius: 999px;
+          font-size: 15px; font-weight: 700; color: #fff; text-decoration: none; white-space: nowrap;
+          padding: 8px 14px; border: 1.5px solid var(--io-action); border-radius: 999px; background: var(--io-action);
+          transition: background-color 200ms ease, border-color 200ms ease;
         }
-        .ps-detail__link:hover { background: var(--io-action); color: #fff; }
+        .ps-detail__link:hover { background: var(--io-action-hover); border-color: var(--io-action-hover); color: #fff; }
         .ps-detail__link:focus-visible { outline: 2px solid var(--io-action); outline-offset: 2px; }
         .ps-detail-in { animation: ps-fade 180ms ease-out; }
         @keyframes ps-fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
@@ -263,8 +267,8 @@ export default function NuestroSistema() {
 
         /* Tablet: 2 × 2, salida centrada debajo, conectores simplificados (solo dentro de cada fila) */
         @media (min-width: 768px) and (max-width: 1023px) {
-          .ps-section { padding: 24px 20px; }
-          .ps-grid { grid-template-columns: 1fr 28px 1fr; row-gap: 12px; }
+          .ps-section { padding: 56px 20px; }
+          .ps-grid { grid-template-columns: 1fr 28px 1fr; row-gap: 32px; }
           .ps-mod { padding: 8px; }
           .ps-mod__btn { flex-direction: row; align-items: center; gap: 12px; }
           .ps-mod__visual { flex: none; width: 112px; }
@@ -275,7 +279,7 @@ export default function NuestroSistema() {
 
         /* Mobile: pipeline vertical compacto; el panel se inserta bajo el módulo activo */
         @media (max-width: 767px) {
-          .ps-section { padding: 28px 20px; }
+          .ps-section { padding: 44px 20px; }
           .ps-header { margin-bottom: 16px; }
           .ps-sub { font-size: 15px; }
           .ps-grid { grid-template-columns: 1fr; row-gap: 0; }

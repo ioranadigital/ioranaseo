@@ -1,6 +1,6 @@
 'use client';
 
-import { ChannelGoogleAdsVisual, ChannelMetaAdsVisual } from './CampanasVisuals';
+import Image from 'next/image';
 
 export default function Canales() {
   return (
@@ -14,7 +14,13 @@ export default function Canales() {
         <div className="ch-grid">
           <article className="ch-panel ch-panel--blue">
             <div className="ch-panel__visual">
-              <ChannelGoogleAdsVisual className="ch-panel__svg" />
+              <Image
+                src="/assets/img/campanas/campanas-google-ads-ui.webp"
+                alt="Anuncio patrocinado de Google Ads en los resultados de búsqueda"
+                fill
+                sizes="(min-width: 1120px) 504px, (min-width: 768px) 44vw, 92vw"
+                className="ch-panel__img"
+              />
             </div>
             <h3 className="ch-panel__title">Google Ads</h3>
             <p className="ch-panel__copy">Aparece cuando te buscan y capta clientes con alta intención.</p>
@@ -22,7 +28,13 @@ export default function Canales() {
 
           <article className="ch-panel ch-panel--lavender">
             <div className="ch-panel__visual">
-              <ChannelMetaAdsVisual className="ch-panel__svg" />
+              <Image
+                src="/assets/img/campanas/campanas-meta-ads-ui.webp"
+                alt="Anuncio de Meta Ads en el feed de Instagram"
+                fill
+                sizes="(min-width: 1120px) 504px, (min-width: 768px) 44vw, 92vw"
+                className="ch-panel__img"
+              />
             </div>
             <h3 className="ch-panel__title">Meta Ads</h3>
             <p className="ch-panel__copy">Llega a nuevas audiencias en Instagram y Facebook.</p>
@@ -54,8 +66,9 @@ export default function Canales() {
         .ch-panel--lavender { background: rgba(139, 124, 246, 0.07); }
         .ch-panel--lavender:hover { border-color: #8B7CF6; }
 
-        .ch-panel__visual { background: #fff; border-radius: var(--io-radius-md); padding: 12px; margin-bottom: 16px; border: 1px solid var(--io-border); }
-        .ch-panel__svg { display: block; width: 100%; height: auto; }
+        /* Capturas de interfaz recortadas para llegar a sangre: proporción fija 5:2 en ambas (sin layout shift), ancladas arriba-izquierda. */
+        .ch-panel__visual { position: relative; aspect-ratio: 5 / 2; overflow: hidden; background: #fff; border-radius: var(--io-radius-md); margin-bottom: 16px; border: 1px solid var(--io-border); }
+        .ch-panel__img { object-fit: cover; object-position: left top; }
         .ch-panel__title { font-size: 20px; font-weight: 700; color: var(--io-text); margin: 0 0 6px; }
         .ch-panel__copy { font-size: 15px; line-height: 1.5; color: var(--io-text-muted); margin: 0; }
 

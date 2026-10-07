@@ -1,11 +1,132 @@
 'use client';
 
 import Image from 'next/image';
-import { Monitor, Search, Megaphone, Target } from 'lucide-react';
+import { Monitor, Search, Megaphone, Target, MapPin, TrendingUp, Users, ChartColumn } from 'lucide-react';
 
 // Generic small-business interior photo used purely as a demonstrative "screen" inside
 // the laptop/phone mockup — not a real Iorana SEO client, no brand/logo involved.
 const MOCKUP_PHOTO_SRC = '/assets/img/home/hero-small-business.webp';
+
+
+/** Microvisuales de las tarjetas flotantes (SVG inline, decorativos, sin métricas reales). */
+const svgFill = { display: 'block', width: '100%', height: '100%' } as const;
+
+function MapMini() {
+  return (
+    <svg viewBox="0 0 120 64" preserveAspectRatio="xMidYMid slice" style={svgFill} aria-hidden="true" focusable="false">
+      <rect width="120" height="64" fill="#e9f0ff" />
+      <path d="M-4 52 Q30 36 62 46 T126 30" fill="none" stroke="#bcd2fb" strokeWidth="9" strokeLinecap="round" />
+      <rect x="76" y="6" width="38" height="22" rx="5" fill="#d3efe2" />
+      <rect x="6" y="8" width="26" height="18" rx="4" fill="#dce7fc" />
+      <path d="M0 30 H120 M44 0 V64 M92 0 V64" stroke="#fff" strokeWidth="5" />
+      <path d="M0 14 L120 44" stroke="#fff" strokeWidth="3" />
+      <circle cx="62" cy="24" r="12" fill="var(--io-accent)" fillOpacity="0.25" />
+      <path d="M62 38 C55 30 53 27 53 23 a9 9 0 0 1 18 0 c0 4 -2 7 -9 15 Z" fill="var(--io-accent)" />
+      <circle cx="62" cy="23" r="3.4" fill="#fff" />
+      <rect x="74" y="44" width="38" height="14" rx="4" fill="#fff" />
+      <circle cx="81" cy="51" r="3" fill="#3bb08a" />
+      <rect x="87" y="49" width="20" height="4" rx="2" fill="#c9d3e6" />
+    </svg>
+  );
+}
+
+function CampaignMini() {
+  return (
+    <svg viewBox="0 0 120 64" preserveAspectRatio="xMidYMid slice" style={svgFill} aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="hc-bar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#5b8ff0" />
+          <stop offset="1" stopColor="#336fe6" />
+        </linearGradient>
+        <linearGradient id="hc-area" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f4a27c" stopOpacity="0.35" />
+          <stop offset="1" stopColor="#f4a27c" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <rect width="120" height="64" fill="#eef3ff" />
+      <path d="M0 16 H120 M0 32 H120 M0 48 H120" stroke="#dbe5fa" strokeWidth="1" />
+      <rect x="10" y="40" width="12" height="18" rx="3" fill="url(#hc-bar)" opacity="0.4" />
+      <rect x="28" y="30" width="12" height="28" rx="3" fill="url(#hc-bar)" opacity="0.6" />
+      <rect x="46" y="35" width="12" height="23" rx="3" fill="url(#hc-bar)" opacity="0.75" />
+      <rect x="64" y="18" width="12" height="40" rx="3" fill="url(#hc-bar)" />
+      <path d="M10 44 L34 30 L52 34 L70 16 L108 8 V58 H10 Z" fill="url(#hc-area)" />
+      <polyline points="10,44 34,30 52,34 70,16 108,8" fill="none" stroke="var(--io-accent)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="108" cy="8" r="3.4" fill="#fff" stroke="var(--io-accent)" strokeWidth="2" />
+      <rect x="84" y="36" width="30" height="14" rx="7" fill="#fff" />
+      <path d="M92 44 L96 39.5 L100 44 M96 40 V47" fill="none" stroke="#3bb08a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="103" y="41.5" width="7" height="3.5" rx="1.75" fill="#c9d3e6" />
+    </svg>
+  );
+}
+
+function LeadsMini() {
+  const rows = [
+    { y: 3, tone: '#3bb08a', av: '#f4a27c' },
+    { y: 22, tone: '#f4a27c', av: '#5b8ff0' },
+    { y: 41, tone: '#336fe6', av: '#3bb08a' },
+  ];
+  return (
+    <svg viewBox="0 0 120 60" preserveAspectRatio="xMidYMid slice" style={svgFill} aria-hidden="true" focusable="false">
+      {rows.map((r) => (
+        <g key={r.y}>
+          <rect x="1" y={r.y} width="118" height="16" rx="6" fill="#fff" stroke="#e1e8f5" />
+          <circle cx="12" cy={r.y + 8} r="5.2" fill={r.av} />
+          <circle cx="12" cy={r.y + 6.4} r="1.7" fill="#fff" />
+          <path d={`M7.8 ${r.y + 11.4} a4.2 3.2 0 0 1 8.4 0`} fill="#fff" />
+          <rect x="22" y={r.y + 4.5} width="36" height="3.5" rx="1.75" fill="#1f2a44" fillOpacity="0.8" />
+          <rect x="22" y={r.y + 10} width="26" height="2.8" rx="1.4" fill="#c9d3e6" />
+          <rect x="84" y={r.y + 3.5} width="30" height="9" rx="4.5" fill={r.tone} fillOpacity="0.18" />
+          <circle cx="90" cy={r.y + 8} r="2" fill={r.tone} />
+          <rect x="95" y={r.y + 6.6} width="14" height="2.8" rx="1.4" fill={r.tone} fillOpacity="0.7" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function DataMini() {
+  return (
+    <svg viewBox="0 0 120 64" preserveAspectRatio="xMidYMid slice" style={svgFill} aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="hd-area" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#336fe6" stopOpacity="0.28" />
+          <stop offset="1" stopColor="#336fe6" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <rect width="120" height="64" fill="#eef3ff" />
+      <circle cx="20" cy="18" r="11" fill="none" stroke="#d5e0f7" strokeWidth="6" />
+      <path d="M20 7 A11 11 0 1 1 9.6 22.4" fill="none" stroke="#3bb08a" strokeWidth="6" strokeLinecap="round" />
+      <rect x="40" y="10" width="34" height="5" rx="2.5" fill="#1f2a44" fillOpacity="0.8" />
+      <rect x="40" y="20" width="22" height="3.5" rx="1.75" fill="#c9d3e6" />
+      <rect x="88" y="9" width="26" height="12" rx="6" fill="#3bb08a" fillOpacity="0.18" />
+      <path d="M94 17 L98 12.5 L102 17 M98 13 V19" fill="none" stroke="#2a9a73" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M0 52 L20 44 L40 48 L62 34 L84 38 L120 24 V64 H0 Z" fill="url(#hd-area)" />
+      <polyline points="0,52 20,44 40,48 62,34 84,38 120,24" fill="none" stroke="var(--io-action)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="62" cy="34" r="3" fill="#fff" stroke="var(--io-action)" strokeWidth="2" />
+    </svg>
+  );
+}
+
+/** Chip de icono para el encabezado de las tarjetas flotantes. */
+function CardIco({ Icon, tone }: { Icon: typeof MapPin; tone: 'blue' | 'peach' | 'green' }) {
+  const tones = {
+    blue: { bg: 'rgba(51, 111, 230, 0.12)', fg: 'var(--io-action)' },
+    peach: { bg: 'rgba(244, 162, 124, 0.26)', fg: '#c8663a' },
+    green: { bg: 'rgba(59, 176, 138, 0.16)', fg: '#23906b' },
+  }[tone];
+  return (
+    <span
+      className="hero-card-ico"
+      aria-hidden="true"
+      style={{
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: 'none',
+        width: '24px', height: '24px', borderRadius: '50%', background: tones.bg, color: tones.fg,
+      }}
+    >
+      <Icon size={13} strokeWidth={2.3} />
+    </span>
+  );
+}
 
 export default function Hero() {
   const capabilities = [
@@ -229,6 +350,15 @@ export default function Hero() {
                 }
               }
 
+              /* 769-1279px: la tarjeta de mapa se compacta para no tapar el titular del portátil */
+              @media (min-width: 769px) and (max-width: 1279px) {
+                .hero-card-maps {
+                  width: 140px !important;
+                  height: 120px !important;
+                  top: 4% !important;
+                }
+              }
+
               /* Campaign card overhangs the laptop's top-right corner further only where the column has room */
               @media (min-width: 1280px) {
                 .hero-card-campaign {
@@ -245,6 +375,24 @@ export default function Hero() {
 
               /* 768px: compact laptop+phone composition, smaller phone, nav hidden for airiness */
               @media (max-width: 768px) {
+                .hero-mockup-nav,
+                .hero-mockup-cta,
+                .hero-mockup-stats,
+                .hero-mockup-addr,
+                .hero-card-ico {
+                  display: none !important;
+                }
+                .hero-mockup-body {
+                  flex-direction: column !important;
+                  gap: 6px !important;
+                }
+                .hero-mockup-body > div:first-child {
+                  flex: 0 0 auto !important;
+                }
+                .hero-mockup-photo {
+                  flex: 1 !important;
+                  min-height: 0 !important;
+                }
                 .hero-mockup-desktop {
                   width: 206px !important;
                   height: 157px !important;
@@ -283,10 +431,14 @@ export default function Hero() {
                 }
                 .hero-card-maps,
                 .hero-card-campaign {
-                  width: 92px !important;
-                  height: 92px !important;
+                  width: 108px !important;
+                  height: 96px !important;
                   padding: 9px !important;
                   gap: 6px !important;
+                }
+                .hero-laptop-screen {
+                  border-width: 3px !important;
+                  border-top-width: 5px !important;
                 }
                 .hero-card-campaign {
                   top: -64px !important;
@@ -337,9 +489,10 @@ export default function Hero() {
                 }
                 .hero-card-maps,
                 .hero-card-campaign {
-                  width: 80px !important;
-                  height: 48px !important;
-                  padding: 7px !important;
+                  width: 96px !important;
+                  height: auto !important;
+                  min-height: 48px !important;
+                  padding: 7px 8px !important;
                 }
                 .hero-card-text {
                   font-size: 11px !important;
@@ -397,12 +550,12 @@ export default function Hero() {
               position: 'absolute',
               top: '10%',
               left: '0%',
-              width: '132px',
-              height: '128px',
+              width: '150px',
+              height: '148px',
               backgroundColor: 'white',
               border: '1px solid var(--io-border)',
               borderRadius: 'var(--io-radius-md)',
-              boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
+              boxShadow: '0 10px 28px rgba(15, 23, 42, 0.10), 0 1px 3px rgba(15, 23, 42, 0.05)',
               padding: '12px',
               display: 'flex',
               flexDirection: 'column',
@@ -410,39 +563,27 @@ export default function Hero() {
               zIndex: 12,
             }}
           >
-            <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
-              Te encuentran
-              <br />
-              en tu zona
+            <div className="hero-card-head" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+              <CardIco Icon={MapPin} tone="blue" />
+              <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.25 }}>
+                Te encuentran
+                <br />
+                en tu zona
+              </div>
             </div>
-            {/* Mini map preview — abstract streets + pin */}
+            {/* Mini map preview — calles, parque, agua y pin */}
             <div
               className="hero-card-visual"
               style={{
                 flex: 1,
                 minHeight: 0,
                 position: 'relative',
-                borderRadius: '6px',
-                backgroundColor: 'var(--io-bg-soft)',
+                borderRadius: '8px',
                 overflow: 'hidden',
+                boxShadow: 'inset 0 0 0 1px rgba(15, 23, 42, 0.05)',
               }}
             >
-              <svg viewBox="0 0 100 40" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
-                <path d="M0,30 Q25,10 50,25 T100,15" fill="none" stroke="var(--io-border)" strokeWidth="2" />
-                <path d="M0,8 Q30,26 60,10 T100,28" fill="none" stroke="var(--io-border)" strokeWidth="1.5" opacity="0.6" />
-              </svg>
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '36%',
-                  left: '54%',
-                  width: '9px',
-                  height: '9px',
-                  borderRadius: '50% 50% 50% 0',
-                  backgroundColor: 'var(--io-action)',
-                  transform: 'rotate(-45deg)',
-                }}
-              />
+              <MapMini />
             </div>
           </div>
 
@@ -453,12 +594,12 @@ export default function Hero() {
               position: 'absolute',
               bottom: '14%',
               left: '1%',
-              width: '128px',
-              height: '116px',
+              width: '148px',
+              height: '138px',
               backgroundColor: 'var(--io-bg-soft)',
               border: '1px solid var(--io-border)',
               borderRadius: 'var(--io-radius-md)',
-              boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
+              boxShadow: '0 10px 28px rgba(15, 23, 42, 0.10), 0 1px 3px rgba(15, 23, 42, 0.05)',
               padding: '12px',
               display: 'flex',
               flexDirection: 'column',
@@ -466,31 +607,27 @@ export default function Hero() {
               zIndex: 12,
             }}
           >
-            <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
-              Más
-              <br />
-              oportunidades
+            <div className="hero-card-head" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+              <CardIco Icon={Users} tone="green" />
+              <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.25 }}>
+                Más
+                <br />
+                oportunidades
+              </div>
             </div>
-            {/* Mini interface preview — result-style rows */}
+            {/* Mini interface preview — filas de contactos con estado */}
             <div
               className="hero-card-visual"
               style={{
                 flex: 1,
                 minHeight: 0,
-                borderRadius: '6px',
-                backgroundColor: 'white',
-                padding: '6px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '5px',
-                justifyContent: 'center',
+                position: 'relative',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: 'inset 0 0 0 1px rgba(15, 23, 42, 0.05)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#22c55e', flexShrink: 0 }} />
-                <div style={{ height: '4px', width: '60%', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
-              </div>
-              <div style={{ height: '4px', width: '40%', backgroundColor: 'var(--io-border)', borderRadius: '2px', marginLeft: '9px' }} />
+              <LeadsMini />
             </div>
           </div>
 
@@ -507,7 +644,7 @@ export default function Hero() {
               zIndex: 10,
             }}
           >
-            {/* Laptop screen — wider/shorter for a clear landscape device silhouette */}
+            {/* Laptop screen — chasis con bisel, cámara y brillo; interfaz de una web real */}
             <div
               className="hero-laptop-screen"
               style={{
@@ -517,55 +654,94 @@ export default function Hero() {
                 width: '410px',
                 height: '280px',
                 backgroundColor: 'white',
-                border: '4px solid var(--io-text)',
+                border: '5px solid #1c2538',
+                borderTopWidth: '8px',
                 borderRadius: '14px 14px 4px 4px',
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '20px',
-                gap: '10px',
-                boxShadow: '0 20px 40px rgba(15,23,42,0.14)',
+                padding: '12px 16px 14px',
+                gap: '9px',
+                boxShadow: '0 28px 48px rgba(15,23,42,0.20), 0 6px 14px rgba(15,23,42,0.10), inset 0 0 0 1px rgba(255,255,255,0.08)',
                 zIndex: 10,
+                overflow: 'hidden',
               }}
             >
-              {/* Browser chrome dots */}
-              <div style={{ display: 'flex', gap: '7px', flexShrink: 0 }}>
-                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
-                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: 'var(--io-border)' }} />
-                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: 'var(--io-accent)' }} />
+              {/* Cámara */}
+              <div style={{ position: 'absolute', top: '-5.5px', left: '50%', width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#3a465f', transform: 'translateX(-50%)' }} />
+              {/* Barra del navegador */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#f28b6b' }} />
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#f4c15d' }} />
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#3bb08a' }} />
+                <div
+                  className="hero-mockup-addr"
+                  style={{ flex: 1, maxWidth: '190px', height: '14px', marginLeft: '10px', borderRadius: '7px', backgroundColor: 'var(--io-bg-soft)', border: '1px solid var(--io-border)', display: 'flex', alignItems: 'center', gap: '5px', padding: '0 7px' }}
+                >
+                  <div style={{ width: '5px', height: '5px', borderRadius: '2px', backgroundColor: '#3bb08a' }} />
+                  <div style={{ height: '3px', width: '60%', borderRadius: '2px', backgroundColor: 'var(--io-border)' }} />
+                </div>
               </div>
-              {/* Mini site title */}
-              <div className="hero-mockup-title" style={{ fontSize: '17px', fontWeight: 800, color: 'var(--io-text)', lineHeight: 1.2, flexShrink: 0 }}>
-                Tu negocio
-                <br />
-                en buenas manos.
+              {/* Navegación de la web */}
+              <div className="hero-mockup-nav" style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, paddingBottom: '7px', borderBottom: '1px solid var(--io-border)' }}>
+                <div style={{ width: '12px', height: '12px', borderRadius: '4px', backgroundColor: 'var(--io-action)' }} />
+                <div style={{ height: '5px', width: '34px', borderRadius: '3px', backgroundColor: 'var(--io-text)', opacity: 0.8 }} />
+                <div style={{ flex: 1 }} />
+                <div style={{ height: '4px', width: '22px', borderRadius: '2px', backgroundColor: 'var(--io-border)' }} />
+                <div style={{ height: '4px', width: '22px', borderRadius: '2px', backgroundColor: 'var(--io-border)' }} />
+                <div style={{ height: '4px', width: '22px', borderRadius: '2px', backgroundColor: 'var(--io-border)' }} />
+                <div style={{ height: '14px', width: '44px', borderRadius: '7px', backgroundColor: 'var(--io-accent)' }} />
               </div>
-              {/* Mini site copy */}
-              <div className="hero-mockup-copy" style={{ fontSize: '11px', color: 'var(--io-text-muted)', lineHeight: 1.4, flexShrink: 0 }}>
-                Una web preparada para atraer clientes.
+              {/* Hero de la web: texto + CTA a la izquierda, foto a la derecha */}
+              <div className="hero-mockup-body" style={{ flex: 1, minHeight: 0, display: 'flex', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: '0 0 44%', minWidth: 0 }}>
+                  <div className="hero-mockup-title" style={{ fontSize: '16px', fontWeight: 800, color: 'var(--io-text)', lineHeight: 1.2, flexShrink: 0 }}>
+                    Tu negocio
+                    <br />
+                    en buenas manos.
+                  </div>
+                  <div className="hero-mockup-copy" style={{ fontSize: '10.5px', color: 'var(--io-text-muted)', lineHeight: 1.4, flexShrink: 0 }}>
+                    Una web preparada para atraer clientes.
+                  </div>
+                  <div className="hero-mockup-cta" style={{ display: 'flex', gap: '6px', marginTop: '2px' }}>
+                    <div style={{ height: '16px', width: '50px', borderRadius: '8px', backgroundColor: 'var(--io-action)', boxShadow: '0 3px 6px rgba(51,111,230,0.3)' }} />
+                    <div style={{ height: '16px', width: '38px', borderRadius: '8px', border: '1.5px solid var(--io-action)', boxSizing: 'border-box' }} />
+                  </div>
+                  <div className="hero-mockup-stats" style={{ display: 'flex', gap: '5px', marginTop: 'auto' }}>
+                    {['#3bb08a', 'var(--io-accent)', 'var(--io-action)'].map((c) => (
+                      <div key={c} style={{ flex: 1, height: '22px', borderRadius: '5px', backgroundColor: 'var(--io-bg-soft)', border: '1px solid var(--io-border)', padding: '4px 5px', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                        <div style={{ height: '3px', width: '55%', borderRadius: '2px', backgroundColor: c }} />
+                        <div style={{ height: '3px', width: '85%', borderRadius: '2px', backgroundColor: 'var(--io-border)' }} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* Mini site photo — protagonist: generic small-business interior, demonstrative only */}
+                <div
+                  className="hero-mockup-photo"
+                  style={{
+                    flex: 1,
+                    minWidth: 0,
+                    position: 'relative',
+                    overflow: 'hidden',
+                    borderRadius: '9px',
+                    backgroundColor: 'var(--io-bg-soft)',
+                    boxShadow: '0 4px 12px rgba(15,23,42,0.12)',
+                  }}
+                >
+                  <Image
+                    src={MOCKUP_PHOTO_SRC}
+                    alt=""
+                    fill
+                    sizes="(max-width: 430px) 140px, (max-width: 768px) 180px, 400px"
+                    style={{ objectFit: 'cover', objectPosition: '38% 30%' }}
+                  />
+                </div>
               </div>
-              {/* Mini site photo — protagonist: generic small-business interior, demonstrative only */}
-              <div
-                className="hero-mockup-photo"
-                style={{
-                  flex: 1,
-                  minHeight: 0,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  borderRadius: '8px',
-                  backgroundColor: 'var(--io-bg-soft)',
-                }}
-              >
-                <Image
-                  src={MOCKUP_PHOTO_SRC}
-                  alt=""
-                  fill
-                  sizes="(max-width: 430px) 140px, (max-width: 768px) 180px, 400px"
-                  style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
-                />
-              </div>
+              {/* Reflejo de pantalla */}
+              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(115deg, rgba(255,255,255,0.0) 55%, rgba(255,255,255,0.35) 56%, rgba(255,255,255,0.0) 70%)' }} />
             </div>
 
-            {/* Laptop base/deck */}
+            {/* Laptop base/deck — bisagra, hendidura y bisel metálico */}
             <div
               className="hero-laptop-base"
               style={{
@@ -574,9 +750,9 @@ export default function Hero() {
                 left: 0,
                 width: '440px',
                 height: '16px',
-                background: 'linear-gradient(180deg, #e4e5e8 0%, #c9cbd0 100%)',
-                borderRadius: '0 0 10px 10px',
-                boxShadow: '0 6px 10px rgba(15,23,42,0.12)',
+                background: 'linear-gradient(180deg, #f1f2f5 0%, #d3d6dc 55%, #b4b8c0 100%)',
+                borderRadius: '0 0 12px 12px',
+                boxShadow: '0 10px 18px rgba(15,23,42,0.18), 0 2px 0 rgba(255,255,255,0.7) inset',
                 zIndex: 9,
               }}
             >
@@ -586,10 +762,10 @@ export default function Hero() {
                   top: 0,
                   left: '50%',
                   transform: 'translateX(-50%)',
-                  width: '50px',
-                  height: '4px',
-                  borderRadius: '0 0 4px 4px',
-                  backgroundColor: '#b9bcc2',
+                  width: '64px',
+                  height: '5px',
+                  borderRadius: '0 0 6px 6px',
+                  background: 'linear-gradient(180deg, #a3a8b1, #c3c7ce)',
                 }}
               />
             </div>
@@ -654,12 +830,12 @@ export default function Hero() {
                 position: 'absolute',
                 top: '-46px',
                 right: '-22px',
-                width: '142px',
-                height: '134px',
+                width: '174px',
+                height: '154px',
                 backgroundColor: 'white',
                 border: '1px solid var(--io-border)',
                 borderRadius: 'var(--io-radius-md)',
-                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
+                boxShadow: '0 10px 28px rgba(15, 23, 42, 0.10), 0 1px 3px rgba(15, 23, 42, 0.05)',
                 padding: '12px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -667,33 +843,27 @@ export default function Hero() {
                 zIndex: 12,
               }}
             >
-              <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
-                Genera demanda
-                <br />
-                cualificada
+              <div className="hero-card-head" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                <CardIco Icon={TrendingUp} tone="peach" />
+                <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.25 }}>
+                  Genera demanda
+                  <br />
+                  cualificada
+                </div>
               </div>
-              {/* Mini KPI chart — ascending bars + trend line */}
+              {/* Mini KPI chart — barras + tendencia */}
               <div
                 className="hero-card-visual"
                 style={{
                   flex: 1,
                   minHeight: 0,
                   position: 'relative',
-                  borderRadius: '6px',
-                  backgroundColor: 'var(--io-bg-soft)',
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  gap: '4px',
-                  padding: '6px',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 0 0 1px rgba(15, 23, 42, 0.05)',
                 }}
               >
-                <div style={{ width: '6px', height: '30%', backgroundColor: 'var(--io-action)', opacity: 0.35, borderRadius: '2px' }} />
-                <div style={{ width: '6px', height: '55%', backgroundColor: 'var(--io-action)', opacity: 0.55, borderRadius: '2px' }} />
-                <div style={{ width: '6px', height: '40%', backgroundColor: 'var(--io-action)', opacity: 0.7, borderRadius: '2px' }} />
-                <div style={{ width: '6px', height: '80%', backgroundColor: 'var(--io-action)', borderRadius: '2px' }} />
-                <svg viewBox="0 0 100 40" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-                  <polyline points="0,35 30,20 55,25 78,8 100,4" fill="none" stroke="var(--io-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <CampaignMini />
               </div>
             </div>
 
@@ -705,12 +875,12 @@ export default function Hero() {
                 top: '306px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                width: '130px',
-                height: '124px',
+                width: '152px',
+                height: '142px',
                 backgroundColor: 'white',
                 border: '1px solid var(--io-border)',
                 borderRadius: 'var(--io-radius-md)',
-                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
+                boxShadow: '0 10px 28px rgba(15, 23, 42, 0.10), 0 1px 3px rgba(15, 23, 42, 0.05)',
                 padding: '12px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -718,40 +888,27 @@ export default function Hero() {
                 zIndex: 12,
               }}
             >
-              <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.3 }}>
-                Datos para
-                <br />
-                mejorar
+              <div className="hero-card-head" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                <CardIco Icon={ChartColumn} tone="blue" />
+                <div className="hero-card-text" style={{ fontSize: '13px', fontWeight: 700, color: 'var(--io-text)', lineHeight: 1.25 }}>
+                  Datos para
+                  <br />
+                  mejorar
+                </div>
               </div>
-              {/* Mini dashboard — KPI dot + sparkline */}
+              {/* Mini dashboard — indicador + área de tendencia */}
               <div
                 className="hero-card-visual"
                 style={{
                   flex: 1,
                   minHeight: 0,
-                  borderRadius: '6px',
-                  backgroundColor: 'var(--io-bg-soft)',
-                  padding: '6px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-end',
-                  gap: '4px',
+                  position: 'relative',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 0 0 1px rgba(15, 23, 42, 0.05)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--io-action)' }} />
-                  <div style={{ height: '4px', width: '28px', backgroundColor: 'var(--io-border)', borderRadius: '2px' }} />
-                </div>
-                <svg viewBox="0 0 60 20" style={{ width: '100%', height: '18px' }}>
-                  <polyline
-                    points="0,17 15,11 30,13 45,5 60,3"
-                    fill="none"
-                    stroke="var(--io-action)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <DataMini />
               </div>
             </div>
           </div>

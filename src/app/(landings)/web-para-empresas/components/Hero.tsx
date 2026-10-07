@@ -10,9 +10,9 @@ const HERO_PHOTO = '/assets/img/web-para-empresas/hero-business.webp';
 // Microcards aprobadas (sin añadir ni inventar ninguna). Posiciones en % de la capa
 // fotográfica, elegidas sobre zonas sin rostros (estanterías, mostrador).
 const MICROCARDS = [
-  { Icon: Search, title: 'SEO preparado', cls: 'wh-mc--seo' },
-  { Icon: Monitor, title: 'Diseño responsive', cls: 'wh-mc--resp' },
-  { Icon: MousePointerClick, title: 'CTA claros', cls: 'wh-mc--cta' },
+  { Icon: Search, title: 'SEO preparado', copy: 'Estructura pensada para posicionar mejor.', cls: 'wh-mc--seo' },
+  { Icon: Monitor, title: 'Diseño responsive', copy: 'Preparada para todos los dispositivos.', cls: 'wh-mc--resp' },
+  { Icon: MousePointerClick, title: 'CTA claros', copy: 'Recorridos pensados para facilitar el contacto.', cls: 'wh-mc--cta' },
 ];
 
 export default function Hero() {
@@ -188,14 +188,17 @@ export default function Hero() {
               />
             </div>
           </div>
-          {MICROCARDS.map((c) => {
+          {MICROCARDS.map((c, i) => {
             const Icon = c.Icon;
             return (
               <div key={c.title} className={`wh-mc ${c.cls}`}>
-                <span className="wh-mc__icon">
+                <span className={`wh-mc__icon${i === 2 ? ' is-accent' : ''}`}>
                   <Icon size={14} strokeWidth={2.2} />
                 </span>
-                <strong>{c.title}</strong>
+                <span className="wh-mc__text">
+                  <strong>{c.title}</strong>
+                  <span>{c.copy}</span>
+                </span>
               </div>
             );
           })}
@@ -233,15 +236,18 @@ export default function Hero() {
         .wh-bg__img { object-fit: cover; object-position: 50% 50%; }
 
         .wh-mc {
-          position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-          background: #fff; border: 1px solid var(--io-border); border-radius: 999px;
-          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08); white-space: nowrap;
+          position: absolute; z-index: 1; display: flex; align-items: flex-start; gap: 8px; width: 190px; padding: 8px 10px;
+          background: #fff; border: 1px solid var(--io-border); border-radius: 14px;
+          box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
         }
         .wh-mc__icon {
-          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px;
+          display: inline-flex; align-items: center; justify-content: center; flex: none; width: 24px; height: 24px;
           border-radius: 50%; background: rgba(51, 111, 230, 0.12); color: var(--io-action);
         }
-        .wh-mc strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); }
+        .wh-mc__icon.is-accent { background: rgba(244, 162, 124, 0.25); color: #c8663a; }
+        .wh-mc__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+        .wh-mc__text strong { font-size: 12.5px; font-weight: 700; color: var(--io-text); line-height: 1.25; }
+        .wh-mc__text span { font-size: 11.5px; line-height: 1.3; color: var(--io-text-muted); }
         /* Posiciones sobre zonas sin rostros: estantería sup. dcha., estantería dcha., mostrador. */
         .wh-mc--seo  { top: 9%;  right: 8%; }
         .wh-mc--resp { top: 41%; right: 5%; }
@@ -262,8 +268,9 @@ export default function Hero() {
             -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
           }
-          .wh-mc { padding: 6px 10px; }
-          .wh-mc strong { font-size: 11.5px; }
+          .wh-mc { width: auto; padding: 6px 10px; align-items: center; }
+          .wh-mc__text span { display: none; }
+          .wh-mc__text strong { font-size: 11.5px; white-space: nowrap; }
         }
         /* Móvil: se omite la microcard puramente decorativa para preservar encuadre y lectura */
         @media (max-width: 767px) {

@@ -248,7 +248,7 @@ export default function DiagnosticoWizard() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--io-bg, #F8FAFC)', paddingTop: currentStep === 'intro' ? 0 : '20px', paddingBottom: currentStep === 'intro' ? 0 : '60px' }}>
+    <div style={{ minHeight: currentStep === 'intro' ? 'calc(100vh - 64px)' : '100vh', backgroundColor: 'var(--io-bg, #F8FAFC)', paddingTop: currentStep === 'intro' ? 0 : '20px', paddingBottom: currentStep === 'intro' ? 0 : '60px' }}>
       {currentStep === 'intro' && (
         <div className={leaving ? 'dg-leave' : undefined}>
           <DiagnosticoIntro onStart={handleStart} />

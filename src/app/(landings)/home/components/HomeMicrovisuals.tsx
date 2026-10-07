@@ -1,8 +1,7 @@
 import type { CSSProperties } from 'react';
 
 /**
- * Microvisuales decorativos (SVG inline) para las secciones "De la presencia digital a las
- * oportunidades" y "Nuestro sistema de captación". Sin métricas, rankings ni ratings.
+ * Microvisuales decorativos (SVG inline) para la sección "Nuestro sistema de captación". Sin métricas, rankings ni ratings.
  * Colores vía tokens: estructura en --io-action, acento puntual en --io-accent (peach).
  */
 
@@ -21,71 +20,6 @@ interface VisualProps {
 }
 
 const svgProps = { 'aria-hidden': true, focusable: false as const, role: 'presentation' as const };
-
-/* ───────────── Journey (240 × 100) ───────────── */
-
-/** Te encuentran: mini búsqueda + resultado + pin. */
-export function JourneyFindVisual({ className }: VisualProps) {
-  return (
-    <svg viewBox="0 0 240 100" className={className} {...svgProps}>
-      <rect x="16" y="6" width="208" height="26" rx="13" style={card} />
-      <circle cx="33" cy="19" r="5" style={{ ...noFill, stroke: 'var(--io-action)', strokeWidth: 2 }} />
-      <path d="M37 23 L41 27" style={{ ...noFill, stroke: 'var(--io-action)', strokeWidth: 2, strokeLinecap: 'round' }} />
-      <rect x="50" y="16" width="92" height="6" rx="3" style={dark} />
-
-      <rect x="16" y="40" width="208" height="24" rx="6" style={card} />
-      <rect x="28" y="46" width="76" height="5" rx="2.5" style={dark} />
-      <rect x="28" y="55" width="120" height="4" rx="2" style={muted} />
-
-      <rect x="16" y="70" width="208" height="26" rx="6" style={{ ...card, stroke: 'var(--io-accent)' }} />
-      <circle cx="35" cy="80" r="6.5" style={peach} />
-      <path d="M30 84.5 L35 92.5 L40 84.5 Z" style={peach} />
-      <circle cx="35" cy="80" r="2.3" style={{ fill: '#fff' }} />
-      <rect x="50" y="76" width="84" height="5" rx="2.5" style={dark} />
-      <rect x="50" y="85" width="112" height="4" rx="2" style={muted} />
-    </svg>
-  );
-}
-
-/** Te entienden: mini browser / bloque de contenido con heading y líneas. */
-export function JourneyUnderstandVisual({ className }: VisualProps) {
-  return (
-    <svg viewBox="0 0 240 100" className={className} {...svgProps}>
-      <rect x="20" y="6" width="200" height="90" rx="8" style={card} />
-      <path d="M20 22 V14 a8 8 0 0 1 8 -8 H212 a8 8 0 0 1 8 8 V22 Z" style={softStroke} />
-      <circle cx="32" cy="14" r="2.5" style={brand} />
-      <circle cx="41" cy="14" r="2.5" style={brand} />
-      <circle cx="50" cy="14" r="2.5" style={brand} />
-
-      <rect x="32" y="34" width="86" height="8" rx="4" style={dark} />
-      <rect x="32" y="48" width="112" height="4" rx="2" style={muted} />
-      <rect x="32" y="56" width="98" height="4" rx="2" style={muted} />
-      <rect x="32" y="70" width="44" height="14" rx="7" style={blue} />
-
-      <rect x="154" y="32" width="56" height="52" rx="6" style={soft} />
-      <circle cx="170" cy="46" r="5" style={peach} />
-      <path d="M154 84 L176 62 L192 76 L200 68 L210 78 V84 Z" style={{ ...brand, fillOpacity: 0.7 }} />
-    </svg>
-  );
-}
-
-/** Contactan: mini formulario / mensaje + pequeño indicador de oportunidad. */
-export function JourneyContactVisual({ className }: VisualProps) {
-  return (
-    <svg viewBox="0 0 240 100" className={className} {...svgProps}>
-      <rect x="46" y="8" width="148" height="86" rx="8" style={card} />
-      <rect x="60" y="20" width="118" height="14" rx="4" style={softStroke} />
-      <rect x="66" y="25" width="40" height="4" rx="2" style={muted} />
-      <rect x="60" y="40" width="118" height="14" rx="4" style={softStroke} />
-      <rect x="66" y="45" width="56" height="4" rx="2" style={muted} />
-      <rect x="60" y="62" width="118" height="14" rx="4" style={softStroke} />
-      <rect x="60" y="80" width="54" height="10" rx="5" style={blue} />
-
-      <circle cx="194" cy="16" r="13" style={peach} />
-      <path d="M187.5 16.5 L192 21 L200.5 11.5" style={{ ...noFill, stroke: '#fff', strokeWidth: 2.6, strokeLinecap: 'round', strokeLinejoin: 'round' }} />
-    </svg>
-  );
-}
 
 /* ───────────── Pipeline (120 × 72) ───────────── */
 

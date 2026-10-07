@@ -345,7 +345,7 @@ export default function TodoLoQueNecesitas() {
       </div>
 
       <style>{`
-        .tl-section { padding: 32px 20px; background-color: #fff; }
+        .tl-section { padding: 64px 20px 68px; background-color: #fff; }
         .tl-grid {
           max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
           gap: 40px; align-items: stretch;
@@ -447,7 +447,7 @@ export default function TodoLoQueNecesitas() {
 
         /* Tablet: mantiene dos columnas; composición simplificada (2 microcards) */
         @media (min-width: 768px) and (max-width: 1023px) {
-          .tl-section { padding: 32px 20px; }
+          .tl-section { padding: 56px 20px; }
           .tl-grid { gap: 24px; }
           .tl-title { font-size: 26px; }
           .tl-panel__body { padding: 14px; gap: 8px; }
@@ -461,7 +461,7 @@ export default function TodoLoQueNecesitas() {
 
         /* Mobile: acordeón compacto; foto + máx. 2 microcards + 1 frase; sin panel */
         @media (max-width: 767px) {
-          .tl-section { padding: 32px 20px; }
+          .tl-section { padding: 44px 20px; }
           .tl-item { padding: 8px 10px; }
           .tl-item__icon { width: 30px; height: 30px; }
           .tl-grid { grid-template-columns: 1fr; gap: 0; }

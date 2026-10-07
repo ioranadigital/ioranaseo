@@ -118,7 +118,6 @@ export default function Pricing() {
                   ? '0 20px 50px rgba(51, 111, 230, 0.15)'
                   : '0 2px 8px rgba(0, 0, 0, 0.04)',
                 transition: 'all 0.2s',
-                order: plan.recommended ? -1 : index,
               }}
             >
               {/* Badge */}
@@ -294,6 +293,10 @@ export default function Pricing() {
       </div>
 
       <style>{`
+        /* Desktop: Esencial | Recomendada (centro) | Growth. Móvil/tablet: recomendada primero (ver styles.css) */
+        @media (min-width: 1024px) {
+          .pricing-card, .pricing-card.recommended { order: 0 !important; }
+        }
         /* Micro polish: solo densidad/spacing en mobile — sin ocultar contenido ni cambiar precios */
         @media (max-width: 1024px) {
           .pr-section { padding: 60px 20px !important; }
