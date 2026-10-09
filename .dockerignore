@@ -28,3 +28,14 @@ Ioranaseo-old
 .claude
 .playwright-mcp
 *.md
+
+# Not needed inside the image build
+build.log
+next-env.d.ts
+tsconfig.tsbuildinfo
+*.ps1
+2026-07-08*Greenshot*
+Dockerfile
+docker-compose.yml
+.env.example
+.gitattributes
