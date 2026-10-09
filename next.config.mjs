@@ -1,22 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**.supabase.co",
-      },
-      {
-        protocol: "https",
-        hostname: "iorana.dev",
-      },
-    ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
@@ -97,7 +84,7 @@ const nextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=60, stale-while-revalidate=300",
+            value: "no-store",
           },
         ],
       },
@@ -168,20 +155,6 @@ const nextConfig = {
     ];
   },
 
-  // Rewrites for API routes
-  async rewrites() {
-    return {
-      beforeFiles: [],
-      afterFiles: [],
-      fallback: [],
-    };
-  },
-
-  // Webpack optimization - simplificado para evitar conflictos
-  webpack: (config) => {
-    return config;
-  },
-
   // Compression
   compress: true,
 
@@ -190,10 +163,6 @@ const nextConfig = {
 
   // Production source maps
   productionBrowserSourceMaps: false,
-
-  experimental: {
-    optimizePackageImports: ["lucide-react", "bootstrap-icons"],
-  },
 };
 
 export default nextConfig;
