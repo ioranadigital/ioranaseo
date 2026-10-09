@@ -64,7 +64,7 @@ export function useWebVitalsTracker(): WebVitalsMetrics {
 
     updateMetrics();
 
-    const handleLCP = (list: PerformanceEntryList) => {
+    const handleLCP = (list: PerformanceObserverEntryList) => {
       const entries = list.getEntries();
       const lastEntry = entries[entries.length - 1];
       setMetrics((prev) => ({
@@ -73,7 +73,7 @@ export function useWebVitalsTracker(): WebVitalsMetrics {
       }));
     };
 
-    const handleCLS = (list: PerformanceEntryList) => {
+    const handleCLS = (list: PerformanceObserverEntryList) => {
       const entries = list.getEntries();
       let clsValue = 0;
       entries.forEach((entry: any) => {
@@ -186,7 +186,7 @@ export function checkMobileOptimization(
     );
   }
 
-  const fontSizeMatches =
+  const fontSizeMatches: string[] =
     htmlContent.match(/<[^>]*style="[^"]*font-size:\s*(\d+)/gi) || [];
   if (
     fontSizeMatches.some((match) => {
