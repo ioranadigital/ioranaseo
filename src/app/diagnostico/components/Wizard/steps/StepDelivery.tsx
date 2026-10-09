@@ -23,7 +23,7 @@ export default function StepDelivery({
   onPrevious,
   progress,
 }: StepDeliveryProps) {
-  const handleChange = (field: keyof typeof data, value: any) => {
+  const handleChange = <K extends keyof typeof data>(field: K, value: (typeof data)[K]) => {
     onChange({ ...data, [field]: value });
   };
 

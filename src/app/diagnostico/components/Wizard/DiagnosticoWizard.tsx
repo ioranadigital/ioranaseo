@@ -121,7 +121,7 @@ export default function DiagnosticoWizard() {
 
   const [stepErrors, setStepErrors] = useState<Record<string, string>>({});
 
-  const handleUpdateFormData = (section: keyof WizardFormData, data: any) => {
+  const handleUpdateFormData = <K extends keyof WizardFormData>(section: K, data: WizardFormData[K]) => {
     setFormData((prev) => ({
       ...prev,
       [section]: data,

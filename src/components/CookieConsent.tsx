@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 
+type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
+
 const STORAGE_KEY = "iorana-cookie-consent";
 const CONSENT_VERSION = "1";
 export const OPEN_COOKIE_PREFERENCES_EVENT = "iorana:open-cookie-preferences";
@@ -118,8 +120,9 @@ export default function CookieConsent() {
   }, []);
 
   const initializeGA4 = () => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("consent", "update", {
+    const gtag = typeof window !== "undefined" ? (window as GtagWindow).gtag : undefined;
+    if (gtag) {
+      gtag("consent", "update", {
         analytics_storage: "granted",
       });
     }
@@ -130,8 +133,9 @@ export default function CookieConsent() {
   // the user rejects or turns Analytics back off. No-op today since gtag
   // isn't loaded anywhere in the site yet (see LEGAL_COOKIE_SYSTEM.md).
   const revokeGA4 = () => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("consent", "update", {
+    const gtag = typeof window !== "undefined" ? (window as GtagWindow).gtag : undefined;
+    if (gtag) {
+      gtag("consent", "update", {
         analytics_storage: "denied",
       });
     }

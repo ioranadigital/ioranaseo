@@ -54,7 +54,7 @@ interface ContactPayload {
   website?: string;
 }
 
-function cleanPayload(raw: any): ContactPayload {
+function cleanPayload(raw: Record<string, unknown> | null | undefined): ContactPayload {
   const data: ContactPayload = {
     nombre: '',
     email: '',
@@ -68,7 +68,7 @@ function cleanPayload(raw: any): ContactPayload {
 
   for (const [field, max] of Object.entries(MAX_LENGTHS)) {
     const value = raw?.[field];
-    (data as any)[field] = typeof value === 'string' ? value.trim().slice(0, max) : '';
+    (data as unknown as Record<string, string>)[field] = typeof value === 'string' ? value.trim().slice(0, max) : '';
   }
 
   data.website = typeof raw?.website === 'string' ? raw.website : '';

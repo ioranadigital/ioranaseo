@@ -102,7 +102,7 @@ function escapeHtml(text: string): string {
 export interface StructuredDataSchema {
   "@context": string;
   "@type": string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function generateJsonLd(schema: StructuredDataSchema): string {
@@ -171,7 +171,7 @@ export interface CanonicalOptions {
 }
 
 export function generateCanonicalUrl(options: CanonicalOptions): string {
-  let url = new URL(options.pageUrl);
+  const url = new URL(options.pageUrl);
 
   if (options.preferredVersion === "www" && !url.hostname.startsWith("www.")) {
     url.hostname = `www.${url.hostname}`;

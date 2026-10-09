@@ -69,8 +69,18 @@ interface DiagnosticoPayload {
   hp: string;
 }
 
-function cleanPayload(raw: any): DiagnosticoPayload {
-  const profiles = Array.isArray(raw?.presence?.profiles) ? raw.presence.profiles.slice(0, MAX.list) : [];
+interface RawDiagnostico {
+  business?: Record<string, unknown>;
+  presence?: { channels?: unknown; profiles?: unknown };
+  objectives?: { selected?: unknown; notes?: unknown };
+  contact?: Record<string, unknown>;
+  website?: unknown;
+}
+
+function cleanPayload(raw: RawDiagnostico | null | undefined): DiagnosticoPayload {
+  const profiles: Array<Record<string, unknown> | null | undefined> = Array.isArray(raw?.presence?.profiles)
+    ? raw.presence.profiles.slice(0, MAX.list)
+    : [];
   return {
     business: {
       company: str(raw?.business?.company, MAX.short),
@@ -83,7 +93,7 @@ function cleanPayload(raw: any): DiagnosticoPayload {
     presence: {
       channels: strList(raw?.presence?.channels),
       profiles: profiles
-        .map((p: any) => ({ type: str(p?.type, MAX.short), url: str(p?.url, MAX.url) }))
+        .map((p) => ({ type: str(p?.type, MAX.short), url: str(p?.url, MAX.url) }))
         .filter((p: { type: string; url: string }) => p.type || p.url),
     },
     objectives: {

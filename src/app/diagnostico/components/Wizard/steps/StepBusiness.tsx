@@ -17,7 +17,7 @@ export default function StepBusiness({
   onPrevious,
   progress,
 }: StepBusinessProps) {
-  const handleChange = (field: keyof typeof data, value: any) => {
+  const handleChange = <K extends keyof typeof data>(field: K, value: (typeof data)[K]) => {
     onChange({ ...data, [field]: value });
   };
 
@@ -284,7 +284,7 @@ export default function StepBusiness({
             {['B2B', 'B2C', 'Ambos'].map((type) => (
               <button
                 key={type}
-                onClick={() => handleChange('customerType', type.toLowerCase().replace('ambos', 'both') as any)}
+                onClick={() => handleChange('customerType', type.toLowerCase().replace('ambos', 'both') as typeof data.customerType)}
                 style={{
                   padding: '10px 16px',
                   fontSize: '14px',

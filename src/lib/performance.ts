@@ -116,9 +116,10 @@ export function useWebVitals(): PerformanceMetrics {
     const clsObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       let clsValue = 0;
-      entries.forEach((entry: any) => {
-        if (!entry.hadRecentInput) {
-          clsValue += entry.value;
+      entries.forEach((entry) => {
+        const shift = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+        if (!shift.hadRecentInput) {
+          clsValue += shift.value ?? 0;
         }
       });
       setMetrics((prev) => ({

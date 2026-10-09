@@ -1,5 +1,8 @@
+type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
+
 export function trackEvent(name: string, params?: Record<string, string>) {
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", name, params ?? {});
+  const gtag = typeof window !== "undefined" ? (window as GtagWindow).gtag : undefined;
+  if (gtag) {
+    gtag("event", name, params ?? {});
   }
 }

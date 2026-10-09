@@ -66,19 +66,23 @@ export function useWebVitalsTracker(): WebVitalsMetrics {
 
     const handleLCP = (list: PerformanceObserverEntryList) => {
       const entries = list.getEntries();
-      const lastEntry = entries[entries.length - 1];
+      const lastEntry = entries[entries.length - 1] as PerformanceEntry & {
+        renderTime?: number;
+        loadTime?: number;
+      };
       setMetrics((prev) => ({
         ...prev,
-        lcp: (lastEntry as any).renderTime || (lastEntry as any).loadTime,
+        lcp: (lastEntry.renderTime || lastEntry.loadTime) as number | null,
       }));
     };
 
     const handleCLS = (list: PerformanceObserverEntryList) => {
       const entries = list.getEntries();
       let clsValue = 0;
-      entries.forEach((entry: any) => {
-        if (!entry.hadRecentInput) {
-          clsValue += entry.value;
+      entries.forEach((entry) => {
+        const shift = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+        if (!shift.hadRecentInput) {
+          clsValue += shift.value ?? 0;
         }
       });
       setMetrics((prev) => ({
@@ -229,13 +233,13 @@ export function getPerformanceMetrics(): PerformanceMetricsData {
   const navigation = performance.getEntriesByType("navigation")[0] as
     | PerformanceNavigationTiming
     | undefined;
-  const resources = performance.getEntriesByType("resource");
+  const resources = performance.getEntriesByType("resource") as PerformanceResourceTiming[];
 
   let jsSize = 0;
   let cssSize = 0;
   let imageSize = 0;
 
-  resources.forEach((resource: any) => {
+  resources.forEach((resource) => {
     if (resource.name.endsWith(".js")) {
       jsSize += resource.transferSize || 0;
     } else if (resource.name.endsWith(".css")) {
