@@ -21,3 +21,10 @@ coverage
 .cache
 .turbo
 .vercel
+
+# Legacy, documentation and local tooling: not part of the build context
+docs
+Ioranaseo-old
+.claude
+.playwright-mcp
+*.md
