@@ -13,13 +13,22 @@ build/
 *.tsbuildinfo
 next-env.d.ts
 
-# Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.*.local
+# Environment files (keep the template)
+.env*
+!.env.example
+
+# Secrets, dumps and local backups
+*.pem
+*.key
+*.p12
+*.pfx
+*.sql
+!docs/database/*.sql
+*.dump
+*.bundle
+*.bak
+*.orig
+backups/
 
 # Logs
 npm-debug.log*
@@ -57,18 +66,17 @@ coverage/
 .turbo/
 .eslintcache
 
-# Ioranaseo-old build artifacts (ignore these)
-Ioranaseo-old/node_modules/
-Ioranaseo-old/.next/
-Ioranaseo-old/out/
-Ioranaseo-old/.env.local
-Ioranaseo-old/.turbo/
-Ioranaseo-old/.vercel/
-Ioranaseo-old/coverage/
+# Legacy sources now live in docs/Ioranaseo-old: only generated files are ignored
+docs/Ioranaseo-old/node_modules/
+docs/Ioranaseo-old/.next/
+docs/Ioranaseo-old/next-env.d.ts
 
-# Ioranaseo-old source MUST NOT be ignored
-# Everything in snapshot source is needed
-# Only the build artifacts listed above are ignored
-
-# Playwright MCP artifacts
+# Agent and QA tooling (local state and generated output)
+.claude/
 .playwright-mcp/
+playwright-report/
+test-results/
+
+# Temporary analysis output (docs/ and docs/analysis/ stay versioned)
+docs/analysis/_tmp/
+docs/analysis/screenshots/_scratch/
